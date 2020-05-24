@@ -1,0 +1,8 @@
+1: Degree of a vertext and graph
+>> http://www.geom.uiuc.edu/~doty/degree.html
+
+2: Subgraph od a graph
+>> https://www.edmath.org/MATtours/discrete/concepts/csubgr.html
+
+3: dense vs sparse graph
+>> https://stackoverflow.com/questions/12599143/what-is-the-distinction-between-sparse-and-dense-graphs

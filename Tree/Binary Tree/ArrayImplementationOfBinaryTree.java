@@ -1,0 +1,48 @@
+public class ArrayImplementationOfBinaryTree
+{
+	static void setRoot(int A[],int key)
+	{
+		if(A[0] == 0)
+		    A[0] = key;
+		else
+			System.out.println("root is already present..");
+	}
+	
+	static void setLeftChild(int A[], int rootIndex , int key)
+	{
+		int leftIndex = 2 * rootIndex + 1;
+		if(A[leftIndex] == 0)
+			A[leftIndex] = key;
+		else
+			System.out.println("already have aa left child..");
+	}
+	
+	static void setRightChild(int A[], int rootIndex, int key)
+	{
+		int rightIndex =  2 * rootIndex + 2;
+		if(A[rightIndex] == 0)
+			A[rightIndex] = key;
+		else
+			System.out.println("already have a right child..");
+	}
+	
+	static void printTree(int A[])
+	{
+		for(int i=0; i< A.length; i++)
+		{
+			System.out.print(A[i]+" ");
+		}
+	}
+	
+	public static void main(String [] args)
+	{
+		int A[] = new int[10];
+		setRoot(A, 10);
+		setLeftChild(A,0,78);
+		setRightChild(A,0,15);
+		setLeftChild(A,2,20);
+		setRightChild(A,2,35);
+		
+		printTree(A);
+	}
+}

@@ -1,0 +1,38 @@
+============>>> finding the array element address in the given 1D array <<<===============
+ given an array (base address (B), size of each element (W), lowerbound (LB)-- the lower index from which the array started)
+ then findout the address of the A[i] element 
+
+formula: adress of A[i] = B + W * (i - LB)
+
+for example if  A[] = {1300....1900}  here 
+
+LB = 1300 (the index from where the array starts)
+let W = 2 Byte
+i = 1700
+base adress B  = 1020
+
+The Adrres of A[1700]  =  1020 + 2 * (1700-1300)  =  1020 + 800 = 1820 (Answer)  
+
+=================>>> finding element address in 2D array  <<<====================
+
+==>> in row mjor order
+
+Add(a[i][j]) = BA + W [N (i-LBR) +(j-LBC))]
+
+here 
+ BA => base addrress
+ W => size of each element
+ i => row number
+ j => column number
+ LBC => starting index of column
+ LBR => starting address of row
+ N => number of total columns
+
+==>> in column major order
+
+Add(A[i][j]) = BA + W [M (j-LBC) + (i-LBR)]
+
+here
+ M => number of total rows
+ 
+ 

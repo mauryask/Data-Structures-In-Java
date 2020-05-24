@@ -1,0 +1,14 @@
+1) tree definitions
+https://www.cs.cmu.edu/~clo/www/CMU/DataStructures/Lessons/lesson4_1.htm
+
+2) max and min height of binary tree
+https://www.geeksforgeeks.org/relationship-number-nodes-height-binary-tree/
+
+3) m-ary tree best explained here
+https://en.wikipedia.org/wiki/M-ary_tree
+
+4) Duplicate values in Binary Serach tree is not allowed, how to handle duplicate values
+https://www.geeksforgeeks.org/how-to-handle-duplicates-in-binary-search-tree/
+
+5) Xor tree conversion
+https://www.geeksforgeeks.org/construct-xor-tree-by-given-leaf-nodes-of-perfect-binary-tree/
