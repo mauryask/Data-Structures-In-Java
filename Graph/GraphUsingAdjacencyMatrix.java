@@ -37,7 +37,6 @@ public class GraphUsingAdjacencyMatrix
 		 {
 			 System.out.println("invalid edge..");
 		 }
-		 
 		 return -1; //if exception occurs
 	}
 	
@@ -56,8 +55,7 @@ public class GraphUsingAdjacencyMatrix
 		while(count < e)
 		{
 		   to = sc.nextInt();
-		   from = sc.nextInt();
-		   
+		   from = sc.nextInt();   
 		   addEdge(to,from,1);
 		   count++;
 		}

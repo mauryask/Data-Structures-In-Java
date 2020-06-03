@@ -1,18 +1,20 @@
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 class Graph 
 {
 	class Edge 
 	{
-		int v; 		
-		Edge(int v)
+		int v, w; 		
+		Edge(int v, int w)
 		{
 			this.v = v;
+			this.w = w;
 		}
 		
 		public String toString()
 		{
-			return v+"";
+			return "("+v+","+w+")";
 		}
 	}	
 	
@@ -29,11 +31,11 @@ class Graph
 		}
 	}
 	
-	void addEdge(int u, int v)
+	void addEdge(int u, int v, int w)
 	{
-		//two additions for undirected graph
-       G[u].add(0,new Edge(v));		
-       G[v].add(0,new Edge(u));		
+	   //two additions for undirected graph
+       G[u].add(0,new Edge(v,w));		
+       G[v].add(0,new Edge(u,w));		
 	}
 
 	public String toString()
@@ -42,8 +44,9 @@ class Graph
 		for(int i=0; i<G.length; i++)
 			result+= i+" ==> "+G[i]+"\n";
 		return result;
+		
 	}
-	
+
 	void bfsTraversal(int s)
 	{
 		boolean visited[] = new boolean[v_num];		
@@ -55,17 +58,15 @@ class Graph
 		
 		while(queue.size() != 0)
 		{
-			s = queue.poll();
-			System.out.println(s+" ");			
-			Iterator<Edge> itr = G[s].iterator();
+			int u = queue.poll(); //retrievs and removes head fo the queue
+			System.out.print(u+" ");			
 			
-			while(itr.hasNext())
+			for(Edge e : G[u])
 			{
-			  int n = itr.next().v;
-			  if(!visited[n]) //if not visited 
+			  if(!visited[e.v]) //if not visited 
 			  {
-				  visited[n] = true; //mark visited
-				  queue.add(n); //add to the queue
+				  visited[e.v] = true; //mark visited
+				  queue.add(e.v); //add to the queue
 			  }
 			}
 		}
@@ -79,18 +80,19 @@ public class BreadthFirstSearch
 	{
 		Graph g = new Graph(4); //number of vertices
 	    //arguments: source, destination
-		g.addEdge(0, 1); 
-        g.addEdge(0, 2); 
-        g.addEdge(1, 2); 
-        g.addEdge(2, 0); 
-        g.addEdge(2, 3); 
-        g.addEdge(3, 3); 
+		g.addEdge(0, 1, 10); 
+        g.addEdge(0, 2, 56); 
+        g.addEdge(1, 2, 12); 
+        g.addEdge(2, 0, 20); 
+        g.addEdge(2, 3, 23); 
+        g.addEdge(3, 3, 58); 
 		
 		System.out.println(g);
 		
 		//herethe argument given to it 
 		//source node from where the 
 		//traversal will begin
-		g.bfsTraversal(2);
+		g.bfsTraversal(0);
+		System.out.println();
 	}
 }

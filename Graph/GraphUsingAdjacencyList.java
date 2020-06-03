@@ -63,7 +63,6 @@ class Graph
 		for(Edge i : G[u])
 		if(i.v == v)
 				return true;
-	
      	return false;
 	}
 	
