@@ -1,0 +1,8 @@
+1: what is a relation
+>  https://www.youtube.com/watch?v=hV1_wvsdJCE
+
+2: what is equivalence classes
+> https://www.youtube.com/watch?v=CmZzZsaof8g
+
+3: disjoint sets (well explained here)
+> https://www.youtube.com/watch?v=wU6udHRIkcc
