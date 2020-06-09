@@ -24,3 +24,12 @@
 
 9: Cycle Detection in an undirected graph using BFS
 > https://www.youtube.com/watch?v=w0NvX--_t7M 
+
+10: Cycle Detection in an undirected graph using DFS
+> https://www.youtube.com/watch?v=tJkpxwg90KY&t=601s
+> https://www.geeksforgeeks.org/detect-cycle-undirected-graph/
+
+11: Cycle detection in an undirected graph using DFS
+> https://www.geeksforgeeks.org/union-find/
+
+12: 
