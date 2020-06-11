@@ -32,4 +32,12 @@
 11: Cycle detection in an undirected graph using DFS
 > https://www.geeksforgeeks.org/union-find/
 
-12: 
+12: Cycle Detection in a directed graph (DFS approach)
+> https://www.geeksforgeeks.org/detect-cycle-direct-graph-using-colors/
+
+13: Kruksals Algorthm of MST
+> https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/
+> https://www.youtube.com/watch?v=EjVHtpWkIho
+
+14: Prims algorithm of MST
+> 

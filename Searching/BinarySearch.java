@@ -11,8 +11,6 @@ public class BinarySearch
 		    out.println("The element is found at index: "+index);
 		}
 
-
-
 		static int binary_search(int A[], int target)
 		{
 

@@ -1,4 +1,5 @@
-// This algorithm is known as the "Kahn's algoeithm to print the vertices in Topological Order"
+// This algorithm is known as the "Kahn's algoeithm
+// to print the vertices in Topological Order"
 
 import java.util.List;
 import java.util.LinkedList;
@@ -58,8 +59,7 @@ class Graph
 			
 		//printing the oredering of the stack
 		while(!stack.isEmpty())
-			System.out.print(stack.pop()+" ");
-			
+			System.out.print(stack.pop()+" ");		
 	}
 	
 }
