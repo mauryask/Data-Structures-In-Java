@@ -1,6 +1,7 @@
 /*
 * Kruskals Algorithm to find MST
 * Time complexity : O(E*logE + E*logV)
+* This is a  Greedy Algorithm
 */
 
 import java.util.*;

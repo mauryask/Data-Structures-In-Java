@@ -1,9 +1,10 @@
 // The time complexity of this Algorithm is : O(V^2)
 // since we or using sequential search technique
 // to find minimum key
-/****************/
+/************************/
 // But time complexity can be reduced to : O(E log V)
 // if we use Min Binary Heap
+// This is Greedy Algorithm
 
 import java.util.*;
 class Graph 
