@@ -45,3 +45,5 @@
 15: Diffrence between Prims and Kruskals algorithm (Very Important Read it please)
 > https://www.geeksforgeeks.org/difference-between-prims-and-kruskals-algorithm-for-mst/
 
+16: Compare Dijkstar vs Bellmanforg (advantages and Drawbacks, finding negative weight cycle)> very imporatant
+> https://www.youtube.com/watch?v=KudAWAMiQog  

@@ -123,6 +123,6 @@ public class PrimsAlgorithmUsingPriorityQueue
 		g.addEdge(4,5,11);
 		g.addEdge(3,5,3);
 
-	    g.PMST(5);	
+	    g.PMST(0);	
 	}
 }
