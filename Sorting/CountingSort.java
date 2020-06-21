@@ -8,10 +8,10 @@
 */
 public class CountingSort 
 {
-	static int findMax(int input[])
+	static int findMax(int input[], int n)
 	{
 		int max = input[0];
-		for(int i=1; i<input.length; i++)
+		for(int i=1; i<n; i++)
 		{
 		   if(max < input[i])
 			   max = input[i];
@@ -19,9 +19,9 @@ public class CountingSort
 		return max;
 	}
 		
-	static void fillCount(int input[], int count[])
+	static void fillCount(int input[], int count[], int n)
 	{
-		for(int i=0; i<input.length; i++)
+		for(int i=0; i<n; i++)
 		  count[input[i]]++;
 	  
 	  //updating count array
@@ -29,28 +29,33 @@ public class CountingSort
 		  count[i] = count[i] + count[i-1];
 	}
 	
-	static void countingSort(int input[], int count[], int output[])
+	static void countingSort(int input[], int count[], int n)
 	{
-		for(int i = input.length-1; i>=0; i--)
+		int output[] = new int[n];
+		for(int i = n-1; i>=0; i--)
 		{
 			count[input[i]]--;
 			int index =  count[input[i]];
 			output[index] = input[i];
 		}
+		
+		//copy the output array into input array
+		for(int i=0; i<n; i++)
+			input[i] = output[i];
 	}
 	
 	public static void main(String [] args)
 	{
 		//int input[] = {2,1,1,0,2,5,4,0,2,8,7,7,9,2,0,1,9};
 		int input[] = {5,4,7,8,9,3,5,5,7,8,9,6,3,4};
-		int output[] = new int[input.length];
-	    int max = findMax(input); //O(n)
+		int n = input.length;
+	    int max = findMax(input, n); //O(n)
 		
 		//initialize count with zero initially
 		int count [] = new int[max+1];
-		fillCount(input, count); //O(n+k) where  k = max
-		countingSort(input,count,output);  // O(n)
-		for(int i : output)
+		fillCount(input, count, n); //O(n+k) where  k = max
+		countingSort(input,count, n);  // O(n)
+		for(int i : input)
 			System.out.print(i+" ");
 	}
 }
