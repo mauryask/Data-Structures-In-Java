@@ -1,2 +1,7 @@
 1: exponential search
 > https://www.youtube.com/watch?v=BDVYtuWXgXE&t=339s
+
+2:Jump Search
+>> https://www.geeksforgeeks.org/jump-search/
+
+>> https://www.youtube.com/watch?v=wNOoyZ45SmQ
