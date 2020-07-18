@@ -1,6 +1,7 @@
 // Time complexity : O(n/m + (m-1))
 // Prerequisite : Array must already be sorted 
 // Optimal Number of jumps : sqrt(n)
+// It is not better than binary search
 
 public class JumpSerach
 {
