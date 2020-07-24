@@ -1,6 +1,7 @@
 ============>>> finding the array element address in the given 1D array <<<===============
+
  given an array (base address (B), size of each element (W), lowerbound (LB)-- the lower index from which the array started)
- then findout the address of the A[i] element 
+ then findout the "address of the A[i] element" 
 
 formula: adress of A[i] = B + W * (i - LB)
 
@@ -17,7 +18,7 @@ The Adrres of A[1700]  =  1020 + 2 * (1700-1300)  =  1020 + 800 = 1820 (Answer)
 
 ==>> in row mjor order
 
-Add(a[i][j]) = BA + W [N (i-LBR) +(j-LBC))]
+Add(a[i][j]) = BA + W [N (i-LBR) +(j-LBC)]
 
 here 
  BA => base addrress
@@ -35,4 +36,4 @@ Add(A[i][j]) = BA + W [M (j-LBC) + (i-LBR)]
 here
  M => number of total rows
  
- 
+>> in the question if no order is given by default take: roe major order 

@@ -37,7 +37,7 @@ public class JumpSerach
 	
 	public static void main(String [] args)
 	{
-		//for jump serach the array mjst be already in sorted order
+		//for jump serach the array must be already in sorted order
            int A[] = {1,3,4,7,8,9,12,14,48,56,69,70};	
            System.out.println(jumpSerach(A,A.length,14));		   
 	}

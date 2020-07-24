@@ -1,0 +1,6 @@
+==> Time complexities (worst case)
+
+1: Acess time : O(n)
+2: Search : O(n)
+3: Deletion : O(1)
+4: Insertion : O(1)
