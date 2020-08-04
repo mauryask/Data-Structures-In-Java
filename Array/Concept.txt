@@ -4,3 +4,15 @@
 2: Insertion : O(n)
 3: Deletion : O(n)
 4: Search : O(n)
+
+==> Jagged Arrays or Ragged arrays both are same
+https://www.geeksforgeeks.org/jagged-array-or-array-of-arrays-in-c-with-examples/
+
+==> In Java 2D arrays elements are stored neither in "row major" nor in "Column major order"
+They are stored as the array of arrays.
+http://ice-web.cc.gatech.edu/ce21/1/static/JavaReview-RU/Array2dBasics/a2dBasics.html#:~:text=Array%20Storage,-Many%20programming%20languages&text=Some%20languages%20store%20all%20the,arrays%20as%20arrays%20of%20arrays.\
+
+===> languages and order
+--> C/C++/Objective-C/Pascal --> Row major order
+--> Fortron/Matlab/Julia --> Column major order
+--> Java/C#/Swift --> Neither row major nor in column major order

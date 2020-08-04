@@ -1,3 +1,10 @@
+// Floyd's Tortoise and Hare AlgorithmConstraints
+// Or simply Floyd's algorithm of cycle detection
+// This is the best algorithm for cyclce detection
+
+// Time Complexity : O(n)
+// Space Complexity : O(1)
+
 class Node 
 {
 	int data;
@@ -31,18 +38,18 @@ public class CycleDetectionInLinkedList
 	
 	static void detectCycle(Node head)
 	{
-		Node ptr1, ptr2;
-		ptr1 = head;
-		ptr2 = head.next;
+		Node fast_ptr, slow_ptr;
+		slow_ptr = head;
+		fast_ptr = head.next;
 		
-		while(ptr2.next != null)
+		while(fast_ptr.next != null)
 		{
-			ptr1 = ptr1.next;
-			ptr2 = ptr2.next.next;
+			slow_ptr = slow_ptr.next;
+			fast_ptr = fast_ptr.next.next;
 			
-			if(ptr2.next == ptr1)
+			if(fast_ptr.next == slow_ptr)
 			{
-				System.out.println("The Linkedlist contains Cycle at node : "+ ptr1.data);
+				System.out.println("The Linkedlist contains Cycle at node : "+ slow_ptr.data);
 				return;
 			}
 		}

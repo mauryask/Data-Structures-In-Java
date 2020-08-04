@@ -80,24 +80,7 @@ public class LinkedList
 		head = newNode;
 	}
 	
-	//===================> reverse linked list
-	
-	public static void reverseLinkedlist()
-	{
-	   Node ptr,prevPtr,nextPtr;
-       prevPtr = null;
-	   ptr = head;
-	   while(ptr != null)
-	   {
-		   nextPtr = ptr.next;
-		   ptr.next = prevPtr;
-		   prevPtr = ptr;
-		   ptr = nextPtr;
-	   }
-	   
-	   head = prevPtr;
-	}
-	
+		
 	public static void main(String [] args)
 	{
 	
