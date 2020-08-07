@@ -16,3 +16,6 @@ http://ice-web.cc.gatech.edu/ce21/1/static/JavaReview-RU/Array2dBasics/a2dBasics
 --> C/C++/Objective-C/Pascal --> Row major order
 --> Fortron/Matlab/Julia --> Column major order
 --> Java/C#/Swift --> Neither row major nor in column major order
+
+===> java array interview queastions (java)
+https://javahungry.blogspot.com/2019/03/array-interview-questions-and-answers-in-java.html

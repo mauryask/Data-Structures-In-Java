@@ -12,3 +12,8 @@ https://www.geeksforgeeks.org/detect-loop-in-a-linked-list/
 ==> finding merging point using stack
 https://www.youtube.com/watch?v=ycIMmSmkQbo
 --> time complexity : O(m+n)
+
+===>> mathematical aspect of the floyd's hare and tortise cycle detection algorithm --> follow the link
+https://www.quora.com/How-does-Floyds-cycle-finding-algorithm-work-How-does-moving-the-
+tortoise-to-the-beginning-of-the-linked-list-while-keeping-the-hare-at-the-meeting-place-
+followed-by-moving-both-one-step-at-a-time-make-them-meet-at-starting-point-of-the-cycle
