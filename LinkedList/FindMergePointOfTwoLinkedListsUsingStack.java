@@ -1,6 +1,9 @@
-// This is the most optimal solution
-// Time complexity : O(n)
-// Space Complexity: O(1)
+//This program demonstrates finding the mergepoint of two linkedlkists
+//using the hashtable
+// Time complexity : O(n+m)
+//space complexity : O(m+n)
+
+import java.util.Stack;
 
 class Node 
 {
@@ -13,7 +16,7 @@ class Node
 	}
 }
 
-public class FindMergePointOfTwoLinkedLists 
+public class FindMergePointOfTwoLinkedListsUsingStack 
 {
 	static Node insertNode(Node head,int value)
 	{
@@ -46,37 +49,45 @@ public class FindMergePointOfTwoLinkedLists
 	
 	  static Node findMergePoint(Node head1, Node head2)
 	  {
-		  int l1 = findLength(head1);
-		  int l2 = findLength(head2);
-		  int d = Math.abs(l1-l2);
-		  
-		  Node p, q;
-		  p = head1;
-		  q = head2;
-		  
-		  if(l1 > l2)
-		  {
-			 for(int i=1; i<=d; i++)
-			 {
-				 p = p.next;
-			 }
-		  }
-		  else
-		  {
-			 for(int i=1; i<=d; i++)
-			 {
-				 q = q.next;
-			 }  
-		  }
-		  
-		  while(p!=q)
-		  {
-			  p = p.next;
-			  q = q.next;
-		  }
-		  
-		  return p;
-	  }
+		Node p1 = head1;
+		Node p2 = head2;
+		
+		Stack<Node> s1 =  new Stack<>();
+		Stack<Node> s2 = new Stack<>();
+		
+		//push all the nodes of first list into first stack
+		while(p1!=null)
+		{
+			s1.push(p1);	
+			p1 = p1.next;
+		}
+		
+		//push all the nodes of second list into first stack
+		while(p2!=null)
+		{
+			s2.push(p2);	
+			p2 = p2.next;
+		}
+		
+		// now pop top of the both lists one by one and compare
+		// if they are equal put it in a temporray variable
+		// else return temp 
+		
+		Node temp =  null;
+		
+		while(!s1.isEmpty()&& !s2.isEmpty())
+		{
+			Node n1  = s1.pop();
+			Node n2 = s2.pop();
+						
+			if(n1 == n2)
+				temp = n1;
+            else if(n1 != n2)
+                return temp;				
+		}
+		
+		return null;
+   	  }
 	
 	static int findLength(Node head)
 	{
@@ -115,6 +126,9 @@ public class FindMergePointOfTwoLinkedLists
 	   
 	   //printList(head2);
 	   Node mp = findMergePoint(head1, head2);
-	   System.out.println(mp.data);
+	   if(mp == null)
+		   System.out.println("There is no merge point");
+	   else
+	       System.out.println(mp.data);
 	}
 }

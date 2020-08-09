@@ -1,0 +1,16 @@
+[0809/191405.834:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0809/191405.834:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0809/191405.834:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0809/191405.979:ERROR:exception_snapshot_win.cc(98)] thread ID 1704 not found in process
+[0809/191405.834:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0809/191405.834:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0809/191405.834:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0809/191405.834:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0809/191405.946:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0809/191405.979:ERROR:exception_snapshot_win.cc(98)] thread ID 11364 not found in process
+[0809/191405.980:ERROR:exception_snapshot_win.cc(98)] thread ID 11032 not found in process
+[0809/191405.980:ERROR:exception_snapshot_win.cc(98)] thread ID 10896 not found in process
+[0809/191405.980:ERROR:exception_snapshot_win.cc(98)] thread ID 2728 not found in process
+[0809/191405.980:ERROR:exception_snapshot_win.cc(98)] thread ID 11844 not found in process
+[0809/191405.980:ERROR:exception_snapshot_win.cc(98)] thread ID 10292 not found in process
+[0809/191405.980:ERROR:exception_snapshot_win.cc(98)] thread ID 3352 not found in process

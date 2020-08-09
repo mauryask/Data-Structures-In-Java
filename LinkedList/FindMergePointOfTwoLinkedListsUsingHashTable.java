@@ -1,6 +1,8 @@
-// This is the most optimal solution
-// Time complexity : O(n)
-// Space Complexity: O(1)
+//This program demonstrates finding the mergepoint of two linkedlkists
+//using the hashtable
+// Time complexity : O(n) + O(m)
+
+import java.util.HashSet;
 
 class Node 
 {
@@ -13,7 +15,7 @@ class Node
 	}
 }
 
-public class FindMergePointOfTwoLinkedLists 
+public class FindMergePointOfTwoLinkedListsUsingHashTable 
 {
 	static Node insertNode(Node head,int value)
 	{
@@ -46,36 +48,29 @@ public class FindMergePointOfTwoLinkedLists
 	
 	  static Node findMergePoint(Node head1, Node head2)
 	  {
-		  int l1 = findLength(head1);
-		  int l2 = findLength(head2);
-		  int d = Math.abs(l1-l2);
-		  
-		  Node p, q;
-		  p = head1;
-		  q = head2;
-		  
-		  if(l1 > l2)
-		  {
-			 for(int i=1; i<=d; i++)
-			 {
-				 p = p.next;
-			 }
-		  }
-		  else
-		  {
-			 for(int i=1; i<=d; i++)
-			 {
-				 q = q.next;
-			 }  
-		  }
-		  
-		  while(p!=q)
-		  {
-			  p = p.next;
-			  q = q.next;
-		  }
-		  
-		  return p;
+		 HashSet<Node> set = new HashSet<>();
+		 Node p1,p2;
+		 p1= head1;
+		 p2 = head2;
+		 
+		 //add allt he nodes of the first list into the hash Table
+		 while(p1!=null)
+		 {
+		    set.add(p1);
+			p1 = p1.next;
+		 }
+		 
+		 //now start scanning second list and check 
+		 //if any node already present in the hash set
+		 while(p2 != null)
+		 {
+			 if(set.contains(p2))
+			   return p2;
+		    
+			 p2 = p2.next;
+		 }
+		 
+		 return null;
 	  }
 	
 	static int findLength(Node head)
@@ -115,6 +110,9 @@ public class FindMergePointOfTwoLinkedLists
 	   
 	   //printList(head2);
 	   Node mp = findMergePoint(head1, head2);
-	   System.out.println(mp.data);
+	   if(mp == null)
+		   System.out.println("There is no merge point");
+	   else
+	       System.out.println(mp.data);
 	}
 }
