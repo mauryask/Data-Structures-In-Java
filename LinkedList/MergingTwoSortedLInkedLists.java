@@ -1,4 +1,5 @@
 // merging two sorted Linked lists into one
+// Time complexity : O(n+m)
 class Node 
 {
 	int data;
