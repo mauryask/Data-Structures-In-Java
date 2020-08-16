@@ -12,3 +12,6 @@ https://www.geeksforgeeks.org/how-to-handle-duplicates-in-binary-search-tree/
 
 5) Xor tree conversion
 https://www.geeksforgeeks.org/construct-xor-tree-by-given-leaf-nodes-of-perfect-binary-tree/
+
+6) Recursive data structure
+https://xlinux.nist.gov/dads/HTML/recursivstrc.html#:~:text=(definition),also%20iteration%2C%20recursion%2C%20recursive

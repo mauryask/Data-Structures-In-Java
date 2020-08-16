@@ -1,4 +1,4 @@
-// Floyd's Tortoise and Hare AlgorithmConstraints
+// Floyd's Tortoise and Hare Algorithm -
 // Or simply Floyd's algorithm of cycle detection
 // This is the best algorithm for cyclce detection
 // Time Complexity : O(n)

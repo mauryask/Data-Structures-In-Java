@@ -73,7 +73,10 @@ public class FindingMiddleNodeOfList
 			ptr = ptr.next;
 		}
 		
-		System.out.println(map.get((int)Math.ceil(count/2.0)).value);		
+		if(count % 2 != 0)
+		   System.out.println(map.get((int)Math.ceil(count/2.0)).value);
+                else
+		   System.out.println(map.get((int)Math.floor(count/2.0)).value);
 	 }
 
 	public static void main(String [] args)

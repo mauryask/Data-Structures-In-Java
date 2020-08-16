@@ -61,7 +61,7 @@ public class FindNthElementFromEndBestMethod
 			ptr1 = ptr1.next;
 		}
 		
-		if(count==n) //check if there is sug=fficient number of nodes
+		if(count==n) //check if there is sufficient number of nodes
 		{
 			//from this point move both pointes simultaneously
 			while(ptr1.next != null)
