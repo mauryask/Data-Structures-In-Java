@@ -14,7 +14,7 @@ public class ArrayImplementationOfBinaryTree
 		if(A[leftIndex] == 0)
 			A[leftIndex] = key;
 		else
-			System.out.println("already have aa left child..");
+			System.out.println("already have a left child..");
 	}
 	
 	static void setRightChild(int A[], int rootIndex, int key)
