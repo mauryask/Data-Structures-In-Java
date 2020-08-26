@@ -34,8 +34,8 @@ class Graph
 	void addEdge(int u, int v, int w)
 	{
 	   //two additions for undirected graph
-       G[u].add(0,new Edge(v,w));		
-       G[v].add(0,new Edge(u,w));		
+          	G[u].add(0,new Edge(v,w));		
+       		G[v].add(0,new Edge(u,w));		
 	}
 
 	public String toString()

@@ -1,5 +1,8 @@
 //ascending priority queue
 //element with highest priority value has has priority
+
+// !!!!!!!!!!!! Flagged ;;; there s error in this program
+
 class Node 
 {
 	int value;
@@ -49,7 +52,7 @@ public class LinkedListImplementationPriorityQueue
 				  ptr = ptr.next;
 			  }	
 
-                   temp.next = ptr.next;
+                                   temp.next = ptr.next;
 				   ptr.next = temp;
 			}
 		}

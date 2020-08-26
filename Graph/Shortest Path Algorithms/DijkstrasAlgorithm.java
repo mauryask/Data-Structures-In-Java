@@ -1,4 +1,4 @@
-// Time Cimplexty : O(V^2)
+// Time Complexty : O(V^2)
 // It can be reduced to : O(E*logV) using min heap
 // It works for both dircetd and undirected graph
 

@@ -33,8 +33,7 @@ public class CreatingNAryTree {
 				root = root.next;
 			
 			return(root.next = createNode(data));
-		}
-		
+		}		
 	}
 	
 	static Node addChild(Node root,int data)

@@ -4,7 +4,7 @@
 2: Spaning Tree Definition
 > https://www.javatpoint.com/spanning-tree
 
-3: sparse vs DEnse Graph
+3: sparse vs Dense Graph
 > https://stackoverflow.com/questions/12599143/what-is-the-distinction-between-sparse-and-dense-graphs
 
 4: disconnected graph

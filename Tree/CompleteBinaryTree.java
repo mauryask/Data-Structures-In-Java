@@ -8,7 +8,7 @@ class Node
 {
 	int data;
 	Node next;
-	Node (int data)
+	Node(int data)
 	{
 		this.data = data;
 		next = null;
@@ -22,43 +22,41 @@ class BinaryTreeNode
 	BinaryTreeNode(int data)
 	{
 		this.data = data;
-		left = right = null;
+		left = right=  null;
 	}
 }
 
-public class CompleteBinaryTree 
+public class BinaryTree 
 {
-	Node head = null;
 	BinaryTreeNode root = null;
-	
-	// this is best way to insert the nodes
-	// if we already know the last node 
-	// time Complexiy : O(n)
-	void createList(int data)
+	Node head = null;
+    
+	void push(int data)
 	{
 		Node new_node = new Node(data);
 		new_node.next = head;
 		head = new_node;
 	}
 	
-	BinaryTreeNode convertListtoBinaryTree()
+	BinaryTreeNode convertList2Tree()
 	{
-		Queue<BinaryTreeNode> q = new ArrayDeque<>();
-				
-		if(head == null) //if there are no nodes in the list
+		if(head == null)
 			return null;
 		
-		BinaryTreeNode node  = new BinaryTreeNode(head.data);//root node
-		q.add(node); //adding root to the queue
+		Queue<BinaryTreeNode> q = new ArrayDeque<>();
+		
+		root = new BinaryTreeNode(head.data);
+		q.add(root);
 		head = head.next;
 		
 		while(head != null)
 		{
 			BinaryTreeNode parent = q.remove();
-			BinaryTreeNode leftChild=null, rightChild=null;
+			BinaryTreeNode leftChild = null, rightChild = null;
 			leftChild = new BinaryTreeNode(head.data);
 			q.add(leftChild);
 			head = head.next;
+		
 			if(head != null)
 			{
 				rightChild = new BinaryTreeNode(head.data);
@@ -69,8 +67,9 @@ public class CompleteBinaryTree
 			parent.left = leftChild;
 			parent.right = rightChild;
 		}
-		return node;
+	  return root;	
 	}
+	
 	
 	void inorder(BinaryTreeNode root)
 	{
@@ -84,16 +83,15 @@ public class CompleteBinaryTree
 	
 	public static void main(String [] args)
 	{
-	    CompleteBinaryTree tree = new CompleteBinaryTree();
-		tree.createList(36); //last node
-		tree.createList(30);
-		tree.createList(25);
-		tree.createList(15);
-		tree.createList(12);
-		tree.createList(10); //first node
+		BinaryTree tree = new BinaryTree();
+		tree.push(36); //last node
+		tree.push(30);
+		tree.push(25);
+		tree.push(15);
+		tree.push(12);
+		tree.push(10); //first null
 		
-		BinaryTreeNode root = tree.convertListtoBinaryTree();
-		
+		BinaryTreeNode root = tree.convertList2Tree();
 		tree.inorder(root);
 	}
 }

@@ -1,6 +1,4 @@
 //iterative traversal of tree pre, in and post order traversals
-package com.pnstech;
-
 import java.util.*;
 
 class Node
@@ -17,19 +15,12 @@ class Node
 	}
 }
 
-public class IteartiveTreeTraversal {
-
-	static Node root = null;
-    static Node createNode(int value)
-	{
-		Node newNode = new Node(value);
-		return newNode; 
-	}
-	
-	static void insertNode(int value)
+public class IteartiveTreeTraversal 
+{	
+	static Node insertNode(int value, Node root)
 	{
 		Node temp, parent_node, current_node;
-		temp = createNode(value);
+		temp = new Node(value);
 		parent_node = null;
 		
 		if(root == null)
@@ -57,6 +48,7 @@ public class IteartiveTreeTraversal {
 			else
 				parent_node.left = temp; //less or equal to then in left subtree
 		}		
+		return temp;
 	} 
 
 
@@ -134,25 +126,51 @@ public class IteartiveTreeTraversal {
 					root = root.right;
 			}
 
-				if(!stack.isEmpty())
-					break;
+			if(stack.isEmpty())
+			  break;
 
 		}
 	}
 	
+	static void postOrderRecursive(Node root)
+	{
+		if(root != null)
+		{
+			postOrderRecursive(root.left);
+			postOrderRecursive(root.right);
+			root.left = null;
+			root.right = null;
+		}
+	}
+	
+	
+	
 	  public static void main(String [] args)
 		{
 		
-		  insertNode(8);
-		  insertNode(5);
-		  insertNode(3);
-		  insertNode(7);
-		  insertNode(9);
-		  insertNode(2);
+		  Node root = null;
+		  root = insertNode(8, root);
+		  insertNode(5, root);
+		  insertNode(3, root);
+		  insertNode(7, root);
+		  insertNode(9, root);
+		  insertNode(2, root);
 		  
-		 //iterativePreorder(root);
+		  //iterativePreorder(root);
 		  //iterativeInorder(root);
+		  //iterativePostorder(root);
+		  
+		  //++++================================++++
+		  // here we are delting the tree
+		  // post order traversal
+		  // we can do it by iterative postorder travesal also
+		  
+		  postOrderRecursive(root);
+		  
+		  // tree after deletion
+		  root = null;
 		  iterativePostorder(root);
+		  
 		}
 
 }

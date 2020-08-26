@@ -61,7 +61,7 @@ class Graph
 	public boolean isConnected(int u, int v)
 	{
 		for(Edge i : G[u])
-		if(i.v == v)
+		   if(i.v == v)
 				return true;
      	return false;
 	}

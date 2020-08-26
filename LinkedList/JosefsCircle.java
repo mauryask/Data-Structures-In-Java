@@ -71,7 +71,7 @@ class MainLogic
 	{	
 		for(int count = n; count>1; count--)
 		{
-		  for(int i=1; i<m-1; i++)
+		  for(int i=1; i<m; i++)
 		  {
 			 head = head.next;	
 		  }
