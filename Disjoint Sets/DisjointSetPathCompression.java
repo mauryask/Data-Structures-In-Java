@@ -3,7 +3,7 @@
 * Here time complexity for union : O(1)
 * Time complexity of makeSet() : O(n)
 * Time Complexity for find() : O(logn)  
-* If there are n consecutive find operation 
+* If there are m consecutive find operation 
 * Then time complexity : O(m * logn) -> worst case
 * Total time complexity : O(n + m * logn)
 */

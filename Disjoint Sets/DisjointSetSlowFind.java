@@ -1,18 +1,18 @@
 /**
-* this is the Fast Union(Quick Find) implementation
+* this is the Fast Union(Slow Find) implementation
 * Here time complexity for union : O(1)
 * time complexity of makeSet() : O(n)
 * Time Complexity for find() : O(n)  
 * If there are n consecutive find operation 
 * then time complexity : O(mn) -> worst case
-* total time complexity : O(n) + (mn) : O(mn)
+* total time complexity : O(n) + O(mn) : O(mn)
 */
 
 public class DisjointSetSlowFind 
 {
 	static int parent_set[];
 	int n; //number of components
-	DisjointSet(int n)
+	DisjointSetSlowFind(int n)
 	{
 		this.n = n;
 		parent_set = new int[n];

@@ -1,7 +1,7 @@
 /**
 * this is the Fast Union(Quick Find) implementation
 * two ways to implement this: "unionByWeight" and "unionByRank"
-* both i=of the find functions take O(n+ m*log(n))->(worst case)
+* both of the find functions take O(n+ m*log(n))->(worst case)
 * Here time complexity for union : O(1)
 * time complexity of makeSet() : O(n)
 * Time Complexity for find() : O(logn)  
@@ -14,7 +14,7 @@ public class DisjointSetQuickFind
 {
 	static int parent_set[];
 	int n; //number of components
-	DisjointSet(int n)
+	DisjointSetQuickFind(int n)
 	{
 		this.n = n;
 		parent_set = new int[n];
@@ -30,7 +30,7 @@ public class DisjointSetQuickFind
 	
 	int find(int item) // O(n)
 	{
-		if(parent_set[item] < 0)
+		if(parent_set[item] < 0) //if it is parent it self
 			return item;
 		else
 			return find(parent_set[item]);
@@ -82,6 +82,9 @@ public class DisjointSetQuickFind
 		
 		d.makeSet();
 		
+		// always pass first element of the set
+		// for union operation
+		
 		d.unionByRank(0,1);
 		d.unionByRank(2,3);
 		d.unionByRank(4,5);
@@ -90,6 +93,6 @@ public class DisjointSetQuickFind
 		d.unionByRank(0,6);
 		d.unionByRank(0,2);
 
-   	    System.out.print(d.find(7));
+   	    System.out.print(d.find(5));
 	}
 }
