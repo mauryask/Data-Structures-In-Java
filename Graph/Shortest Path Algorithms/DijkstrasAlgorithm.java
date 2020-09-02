@@ -34,20 +34,23 @@ class Graph
 		G[v].add(0, new Edge(u,w));
 	}
 		
+	int parent[];	
+		
 	void dijkstra(int src)
 	{
 		boolean visited[] = new boolean[v_num];
 		int dist[] = new int[v_num];
+		parent = new int[v_num];
 		
 		for(int i=0; i<v_num; i++)
 		{
-			visited[i] = false;
 			dist[i] = Integer.MAX_VALUE;
+			parent[i] = -1;
 		}
 		
 		dist[src] = 0;
 		
-		for(int i=0; i<v_num; i++)
+	for(int i=0; i<v_num; i++) //that means run |v| - times
 		{
 			int u = minDist(dist, visited);
 			
@@ -56,20 +59,38 @@ class Graph
 				if(!visited[e.v] && (dist[u] + e.w) < dist[e.v])
 				{
 					dist[e.v] = dist[u] + e.w;
+					parent[e.v] = u;
 				}
 			}	
 			visited[u] = true;
 		}
-		
-		//printting the distance
+	
 		for(int i=0; i<v_num; i++)
 			System.out.println(src+" ==> "+i+" = "+dist[i]);
 	}
-       
+      
+	  
+	void printPath(int dest)
+	{
+		int crawl =  dest;
+		List<Integer> path = new LinkedList<>();
+		path.add(crawl);
+		
+		while(parent[crawl] != -1)
+		{
+			path.add(0,parent[crawl]);
+			crawl = parent[crawl];
+		}
+		
+		System.out.println("The path: ");
+		for(int x: path)
+			System.out.print(x+" ");
+	}	
+	   
     int minDist(int dist[], boolean visited[])
 	{
 		int min = Integer.MAX_VALUE;
-		int min_index = -1;
+		int min_index = 0;
 		for(int i=0; i<v_num; i++)
 		{
 			if(!visited[i] && dist[i] <= min)
@@ -99,5 +120,6 @@ public class DijkstrasAlgorithm
 		g.addEdge(3,5,3);
 		
 		g.dijkstra(0);
+		g.printPath(5);
 	}
 }

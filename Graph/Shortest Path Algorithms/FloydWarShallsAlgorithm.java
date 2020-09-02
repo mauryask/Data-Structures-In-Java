@@ -1,29 +1,22 @@
+//this algo uses dynamic programming approach
 class AllPairShortestPath
 {
 	void floydWarshall(int G[][], int v_num)
 	{
-		int i,j,k;
-		int dist[][] = new int[v_num][v_num];
-		//initialize dist matrix with original matrix
-		for(i=0; i<v_num; i++)
-			for(j=0; j<v_num; j++)
-				dist[i][j] = G[i][j];
-			
+		int i,j,k;			
 			for(k=0; k<v_num; k++)
 			{
 				for(i=0; i<v_num; i++)
 				{
 					for(j=0; j<v_num; j++)
 					{
-						if(dist[i][k] != Integer.MAX_VALUE &&
-						dist[k][j] != Integer.MAX_VALUE &&
-						(dist[i][k] + dist[k][j]) < dist[i][j])
-							dist[i][j] = dist[i][k] + dist[k][j];
+						if(G[i][k] != Integer.MAX_VALUE &&
+						G[k][j] != Integer.MAX_VALUE &&
+						(G[i][k] + G[k][j]) < G[i][j])
+							G[i][j] = G[i][k] + G[k][j];
 					}
 				}
 			}
-			
-			printDist(dist, v_num);
 	}
 	
 	void printDist(int dist[][], int v_num)
@@ -47,6 +40,8 @@ public class FloydWarShallsAlgorithm
 	public static void main(String [] args)
 	{
 		AllPairShortestPath a = new AllPairShortestPath();
+		int v_num = 4;
+		//create a n*n matrix : n is number of vertices
 		int graph[][] = {
 							{0, 5, inf, 10},
 							{inf,0 , 3, inf},
@@ -54,6 +49,7 @@ public class FloydWarShallsAlgorithm
 							{inf, inf, inf, 0}
 		                };
 		
-		a.floydWarshall(graph, graph.length);
+		a.floydWarshall(graph,v_num);
+		a.printDist(graph, v_num);
 	}
 }

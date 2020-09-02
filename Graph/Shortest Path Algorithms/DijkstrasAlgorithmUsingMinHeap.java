@@ -1,34 +1,25 @@
-//Time Cimplexty : O(E * log V)
-
 import java.util.*;
-class Graph
+class Graph 
 {
-	class Edge
+	class Edge 
 	{
 		int v;
 		int w;
-		
-	   Edge(int v, int w)
-	   {
-		   this.v = v;
-		   this.w = w;
-	   }	   
-	}
-	
-	class HeapNode 
-	{
-		int vertex;
-		int dist; //distance
+		Edge(int v, int w)
+		{
+			this.v = v;
+			this.w = w;
+		}
 	}
 	
 	int v_num;
-    List<Edge> G[];	
+	List<Edge> G[];
 	
 	Graph(int v_num)
 	{
 		this.v_num = v_num;
 		G = new LinkedList[v_num];
-		for(int i=0; i<v_num; i++)
+		for(int i=0;i<v_num; i++)
 		  G[i] = new LinkedList<Edge>();
 	}
 	
@@ -36,65 +27,57 @@ class Graph
 	{
 		G[u].add(0, new Edge(v,w));
 		G[v].add(0, new Edge(u,w));
-	}
-		
-	void dijkstra(int src)
+	} 
+
+	class HeapNode 
 	{
-		boolean visited[] = new boolean[v_num];
-		HeapNode e[] = new HeapNode[v_num];
-		
-		for(int i=0; i<v_num; i++)
-			e[i] = new HeapNode();
-		
-		for(int i=0; i<v_num; i++)
-		{
-			visited[i] = false;
-			e[i].vertex = i;
-			e[i].dist = Integer.MAX_VALUE;
-		}
-		
-		e[src].dist = 0;
-		
-		Comparator cmp =  new Comparator<HeapNode>()
-		{
-			public int compare(HeapNode e1 , HeapNode e2)
-			{
-				return e1.dist - e2.dist;
-			}			
-		};
-		
-		TreeSet<HeapNode> queue = new TreeSet<>(cmp);
-		for(int i=0; i<v_num; i++)
-			queue.add(e[i]);
-		
-	 while(!queue.isEmpty())
-	 {
-	        HeapNode node  = queue.pollFirst();	//remove first smallest node forever
-		for(Edge edge : G[node.vertex])
-		{
-				if(!visited[edge.v] && (node.dist + edge.w) < e[edge.v].dist)
-				{
-					queue.remove(e[edge.v]);
-					e[edge.v].dist = node.dist + edge.w;
-					queue.add(e[edge.v]);
-				}
-		}
-		
-		visited[node.vertex] = true;
-	 } 
-		
-		//printting the distance
-		for(int i=0; i<v_num; i++)
-			System.out.println(src+" ==> "+i+" = "+e[i].dist);
-		
+		int vertex;
+		int dist;
 	}
-       
+	
+   void dijkstra(int src)
+   {
+      boolean visited[] = new boolean[v_num];   
+	  HeapNode heap[] = new HeapNode[v_num];
+
+	   TreeSet<HeapNode> q = new TreeSet<>((e1,e2)->
+		{		
+				return e1.dist - e2.dist;			
+		});
+	  
+	    for(int i=0;i<v_num;i++)
+		{
+		  heap[i] = new HeapNode();
+          heap[i].vertex = i;
+          heap[i].dist = (i == src)? 0 : Integer.MAX_VALUE;	
+          q.add(heap[i]);			  
+		}
+		
+       while(!q.isEmpty()) // that means |v| - times
+		{
+			HeapNode node = q.pollFirst();			
+			
+			for(Edge e : G[node.vertex])
+			{
+				if(!visited[e.v] && (node.dist + e.w) < heap[e.v].dist)
+				{
+					q.remove(heap[e.v]);
+					heap[e.v].dist = node.dist + e.w;
+					q.add(heap[e.v]);
+				}
+			}
+			visited[node.vertex] = true;
+		}
+
+      for(int i=0; i<v_num; i++)
+			System.out.println(src+" ==> "+i+" = "+heap[i].dist);	   
+   }
+   
 }
 
-
-public class DijkstrasAlgorithmUsingMinHeap
+public class DijkstrasAlgorithmUsingMinHeap 
 {
-	public static void main(String [] arg)
+	public static void main(String [] args)
 	{
 		Graph g = new Graph(6);
 		g.addEdge(0,1,4);

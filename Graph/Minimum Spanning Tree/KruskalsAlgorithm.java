@@ -64,7 +64,7 @@ class Graph
 	   //this array holds the resulting MST
 	   Edge rslt[] = new Edge[v_num-1]; //since edges in MST : (|V|-1)
 	   
-	   for(int i=0; i<rslt.length; i++)
+	   for(int i=0; i<v_num-1; i++)
 		   rslt[i] = new Edge();
 	   
 	   //sort the edges in non-decreasing order of weights

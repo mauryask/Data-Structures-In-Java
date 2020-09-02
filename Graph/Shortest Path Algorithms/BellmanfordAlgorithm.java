@@ -68,7 +68,7 @@ class Graph
 	
 	boolean isNegativeWeightCycle(int dist[])
 	{
-	    for(int i=0; i<v_num; i++)
+	    for(int i=0; i<e_num; i++)
 		{
 			int u = edge[i].src;
 			int v = edge[i].dest;

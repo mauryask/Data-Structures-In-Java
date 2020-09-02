@@ -61,8 +61,7 @@ class Graph
 		
 		while(!stack.isEmpty())
 		{
-			int u  = stack.peek();
-			stack.pop();
+			int u  = stack.pop();
 			
 			if(!visited[u])
 			{
@@ -77,8 +76,7 @@ class Graph
 			}
 		}		
 	}
-	
-	
+
 	void recursiveDFS(int v, boolean visited[])
 	{
        	if(!visited[v])

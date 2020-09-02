@@ -18,7 +18,7 @@ class Graph
  
   void addEdge(int u, int v)
   {
-	  //undirected graph
+	  //directed graph
 	  G[u].add(0,v);
 	  //G[v].add(0,u);
   }
@@ -58,7 +58,7 @@ class Graph
 	  
 	  while(parent[crawl] != -1)
 	  {
-		path.add(parent[crawl]);
+		path.add(0,parent[crawl]);
 		crawl = parent[crawl];
 	  }
 	  
@@ -87,11 +87,10 @@ class Graph
 			}
 	 }
 	
-
 	boolean bfSearch(int s, int d, int distance[],int parent[])
 	{
 	   boolean visited[] = new boolean[v_num];
-	   LinkedList<Integer> queue = new LinkedList<>();
+	   Queue<Integer> queue = new ArrayDeque<>();
 	   
 	   for(int i=0; i<v_num; i++)
 	   {
@@ -107,10 +106,10 @@ class Graph
 	   
 	   while(!queue.isEmpty())
 	   {
-		   int u = queue.remove();
-		   for(Integer v : G[u])
+		   int u = queue.poll();
+		   for(int v : G[u])
 		   {
-			   if(visited[v] == false)
+			   if(!visited[v])
 			   {
 				   visited[v] = true;
 				   distance[v] = distance[u] + 1;
@@ -123,7 +122,6 @@ class Graph
 	   }
 	   
        return false;
-	   
 	}
 	
 }

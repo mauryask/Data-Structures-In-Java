@@ -51,9 +51,6 @@ class Graph
 		boolean visited[] = new boolean[v_num];
 		
 		for(int i=0; i<v_num; i++)
-			visited[i] = false;
-		
-		for(int i=0; i<v_num; i++)
 			if(!visited[i])
 				topologicalSortUtil(i,visited,stack);
 			

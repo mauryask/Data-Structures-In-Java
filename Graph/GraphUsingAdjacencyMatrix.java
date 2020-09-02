@@ -42,7 +42,7 @@ public class GraphUsingAdjacencyMatrix
 	
 	public static void main(String [] args)
 	{
-		int v, e, to = 0, from = 0, count  = 0;
+		int v, e, to = 0, from = 0;
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Enter number of vertices: ");
 		v = sc.nextInt();
@@ -52,12 +52,11 @@ public class GraphUsingAdjacencyMatrix
 		makeGraph(v);
 		
 		System.out.println("Enter edges to from: ");
-		while(count < e)
+		while(e-->0)
 		{
 		   to = sc.nextInt();
 		   from = sc.nextInt();   
 		   addEdge(to,from,1);
-		   count++;
 		}
 		
 		System.out.println("The adjacency matrix is: ");

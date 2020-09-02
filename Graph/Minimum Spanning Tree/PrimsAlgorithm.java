@@ -57,8 +57,7 @@ class Graph
 	   {                      //parent        //vertex  //weight 
 		   System.out.println(parent[i]+" ==> "+i+" ==>"+weight[i]);
 	   }
-	}
-	
+	}	
 	
 	void primsUtil(int parent[], int weight[],boolean visited[])
 	{
@@ -85,7 +84,7 @@ class Graph
 		
 		for(int i=0; i<v_num; i++)
 		{
-			if(visited[i] == false && weight[i] < min)
+			if(!visited[i] && weight[i] < min)
 			{
 				min = weight[i];
 				min_index = i;
