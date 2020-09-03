@@ -1,6 +1,6 @@
 //n-art tree creation / traversal
 //https://www.geeksforgeeks.org/creating-tree-left-child-right-sibling-representation/
-package com.pnstech;
+import java.util.*;
 class Node
 {
 	int data;
@@ -14,8 +14,8 @@ class Node
 	}
 }
 
-public class CreatingNAryTree {
-
+public class CreatingNAryTree
+{
 	
 	static Node createNode(int data)
 	{
@@ -49,7 +49,7 @@ public class CreatingNAryTree {
 	
 	
   //time complexity O(n)
-	static void traversal(Node root)
+	static void traversal(Node root) // it is like depth first search
 	{
 		if(root == null) 
             return; 
@@ -61,6 +61,26 @@ public class CreatingNAryTree {
             root = root.next; 
         } 
 		 
+	}
+	
+	//level order traversal
+	
+	static void levelOrderTraversal(Node root)
+	{
+		Queue<Node> q = new ArrayDeque<>();
+		q.add(root);
+		while(!q.isEmpty())
+		{
+			root = q.poll();
+			
+			while(root != null)
+			{
+				System.out.print(root.data+" ");
+				if(root.child != null)
+					q.add(root.child);
+				root = root.next;
+			}
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -76,8 +96,9 @@ public class CreatingNAryTree {
        Node n9 = addChild(n3,9);
        Node n10 = addChild(n4,23);
        
-       traversal(root);
+       //traversal(root);
   
+       levelOrderTraversal(root);
 	}
 
 }
