@@ -43,8 +43,7 @@ class Graph
 		String result = "";
 		for(int i=0; i<G.length; i++)
 			result+= i+" ==> "+G[i]+"\n";
-		return result;
-		
+		return result;	
 	}
 
 	void bfsTraversal(int s)

@@ -73,8 +73,7 @@ public class IteartiveTreeTraversal
 			
 			root = stack.pop();
 			
-			root = root.right;
-				
+			root = root.right;			
 		}
 	}
 
