@@ -44,7 +44,7 @@ public class MergingTwoSortedLInkedLists
 		else
 		{
 			s = head2;
-			head2 = head2.next;
+			head2 = s.next;
 		}
 		
 		head = s;
