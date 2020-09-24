@@ -26,7 +26,6 @@ class Graph
 	
 	void bellManFord(int src)
 	{
-	   		
 		int dist[] = new int[v_num];
 		for(int i=0; i<v_num; i++)
 			dist[i] = Integer.MAX_VALUE;

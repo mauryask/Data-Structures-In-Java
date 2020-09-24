@@ -61,7 +61,6 @@ class Graph
 			{
 				if(!visited[e.v] && (node.dist + e.w) < heap[e.v].dist)
 				{
-					q.remove(heap[e.v]);
 					heap[e.v].dist = node.dist + e.w;
 					q.add(heap[e.v]);
 				}

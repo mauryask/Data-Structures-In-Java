@@ -39,7 +39,7 @@ class Graph
 	void addEdge(int u, int v)
 	{
 		G[u].add(0,v);
-		G[v].add(0,u);
+		//G[v].add(0,u);
 	}
 	
 	boolean isCycle(int src) //pass the source node here
@@ -84,6 +84,7 @@ public class CycleDetectionUsingBFS
 		g.addEdge(3,4);
 		g.addEdge(3,5);
 		g.addEdge(6,5);
+		g.addEdge(2,6);
 		System.out.println(g);
 		System.out.println("\n=========================\n\n"+g.isCycle(0));
 	}

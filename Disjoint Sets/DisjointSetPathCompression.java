@@ -11,7 +11,6 @@
 // here path compression helps to the 
 // speedup the future find() operation 
 
-
 public class DisjointSetPathCompression 
 {
 	static int parent_set[];
