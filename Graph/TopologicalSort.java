@@ -1,4 +1,4 @@
-// This algorithm is known as the "Kahn's algoeithm
+// This algorithm is known as the "Kahn's algorithm
 // to print the vertices in Topological Order"
 
 import java.util.List;
@@ -65,14 +65,13 @@ public class TopologicalSort
 {
 	public static void main(String [] args)
 	{
-		Graph g = new Graph(6);
+		Graph g = new Graph(5);
 		g.addEdge(0,1);
-		g.addEdge(2,0);
-		g.addEdge(2,3);
-		g.addEdge(5,3);
-		g.addEdge(4,5);
-		g.addEdge(4,1);
-		g.addEdge(3,1);
+		g.addEdge(1,3);
+		g.addEdge(0,3);
+		g.addEdge(1,2);
+		g.addEdge(3,2);
+		g.addEdge(3,4);
 		
 		System.out.println("\n"+g);
 		System.out.println("=================\n");

@@ -33,7 +33,7 @@ public class IteartiveTreeTraversal
 			while(current_node != null)
 			{
 				parent_node = current_node;
-				if(temp.data >= current_node.data)
+				if(temp.data > current_node.data)
 				{
 				  current_node = current_node.right;	
 				}
@@ -80,7 +80,7 @@ public class IteartiveTreeTraversal
 	
 	static void iterativeInorder(Node root)
 	{
-	  Stack<Node>	 stack = new Stack<>();
+	  Stack<Node> stack = new Stack<>();
 	  while(true)
 	  {
 		  while(root!=null)
@@ -108,7 +108,6 @@ public class IteartiveTreeTraversal
 			{
 				stack.push(root);
 				root = root.left;
-				
 			}
 			
 			while(root==null && !stack.isEmpty())
@@ -127,7 +126,6 @@ public class IteartiveTreeTraversal
 
 			if(stack.isEmpty())
 			  break;
-
 		}
 	}
 	

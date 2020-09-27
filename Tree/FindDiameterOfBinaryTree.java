@@ -44,13 +44,7 @@ public class FindDiameterOfBinaryTree
 	{
 		if(root==null)
 			return 0;
-	 	
-	    int left = getHeight(root.left);
-		int right = getHeight(root.right);
-		if(left > right)
-			return left+1;
-		else
-			return right+1;
+		return Math.max(getHeight(root.left), getHeight(root.right)) + 1;
 	}	
 	
 	static void printTree(Node root)
