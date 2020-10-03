@@ -1,5 +1,5 @@
-//This program demonstrates finding the mergepoint of two linkedlkists
-//using the hashtable
+// This program demonstrates finding the mergepoint of two linkedlkists
+// using the hashtable
 // Time complexity : O(n) + O(m)
 
 import java.util.*;
