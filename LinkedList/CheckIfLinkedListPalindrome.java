@@ -12,7 +12,7 @@ class Node
 	}
 }
 
-public class CheckIfLinkedListPalindrome 
+public class CheckIfLinkedListPalindrome
 {
 	static Node insertNode(int value, Node head)
 	{
@@ -63,19 +63,16 @@ class Solver
 	   Node p1 = head;
 	   Node p2 = head;
 	   Node newHead = null;
-	   
-	   while(p1!=null && p1.next !=null)
+	   Node temp = null;
+	   while(p2!= null && p2.next != null)
 	   {
-			   p2 = p2.next;
-			   p1 = p1.next.next;
+		       temp = p1;
+			   p1 = p1.next;
+			   p2 = p2.next.next;
 	   }
 	   
-	   if(p1 == null) //even nodes
-		    newHead = reverseList(p2);
-	   else if(p1.next == null) //odd nodes
-		    newHead = reverseList(p2.next);  
-         
-		    return isPalin(newHead, head);	
+	   Node head2 = reverseList(p1);
+	   return isPalin(head, head2);
     }
 
 
@@ -97,14 +94,14 @@ class Solver
 	  }
 	
 
-    static boolean isPalin(Node newHead, Node head)
+    static boolean isPalin(Node head, Node head2)
 	{
-		while(newHead != null)
+		while(head2 != null )
 		{
-			if(head.data != newHead.data)
+			if(head.data != head2.data)
 				return false;
 			head = head.next;
-			newHead = newHead.next;
+			head2 = head2.next;
 		}
 		return true;
 	}	
