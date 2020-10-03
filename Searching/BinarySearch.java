@@ -30,6 +30,5 @@ public class BinarySearch
 			}
 
 			return m_index;
-
 		}
 }

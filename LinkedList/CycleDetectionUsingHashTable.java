@@ -1,7 +1,7 @@
 //detecting loop in alinked list using hashset
 //time complexity: O(n) ==>  during scanning the linkedlist
 
-import java.util.HashSet;
+import java.util.HashMap;
 class Node 
 {
 	int value;
@@ -37,13 +37,21 @@ public class CycleDetectionUsingHashTable
 	
 	static void detectLoop(Node head)
 	{
-	   HashSet<Node> hashSet = new HashSet<>();
-	   while(!hashSet.contains(head) && head!= null)
+	   Map<Node> map = new HashMap<>();
+	   int count = 0;
+	   boolean flag = false;
+	   while(head != null)
 	   {
-		   hashSet.add(head);
+		   if(!map.containsKey(head))
+		     map.put(head, count++);
+		   else 
+		   {
+			   flag  = true;
+			   break;
+		   }
 		   head = head.next;
 	   }
-	   if(head == null)
+	   if(flag == false)
 		   System.out.println("\nNo loop found in the linked list");
 	   else
 	     System.out.println("\nloop detected at node: "+head.value);

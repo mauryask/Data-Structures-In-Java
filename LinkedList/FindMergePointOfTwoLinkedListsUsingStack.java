@@ -89,17 +89,6 @@ public class FindMergePointOfTwoLinkedListsUsingStack
 		return null;
    	  }
 	
-	static int findLength(Node head)
-	{
-		int count=0;
-		while(head != null)
-		{
-			count++;
-			head = head.next;
-		}
-		return count;
-	}
-	
 	public static void main(String [] args)
 	{
 	   Node head1 = null;

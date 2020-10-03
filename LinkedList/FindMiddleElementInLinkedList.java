@@ -1,5 +1,5 @@
 // Concept: when the fast pointer will reach to end
-// The slow poointer wil point to middle element
+// The slow pointer wil point to middle element
 // Time Complexity : O(n)
 
 class Node 
@@ -47,8 +47,8 @@ public class FindMiddleElementInLinkedList
 	{
 		Node slow_ptr, fast_ptr;
 		slow_ptr = head;
-		fast_ptr = head.next;
-		while(fast_ptr!= null)
+		fast_ptr = head;
+		while(fast_ptr!= null && fast_ptr.next != null)
 		{
 			slow_ptr = slow_ptr.next;
 			fast_ptr = fast_ptr.next.next;
@@ -67,7 +67,7 @@ public class FindMiddleElementInLinkedList
 		insertNode(56);
 		insertNode(23);
 		
-		int me  = findMiddleElement();
-		System.out.print(me);
+		int midNode = findMiddleElement();
+		System.out.print(midNode);
 	}
 }
