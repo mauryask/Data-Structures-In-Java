@@ -49,8 +49,7 @@ public class JosefsCircle
 		insertNode(3, head);
 		insertNode(4, head);
 		insertNode(5, head);
-		insertNode(6, head);   
-		//insertNode(7, head);   
+		insertNode(6, head);      
 		Node end = insertNode(7, head); 
        
 	   end.next = head;
@@ -58,10 +57,10 @@ public class JosefsCircle
 	   int m = 4; //eleminate every mth person
 	   
 	   MainLogic ml = new MainLogic();
-	   displayList(head);
-	   System.out.println();
-	   Node newHead = ml.electLeader(head, 8/*total nodes*/, m);
-	   displayList(newHead);
+	   //displayList(head);
+	   //System.out.println();
+	   Node newHead = ml.electLeader(head, 7, m);
+	   System.out.println(newHead.data);
 	}
 }
 
@@ -69,12 +68,10 @@ class MainLogic
 {
 	public Node electLeader(Node head, int n,int m)
 	{	
-		for(int count = n; count>1; count--)
+		for(int count = n; count>1; --count)
 		{
 		  for(int i=1; i<m; i++)
-		  {
 			 head = head.next;	
-		  }
 		  head.next = head.next.next;
 		}
 		
