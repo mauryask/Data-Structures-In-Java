@@ -1,5 +1,6 @@
 // given two sorted linkedlists 
 // find the nodes that are common in both(intersction of the linkedlists)
+// Time Complexity : O(m+n)
 
 import static java.lang.System.*;
 
