@@ -1,9 +1,3 @@
-/**
-* Reversing a group of k nodes 
-* this is a recursive methos and demonstrates 
-* that if number of nodes is not equal to 'k' 
-* still it is going to reverse it
-*/
 import static java.lang.System.*;
 import java.util.*;
 
@@ -67,7 +61,6 @@ public class ReverseListInaGroupOfk
 			
 			if(nextPtr != null)
 					head.next = reverseList(k, nextPtr);
-				
 			return prev;
 	}
 	
@@ -75,6 +68,8 @@ public class ReverseListInaGroupOfk
 	// this connects the rest of nodes as it is if number of
 	// nodes is not equal to 'k'
 	// best solution
+	// time complexity : O(n)
+	// space complexity : O(1)
 	
 	static Node reverseList2(int k)
 	{
@@ -92,13 +87,13 @@ public class ReverseListInaGroupOfk
 				count++;
 			}
 			
-			if(count != k)
+			/*if(count != k)
 				prev.next = tail;
 			else
-			{
-				prev.next = reverseUtil(tail, k);
+			{*/
+				prev.next = reverseUtil(tail, k); // tail is head here of a group of 3 nodes
 				prev = tail;
-			}
+		//	}
 		}
 		return temp.next;
 	}
@@ -132,7 +127,7 @@ public class ReverseListInaGroupOfk
 		
 		printList();
 		//head = reverseList(3, head);
-		head = reverseList2(4);
+		head = reverseList(4, head);
 		printList();
 	}
 }
