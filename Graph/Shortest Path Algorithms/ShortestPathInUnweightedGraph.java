@@ -58,8 +58,8 @@ class Graph
 	  
 	  while(parent[crawl] != -1)
 	  {
-		path.add(0,parent[crawl]);
 		crawl = parent[crawl];
+		path.add(0, crawl);
 	  }
 	  
 	  for(int i = path.size()-1 ; i >= 0; i--)
@@ -123,7 +123,6 @@ class Graph
 	   
        return false;
 	}
-	
 }
 
 public class ShortestPathInUnweightedGraph

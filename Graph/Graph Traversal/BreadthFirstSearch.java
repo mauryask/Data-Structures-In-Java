@@ -57,7 +57,7 @@ class Graph
 		
 		while(queue.size() != 0)
 		{
-			int u = queue.poll(); //retrievs and removes head fo the queue
+			int u = queue.poll(); //retrievs and removes head of the queue
 			System.out.print(u+" ");			
 			
 			for(Edge e : G[u])

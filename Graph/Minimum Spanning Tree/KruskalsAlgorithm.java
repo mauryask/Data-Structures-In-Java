@@ -81,8 +81,8 @@ class Graph
 		   int x =  find(parent_set, edge[i].src); // this is called E-times
 		   int y =  find(parent_set, edge[i].dest); // this is called E-times
 		   
-		   // check if source and vertex belong from if different sets
-		   // if x!=y > then no cycle is presetn here 
+		   // check if source and vertex belong from different sets
+		   // if x!=y  then no cycle is presetn here 
 		   if(x!=y) 
 		   {
 			   rslt[j++] = edge[i];

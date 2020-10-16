@@ -1,16 +1,15 @@
-// Time complexity : O(n/m + (m-1))
+// Time complexity : O(√n)
 // Prerequisite : Array must already be sorted 
-// Optimal Number of jumps : sqrt(n)
+// Optimal Number of jumps : √n
 // It is not better than binary search
 
 public class JumpSerach
 {
-	static int linearSerach(int A[], int i, int j, int item) //O(m-1)
+	static int linearSerach(int A[], int i, int j, int item) //O(√n)
 	{
-		for(int x = i+1; x<j; x++)
+		for(int x = i; x<=j; x++)
 			if(A[x] == item)
 				return x;
-			
 		return -1;	
 	}
 	
@@ -18,7 +17,7 @@ public class JumpSerach
 	{
 		int jump = (int)Math.sqrt(n);
 		int i,j;
-		for(i=jump,j=jump; j<n ; i=j,j+=jump) //O(n/m)
+		for(i=0,j=jump; j<n ; i=j,j+=jump) 
 		{
 			if(A[i] == item)
 				return i;
@@ -28,16 +27,12 @@ public class JumpSerach
 				return linearSerach(A,i,j, item);
 		}
 		
-		for(int x = i; x<n; x++)
-			if(A[x] == item)
-				return x;
-		
-		return -1;
+		return linearSerach(A, i, n-1, item);
 	}
 	
 	public static void main(String [] args)
 	{
-		//for jump serach the array must be already in sorted order
+		   //for jump serach the array must be already in sorted order
            int A[] = {1,3,4,7,8,9,12,14,48,56,69,70};	
            System.out.println(jumpSerach(A,A.length,14));		   
 	}
