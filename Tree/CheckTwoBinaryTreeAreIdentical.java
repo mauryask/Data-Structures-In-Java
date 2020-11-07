@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 class Node
@@ -77,5 +76,4 @@ public class CheckTwoBinaryTreeAreIdentical
 		 System.out.println(isIdentical(root, rootx));
 		 
 		}
-
 }
