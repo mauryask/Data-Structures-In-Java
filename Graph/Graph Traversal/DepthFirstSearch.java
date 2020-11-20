@@ -45,8 +45,8 @@ class Graph
 	void addEdge(int u, int v, int w)
 	{
 		//undirected graph
-		G[u].add(0, new Edge(v,w));
-		G[v].add(0, new Edge(u,w));
+		G[u].add(new Edge(v,w));
+		G[v].add(new Edge(u,w));
 	}
 	
 	void depthSearch(int s)
@@ -79,22 +79,19 @@ class Graph
 
 	void recursiveDFS(int v, boolean visited[])
 	{
-       	if(!visited[v])
-		{
-			System.out.println(v+" ");
-			visited[v] = true;
-		}
+	    visited[v] = true;	
+		System.out.print(v+" ");
 		
-		for(Edge e : n)
+		for(Edge e : G[v])
 		{
 			if(!visited[e.v])
-			  recursiveDFS(v, visited);
+			  recursiveDFS(e.v, visited);
 		}
 	}
 	
 }
 
-class Test 
+public class DepthFirstSearch
 {
 	public static void main(String [] args)
 	{
@@ -108,10 +105,9 @@ class Test
 
 		System.out.println(g);
 		System.out.println("===============\n");
-		//g.depthSearch(0);
+		/*boolean visited[] = new boolean[7];
+		g.recursiveDFS(0, visited);*/
 		
-		//recursive approach for DFS
-		boolean visited[] = new boolean(7);
-		g.recursiveDFS(0, visited);
+		g.depthSearch(0);
 	}
 }

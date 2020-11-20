@@ -27,16 +27,10 @@ public class BubbleSort
 					temp = A[j];
 					A[j] =  A[j+1];
 					A[j+1]  = temp;
-					swapped=1; //if array is already sorted
 				}
 			}
-
-			if(swapped==0)
-				break;
 		}
 	}
-
-
 
 	static void printArray(int A[])
 	{

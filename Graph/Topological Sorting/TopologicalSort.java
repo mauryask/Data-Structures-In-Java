@@ -1,5 +1,10 @@
-// This algorithm is known as the "Kahn's algorithm
-// to print the vertices in Topological Order"
+// 2-ways to implemment topological sorting 
+// 1: Kahn's algorithm (indegree method)
+// 2: Using Stack
+// here we have implemented it using stack
+// Time Complexity: O(E+V)
+// Space Coplexity : O(V)
+// Recommended to use : Kahn's Algorithm
 
 import java.util.List;
 import java.util.LinkedList;
@@ -31,15 +36,15 @@ class Graph
 		G[u].add(0,v);
 	}
 	
-	
 	void topologicalSortUtil(int v, boolean visited[], Stack<Integer> stack)
 	{
 	   	visited[v] =  true; 
+		// print the element in case of DFS
 		
 		for(int e : G[v])
 		{
 			if(!visited[e])
-				topologicalSortUtil(e,visited,stack);
+				 	topologicalSortUtil(e,visited,stack);
 		}
 		
 		stack.push(v);
@@ -58,20 +63,19 @@ class Graph
 		while(!stack.isEmpty())
 			System.out.print(stack.pop()+" ");		
 	}
-	
 }
 
 public class TopologicalSort
 {
 	public static void main(String [] args)
 	{
-		Graph g = new Graph(5);
-		g.addEdge(0,1);
-		g.addEdge(1,3);
-		g.addEdge(0,3);
-		g.addEdge(1,2);
-		g.addEdge(3,2);
-		g.addEdge(3,4);
+		Graph g = new Graph(6);
+		g.addEdge(4,0);
+		g.addEdge(5,0);
+		g.addEdge(5,2);
+		g.addEdge(4,1);
+		g.addEdge(2,3);
+		g.addEdge(3,1);
 		
 		System.out.println("\n"+g);
 		System.out.println("=================\n");
