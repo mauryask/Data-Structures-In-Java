@@ -69,9 +69,9 @@ class Graph
 		}
 		
 		// checking whether the graph is "acyclic or not"
-		if(count < v_num)
+		if(count != v_num)
 		{
-			out.println("Not a DAG");
+			out.println("Not a DAG "+count);
 		}
 	}
 }
@@ -86,7 +86,7 @@ public class KahnsAlgorithm
 		g.addEdge(1,2);
 		g.addEdge(3,5);
 		g.addEdge(2,5);
-		g.addEdge(2,4);
+		g.addEdge(4,2);
 		g.addEdge(5,4);
 		g.addEdge(5,6);
 	    

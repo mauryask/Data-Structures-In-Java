@@ -53,6 +53,7 @@ class Graph
 	for(int i=0; i<v_num; i++) //that means run |v| - times
 		{
 			int u = minDist(dist, visited);
+			visited[u] = true;
 			
 			for(Edge e : G[u])
 			{
@@ -62,11 +63,10 @@ class Graph
 					parent[e.v] = u;
 				}
 			}	
-			visited[u] = true;
 		}
 	
 		for(int i=0; i<v_num; i++)
-			System.out.println(src+" ==> "+i+" = "+dist[i]);
+			Sylstem.out.println(src+" ==> "+i+" = "+dist[i]);
 	}
        
 	void printPath(int dest)
