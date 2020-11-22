@@ -1,4 +1,4 @@
-// Time Complexity of this graph : O(E*V) > O(n^2)
+// Time Complexity : O(E*V) > O(n^2)
 // If the graph is complete : O(n^3) (worst case)
 // It is a Dynamic programing algorithm
 

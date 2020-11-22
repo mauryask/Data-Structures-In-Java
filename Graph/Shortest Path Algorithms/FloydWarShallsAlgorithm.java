@@ -1,4 +1,7 @@
-//this algo uses dynamic programming approach
+// this algo uses dynamic programming approach
+// time complexity  : O(V^3)
+// space complexity : O(V^2)
+
 class AllPairShortestPath
 {
 	void floydWarshall(int G[][], int v_num)
@@ -10,8 +13,12 @@ class AllPairShortestPath
 				{
 					for(j=0; j<v_num; j++)
 					{
-						if(G[i][k] != Integer.MAX_VALUE &&
-						G[k][j] != Integer.MAX_VALUE &&
+						// the purpose to use G[i][k] != inf 
+						// id to prevent overflow
+						// because when you will add something to infinite
+						// it is going to be out of range og "int"
+						
+						if(G[i][k] != inf && G[k][j] != inf && 
 						(G[i][k] + G[k][j]) < G[i][j])
 							G[i][j] = G[i][k] + G[k][j];
 					}
