@@ -3,13 +3,7 @@
 *  0 > white (vertex is not yet discovered)
 * -1 > gray (vertext is discovered)
 *  1 > black (vertex is visited)
-* Time complxity : O(V+E)
-*/
-
-//*Algorithm 
-/*
-* There will be cycle in the grapg if it consistes of a 
-* back edge
+* Time complexity : O(V+E)
 */
 
 import java.util.*;
@@ -36,9 +30,13 @@ class Graph
 		
 		for(int v : G[u])
 		{
+			// if we discover a node and any
+			// of its neighbor is alrady discovered
+			// then there is a cycle
+			
 			if(state[v] == -1)
 				return true;
-			if(state[v] == 0 && isCycleUtil(v,state) == true)
+			if(state[v] == 0 && isCycleUtil(v,state))
 				return true;
 		}
 		

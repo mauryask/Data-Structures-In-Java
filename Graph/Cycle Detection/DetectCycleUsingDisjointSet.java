@@ -38,33 +38,35 @@ class Graph
    int find(int parent_set[], int item) //O(log n) (worst case)
    {
 	  int root = item;
-		if(parent_set[root] < 0)
+		if(parent_set[root] == root)
 			return root;
 		//path compression
 		//it gives amortize constant time complexity
-		while(parent_set[root] >= 0)
+		while(parent_set[root] != root)
 			root = parent_set[root];
 		parent_set[item] = root;		
 		return parent_set[item];
    }
 
-   void union(int parent_set[],int set_1, int set_2)
+   void union(int parent_set[],int rank[], int set_1, int set_2)
    {	   
-	  if(parent_set[set_2] < parent_set[set_1])
-		   parent_set[set_1] = set_2;
-	   else
-	   {
-		   if(parent_set[set_1] == parent_set[set_2])
-			   parent_set[set_1]--;
+	   if(rank[set_2] < rank[set_1])
 		   parent_set[set_2] = set_1;
-	   }	
+	   else if(rank[set_2] > rank[set_1])
+		   parent_set[set_1] = set_2;
+ 	   else
+	   {
+		   parent_set[set_2] = set_1;
+		   rank[set_1] += 1;
+	   }		   
    }
    
    boolean isCycle(Graph g)
    {
 	   int parent_set[] = new int[v_num];
+	   int rank[] = new int[v_num];
 	     for(int i=0; i<v_num; i++) 
-			 parent_set[i] = -1;
+			 parent_set[i] = i;
 
 		for(int i=0; i<e_num; i++) 
 		{
@@ -72,7 +74,7 @@ class Graph
 			int y = find(parent_set, g.edge[i].dest); 
 			if(x == y)
 				return true;
-			union(parent_set,x,y); 
+			union(parent_set,rank,x,y); 
 		}
 		
 		return false;

@@ -1,21 +1,19 @@
 /*
-* Kruskals Algorithm to find MST
-* Time complexity : O(E*logE + E*logV)
+* Kruskal's Algorithm to find MST
+* Time complexity : O(E*logE + E*logV) = O(E*log(V*E))
 * This is a  Greedy Algorithm
 */
 
 import java.util.*;
+import static java.lang.System.*;
+
 class Graph 
 {
-	class Edge implements Comparable<Edge>
+	class Edge 
 	{
 		int src;
 		int dest;
 		int weight;
-		public int compareTo(Edge e)
-		{
-			return this.weight - e.weight;
-		}
 	}
 	
 	int v_num;
@@ -33,29 +31,29 @@ class Graph
 			edge[i] = new Edge();
 	}
 		
+			
     int find(int parent_set[],int item) // O(log V)
 	{
 		int root = item;
-		if(parent_set[root] < 0)
+		if(parent_set[root]  == root)
 			return root;
-		//path compression
-		//it gives amortize constant time complexity
-		while(parent_set[root] >= 0)
+		while(parent_set[root] != root)
 			root = parent_set[root];
 		parent_set[item] = root;		
 		return parent_set[item];
 	}
 	
-	void union(int parent_set[],int set_1, int set_2)
+	void union(int parent_set[],int rank[],int x, int y)
 	{
-	   if(parent_set[set_2] < parent_set[set_1])
-		   parent_set[set_1] = set_2;
-	   else
+	   if(parent_set[y] < parent_set[x])
+		   parent_set[y] = x;
+	   else if(parent_set[y] > parent_set[x])
+	      parent_set[x] = y;
+       else
 	   {
-		   if(parent_set[set_1] == parent_set[set_2])
-			   parent_set[set_1]--;
-		   parent_set[set_2] = set_1;
-	   }	
+		   parent_set[y] = x;
+		   rank[x] += 1;
+	   }
 	}
 	
    void KMST()
@@ -67,14 +65,15 @@ class Graph
 	   for(int i=0; i<v_num-1; i++)
 		   rslt[i] = new Edge();
 	   
-	   //sort the edges in non-decreasing order of weights
-	   Arrays.sort(edge);  // O(E * log E)
+	   //sorting edges according to the weight
+	   Arrays.sort(edge, (e1, e2) -> {return e1.w - e2.w;});
 	   
 	   // this array holds the name of the set to which
 	   // a vertex belongs
 	   int parent_set[] = new int[v_num];
+	   int rank[] = new int[v_num];
 	   for(int i=0; i<v_num; i++)
-		   parent_set[i] = -1;
+		   parent_set[i] = i;
 	   
 	   for(int i=0; i<e_num; i++)
 	   {
@@ -86,17 +85,16 @@ class Graph
 		   if(x!=y) 
 		   {
 			   rslt[j++] = edge[i];
-			   union(parent_set,x,y);
+			   union(parent_set,rank,x,y);
 		   }
 	   }
 	   	
-	//pritin resulting MST
-    for(int i=0; i<rslt.length; i++)
-	   System.out.println(rslt[i].src+" ==> "+rslt[i].dest+" = "+rslt[i].weight);
+     for(Edge e : rslt)
+	   out.println(e.src+" ==> "+e.dest+" : "+e.weight);
    }
 }
 
-public class KruskalsAlgorithm 
+public class KruskalsAlgorithm
 {
 	public static void main(String [] args)
 	{

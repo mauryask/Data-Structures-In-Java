@@ -1,17 +1,7 @@
-// Detecting Cycle in an undirected graph using 
-// BFS technique
-// Here wordt case time complexity : O(V+E)
-
-// =======>>> Algorithm : 
-/*
-@ Traverse the Graph through BFS manner
-@ if a vertext is found which is already 
-@ visited and this vertex is not the parent of
-@ the current vertex 
-@ then we can say that cycle is present here
-*/
+// Here worst case time complexity : O(V+E)
 
 import java.util.*;
+import static java.lang.System.*;
 
 class Graph 
 {
@@ -39,27 +29,29 @@ class Graph
 	void addEdge(int u, int v)
 	{
 		G[u].add(0,v);
-		//G[v].add(0,u);
+		G[v].add(0,u);
 	}
 	
-	boolean isCycle(int src) //pass the source node here
+	boolean isCycle(int src, boolean visited[], int parent[])
 	{
-		boolean visited[] = new boolean[v_num];
-		int parent[] = new int[v_num];
-		LinkedList<Integer> queue = new LinkedList<Integer>();
-		
+		List<Integer> queue = new LinkedList<>();
 		visited[src] = true;
 		queue.add(src);
 		parent[src] = src;
 		
 		while(!queue.isEmpty())
 		{
-			int u = queue.remove();
+			int u = queue.remove(0);
 			for(int v : G[u])
 			{
+				// if any neighbor of the give node
+				// is already visited and it is not the parent of
+				// the given node it means thet there is a cycle
+				
 				if(visited[v] == true && parent[u] != v)
 					return true;
-				else if(!visited[v])
+			   
+			    if(!visited[v])
 				{
 					visited[v] = true;
 					parent[v] = u;
@@ -79,13 +71,30 @@ public class CycleDetectionUsingBFS
 	{
 		Graph g = new Graph(7);
 		g.addEdge(0,1);
+		g.addEdge(1,2);
 		g.addEdge(0,3);
-		g.addEdge(0,2);
+		g.addEdge(2,0);
 		g.addEdge(3,4);
 		g.addEdge(3,5);
 		g.addEdge(6,5);
 		g.addEdge(2,6);
 		System.out.println(g);
-		System.out.println("\n=========================\n\n"+g.isCycle(0));
+		boolean visited[] = new boolean[7];
+		int parent[] = new int[7];
+		boolean flag = false;
+		
+		for(int i=0;i<7;i++)
+		{
+			parent[i]  = -1;
+			visited[i] = false;
+		}
+		
+		// loop is used to handle connected component
+		// otherwise we can pass simply '0' as source vertex
+		
+		for(int i=0;i<7;i++)
+			if(!visited[i])
+				flag = g.isCycle(i, visited, parent);
+        out.println(flag);
 	}
 }

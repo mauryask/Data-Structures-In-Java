@@ -52,12 +52,16 @@ class Graph
 	void depthSearch(int s)
 	{
 		boolean visited[] = new boolean[v_num];
-		
+		int parent[] = new int[v_num];
 		for(int i=0; i<v_num; i++)
-			visited[i] = false;
+		{
+		  visited[i] = false;
+		  parent[i] = -1;
+		}
 		
 		Stack<Integer> stack = new Stack<>();
 		stack.push(s);
+		
 		
 		while(!stack.isEmpty())
 		{
@@ -71,8 +75,13 @@ class Graph
 			
 			for(Edge e : G[u])
 			{
+				if(visited[e.v] && parent[e.v] != u)
+					out.print("Cycle");
 				if(!visited[e.v])
+				{
 					stack.push(e.v);
+					parent[e.v] = u;
+				}
 			}
 		}		
 	}

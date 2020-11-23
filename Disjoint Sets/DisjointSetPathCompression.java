@@ -1,80 +1,71 @@
-/**
-* this is the "UnionByRank with Path Compression" implementation of DisjointSet
-* Here time complexity for union : O(1)
-* Time complexity of makeSet() : O(n)
-* Time Complexity for find() : O(logn)  
-* If there are m consecutive find operation 
-* Then time complexity : O(m * logn) -> worst case
-* Total time complexity : O(n + m * logn)
-*/
+// forget the previous implementations
+// this is the best implemntaation as of now
+// T(n) = O(m*logn) --> with path compression
+// T(n) = O(m*n) --> without path compression 
 
-// here path compression helps to the 
-// speedup the future find() operation 
+//**************** Union By Rank (Height) ***************
 
-public class DisjointSetPathCompression 
+import java.util.*;
+import static java.lang.System.*;
+
+public class DisjointSetPathCompression
 {
-	static int parent_set[];
-	int n; //number of components
-	DisjointSet(int n)
+	static int []rank,parent;
+	static void makeSet(int n)
 	{
-		this.n = n;
-		parent_set = new int[n];
-	}
-	
-	void makeSet()
-	{
+		parent = new int[n];
+		rank = new int[n];
 		for(int i=0; i<n; i++)
-		{
-			parent_set[i] = -1;
-		}
+			parent[i] = i;
 	}
 	
-	int find(int item) // O(n)
+	static int find(int x)
 	{
-		int root = item;
-		if(parent_set[root] < 0)
+		// union without path compression
+		/*
+		if(parent[x] == x)
+			return x;
+		return find(parent[x]);
+		*/
+		// union with path compression
+		
+		int root =  x;
+		if(parent[root] == root)
 			return root;
-		//path compression
-		//it gives amortize constant time complexity
-		while(parent_set[root] >= 0)
-			root = parent_set[root];
-		parent_set[item] = root;		
-		return parent_set[item];
+		while(parent[root] != root)
+			root = parent[root];
+		parent[x] = root;
+		return parent[x];
 	}
 	
-	
-   void unionByRank(int set_1, int set_2) 
-	{ 	
-	   if(find(set_1) == find(set_2))
+	static void union(int x, int y, int ans[])
+	{
+	   int xRoot = find(x); // parent of x
+	   int yRoot = find(y); // parent of y
+	   if(xRoot == yRoot)
 		   return;
-	   if(parent_set[set_2] < parent_set[set_1])
-		   parent_set[set_1] = set_2;
+	   
+	   if(rank[xRoot] < rank[yRoot])
+		   parent[xRoot] = yRoot;
+	   else if(rank[xRoot] > rank[yRoot])
+		   parent[yRoot] = xRoot;
 	   else
 	   {
-		   if(parent_set[set_1] == parent_set[set_2])
-			   parent_set[set_1]--;
-		   parent_set[set_2] = set_1;
-	   }		   
-	} 
+		   parent[yRoot] = xRoot;
+		   rank[xRoot] += 1;
+	   }
+	}
 	
 	public static void main(String [] args)
 	{
-		DisjointSetPathCompression d = new DisjointSetPathCompression(8);
-		
-		d.makeSet();
-		
-		d.unionByRank(0,1);
-		d.unionByRank(2,3);
-		d.unionByRank(4,5);
-		d.unionByRank(6,7);
-		d.unionByRank(0,2);
-		d.unionByRank(4,6);
-		d.unionByRank(0,4);
-			
-	for(int i=0; i<8 ; i++)
-   	    System.out.print(parent_set[i]+" ");
-	
-	System.out.println("\n"+d.find(7));
-	
+	   	int n = 5;
+		int ans[] = new int[2];
+		makeSet(n);
+		union(0,1,ans);
+		union(1,2,ans);
+		union(2,3,ans);
+		union(0,3,ans);
+		union(0,4,ans);
+		out.println(find(2));
 	}
 }
