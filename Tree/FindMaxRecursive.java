@@ -1,9 +1,4 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import static java.lang.System.*;
-import java.util.stream.*;
-import java.util.*;
-
 class Node 
 {
 	int data;
@@ -17,25 +12,13 @@ class Node
 
 public class FindMaxRecursive
  {
-	static int findMax(Node root)
+	static int getMax(Node root)
 	{	
-	  int max = Integer.MIN_VALUE;
-	  int left, right, root_val;
-       if(root != null)
-	   {
-		   root_val = root.data;
-		   left = findMax(root.left);
-		   right = findMax(root.right);
-		   
-		   if(left > right)
-			   max = left;
-		   else
-			   max = right;
-		   if(max < root_val)
-			   max = root_val;
-	   }
-	   
-	   return max;
+	  if(root == null)
+			 return 0;
+		 int max = Math.max(root.data, Math.max(getMax(root.left),
+		 getMax(root.right)));
+		 return max;
 	}    
 	
 	static void printTree(Node root)
@@ -66,7 +49,7 @@ public class FindMaxRecursive
 		r3.left = r6;
 		r3.right = r7;
 		
-		out.println(findMax(root));	
+		out.println(getMax(root));	
     }
 
 }

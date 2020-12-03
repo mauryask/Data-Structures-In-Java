@@ -1,0 +1,1 @@
+https://www.geeksforgeeks.org/difference-between-prims-and-kruskals-algorithm-for-mst/#:~:text=Kruskal's%20algorithm's%20time%20complexity%20is,works%20only%20on%20connected%20graph.&text=Prim's%20algorithm%20runs%20faster%20in,runs%20faster%20in%20sparse%20graphs.

@@ -1,11 +1,12 @@
+// Question Number : #5
+
 import java.io.*;
 import java.util.stream.*;
-public class MaxSumSubArray
+public class MaxSubArraySum
 {
 	public static void main(String [] args) throws IOException
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
 		int A[] =  Stream.of(br.readLine().split(" "))
 		.mapToInt(Integer::parseInt)
 		.toArray();
@@ -19,20 +20,26 @@ public class MaxSumSubArray
 	   for(int i=0;i<A.length;i++)
 	   {
 		   sum += A[i];
+		   
+		   //  dont update indices 
+		   //  if currentSum < maxSum
+		   // else update
+		   
 		   if(sum > maxSum)
 		   {
 			   maxSum = sum;
 			   start = s;
 			   end = i;
 		   }
-		   else if(sum < 0)
+		   else if(sum < 0) // negative sum is not acceptable
 		   {
 			   sum = 0;
 			   s = i+1;
 		   }
 	   }
-	   
-	   return maxSum;
+		for(int i= start ; i<= end; i++)
+		System.out.print(A[i]+" ");	
+	    System.out.println();
+ 	    return maxSum;
 	}
-	
 }

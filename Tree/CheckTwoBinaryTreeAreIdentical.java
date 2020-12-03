@@ -16,16 +16,6 @@ class Node
 
 public class CheckTwoBinaryTreeAreIdentical
 {
-	static void preOrder(Node root) 
-	{
-		if(root != null)
-		{
-			System.out.print(root.data+" ");
-			preOrder(root.left);
-			preOrder(root.right);
-		}
-	}
-	
 	static boolean isIdentical(Node root1, Node root2)
 	{
 		if(root1 == null && root2 == null)
@@ -33,9 +23,52 @@ public class CheckTwoBinaryTreeAreIdentical
 		if(root1 == null || root2 == null)
 			return false;
 		
-		return (root1.data == root2.data &&
+		return root1.data == root2.data &&
 		isIdentical(root1.left,root2.left)&&
-		isIdentical(root1.right, root2.right));
+		isIdentical(root1.right, root2.right);
+	}
+	
+	
+	static boolean isSame(Node root1, Node root2)
+	{
+         if(root1 == null && root2 == null) 
+			return true;  
+	   
+		 if(root1 == null || root2 == null)
+			 return false;  
+	  
+		Queue<Node > q1 = new ArrayDeque<Node>(); 
+		Queue<Node>  q2 = new ArrayDeque<Node>();  
+		
+		q1.add(root1);  
+		q2.add(root2);  
+  
+		while (!q1.isEmpty() && !q2.isEmpty())  
+		{  
+				root1 = q1.poll();  
+				root2 = q2.poll();  
+		  
+				if (root1.data != root2.data)  
+				return false;  
+		   
+				if (root1.left != null && root2.left != null)  
+				{  
+					q1.add(root1.left);  
+					q2.add(root2.left);  
+				}  
+				else if (root1.left != null || root2.left != null)  
+					return false;  
+				
+				if (root1.right != null && root2.right != null)  
+				{  
+					q1.add(root1.right);  
+					q2.add(root2.right);  
+				}  
+				else if (root1.right != null || root2.right != null)  
+					return false;  
+			}  
+		  
+			return true;
 	}
 	
 	  public static void main(String [] args)
@@ -74,6 +107,5 @@ public class CheckTwoBinaryTreeAreIdentical
 		  rx4.right = rx7;
 		  
 		 System.out.println(isIdentical(root, rootx));
-		 
 		}
 }

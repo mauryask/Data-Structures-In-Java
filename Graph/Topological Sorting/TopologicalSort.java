@@ -36,30 +36,31 @@ class Graph
 		G[u].add(0,v);
 	}
 	
-	void topologicalSortUtil(int v, boolean visited[], Stack<Integer> stack)
+	void topologicalSortUtil(int u, boolean visited[], Stack<Integer> stack)
 	{
-	   	visited[v] =  true; 
+	   	visited[u] =  true; 
 		// print the element in case of DFS
 		
-		for(int e : G[v])
+		for(int v : G[u])
 		{
-			if(!visited[e])
-				 	topologicalSortUtil(e,visited,stack);
+			if(!visited[v])
+				 	topologicalSortUtil(v,visited,stack);
 		}
 		
-		stack.push(v);
+		stack.push(u);
 	}
 	
 	void topologicalSort()
 	{
 		Stack<Integer> stack = new Stack<>();
 		boolean visited[] = new boolean[v_num];
-		
 		for(int i=0; i<v_num; i++)
-			if(!visited[i])
-				topologicalSortUtil(i,visited,stack);
+		{
+		   if(!visited[i])
+			  topologicalSortUtil(i,visited,stack);	
+		}
 			
-		//printing the oredering of the stack
+    	//printing the oredering of the stack
 		while(!stack.isEmpty())
 			System.out.print(stack.pop()+" ");		
 	}

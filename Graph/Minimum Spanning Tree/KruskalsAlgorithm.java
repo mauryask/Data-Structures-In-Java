@@ -1,6 +1,6 @@
 /*
 * Kruskal's Algorithm to find MST
-* Time complexity : O(E*logE + E*logV) = O(E*log(V*E))
+* Time complexity : O(E*logE + E*logV) = O(E*log V)
 * This is a  Greedy Algorithm
 */
 
@@ -82,7 +82,10 @@ class Graph
 		   
 		   // check if source and vertex belong from different sets
 		   // if x!=y  then no cycle is presetn here 
-		   if(x!=y) 
+		   //--------------***********************
+		   // the sole purpose of the line is to 
+		   // leave the egdes causing cycle int eh graph
+		   if(x!=y)  
 		   {
 			   rslt[j++] = edge[i];
 			   union(parent_set,rank,x,y);

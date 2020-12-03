@@ -11,17 +11,14 @@ class Node
 	}
 }
 
-public class SerachNodeRecursive
+public class CountNumberOfNodesInBinaryTree
  {
-	static boolean search(Node root, int target)
+	static int count(Node root)
 	{	
-        if(root == null)
-			return false;
-		
-	    if(root.data == target)
-			return true;
-	      // not found -->               call to right else -->      return true
-        return !search(root.left, target)? search(root.right, target): true;
+	  if(root == null)
+			return 0;
+	 int count = count(root.left) + count(root.right) + 1;
+	 return count;
 	}    
 		
     public static void main(String args[] ) throws Exception
@@ -42,7 +39,7 @@ public class SerachNodeRecursive
 		r3.left = r6;
 		r3.right = r7;
 		
-		out.println(search(root, 1));
+		out.println(count(root));	
     }
 
 }

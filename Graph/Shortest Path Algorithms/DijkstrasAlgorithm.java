@@ -50,11 +50,10 @@ class Graph
 		
 		dist[src] = 0;
 		
-	for(int i=0; i<v_num; i++) //that means run |v| - times
+	    for(int i=1; i<=v_num; i++) //that means run |v| - times
 		{
 			int u = minDist(dist, visited);
-			visited[u] = true;
-			
+						
 			for(Edge e : G[u])
 			{
 				if(!visited[e.v] && (dist[u] + e.w) < dist[e.v])
@@ -63,6 +62,7 @@ class Graph
 					parent[e.v] = u;
 				}
 			}	
+			visited[u] = true;
 		}
 	
 		for(int i=0; i<v_num; i++)

@@ -2,9 +2,12 @@
 // since we or using sequential search technique
 // to find minimum key
 /************************/
-// But time complexity can be reduced to : O(E log V)
+// But time complexity can be reduced to : O(E *s log V)
 // if we use Min Binary Heap
 // This is Greedy Algorithm
+
+// ***************** Note: the source code is 
+// ***************** same as the dijkstra algorithm
 
 import java.util.*;
 class Graph 
@@ -73,7 +76,6 @@ class Graph
 				parent[v] = u;
 		   }
 		}
-		
 		visited[u] = true;
 	}
 	
@@ -93,10 +95,9 @@ class Graph
 	
 		return min_index;
 	}
-	
 }
 
-public class PrimsAlgorithm 
+public class PrimsAlgiorithm
 {
 	public static void main(String [] args)
 	{

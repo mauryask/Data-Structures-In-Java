@@ -16,37 +16,33 @@ class Node
 
 public class CreatingNAryTree
 {
-	
 	static Node createNode(int data)
 	{
 		Node n = new Node(data);
 		return n;
 	}
 	
-	static Node addSiblings(Node root, int data)
+	static void addSiblings(Node root, Node node)
 	{
 		if(root==null)
-			return null;
+			return;
 		else
 		{
 			while(root.next!=null)
 				root = root.next;
-			
-			return(root.next = createNode(data));
+			root.next = node;
 		}		
 	}
 	
-	static Node addChild(Node root,int data)
-	{
-				
+	static void addChild(Node root,Node node)
+	{		
 		if(root ==  null)
-			return null;
+			return;
 		if(root.child != null)
-		    return addSiblings(root.child, data);
+		    addSiblings(root.child, node);
 		else
-		    return (root.child = createNode(data));
+		   root.child = node;
 	}
-	
 	
   //time complexity O(n)
 	static void traversal(Node root) // it is like depth first search
@@ -59,12 +55,10 @@ public class CreatingNAryTree
             if(root.child != null) 
             	traversal(root.child); 
             root = root.next; 
-        } 
-		 
+        } 	 
 	}
 	
-	//level order traversal
-	
+	//level order traversal	
 	static void levelOrderTraversal(Node root)
 	{
 		Queue<Node> q = new ArrayDeque<>();
@@ -84,18 +78,29 @@ public class CreatingNAryTree
 	}
 	
 	public static void main(String[] args) {
-	   Node root = createNode(10);
-	   Node n1 = addChild(root,2); 
-       Node n2 = addChild(root,3);  
-       Node n3 = addChild(root,4);
-       Node n4 = addChild(root,14);
-       Node n5 = addChild(root,12);
-       Node n6 = addChild(n3,6);
-       Node n7 = addChild(n3,7); 
-       Node n8 = addChild(n3,8); 
-       Node n9 = addChild(n3,9);
-       Node n10 = addChild(n4,23);
+	   Node root = new Node(12);
+	   Node n1 = new Node(2); 
+       Node n2 = new Node(3);  
+       Node n3 = new Node(4);
+       Node n4 = new Node(14);
+       Node n5 = new Node(12);
+       Node n6 = new Node(6);
+       Node n7 = new Node(7); 
+       Node n8 = new Node(8); 
+       Node n9 = new Node(9);
+       Node n10 = new Node(23);
        
+	   addChild(root, n1);
+	   addChild(root, n2);
+	   addChild(root, n3);
+	   addChild(root, n4);
+	   addChild(n2,n5);
+	   addChild(n2,n6);
+	   addChild(n3,n7);
+	   addChild(n7,n8);
+	   addChild(n7,n9);
+	   addChild(n8,n10);
+	   
        //traversal(root);
   
        levelOrderTraversal(root);

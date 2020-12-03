@@ -82,8 +82,6 @@ class Graph
 			//extrracting min
 			MinHeap node = set.pollFirst(); // O(V*logV)
 			int u  =  node.vertex;
-			visited[u] = true;
-			boolean flag =  false;
 			
 			// relaxing adjacent edges
 			for(Edge e : adj[u]) // O(E*logV)
@@ -95,6 +93,8 @@ class Graph
 					set.add(heap[e.v]);
 				}
 			}
+			
+			visited[u] = true;
 		}
 		
 		for(int i=0;i<v_num; i++)

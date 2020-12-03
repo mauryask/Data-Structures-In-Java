@@ -34,7 +34,7 @@ public class ZigZagTraversal
 				while(!stack.isEmpty())
 					System.out.print(stack.pop().data+" ");
 				
-				flag  = (flag == true) ? false : true;
+				flag  = flag ? false : true;
 				
 				if(!q.isEmpty())
 					q.add(null);

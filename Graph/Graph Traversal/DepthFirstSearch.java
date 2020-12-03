@@ -62,21 +62,17 @@ class Graph
 		Stack<Integer> stack = new Stack<>();
 		stack.push(s);
 		
-		
 		while(!stack.isEmpty())
 		{
 			int u  = stack.pop();
-			
 			if(!visited[u])
 			{
-				System.out.print(u+" ");
-				visited[u] = true;
+			   System.out.print(u+" ");
+			   visited[u] = true;
 			}
 			
 			for(Edge e : G[u])
 			{
-				if(visited[e.v] && parent[e.v] != u)
-					out.print("Cycle");
 				if(!visited[e.v])
 				{
 					stack.push(e.v);

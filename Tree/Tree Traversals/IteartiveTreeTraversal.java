@@ -24,9 +24,7 @@ public class IteartiveTreeTraversal
 		parent_node = null;
 		
 		if(root == null)
-		{
 			root = temp;
-		}
 		else
 		{
 			current_node = root;
@@ -34,13 +32,9 @@ public class IteartiveTreeTraversal
 			{
 				parent_node = current_node;
 				if(temp.data > current_node.data)
-				{
 				  current_node = current_node.right;	
-				}
 				else
-				{
 					current_node = current_node.left;
-				}
 			}
 			
 			if(temp.data > parent_node.data)

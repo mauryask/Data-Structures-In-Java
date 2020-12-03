@@ -38,7 +38,8 @@ class Graph
 		while(!stack.isEmpty())
 		{
 			int u = stack.pop();
-			visited[u] = true;
+			if(!visited[u])
+				visited[u] = true;
 			
 			for(int v : G[u])
 			{
