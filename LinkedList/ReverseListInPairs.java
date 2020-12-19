@@ -57,8 +57,7 @@ public class ReverseListInPairs
 			p1.next = temp.next;
 			p1 = temp;
 			p2 = temp.next;
-		 }
-		 
+		 } 
 	 }
 
    public static void displayNode()

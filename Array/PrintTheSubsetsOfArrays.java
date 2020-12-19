@@ -16,7 +16,7 @@ public class PrintTheSubsetsOfArrays
 	static void solve(int A[])
 	{
 		int n = A.length;
-		int subset_count = (int)Math.pow(2,n); 
+		int subset_count = Math.pow(2,n); 
 
 		//convert each number into its binary
 		for(int i=0; i<subset_count; i++)
@@ -24,7 +24,7 @@ public class PrintTheSubsetsOfArrays
 			int temp = i;
 		    String rslt = "";
 			
-			// reprsent the binary equailents upto n digits (2^n) 
+			// reprsent the binary equivalent upto n digits (2^n) 
 			for(int j=0; j<n; j++)
 			{
 			   int rem = temp%2;

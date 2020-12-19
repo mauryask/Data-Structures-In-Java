@@ -1,7 +1,7 @@
 // Question Number : #5
-
 import java.io.*;
 import java.util.stream.*;
+
 public class MaxSubArraySum
 {
 	public static void main(String [] args) throws IOException
@@ -14,9 +14,12 @@ public class MaxSubArraySum
 		System.out.println(solve(A));
 	}
 	
+	// Time Complexity : O(n)
+	// Kadane's algorithm
 	static int solve(int A[])
 	{
-	   int sum = 0, maxSum = 0, s = 0, start = 0, end = 0;	
+	   int sum = 0, maxSum = A[0], s = 0, start = 0, end = 0;
+	   
 	   for(int i=0;i<A.length;i++)
 	   {
 		   sum += A[i];
@@ -37,9 +40,31 @@ public class MaxSubArraySum
 			   s = i+1;
 		   }
 	   }
-		for(int i= start ; i<= end; i++)
-		System.out.print(A[i]+" ");	
-	    System.out.println();
  	    return maxSum;
+	}
+	
+	
+	// Time Complexity : O(n^2)
+	static int solve2(int A[])
+	{
+		int n = A.length;
+		int sum = 0;
+		int max = Integer.MAX_VALUE;
+		
+		for(int i=0;i<n; i++)
+		{
+		  sum = A[i];
+		  for(int j=i+1; j<n; j++)
+		  {
+			  if(max<sum)
+				  max = sum;
+			  sum += A[j];
+		  }
+		  
+		  if(max< sum)
+			  max = sum;
+		}
+		
+		return max;
 	}
 }

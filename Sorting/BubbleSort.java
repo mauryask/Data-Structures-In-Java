@@ -16,7 +16,6 @@ public class BubbleSort
 	{
 
 		int i, j, temp;
-		int swapped = 0;
 
 		for(i=0; i<A.length; i++)
 		{

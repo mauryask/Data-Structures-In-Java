@@ -60,7 +60,7 @@ public class ReverseListInaGroupOfk
 			}	
 			
 			if(nextPtr != null)
-					head.next = reverseList(k, nextPtr);
+				head.next = reverseList(k, nextPtr);
 			return prev;
 	}
 	

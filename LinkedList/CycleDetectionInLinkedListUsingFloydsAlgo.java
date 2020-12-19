@@ -84,13 +84,12 @@ public class CycleDetectionInLinkedListUsingFloydsAlgo
 		//fix the slow ptr and move the fast_ptr 
 		//until it reaches back to slow ptr
 		int count = 1;
-		{
+		
 			while(fast_ptr.next != slow_ptr)
 			{
 				count++;
 				fast_ptr = fast_ptr.next;
 			}
-		}
 		
 		System.out.println("Lop Length: "+count);
 	}

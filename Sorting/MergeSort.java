@@ -17,7 +17,6 @@ public class MergeSort
 			out.print(x+" ");
 	}
 	
-	
 	static void merge(int A[], int p, int q, int r)
 	{
 		int n1 = q-p+1;

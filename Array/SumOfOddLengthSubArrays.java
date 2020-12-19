@@ -1,5 +1,4 @@
 // Queation Number : #14
-
 // very lovely question
 
 import static java.lang.System.*;
@@ -21,7 +20,7 @@ public class SumOfOddLengthSubArrays
 	   int n = A.length;
 	   int sum = 0;
 	   
-	   // each element is reapeated exactly "given expreesion" 
+	   // each element is reapeated exactly "given expresion" 
 	   // number of times check for it
 	   
 	   for(int i=0; i<n; i++)
@@ -36,7 +35,7 @@ public class SumOfOddLengthSubArrays
   // Space Complexity : O(1)
 	static int oddSubArraySum2(int A[])
 	{
-		int n   = A.length;
+	   int n   = A.length;
        int cum_sum = 0;
         
         for(int l=1; l<=n; l+=2)

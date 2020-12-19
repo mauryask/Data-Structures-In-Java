@@ -16,6 +16,7 @@ public class CountSubarraysWithSumDivisibleByK
 	{   int A[] = {4, 5, 0, -12, -23, 1 };
 		int k = 5;
 		solve(A, k);
+		bruteForce(A,k);
 	}
 	
 	static void solve(int A[], int k)
@@ -46,5 +47,32 @@ public class CountSubarraysWithSumDivisibleByK
 				 countSub += remFreq[i] * (remFreq[i] -1)/2; 
 		 }
 		 out.println(countSub);
+	}
+	
+	
+	// Time Complexity  : O(n^2)
+	// Space Complexity : O(1)
+	
+	static void bruteForce(int A[], int k)
+	{
+		int n = A.length;
+		int count = 0;
+		int sum = 0;
+		
+		for(int i=0; i<n; i++)
+		{
+			sum = A[i];
+			for(int j=i+1; j<n; j++)
+			{
+				if(sum % k == 0)
+					count++;
+				sum += A[j];
+			}
+			
+			if(sum %k == 0)
+				count++;
+		}
+		
+		out.println("\n"+count);
 	}
 }
