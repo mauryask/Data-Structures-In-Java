@@ -19,7 +19,7 @@ public class FindNextGreaterElementInArray
 			// if current elemnt is less than 
 			// or equal to the stack.peek() 
 			// then push its index into the stack
-			// elese pop() tye index and put the corresponding 
+			// elese pop() the index and put the corresponding 
 			// current elemnt in array B at poped index 
 			
 			if(A[i] <= A[stack.peek()])

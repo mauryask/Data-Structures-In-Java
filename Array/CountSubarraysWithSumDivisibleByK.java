@@ -1,6 +1,6 @@
 // Question Number : #1
 
-// countind all the sub arrays 
+// counting all the sub arrays 
 // with cumulative sum divisible by k
 // Time Complexity  : O(n+k)
 // Space Complexity : O(k)

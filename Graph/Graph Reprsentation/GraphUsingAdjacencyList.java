@@ -1,10 +1,11 @@
 //Adjacency list implementation of graph
 import java.util.*;
+
 class Graph
 {
 	class Edge 
 	{
-		int v; //vertext
+		int v; //vertex
 		int w; //weight
 		
 		public Edge(int v, int w)
@@ -32,17 +33,8 @@ class Graph
 	
 	void addEdge(int u, int v, int w)
 	{
-		//notice this statement
-		//here every time the vertex is being added at 0
-		//it saves alot of time
-		//time complexity reduces to O(1)
-		// instead of O(n)
-		
-		//this is for directed graph
-		G[u].add(0,new Edge(v,w));  //toString() is called from the age class
-		
-		//for undirected graph use this too
-		G[v].add(0, new Edge(u,w));
+		G[u].add(new Edge(v,w)); 
+		G[v].add(new Edge(u,w));
 	}
 	
 	@Override
