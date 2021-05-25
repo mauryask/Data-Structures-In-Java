@@ -1,6 +1,6 @@
-============>>> finding the array element address in the given 1D array <<<===============
+============>>> Finding the array element address in the given 1D array <<<===============
 
- given an array (base address (B), size of each element (W), lowerbound (LB)-- the lower index from which the array started)
+ Given an array (base address (B), size of each element (W), lowerbound (LB)-- the lower index from which the array started)(like 0 in normal cases)
  then findout the "address of the A[i] element" 
 
 formula: adress of A[i] = B + W * (i - LB)
@@ -12,7 +12,7 @@ let W = 2 Byte
 i = 1700
 base adress B  = 1020
 
-The Adrres of A[1700]  =  1020 + 2 * (1700-1300)  =  1020 + 800 = 1820 (Answer)  
+The Addrres of A[1700]  =  1020 + 2 * (1700-1300)  =  1020 + 800 = 1820 (Answer)  
 
 =================>>> finding element address in 2D array  <<<====================
 
@@ -36,4 +36,8 @@ Add(A[i][j]) = BA + W [M (j-LBC) + (i-LBR)]
 here
  M => number of total rows
  
->> in the question if no order is given by default take: roe major order 
+>> in the question if no order is given by default take: row major order 
+
+
+>> Java does not have multi dimentional array but array of arrays (It uses neither row major nor column major order)
+--> https://stackoverflow.com/questions/6630990/java-a-two-dimensional-array-is-stored-in-column-major-or-row-major-order

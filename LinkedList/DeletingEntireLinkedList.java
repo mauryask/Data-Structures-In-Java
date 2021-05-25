@@ -45,16 +45,14 @@ public class DeletingEntireLinkedList
 	//deliting the entire list
 	static void deleteList() 
 	{
-		Node ptr, auxPtr;
-        ptr = head;
-		while(ptr.next != null)
+		Node ptr = head;
+       
+		while(head != null)
 		{
-			auxPtr = ptr.next;
+			head = ptr.next;
 			ptr.next = null;
-			ptr = auxPtr;
+			ptr = head;
 		}
-		
-		head = null;
 	}
 	
 	public static void main(String [] args)
