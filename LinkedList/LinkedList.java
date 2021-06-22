@@ -16,32 +16,18 @@ public class LinkedList
 	//default value of the object in  java is null
 	//hence head will be initialized to null
 	
-	static Node head; 
-		
-	//===================> create node	
-	
-	public static Node createNode(int value)
-	{
-		Node newNode = new Node(value);
-		return newNode;
-	}
-	
-	
-	//===================> insert node at the end
+	static Node head, tail; 
 	
 	public static void insertNode(int value)
 	{
-		Node newNode = createNode(value);
+		Node newNode = new Node(value);
+		
 		if(head == null)
 			head = newNode;
 		else
-		{
-			Node p = head;
-			while(p.next != null)
-				p = p.next;
-			
-			p.next = newNode;
-		}
+		    tail.next = newNode;
+		
+		tail = newNode;
 	}
 	
 	//===================> diaply nodes
@@ -51,7 +37,7 @@ public class LinkedList
 		Node p = head;
 		while(p != null)
 		{
-			System.out.print(p.value+" "+p.next+"\n");
+			System.out.print(p.value+" ");
 			p = p.next;
 		}
 	}

@@ -1,75 +1,82 @@
-//detecting loop in alinked list using hashset
-//time complexity: O(n) ==>  during scanning the linkedlist
+/**
+Time complexity  : O(n)
+Space complexity : O(n)
+*/
 
-import java.util.HashMap;
+import java.util.*;
+import static java.lang.System.*;
+
 class Node 
 {
-	int value;
+	int data;
 	Node next;
-	Node(int value)
+	
+	Node(int data)
 	{
-		this.value = value;
-		next = null;
+	   this.data = data;
+	   next =  null;
 	}
 }
 
 public class CycleDetectionUsingHashTable
 {
-	static Node insertNode(Node head, int value)
-	{
-		Node ptr,temp;
-		temp = new Node(value);
-		if(head == null)
-		{
-			head = temp;
-		}
-		else
-		{
-			ptr = head;
-			while(ptr.next!= null)
-			{
-				ptr = ptr.next;
-			}
-			ptr.next = temp;
-		}
-		return temp;
-	}
+	 static Node tail = null;
 	
-	static void detectLoop(Node head)
-	{
-	   Map<Node> map = new HashMap<>();
-	   int count = 0;
-	   boolean flag = false;
-	   while(head != null)
-	   {
-		   if(!map.containsKey(head))
-		     map.put(head, count++);
-		   else 
-		   {
-			   flag  = true;
-			   break;
-		   }
-		   head = head.next;
-	   }
-	   if(flag == false)
-		   System.out.println("\nNo loop found in the linked list");
-	   else
-	     System.out.println("\nloop detected at node: "+head.value);
-	}
-	
-    public static void main(String [] args)
-	{
-		Node head =  null;
-		head = insertNode(head,10);
-		Node r2 = insertNode(head,23);
-		Node r3 = insertNode(head,54);
-		Node r4 = insertNode(head,13);
-		Node r5 = insertNode(head,14);
-		Node r6 = insertNode(head,45);
-		Node r7 = insertNode(head,96);
-		Node r8 = insertNode(head,78);
+	 static Node insertNode(Node head, int data)
+	 {
+		 Node temp = new Node(data), ptr = null;
+		 if(head == null)
+			 head = temp;
+		 else
+			 tail.next = temp;
+		 tail = temp;
+		 return temp;
+	 }
+	 
+	 static void displayList(Node head)
+	 {
+		 Node ptr = head;
+		 while(ptr != null)
+		 {
+			 out.print(ptr.data+" ");
+			 ptr = ptr.next;
+		 }
+		 out.println();
+	 }
+	 
+	 static void isLoop(Node head)
+	 {
+	    Set<Node> set = new HashSet<>();	
+	    Node ptr  = head;
+		boolean flag = false;
 		
-		r8.next = r2; //creating loop in the list
-	    detectLoop(head);
+		while(ptr != null)
+		{
+			if(set.contains(ptr))
+			{
+				flag = true;
+				break;
+			}
+			
+			set.add(ptr);
+			ptr = ptr.next;
+		}
+		
+		out.println(flag ? "loop found!" : "loop not found!");
+	 }
+	public static void main(String [] args) 
+	{
+		Node head = null;
+		head = insertNode(head, 13);
+		Node r1 = insertNode(head, 5);
+		Node r2 = insertNode(head, 12);
+		Node r3 = insertNode(head, 20);
+		Node r4 = insertNode(head, 32);
+		Node r5 = insertNode(head, 24);
+		
+		// creating a loop
+		r5.next = head; 
+		
+        isLoop(head);
 	}
 }

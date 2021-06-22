@@ -1,5 +1,8 @@
-//This prgram demonstrates how to revrse a linked list
-//using recursive approach 
+/**
+Time complexity: O(n)
+Space complexity: O(n) -> as recursion stack
+Note: very important
+*/
 
 class Node 
 {

@@ -1,6 +1,6 @@
 /**
 Time complexity: O(m+n)
-Space complexity : O(m+n) 
+Space complexity : O(1)
 */
 
 import static java.lang.System.*;
@@ -18,7 +18,7 @@ class Node
 	}
 }
 
-public class FindMergePointOfTwoLinkedListsUsingStack
+public class FindMergerPointUsingTwoPointerApproach
 {
 	 static Node tail = null;
 	
@@ -51,35 +51,25 @@ public class FindMergePointOfTwoLinkedListsUsingStack
 	 
 	 static Node findMergePoint(Node head1, Node head2)
 	 {
-		Stack<Node> st1 = new Stack<>();
-		Stack<Node> st2 = new Stack<>();
-	
-	     
-		while(head1 != null)
-		{
-			st1.push(head1);
-			head1 = head1.next;
-		}			
-	
-	    while(head2 != null)
-		{
-			st2.push(head2);
-			head2 = head2.next;
-		}	
-	   
-	    Node temp = null;
+		Node p1 = head1;
+		Node p2 = head2;
 		
-	    while(!st1.isEmpty() && !st2.isEmpty())
+		while(p1 != p2)
 		{
-		   Node p1 = st1.pop();
-		   Node p2 = st2.pop();
-		   	   
-		   if(p1 == p2)
-			temp = p1;
-           else
-             return temp;		 
+			p1 = p1.next;
+			p2 = p2.next;
+			
+			if(p1 == p2)
+				return p1;
+			
+			if(p1 == null)
+				p1 = head2;
+			
+			if(p2 == null)
+				p2 = head1;
 		}
-		return null;
+		
+		return p1;
 	 }
 			
 	public static void main(String [] args) 
@@ -99,7 +89,7 @@ public class FindMergePointOfTwoLinkedListsUsingStack
 		Node s6 = insertNode(head2, 102);
 		Node s7 = insertNode(head2, 56);
 		
-		f4.next = s4;
+		//f4.next = s4;
 		
 		displayList(head1);
 		displayList(head2);

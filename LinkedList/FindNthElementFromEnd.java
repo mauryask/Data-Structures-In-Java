@@ -1,9 +1,7 @@
 /**
 Time complexity: O(n)
-Space complexity: O(n)
+Space complexity: O(1)
 */
-
-import java.util.*;
 import static java.lang.System.*;
 
 class Node 
@@ -18,7 +16,7 @@ class Node
 	}
 }
 
-public class FindNthNodeFromEndUsingHashTable
+public class FindNthElementFromEnd
 {
 	 static Node head = null, tail = null;
 	
@@ -46,23 +44,30 @@ public class FindNthNodeFromEndUsingHashTable
 	 
 	 static void nthNodeFromEnd(int n)
 	 {
-		Map<Integer, Node> map =  new HashMap<>();
+		int m = 0; //total node in the list
 		
 		Node ptr = head;
-		int count = 0;
+		
 		while(ptr != null)
 		{
-			map.put(count+1, ptr);
-			count++;
+			m++;
 			ptr = ptr.next;
 		}
 		
-		Node rslt = map.get(count-n+1);
-        		
-		if(rslt == null)
+		// get m-n+1 node from the begining 	
+		int count  = 1;
+		ptr = head;
+		
+		while(ptr != null && count != m-n+1)
+		{
+		    count++;
+			ptr = ptr.next;
+		}
+		
+		if(count != m-n+1)
 			out.println("Insufficient number of nodes");
 		else
-			out.println(rslt.data);
+		  out.println(ptr.data);
 	 }
 	 
 	public static void main(String [] args) 
@@ -75,6 +80,6 @@ public class FindNthNodeFromEndUsingHashTable
 	  insertNode(45);
 	  display();
 	  out.println();
-	  nthNodeFromEnd(1);
+	  nthNodeFromEnd(4);
 	}
 }

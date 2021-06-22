@@ -1,10 +1,9 @@
 /**
 Time complexity: O(m+n)
-Space complexity : O(m+n) 
+Space complexity: O(1)
 */
 
 import static java.lang.System.*;
-import java.util.*;
 
 class Node
 {
@@ -18,7 +17,7 @@ class Node
 	}
 }
 
-public class FindMergePointOfTwoLinkedListsUsingStack
+public class FindMergePointOfTwoLinkedListsBestWay
 {
 	 static Node tail = null;
 	
@@ -49,39 +48,63 @@ public class FindMergePointOfTwoLinkedListsUsingStack
 		 out.println();
 	 }
 	 
-	 static Node findMergePoint(Node head1, Node head2)
+	 static void findMergePoint(Node head1, Node head2)
 	 {
-		Stack<Node> st1 = new Stack<>();
-		Stack<Node> st2 = new Stack<>();
-	
-	     
-		while(head1 != null)
-		{
-			st1.push(head1);
-			head1 = head1.next;
-		}			
-	
-	    while(head2 != null)
-		{
-			st2.push(head2);
-			head2 = head2.next;
-		}	
-	   
-	    Node temp = null;
+		int m = getLength(head1); // length of first list
+		int n = getLength(head2); // length of second list
 		
-	    while(!st1.isEmpty() && !st2.isEmpty())
+		int diff = 0;
+		Node big = null,small = null;
+		
+		// check which list is large
+		// and which is small in length
+		if(m>n)
 		{
-		   Node p1 = st1.pop();
-		   Node p2 = st2.pop();
-		   	   
-		   if(p1 == p2)
-			temp = p1;
-           else
-             return temp;		 
+			diff = m-n;
+			big = head1;
+			small = head2;
 		}
-		return null;
+		else
+		{
+			diff = n-m;
+			big = head2;
+			small = head1;
+		}
+		
+		int count = 0;
+		
+		// move big pointer by diff positions
+		while(count != diff)
+		{
+			big = big.next;
+			count++;
+		}
+		
+		// now compare corresponding nodes
+		while(big != small)
+		{
+			big = big.next;
+			small = small.next;
+		}
+		
+		// print the commona nodes
+		out.println(big.data);
 	 }
-			
+	 
+	 
+	 static int getLength(Node head)
+	 {
+		Node ptr = head;
+		int count = 0;
+		while(ptr != null)
+		{
+			count++;
+			ptr = ptr.next;
+		} 
+		
+		return count;
+	 }
+		
 	public static void main(String [] args) 
 	{
 		Node head1 = new Node(5);
@@ -103,7 +126,7 @@ public class FindMergePointOfTwoLinkedListsUsingStack
 		
 		displayList(head1);
 		displayList(head2);
-		Node mNode = findMergePoint(head1, head2);
-		out.println(mNode != null ? mNode.data : "No merge point found");
+		out.println();
+		findMergePoint(head1, head2);
 	}
 }
