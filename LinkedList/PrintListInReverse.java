@@ -1,6 +1,6 @@
 /**
 Time complexity: O(n)
-Space complexity : O(1) 
+Space complexity : O(n) 
 */
 
 import static java.lang.System.*;
@@ -18,7 +18,7 @@ class Node
 	}
 }
 
-public class CheckEvenOddLength
+public class PrintListInReverse 
 {
 	 static Node tail = null;
 	
@@ -41,9 +41,13 @@ public class CheckEvenOddLength
 	 }
 	 
 	 
-	 static void mergeLists(Node head1, NOde head2)
+	 static void printRev(Node head)
 	 {
-		 
+		if(head == null)
+			return;
+		
+        printRev(head.next);
+		out.print(head.data+" ");
 	 }
 	 
 	 static void displayList(Node head)
@@ -67,9 +71,8 @@ public class CheckEvenOddLength
 		insertNode(head1, 32);
 		insertNode(head1, 7);
 		insertNode(head1, 52);
-		insertNode(head1, 45);
-				
-		displayList(head1);
-		checkEvenOdd(head1);
+		
+		//displayList(head1);
+		printRev(head1);
 	}
 }

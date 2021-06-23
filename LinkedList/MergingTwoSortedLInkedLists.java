@@ -1,5 +1,8 @@
-// merging two sorted Linked lists into one
-// Time complexity : O(n+m)
+/**
+Time complexity: O(n+m)
+Space complexity: O(1)
+*/
+
 class Node 
 {
 	int data;
@@ -13,22 +16,22 @@ class Node
 
 public class MergingTwoSortedLInkedLists 
 {
+	static Node tail = null;
+	
 	static Node insertNode(Node head, int data)
 	{
 	   Node temp, ptr;
 		temp = new Node(data);
 		if(head == null)
-			head = temp;
-		else
 		{
-			ptr = head;
-			while(ptr.next != null)
-			{
-				ptr = ptr.next;
-			}
-			ptr.next = temp;
+			head = temp;
+			tail = temp;
+			return head;
 		}
-		
+          
+        tail.next = temp;
+		tail = temp;		
+		 
 		return temp;
 	}
 	
@@ -87,24 +90,23 @@ public class MergingTwoSortedLInkedLists
 	   Node head1 = null;
 	   Node head2 = null;
        head1 = insertNode(head1,10);
-       Node n1 = insertNode(head1,12);	   
-       Node n2 = insertNode(head1,20);	   
-       Node n3 = insertNode(head1,45);	   
-       Node n4 = insertNode(head1,63);	   
-       Node n5 = insertNode(head1,74);
-       Node n6 = insertNode(head1,78);
-       Node n7 = insertNode(head1,80);
-       Node n8 = insertNode(head1,96);
+        insertNode(head1,12);	   
+        insertNode(head1,20);	   
+        insertNode(head1,45);	   
+        insertNode(head1,63);	   
+        insertNode(head1,74);
+        insertNode(head1,78);
+        insertNode(head1,80);
+        insertNode(head1,96);
 
        head2 = insertNode(head2, 2);
-	   Node m1 = insertNode(head2,35);
-	   Node m2 = insertNode(head2,33);
-	   Node m3 = insertNode(head2,47);
-	   Node m4 = insertNode(head2,50);
-	   Node m5 = insertNode(head2,87);
+	    insertNode(head2,35);
+	    insertNode(head2,33);
+	    insertNode(head2,47);
+	    insertNode(head2,50);
+	    insertNode(head2,87);
 	   
 	   Node head = mergeLists(head1, head2);
 	   printList(head);
-	
 	}
 }

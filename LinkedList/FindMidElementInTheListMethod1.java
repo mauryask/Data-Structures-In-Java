@@ -18,7 +18,7 @@ class Node
 	}
 }
 
-public class FindMiddleElementInLinkedList 
+public class Test 
 {
 	 static Node tail = null;
 	
@@ -40,27 +40,7 @@ public class FindMiddleElementInLinkedList
 		return tail;
 	 }
 	 
-	 
-	 static void findMidNode(Node head)
-	 {
-		 // if list is empty
-		 if(head == null)
-		 {
-			 out.println("list is empty");
-			 return;
-		 }
-		 
-		 Node p1 = head, p2 = head;
-		 
-		 while(p2 != null && p2.next != null)
-		 {
-			 p1 = p1.next;
-			 p2 = p2.next.next;
-		 }
-
-		 out.println(p1.data);
-	 }
-	 
+	
 	 static void displayList(Node head)
 	 {
 		 Node ptr = head;
@@ -73,12 +53,52 @@ public class FindMiddleElementInLinkedList
 		 
 		 out.println();
 	 }
-	 			
+	 	
+		static void findMidNode(Node head)
+		{
+			// list is empty
+			if(head == null)
+			{
+				out.println("list is empty");
+				return;
+			}
+			// list has only one nodes
+			if(head.next == null)
+			{
+				out.println(head.data);
+				return;
+			}
+			
+						
+			Node ptr = head;
+			int n = 1; // total nodes in the list
+			
+			while(ptr.next != null)
+			{
+				n++;
+				ptr = ptr.next;
+			}
+             
+			ptr = head;
+			int count = 0;
+            while(ptr != null && count != n/2)
+			{
+				ptr = ptr.next;
+				count++;
+			}				
+		    out.println(ptr.data);
+		}
+		
 	public static void main(String [] args) 
 	{
 		Node head1 =  null;
 		head1 = insertNode(head1, 5);
-		
+		Node f1 = insertNode(head1, 10);
+		Node f2 = insertNode(head1, 12);
+		Node f3 = insertNode(head1, 14);
+		Node f4 = insertNode(head1, 28);
+		Node f5 = insertNode(head1, 32);
+		Node f6 = insertNode(head1, 55);
 		displayList(head1);
 		findMidNode(head1);
 	}
