@@ -1,105 +1,124 @@
-// checking if list is palindrome or not
-// Time complexity : O(n)
-// Space Complexity : O(1)
+/**
+Time complexity: O(n)
+Space complexity : O(1) 
+*/
 
 import static java.lang.System.*;
-class Node 
+import java.util.*;
+
+class Node
 {
 	int data;
 	Node next;
-	Node(int value)
+	
+	Node(int data)
 	{
-		data = value;
-		next = null;
+	   this.data = data;   
+	   next =  null;
 	}
 }
 
-public class CheckIfLinkedListPalindrome
+public class Test 
 {
-	static Node insertNode(int value, Node head)
-	{
-		Node temp, ptr = null;
-		temp = new Node(value);
+	 static Node tail = null;
+	
+	 static Node insertNode(Node head,int data)
+	 {
+		 Node temp = new Node(data);
+		 Node ptr = null;
+		 
 		if(head == null)
-			head = temp;
-		else
 		{
-			ptr = head;
-			while(ptr.next != null)
-			{
-				ptr = ptr.next;
-			}
-			ptr.next = temp;
+			head = temp;
+			tail = head;
+			return head;
 		}
-		return temp;
-	}
-	
-///==============================================>> Main Method
-   	
-	public static void main(String [] args)
-	{
-		Node head = null;
-	    head = insertNode(78, head);
-		insertNode(56, head);
-		insertNode(60, head);
-		insertNode(50, head);
-		insertNode(50, head);
-		insertNode(60, head);   
-		insertNode(56, head);   
-		Node end = insertNode(78, head); 
-       
-	    out.println(checkPalin(head));
-	}
-	
-   static boolean checkPalin(Node head)
-   {
-	   if(head == null || head.next == null)
-		   return true;
-	   
-	   Node p1 = head;
-	   Node p2 = head;
-	   
-	   Node revHead = null;
-
-	   while(p2!= null && p2.next != null)
-	   {
-			   p1 = p1.next;
-			   p2 = p2.next.next;
-	   }
-	   
-	   revHead = reverse(p1);
-	   boolean flag = true;
-	   
-	   while(head != p1)
-	   {
-		   if(head.data != revHead.data)
-		   {
-			   flag = false;
-			   break;
-		   }
-		   head = head.next;
-		   revHead = revHead.next;
-	   }
-	   
-	   return flag;
-    }
-
-
-      static Node reverse(Node head)
-	  {
-		 Node ptr = head; 
-		 Node prevPtr = null;
-		 Node nextPtr = null;
-		 
-		 while(ptr!=null)
+		
+        tail.next = temp;
+        tail = temp;
+		
+		return tail;
+	 }
+	 
+	 
+	 static void displayList(Node head)
+	 {
+		 Node ptr = head;
+		
+		 do
 		 {
-			 nextPtr = ptr.next;
-			 ptr.next = prevPtr;
-			 prevPtr = ptr;
-			 ptr = nextPtr;
-		 }
+			 out.print(ptr.data+" ");
+			 ptr = ptr.next;
+		 }while(ptr != null);
 		 
-		 return prevPtr;
-	  }
-}
+		 out.println();
+	 }
+	 		
+			
+    static void checkPalin(Node head)
+	{
+		Node midNode = findMidNode(head);
+		Node revHead = reverseList(midNode);
+		boolean flag = true;
 
+		
+		while(head != midNode)
+		{
+			if(head.data != revHead.data)
+			{
+				flag = false;
+				break;
+			}
+			
+			head = head.next;
+			revHead = revHead.next;
+		}
+		
+		out.println(flag ? "Palindrome!" : "Not palindrome");
+	}
+	
+	static Node reverseList(Node head)
+	{
+		Node ptr = head;
+		Node prevNode = null, nextNode = null;
+		
+		while(ptr != null)
+		{
+			nextNode = ptr.next;
+			ptr.next = prevNode;
+			prevNode = ptr;
+			ptr = nextNode;
+		}
+		
+		return prevNode;
+	}
+	
+	static Node findMidNode(Node head)
+	{
+		Node p1 = head, p2 = head;
+		
+		while(p2 != null && p2.next != null)
+		{
+			p1 = p1.next;
+			p2 = p2.next.next;
+		}
+		
+		return p1;
+	}
+			
+	public static void main(String [] args) 
+	{
+		Node head1 =  null;
+		head1 = insertNode(head1, 1);
+		insertNode(head1, 2);
+		insertNode(head1, 3);
+		insertNode(head1, 4);
+		insertNode(head1, 3);
+		insertNode(head1, 2);
+		insertNode(head1, 1);
+					
+		displayList(head1);
+		
+		checkPalin(head1);
+	}
+}
