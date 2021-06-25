@@ -1,113 +1,121 @@
-// Given two linked lists, each list node with 
-// one integer digit, add these two
-// linked lists. The result should be stored
-// in the third linked list. Also note that the head node
-// contains the most significant digit of the number.
+/**
+Time complexity: O(n)
+Space complexity : O(1) 
+*/
 
 import static java.lang.System.*;
+import java.util.*;
 
-class Node 
+class Node
 {
 	int data;
 	Node next;
+	
 	Node(int data)
 	{
-		this.data = data;
-		next = null;
+	   this.data = data;   
+	   next =  null;
 	}
 }
 
 public class AddTwoNumbersGivenAsTheTwoLinkedLists
 {
-	static Node insertNode(int data, Node head)
-	{
-		Node temp, ptr = null;
-		temp = new Node(data);
+	 static Node tail = null;
+	 
+	 static Node insertNode(Node head,int data)
+	 {
+		 Node temp = new Node(data);
+		 Node ptr = null;
+		 
 		if(head == null)
+		{
 			head = temp;
-		else
-		{
-			ptr = head;
-			while(ptr.next != null)
-			{
-				ptr = ptr.next;
-			}
-			ptr.next = temp;
+			tail = head;
+			return head;
 		}
-		return temp;
-	}
-	
-	static Node findSum(Node p1, Node p2)
-	{
-		if(p1 == null && p2 != null)
-			return  p1 ;
-	    else if(p1 != null && p2 == null)
-			return p2;
-		if(p1 == null && p2 == null)
-			return null;
 		
-		int carry = 0;
-		int sum = 0;
-		int nDigit= 0;
+        tail.next = temp;
+        tail = temp;
 		
-		Node head = p1;
+		return tail;
+	 }
+	 
+	 
+	 static void displayList(Node head)
+	 {
+		 Node ptr = head;
 		
-		while(p1 != null && p2 != null)
-		{
-			sum = p1.data + p2.data + carry;
-			nDigit = (int)Math.log10(sum) + 1; //finding number of digits
-
-			if(nDigit > 1)
-			{
-				p1.data = sum % 10;
-				carry = sum /10;
-			}
-			else
-			{
-				p1.data = sum;
-				carry = 0;
-			}
-						
-			if(p1.next ==  null && p2.next != null)
-				p1.next = new Node(0);
-			else if(p1.next != null && p2.next == null)
-				p2.next = new Node(0);
-			
-			p1 = p1.next;
-			p2 = p2.next;
-		}
-		return head;
-	}
-	
-	static void displayNode(Node head)
-	{
-		Node ptr = head;
-		while(ptr != null)
-		{
-			out.print(ptr.data);
-			ptr = ptr.next;
-		}
-		out.println();
-	}
-	
-	public static void main(String [] args)
-	{
-		Node head1 = null;
-		Node head2 = null;
-		
-		head1 = insertNode(7, head1);
-		insertNode(3, head1);
-		insertNode(8, head1);
+		 while(ptr != null)
+		 {
+			 out.print(ptr.data+" ");
+			 ptr = ptr.next;
+		 }
+		 
+		 out.println();
+	 }	
 				
+	 static void addList(Node head1, Node head2)
+	 {
+		 // handling base cases
+		 if(head1 == null && head2 != null)
+		 {
+			 displayList(head2);
+			 return;
+		 }
+		 
+		 if(head1 != null && head2 == null)
+		 {
+			 displayList(head1);
+			 return;
+		 }
+		 
+		 if(head1 == null && head2 == null)
+			 return;
+		 
+		 int carry = 0, sum = 0, cumSum  = 0;
+		 Node head = head1, prev = null;
+		 
+		 while(head1 != null && head2 != null)
+		 {
+			 cumSum = head1.data + head2.data + carry;
+			 sum = cumSum % 10;
+			 carry = cumSum / 10;
+			 			 
+			 head1.data = sum;
+			 			 			 
+			 if(head1.next == null && head2.next != null)
+			 {
+				 head1.next = new Node(0);
+			 }
+			 
+			 if(head1.next != null && head2.next == null)
+			 {
+				head2.next = new Node(0);
+			 }		
+
+             prev  = head1;
+             head1 = head1.next;
+			 head2 = head2.next;			 
+		 }
+		 
+		 if(carry != 0)
+			 prev.next = new Node(carry);
+		 displayList(head);
+	 }	 
+   		
+					
+	public static void main(String [] args) 
+	{
+		Node head1 =  null;
+		head1 = insertNode(head1, 2);
+		insertNode(head1, 4);
+		insertNode(head1, 3);
 		
-		head2 = insertNode(2, head2);
-		insertNode(2, head2);
-		insertNode(3, head2);
-		
-		displayNode(head1);
-		displayNode(head2);
-		
-		Node head = findSum(head1, head2);
-		displayNode(head);
+		Node head2 =  null;
+		head2 = insertNode(head2, 9);
+		insertNode(head2, 7);
+		insertNode(head2, 8);
+       
+        addList(head1, head2);
 	}
 }

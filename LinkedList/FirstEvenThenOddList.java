@@ -1,6 +1,7 @@
 /**
 Time complexity: O(n)
-Space complexity : O(n) 
+Space complexity : O(1) => Think about it
+as we are not using any extra space 
 */
 
 import static java.lang.System.*;

@@ -46,8 +46,10 @@ public class IteartiveTreeTraversal
 	} 
 
 
-//here we are going to use stack to store info of the previous node	 	
-	static void iterativePreorder(Node root) //this is not the global 'root' variable
+	//here we are going to use stack to store info of the previous node	 	
+	//this is not the global 'root' variable
+	
+	static void iterativePreorder(Node root) 
 	{
 		Stack<Node> stack = new Stack<>();
 		
@@ -95,6 +97,7 @@ public class IteartiveTreeTraversal
 	static void iterativePostorder(Node root)
 	{
 		Stack<Node> stack =  new Stack<>();
+		// tells that this node a node is already visited
 		Node prev = null;
 		while(true)
 		{
