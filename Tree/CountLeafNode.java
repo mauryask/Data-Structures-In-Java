@@ -1,5 +1,8 @@
-//finding total number of leaf node
-
+/**
+Time complexity  : O(n)
+Space complexity : O(n)
+*/
+import static java.lang.System.*;
 import java.util.*;
 
 class Node
@@ -16,43 +19,46 @@ class Node
 	}
 }
 
-public class CountLeafNode
+public class CountLeafNodeInBinaryTree
 {
-	static void preOrder(Node root) 
+	static void levelOrder(Node root)
 	{
-		if(root != null)
-		{
-			System.out.print(root.data+" ");
-			preOrder(root.left);
-			preOrder(root.right);
-		}
-	}
-
-	static int countLeafNode(Node root)
-	{
-		List<Node> q = new LinkedList<>();
+		Queue<Node> q = new ArrayDeque<>();
 		q.add(root);
-		int count =0;
+		
 		while(!q.isEmpty())
 		{
-			root = q.remove(0);
-			
-			//node that does not have left and right
-			//child is a leaf node
-			
-			if(root.right == null && root.left == null)
-			  count++;
-			
+			root = q.remove();
+			out.print(root.data+" ");
 			if(root.left != null)
 				q.add(root.left);
-			
 			if(root.right != null)
 				q.add(root.right);
 		}
-		return count;
+		out.println();
 	}
 	
-	
+	static int countLeafNode(Node root)
+	{
+        int count = 0;	
+		Queue<Node> q = new ArrayDeque<>();
+		q.add(root);
+		
+		while(!q.isEmpty())
+		{
+			root = q.remove();
+		
+			
+			if(root.left != null)
+				q.add(root.left);
+			if(root.right != null)
+				q.add(root.right);
+			if(root.left == null && root.right == null)
+				count++;				
+		}
+		return count;
+	}
+		
 	  public static void main(String [] args)
 		{
 		
@@ -62,15 +68,15 @@ public class CountLeafNode
 		  Node r4 = new Node(4);
 		  Node r5 = new Node(5);
 		  Node r6 = new Node(6);
+		  Node r7 = new Node(7);
 		  
 		  root.left = r2;
 		  root.right = r3;
 		  r2.left = r4;
 		  r2.right = r5;
-		  r4.left = r6;
-		 
-		 int totalLeafNode = countLeafNode(root);
-		 System.out.println(totalLeafNode);
+		  r3.left = r6;
+		  r3.right = r7;
+          levelOrder(root);
+		  out.println(countLeafNode(root));
 		}
-
 }
