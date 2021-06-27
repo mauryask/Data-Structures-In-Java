@@ -2,7 +2,6 @@
 Time complexity  : O(n)
 Space complexity : O(n)
 */
-
 import static java.lang.System.*;
 import java.util.*;
 
@@ -20,7 +19,7 @@ class Node
 	}
 }
 
-public class DeleteANodeFromBinaryTree
+public class CountLeafNodeInBinaryTree
 {
 	static void levelOrder(Node root)
 	{
@@ -39,43 +38,25 @@ public class DeleteANodeFromBinaryTree
 		out.println();
 	}
 	
-	static void deleteNode(Node root, int value)
+	static int countLeafNode(Node root)
 	{
-		Node deepNode = null;
-		Node requiredNode = null;
-		Node prev = null;
-		
+        int count = 0;	
 		Queue<Node> q = new ArrayDeque<>();
 		q.add(root);
 		
 		while(!q.isEmpty())
 		{
 			root = q.remove();
-			
-			if(root.data == value)
-				requiredNode = root;
+		
 			
 			if(root.left != null)
-			{
-				prev = root;
 				q.add(root.left);
-			}
-
 			if(root.right != null)
-			{
-				prev = root;
 				q.add(root.right);
-			}
-				
+			if(root.left == null && root.right == null)
+				count++;				
 		}
-		
-		deepNode = root;
-		requiredNode.data = deepNode.data;
-		
-		if(prev.left == deepNode)
-			prev.left = null;
-		else
-			prev.right = null;
+		return count;
 	}
 		
 	  public static void main(String [] args)
@@ -96,7 +77,6 @@ public class DeleteANodeFromBinaryTree
 		  r3.left = r6;
 		  r3.right = r7;
           levelOrder(root);
-		  deleteNode(root, 2);
-		  levelOrder(root);
+		  out.println(countLeafNode(root));
 		}
 }

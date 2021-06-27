@@ -1,7 +1,10 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+/**
+Time compexity : O(n)
+Space compexity: O(n)
+Note : Clever solution (Using Post order traversal)
+*/
+
 import static java.lang.System.*;
-import java.util.stream.*;
 import java.util.*;
 
 class Node 
@@ -17,7 +20,6 @@ class Node
 
 public class DeleteBinaryTree
  {
-	
 	static void deleteTree(Node root)
 	{
 		Stack<Node> stack = new Stack<>();
@@ -85,5 +87,4 @@ public class DeleteBinaryTree
 		printTree(root);
 		
     }
-
 }

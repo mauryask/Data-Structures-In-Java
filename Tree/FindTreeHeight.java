@@ -1,7 +1,8 @@
-//Getting the height of the tree
-//---> recursively
-//---> using Level order traversal (it gives totoal levels in the tree)
-
+/**
+Time complexity : O(n)
+Space complexity: O(n)
+*/
+import static java.lang.System.*;
 import java.util.*;
 
 class Node
@@ -18,47 +19,20 @@ class Node
 	}
 }
 
-public class FindTreeHeight
+public class Test
 {
-	static void preOrder(Node root) 
-	{
-		if(root != null)
-		{
-			System.out.print(root.data+" ");
-			preOrder(root.left);
-			preOrder(root.right);
-		}
-	}
-
-	static int getHeight(Node root)
-	{
-		if(root == null)
-			return 0;
-		else
-		{
-			int leftHeight = getHeight(root.left);
-			int rightHeight = getHeight(root.right);
-			if(leftHeight > rightHeight)
-				return leftHeight+1;
-			else
-				return rightHeight+1;
-		}
-	}
-	
 	static int getLevel(Node root)
-	{
-	   //dont use array deque
-	   //because it can not have NULL vaues
-	   //use linked list instead
-       //which behaves like queue as well
-	   
+	{   
+		// Don't use ArrayDeque as it can't have null value
 		List<Node> q = new LinkedList<>();
 		int level = 0;
 		q.add(root);
 		q.add(null);
+		
 		while(!q.isEmpty())
 		{
-			root = q.remove(0); //remove the first element
+			root = q.remove(0); 
+			// Add null at the end of each level
 			if(root == null)
 			{
 				if(!q.isEmpty())
@@ -91,19 +65,9 @@ public class FindTreeHeight
 		  r2.left = r4;
 		  r2.right = r5;
 		  r4.left = r6;
-		 
-		  //preOrder(root);
-          
-         //	here u can find height of any node
-		 /*System.out.println("\n"+(getHeight(root) - 1)); //height of the tree
-		 System.out.println((getHeight(r2) - 1)); //height of r2
-		 System.out.println((getHeight(r3) - 1)); // height of the r3
-		 */
-		 
-		 //getting total number of level and hwence height
-		 int level = getLevel(root);
-		 System.out.println("Level: "+level);
-		 System.out.println("Height: "+(level-1));
-		}
 
+		 int level = getLevel(root);
+		 System.out.println("Level: "+level); // level
+		 System.out.println("Height: "+(level-1)); //height
+		}
 }
