@@ -1,4 +1,7 @@
-//iterative traversal of tree pre, in and post order traversals
+/**
+Time complexity  : O(n)
+Space complexity : O(n)
+*/
 import java.util.*;
 
 class Node
@@ -93,7 +96,6 @@ public class IteartiveTreeTraversal
 	  }
 	}
 	
-	
 	static void iterativePostorder(Node root)
 	{
 		Stack<Node> stack =  new Stack<>();
@@ -136,9 +138,7 @@ public class IteartiveTreeTraversal
 			root.right = null;
 		}
 	}
-	
-	
-	
+
 	  public static void main(String [] args)
 		{
 		

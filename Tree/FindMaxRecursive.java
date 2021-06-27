@@ -1,3 +1,7 @@
+/**
+Time complexity: O(n)
+Space complexity: O(n)
+*/
 import static java.lang.System.*;
 class Node 
 {
@@ -14,11 +18,12 @@ public class FindMaxRecursive
  {
 	static int getMax(Node root)
 	{	
-	  if(root == null)
-			 return 0;
-		 int max = Math.max(root.data, Math.max(getMax(root.left),
-		 getMax(root.right)));
-		 return max;
+		if(root == null)
+			return 0;
+		int left = findMax(root.left);
+		int right = findMax(root.right);
+		int max = Math.max(root.data, Math.max(left, right));
+		return max;
 	}    
 	
 	static void printTree(Node root)

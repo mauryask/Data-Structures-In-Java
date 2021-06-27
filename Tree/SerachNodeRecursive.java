@@ -1,6 +1,7 @@
 import static java.lang.System.*;
+import java.util.*;
 
-class Node 
+class Node
 {
 	int data;
 	Node left, right;
@@ -12,37 +13,86 @@ class Node
 }
 
 public class SerachNodeRecursive
- {
-	static boolean search(Node root, int target)
-	{	
-        if(root == null)
-			return false;
-		
-	    if(root.data == target)
-			return true;
-	      // not found -->               call to right else -->      return true
-        return !search(root.left, target)? search(root.right, target): true;
-	}    
-		
-    public static void main(String args[] ) throws Exception
+{
+	static Node insertNode(int data, Node root)
 	{
-		Node root = new Node(1);
-		Node r2 = new Node(2);
-		Node r3 = new Node(3);
-		Node r4 = new Node(4);
-		Node r5 = new Node(5);
-		Node r6 = new Node(6);
-		Node r7 = new Node(7);
-		
-		
-		root.left = r2;
-		root.right = r3;
-		r2.left = r4;
-		r2.right = r5;
-		r3.left = r6;
-		r3.right = r7;
-		
-		out.println(search(root, 1));
-    }
+		Node parentNode = null, currentNode = null;
+		Node temp = new Node(data);
+		if(root == null)
+			root = temp;
+		else
+		{
+			currentNode = root;
+			while(currentNode != null)
+			{
+				parentNode = currentNode;
+				if(temp.data < currentNode.data)
+					currentNode = currentNode.left;
+				else
+					currentNode = currentNode.right;
+			}
 
+			if(temp.data < parentNode.data)
+				parentNode.left = temp;
+			else
+				parentNode.right = temp;
+		}
+
+		return temp;
+	}
+
+	static void preorder(Node root)
+	{
+		Stack<Node> stack = new Stack<>();
+		while(true)
+		{
+		   	while(root != null)
+			{
+				out.print(root.data+" ");
+				stack.push(root);
+				root = root.left;
+			}
+
+			if(stack.isEmpty())
+				break;
+
+			root = stack.pop();
+			root = root.right;
+		}
+	}
+
+	static boolean isExist(Node root, int value)
+	{
+		if(root == null)
+			return false;
+		if(root.data == value)
+		{
+			return true;
+		}
+		else
+		{
+			boolean left =  isExist(root.left, value);
+			if(left) m    
+				return true;
+			else
+			{
+				boolean right = isExist(root.right, value);
+				return right;
+			}
+		}
+	}
+
+	public static void main(String [] args)
+	{
+		Node root = null;
+		root = insertNode(58, root);
+		insertNode(45, root);
+		insertNode(62, root);
+		insertNode(59, root);
+		insertNode(42, root);
+		insertNode(75, root);
+		insertNode(20, root);
+
+		out.println(isExist(root, 59));
+	}
 }
