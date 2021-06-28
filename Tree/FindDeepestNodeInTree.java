@@ -19,7 +19,7 @@ class Node
 	}
 }
 
-public class FindDeppestNodeInTree
+public class FindDeepestNodeInTree
 {
 	static Node getLevel(Node root)
 	{   

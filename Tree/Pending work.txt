@@ -1,3 +1,2 @@
-1: Count leaf nodes : recursion
-2: Count full nodes : recursion
-3: Count half nodes : recursive
+1: Printing all the root to leaf paths : Iterrative
+2: 

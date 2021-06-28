@@ -1,15 +1,9 @@
-// finding diameter of a binary tree
-// Diamter : number of nodes in the longest
-// path between two leaf node
+/**
+Time complexity: O(n^2)
+Space complexity: O(n)
+*/
 
-// Approach : first we will find if diameter passes through root
-// secondly find left subtree diameter and right subtree diameter
-// return max of the three (the diameter of the tree)
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import static java.lang.System.*;
-import java.util.stream.*;
 import java.util.*;
 
 class Node 
@@ -23,7 +17,7 @@ class Node
 	}
 }
 
-public class FindDiameterOfBinaryTree
+public class FindTreeDiameterRecursive
  {
 	static int findDiameter(Node root)
 	{	
@@ -40,6 +34,9 @@ public class FindDiameterOfBinaryTree
 		return Math.max(lh+rh+1, Math.max(ld, rd));
 	} 
 
+	// for each node this function is being called
+	// that is hearting us most
+	// it causes time complexity : O(n^2)
     static int getHeight(Node root)
 	{
 		if(root==null)

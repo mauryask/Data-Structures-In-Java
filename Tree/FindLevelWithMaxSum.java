@@ -1,4 +1,8 @@
-//getting the level number having maximum sum
+/**
+Time complexity: O(n)
+Space complexity: O(n)
+*/
+
 import java.util.*;
 
 class Node
@@ -33,15 +37,24 @@ public class FindLevelWithMaxSum
 			root = q.remove(0);
 			if(root == null)
 			{
+				if(!q.isEmpty())
+				 q.add(null);
+			   				
 				if(currentSum > maxSum)
 				{
 					maxSum = currentSum;
 					maxLevel = level;
 				}
+				
+				// put it here as the level starts with zero
+				// you can put it above the condition
+				// if u are taking root node at level 0
+				// nothin wrong with that
+				level++; 
+				// you have to make current sum 0 here
+				// after the end of each level 
+				// there should be a new sum
 				currentSum = 0;
-				if(!q.isEmpty())
-				 q.add(null);
-			 level++;
 			}
 			else
 			{
@@ -79,6 +92,6 @@ public class FindLevelWithMaxSum
 		  r4.right = r9;
 		  r5.left = r10;
 		  
-		System.out.println(findLevelOfMaxSum(root));
+		  System.out.println(findLevelOfMaxSum(root));
 		}
 }

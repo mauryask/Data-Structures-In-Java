@@ -1,3 +1,7 @@
+/**
+Time complexity: O(n)
+Space complexity: O(n)
+*/
 import java.util.*;
 
 class Node
@@ -20,6 +24,7 @@ public class CheckTwoBinaryTreeAreIdentical
 	{
 		if(root1 == null && root2 == null)
 			return true;
+	
 		if(root1 == null || root2 == null)
 			return false;
 		
@@ -33,7 +38,8 @@ public class CheckTwoBinaryTreeAreIdentical
 	{
          if(root1 == null && root2 == null) 
 			return true;  
-	   
+	   		// this is the case when one root is null
+		// and another root is not null
 		 if(root1 == null || root2 == null)
 			 return false;  
 	  
@@ -56,6 +62,8 @@ public class CheckTwoBinaryTreeAreIdentical
 					q1.add(root1.left);  
 					q2.add(root2.left);  
 				}  
+				// this is the case when one left is null
+				// and another left is not null
 				else if (root1.left != null || root2.left != null)  
 					return false;  
 				
@@ -63,7 +71,9 @@ public class CheckTwoBinaryTreeAreIdentical
 				{  
 					q1.add(root1.right);  
 					q2.add(root2.right);  
-				}  
+				} 
+				// this is the case when one right is null
+				// and another right is not null				
 				else if (root1.right != null || root2.right != null)  
 					return false;  
 			}  
