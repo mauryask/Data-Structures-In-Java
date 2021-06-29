@@ -1,6 +1,6 @@
 /**
 Time complexity  : O(n)
-Space complexity : O(height) : stack as extra space
+Space complexity : O(n) : as recursion stack
 */
 
 import static java.lang.System.*;
@@ -20,7 +20,7 @@ class Node
 	}
 }
 
-public class ValidateBST
+public class ValidateBSTRecursive
 {
 	static void inorder(Node root)
 	{
@@ -31,32 +31,23 @@ public class ValidateBST
 			inorder(root.right);
 		}
 	}
-	
-		static boolean validateBST(Node root)
-		{
-			Stack<Node> stack = new Stack<>();
-			
-			while(true)
-			{
-				while(root != null)
-				{
-					stack.push(root);
-					root = root.left;
-				}
-				
-				if(stack.isEmpty())
-					break;
-				
-				root = stack.pop();
-				
-				if(root.left != null && root.left.data > root.data)
-					return false;
-				if(root.right != null && root.right.data < root.data)
-					return false;
-				root = root.right;
-			}
+
+	static boolean isBST(Node root)
+	{
+		if(root == null)
 			return true;
-		}
+	
+		if(root.left != null && root.left.data > root.data)
+			return false;
+		if(root.right != null && root.right.data < root.data)
+			return false;
+		
+		// if both sub tress are BST
+		if(isBST(root.left) && isBST(root.right))
+			return true;
+		
+		return false;		
+	}
 	
 	public static void main(String [] args)
 	{
@@ -82,6 +73,6 @@ public class ValidateBST
 		
 		inorder(root);
 		out.println();
-		out.println(validateBST(root));
+		out.println(isBST(root));
 	}
 }
