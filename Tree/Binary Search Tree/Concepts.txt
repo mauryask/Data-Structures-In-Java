@@ -1,0 +1,50 @@
+1: Time & space complexity for creating a BST
+
+A) if nodes are coming in sorted order (Worst case)
+ 
+   1
+    \
+     2
+      \
+       3
+        \
+         4 
+          \
+           5
+
+T(n) = O(n^2)
+==> O(n) for inserting each element and there are total n elements
+
+S(n) = O(n) 
+==> each element is occupying a memory location, and there are toatal n  elementss
+
+B) Average case time complexity
+
+T(n) = O(n*log n) 
+==> (log n) for inserting each element and there are total n elements
+
+S(n) = O(n)s
+==> Reason is same as above
+
+*** Here O(log n) is nothing but the height of the tree 
+
+=================================================================================
+
+2: Time and space complexity for searching an element in BST
+
+A) Worst case
+
+==> In case of complete BST
+T(n) = O(log n) or O(h)
+
+==> in case of skew tree 
+T(n) = O(n) or O(h)
+
+B) Average case
+T(n) = O(log n)
+
+Space complextiy : 
+
+S(n) = O(1) : iterative version
+S(n) = O(n) : recursive version as recursion trees
+ 

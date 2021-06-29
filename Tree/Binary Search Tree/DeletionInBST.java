@@ -1,168 +1,150 @@
-//iterative method to delete a node
-//from a binary search tree
+/**
+Time complexity  : O(n)
+Space complexity : O(1)
+*/
 
-class Node 
+import static java.lang.System.*;
+import java.util.*;
+
+class Node
 {
-   int value;
-   Node left;
-   Node right;
-   
-   Node(int value)
-   {
-	   this.value = value;
-	   left = right = null;
-   }
- 
+	int data;
+	Node left;
+	Node right;
+	
+	public Node(int data)
+	{
+		this.data = data;
+		left = null;
+		right = null;
+	}
 }
 
-public class DeletionInBST
+public class Test 
 {
-	   private static Node root = null;
-	   
-	   static Node createNode(int value)
-	   {
-	     Node newNode = new Node(value);
-	     return newNode;
-	   }
-	   
-	   
-	   
-	   //insertion
-	   static void insertNode(int value)
-	   {
-		   Node parent_node, current_node, temp;
-		   current_node = parent_node = null;
-		   
-		   temp = createNode(value);
-		   
-		   if(root == null)
-			   root = temp;
-		   else
-		   {
-			   current_node = root;
-			   while(current_node != null)
-			   {
-				    parent_node  = current_node;
-				    
-				    if(current_node.value > temp.value)
-				    	current_node = current_node.left;
-				    else
-				    	current_node = current_node.right;
-			   }
-			   
-			   if(parent_node.value > temp.value)
-				   parent_node.left = temp;
-			   else
-				   parent_node.right = temp;
-			   
-		   }
-			   
-	   }
-	   
-	   
-	   //deletion
-	   static void deleteNode(int value)
-	   {
-	    
-		   Node ptr = root;
-		   Node parentNode = null;
-		   
-		   while(ptr.value != value)
-		   {
-			   parentNode = ptr;
-			   
-			   if(value < ptr.value)
-				   ptr = ptr.left;
-			   else
-				   ptr = ptr.right;
-		   }
-		   
-		   
-		   //delete node having no child
-		   if(ptr.left == null && ptr.right == null)
-		   {
-			   if(parentNode.value  > value)
-				   parentNode.left = null;
-			   else
-				   parentNode.right = null;
-		   }
-		   //delete node having one child
-		   else if((ptr.left == null && ptr.right!= null) 
-	      || (ptr .left != null && ptr.right == null))
-		   {
-				Node childPtr = null;
-				
-				if(ptr.left == null)
-					childPtr = ptr.right;
-				else
-				 childPtr = ptr.left;
+	static Node root = null;
+	
+	static void insertNode(int data)
+	{
+		Node temp = new Node(data);
+		Node currentNode = null, parentNode = null;
+		
+		if(root == null)
+			root = temp;
+		else
+		{
+			currentNode = root;
+			while(currentNode!= null)
+			{
+				parentNode = currentNode;
+				if(currentNode.data < temp.data)
+					currentNode = currentNode.right;
+				else if(currentNode.data > temp.data)
+					currentNode = currentNode.left;
+			}
 			
-				ptr.value = childPtr.value;
-				ptr.left = childPtr.left;
-				ptr.right = childPtr.right;
-				
-		   }
-		   //delete node with two children
-		   else
-		   {
-			   Node min_node_parent = findMinNodeParent(ptr.right);
-		       ptr.value =  min_node_parent.left.value;
-		       min_node_parent.left = null;
-		   
-		   }
-		   
-	  }
-	     
-	   
-	   static Node findMinNodeParent(Node root)
+			if(parentNode.data > temp.data)
+				parentNode.left = temp;
+			else if(parentNode.data < temp.data)
+				parentNode.right = temp;
+		}
+	}
+	
+	static void inorder(Node root)
+	{
+		if(root != null)
+		{
+			inorder(root.left);
+			out.print(root.data+" ");
+			inorder(root.right);
+		}
+	}
+		
+  static void deleteElement(Node root, int target)
+  { 
+	 Node parentNode = null;	
+	 while(root != null && root.data != target)
+	 {		 			   			 
+ 		parentNode = root;
+		 if(root.data < target)
+			 root = root.right;
+		 else if(root.data > target)
+			 root = root.left;
+	 }
+       
+	   // what if node is not found
+	   if(root == null)
 	   {
-		   Node parent = null;
-		   
-		   while(root.left != null)
-		   {
-		     parent = root;
-		     root = root.left;
-		   }
-		   
-		   return parent;
+		   out.println("Node not found");
+		   return;
 	   }
-	   
-	   
-       //traversal
-	   static void preorder(Node root)
-	   {
-		   if(root != null)
-		   {
-			   System.out.print(root.value+" ");
-			   preorder(root.left);
-			   preorder(root.right);
-		   }
-	   }
-	   
-	   
-	   public static void main(String [] args)
-	   {
-		   insertNode(14);
-		   insertNode(11);
-		   insertNode(19);
-		   insertNode(7);
-		   insertNode(17);
-		   insertNode(53);
-		   insertNode(4);
-		   insertNode(8);
-		   insertNode(16);
-		   insertNode(20);
-		   insertNode(60);
-		   
-		   preorder(root);
-		   
-		   System.out.println();
-		   deleteNode(60);
-		   preorder(root);
-	   }
-	   
-	   
-}
-	   
 
-   
+	// if node has 0 child
+	 if(root.left == null && root.right == null) 
+	 {
+		 if(parentNode.data  > target)
+			parentNode.left = null;
+		 else
+			parentNode.right = null; 
+	 } // if node has nly one children
+	 else if((root.left == null && root.right != null) ||
+	 (root.left != null && root.right == null)) 
+	 {
+		 Node childPtr = null;
+		 
+		 if(root.left == null)
+			 childPtr = root.right;
+		 else
+			 childPtr = root.left;
+		 
+		 root.data = childPtr.data;
+		 root.left = childPtr.left;
+		 root.right = childPtr.right;
+	 }
+	 else  //if node has both children
+	 {
+		 // the node value will be replaced with the inorder
+		 // predecessor or inorder successor
+		 // inorder prdecessor will be
+		 // max-value node in left subtree
+		 
+		 // code to find max value in the left subtree
+		 //	of the current root node
+	 	 Node temp = root.left;
+		 Node prevNode = null;
+		 while(temp.right != null)
+		 {
+			 prevNode = temp;
+			 temp = temp.right;
+		 }
+		 
+		 root.data = temp.data;
+		 
+		 // handling case when both children are leaf nodes
+		 if(prevNode == null)
+			 root.left = temp.left;
+		 else // both chilren further contains children
+			 prevNode.right = null; 
+	 }
+  }
+  
+	
+	public static void main(String [] args)
+	{
+		insertNode(89);
+		insertNode(36);
+		insertNode(78);
+		insertNode(120);
+		insertNode(100);
+		insertNode(45);
+		insertNode(145);
+		insertNode(79);
+		insertNode(44);
+		insertNode(48);
+		insertNode(80);
+		
+		inorder(root);
+		out.println();
+		deleteElement(root,12015);
+		}
+}

@@ -1,0 +1,4 @@
+For searching, insertion, deletion
+we have to travserse all the elements
+
+T(n) = O(n) : worst case

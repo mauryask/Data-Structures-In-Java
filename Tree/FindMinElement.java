@@ -1,6 +1,6 @@
 /**
 Time complexity  : O(n)
-Space complexity : O(n)
+Space complexity : O(n) // recursion stack
 */
 
 import static java.lang.System.*;
@@ -20,7 +20,7 @@ class Node
 	}
 }
 
-public class TreeUsingLinkedList
+public class FindMinElement
 {
 	static Node root = null;
 	
@@ -59,6 +59,21 @@ public class TreeUsingLinkedList
 			inorder(root.right);
 		}
 	}
+		
+	static int findMin(Node root)
+	{
+		if(root == null)
+			return Integer.MAX_VALUE;
+		
+		// find min in left sub tree
+		// find min in right sub tree
+		// compare both with root element
+		// take the smallest of the three
+		// smae case applies on finding max element
+		
+		return Math.min(root.data, Math.min(findMinx(root.left),
+		findMinx(root.right)));
+	}
 	
 	public static void main(String [] args)
 	{
@@ -71,5 +86,8 @@ public class TreeUsingLinkedList
 		insertNode(145);
 		
 		inorder(root);
-	}
+		out.println();
+		out.println(findMin(root));
+		
+		}
 }

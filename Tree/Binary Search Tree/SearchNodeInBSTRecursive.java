@@ -1,6 +1,6 @@
 /**
-Time complexity  : O(n)
-Space complexity : O(n)
+Time complexity  : O(log n)
+Space complexity : O(Tree height) // as recursion stack
 */
 
 import static java.lang.System.*;
@@ -20,7 +20,7 @@ class Node
 	}
 }
 
-public class TreeUsingLinkedList
+public class SearchNodeInBSTRecursive
 {
 	static Node root = null;
 	
@@ -60,6 +60,20 @@ public class TreeUsingLinkedList
 		}
 	}
 	
+	static boolean serachElement(Node root, int value)
+	{
+		if(root == null)
+			return false;
+		
+		else if(root.data > value)
+			return serachElement(root.left, value);
+		else if(root.data < value)
+			return serachElement(root.right, value);
+		
+		// the only case left is root.data == value
+		return true;
+	}
+	
 	public static void main(String [] args)
 	{
 		insertNode(89);
@@ -71,5 +85,7 @@ public class TreeUsingLinkedList
 		insertNode(145);
 		
 		inorder(root);
+		out.println();
+		out.println(serachElement(root, 78));
 	}
 }

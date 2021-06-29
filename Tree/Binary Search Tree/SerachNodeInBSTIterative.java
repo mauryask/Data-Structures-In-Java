@@ -1,6 +1,6 @@
 /**
-Time complexity  : O(n)
-Space complexity : O(n)
+Time complexity  : O(log n)
+Space complexity : O(1)
 */
 
 import static java.lang.System.*;
@@ -20,7 +20,7 @@ class Node
 	}
 }
 
-public class TreeUsingLinkedList
+public class SerachNodeInBSTIterative
 {
 	static Node root = null;
 	
@@ -60,6 +60,21 @@ public class TreeUsingLinkedList
 		}
 	}
 	
+	static boolean serachElementIterative(Node root, int value)
+	{
+		while(root != null)
+		{
+			if(root.data == value)
+				return true;
+			if(root.data > value)
+				root = root.left;
+			else if(root.data < value)
+				root = root.right;
+		}
+		
+		return false;
+	}
+	
 	public static void main(String [] args)
 	{
 		insertNode(89);
@@ -71,5 +86,7 @@ public class TreeUsingLinkedList
 		insertNode(145);
 		
 		inorder(root);
+		out.println();
+		out.println(serachElementIterative(root, 100));
 	}
 }

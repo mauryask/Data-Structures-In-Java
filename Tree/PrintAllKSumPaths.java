@@ -1,5 +1,5 @@
 /**
-Time complexity  : O(n)
+Time complexity  : O(n^2)
 Space complexity : O(n)
 */
 
@@ -23,30 +23,43 @@ class Node
 class Answer 
 {
 	int sum = 0;
-	boolean isPathExist = false;
 	Stack<Node> path = new Stack<>();
 }
 
-public class CheckIfPathWithRequiredSumExists
-{
+public class PrintAllKSumPaths
+{   
    static void inorder(Node root,
    Answer answer, int requiredSum)
    {
+	   // O(n)
 	   if(root != null)
 	   {
 		   answer.path.push(root);
-		   answer.sum += root.data;
 		   inorder(root.left,answer, requiredSum);
-		   if(root.right == null && root.left == null)
-		   {
-			   if(answer.sum == requiredSum)
-				answer.isPathExist = true;				   
-		   }
 		   inorder(root.right,answer,requiredSum);
+		   
+		   // O(n)
+		   // it is being done for each node
+		   int sum = 0;
+		   for(int i = answer.path.size()-1; i>=0; i--)
+		   {
+			   sum += answer.path.get(i).data;
+			   if(sum == requiredSum)
+				    printPath(answer.path, i);
+		   }
+		   
+		   // once done with a node pop it from path stack
 		   answer.path.pop();
-		   answer.sum -= root.data;
 	   }
    }	
+   
+   static void printPath(Stack<Node> path, int j)
+   {
+	   for(int i=j; i<path.size(); i++)
+		out.print(path.get(i).data+" ");
+	   out.println();
+   }
+   
 	  public static void main(String [] args)
 		{		
 			  Node root = new Node(1);
@@ -67,7 +80,7 @@ public class CheckIfPathWithRequiredSumExists
 			  r4.right = r8;
 			 
 			  Answer answer = new Answer();
-			  inorder(root,answer,15);
-			  out.println(answer.isPathExist);
+			  // print all paths with sum k = 7
+			  inorder(root, answer, 7);
 		}
 }

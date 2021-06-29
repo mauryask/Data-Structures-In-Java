@@ -1,5 +1,14 @@
-import static java.lang.System.*;
+/*
+* Best solution
+* as if path is found the recursion stops
+* hence a lot of timne is saved here
+*/
 
+/**
+Time compelxity : O(n)
+Space complexity: O(n)
+*/
+import static java.lang.System.*;
 class Node 
 {
 	int data;
@@ -12,7 +21,7 @@ class Node
 	}
 }
 
-public class CheckForPathHavingGivenSum
+public class CheckPathForGivenSumBestWay
 {
 	static boolean printRootToLeafPaths(Node root, int sum, int target)
 	{
