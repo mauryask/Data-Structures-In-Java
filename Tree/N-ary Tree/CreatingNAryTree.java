@@ -24,14 +24,9 @@ public class CreatingNAryTree
 	
 	static void addSiblings(Node root, Node node)
 	{
-		if(root==null)
-			return;
-		else
-		{
 			while(root.next!=null)
 				root = root.next;
-			root.next = node;
-		}		
+			root.next = node;		
 	}
 	
 	static void addChild(Node root,Node node)
@@ -77,7 +72,8 @@ public class CreatingNAryTree
 		}
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 	   Node root = new Node(12);
 	   Node n1 = new Node(2); 
        Node n2 = new Node(3);  
