@@ -1,6 +1,13 @@
-//n-art tree creation / traversal
-//https://www.geeksforgeeks.org/creating-tree-left-child-right-sibling-representation/
+/**
+Time compelxity : O(n^2) // as to insert each node 
+* we need to traverse a number of siblings (n-nodes)
+* in worst caase
+Space complexity: O(n) : recursion stack
+*/
+
 import java.util.*;
+import static java.lang.System.*;
+
 class Node
 {
 	int data;
@@ -39,34 +46,44 @@ public class CreatingNAryTree
 		   root.child = node;
 	}
 	
-  //time complexity O(n)
+    //Time complexity O(n)
+	// Space complexity: O(height)
 	static void traversal(Node root) // it is like depth first search
 	{
-		if(root == null) 
-            return; 
-        while(root != null) 
-        { 
-            System.out.print(root.data + " "); 
-            if(root.child != null) 
-            	traversal(root.child); 
-            root = root.next; 
-        } 	 
+		if(root == null)
+			return;
+		/*while(root != null)
+		{
+			out.print(root.data+" ");
+			if(root.child != null)
+				traversal(root.child);
+			root = root.next;
+		}*/
+		
+		// same thing can be don ei below fashion
+		out.print(root.data+" ");
+		traversal(root.child);
+		traversal(root.next);
 	}
 	
 	//level order traversal	
+	// time complexity: O(n)
+	// Space complexity: O(n)
 	static void levelOrderTraversal(Node root)
 	{
 		Queue<Node> q = new ArrayDeque<>();
 		q.add(root);
+		
 		while(!q.isEmpty())
 		{
-			root = q.poll();
+			root = q.remove();
+			out.print(root.data+" ");
 			
+			// push the entire level in the q (all the chilren)
+			root = root.child;
 			while(root != null)
 			{
-				System.out.print(root.data+" ");
-				if(root.child != null)
-					q.add(root.child);
+				q.add(root);
 				root = root.next;
 			}
 		}

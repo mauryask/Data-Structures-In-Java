@@ -1,0 +1,4 @@
+N-ary tree is like binary tree where
+Child is like left subtree
+and nextSibling is like right subtree
+operation will be performed in a similar fashion
