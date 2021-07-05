@@ -1,6 +1,9 @@
 /**
-Time complexity  : O(n)
-Space complexity : O(n) 
+Time complexity  : O(n^2) : in case of linear search
+Space complexity : O(n)  : as recurssion stack
+Instead of using linear search, we cvan firest put the 
+'inorder' array elements into a map then we can access
+each and every element in O(n) time complexity
 */
 
 import java.util.*;
@@ -65,7 +68,6 @@ public class CreateBinaryTreeFromInorderAndPrerder
 	{
 	   int in[]  = {3,1,4,0,5,2};
 	   int pre[] = {0,1,3,4,2,5};
-	   int n = in.length;
 	   Node root = createTree(in, pre, 0, n-1);
 	   printTree(root);
 	   out.println();
