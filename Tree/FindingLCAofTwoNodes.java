@@ -1,10 +1,11 @@
 /* 
 * finding least commom ancestor of two 
 * nodes in a given binary tree
-* Baically it is the first common node in
+* Basically it is the first common node in
 * the ancestors of the two given nodes
 * https://www.youtube.com/watch?v=F-_1sbnPbWQ
 */
+
 /**
 * find the nodes first
 * if found return pointer pointing to the node

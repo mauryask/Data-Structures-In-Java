@@ -1,3 +1,7 @@
+/**
+Time complexity  : O(n)
+Space complexity : O(n)
+*/
 import static java.lang.System.*;
 import java.util.*;
 class Node 
@@ -14,14 +18,24 @@ class Node
 
 public class ConvertABinaryTreeIntoItsMirror
 {
-	static void preOrder(Node root)
+    static void levelOrder(Node root)
 	{
-		if(root !=  null)
+		if(root == null)
+			return;
+		Queue<Node> q = new ArrayDeque<>();
+		q.add(root);
+		
+		while(!q.isEmpty())
 		{
+			root = q.remove();
 			out.print(root.data+" ");
-			preOrder(root.left);
-			preOrder(root.right);
+			
+			if(root.left != null)
+				q.add(root.left);
+			if(root.right != null)
+				q.add(root.right);
 		}
+		out.println();
 	}
 	
 	static void getMirror(Node root)
@@ -56,8 +70,9 @@ public class ConvertABinaryTreeIntoItsMirror
 		  r2.left = r4;
 		  r2.right = r5;
 		  r4.left = r6;
-		   
-		  out.print(getSum(root));
+		  levelOrder(root);
+		  getMirror(root);
+		  levelOrder(root);
 	}
 }
 

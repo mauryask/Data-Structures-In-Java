@@ -41,38 +41,16 @@ public class SerachNodeRecursive
 		return temp;
 	}
 
-	static void preorder(Node root)
-	{
-		Stack<Node> stack = new Stack<>();
-		while(true)
-		{
-		   	while(root != null)
-			{
-				out.print(root.data+" ");
-				stack.push(root);
-				root = root.left;
-			}
-
-			if(stack.isEmpty())
-				break;
-
-			root = stack.pop();
-			root = root.right;
-		}
-	}
-
 	static boolean isExist(Node root, int value)
 	{
 		if(root == null)
 			return false;
 		if(root.data == value)
-		{
 			return true;
-		}
 		else
 		{
 			boolean left =  isExist(root.left, value);
-			if(left) m    
+			if(left)   
 				return true;
 			else
 			{

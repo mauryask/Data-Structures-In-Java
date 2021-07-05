@@ -20,7 +20,7 @@ class Node
 	}
 }
 
-public class PrintAllTheRootToLeafPath
+public class PrintRootToLeafPathsRecursive
 {
 	static void levelOrder(Node root)
 	{
@@ -39,16 +39,22 @@ public class PrintAllTheRootToLeafPath
 		out.println();
 	}
     
+	// postorder traversal
 	static void printPaths
 	(Node root, Stack<Node> path)
 	{
 	   if(root != null)
 	   {
 		   path.push(root);
+		   
 		   printPaths(root.left, path);
-		   if(root.right == null && root.left == null)
-			   printStack(path);
 		   printPaths(root.right, path);
+		   
+		    if(root.right == null && root.left == null)
+			   printStack(path);
+		   
+		   // once we are done with a node 
+		   // pop it from the path stack
 		   path.pop();
 	   }		   
 	}	

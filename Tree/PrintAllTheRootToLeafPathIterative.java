@@ -38,32 +38,43 @@ public class PrintAllTheRootToLeafPathIterative
 		}
 		out.println();
 	}
-    
-	static void printPaths
-	(Node root, Stack<Node> path)
+    	
+	static void printPath(Node root, Stack<Node> path)
 	{
-		if(root == null)
-			return;
-	    Stack<Node>	stack  = new Stack<>();
+		Stack<Node> stack = new Stack<>();
+		Node prev = null;
+		
 		while(true)
 		{
-			while(root!=null)
+			while(root != null)
 			{
 				stack.push(root);
 				path.push(root);
 				root = root.left;
 			}
 			
+			while(root == null && !stack.isEmpty())
+			{
+				root = stack.peek();
+				if(root.left == null && root.right == null)
+					printStack(path);
+				if(root.right == null || root.right == prev)
+				{
+					// once done with a node 
+					// pop it from path stack
+					path.pop();
+			     	stack.pop();
+					prev = root;
+					root = null;
+				}
+				else
+					root = root.right;
+			}
+			
 			if(stack.isEmpty())
 				break;
-			root = stack.pop();
-			if(root.left == null && root.right == null)
-				printStack(path);
-			root = root.right;
-			if(root==null)
-			  path.pop();
-		}		
-	}	
+		}
+	}
 	
 	static void printStack(Stack<Node> path)
 	{
@@ -90,8 +101,9 @@ public class PrintAllTheRootToLeafPathIterative
 			  r3.left = r6;
 			  r3.right = r7;
 			  r4.right = r8;
+			  
 			  //path stack
 			  Stack<Node> path = new Stack<>();
-			  printPaths(root, path);
+			  printPath(root, path);
 		}
 }

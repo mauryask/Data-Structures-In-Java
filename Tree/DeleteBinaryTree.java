@@ -33,7 +33,7 @@ public class DeleteBinaryTree
 				root = root.left;
 			}
 			
-			while(root == null && ! stack.isEmpty())
+			while(root == null && !stack.isEmpty())
 			{
 				root = stack.peek();
 				if(root.right == null || root.right == prev)
