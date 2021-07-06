@@ -1,6 +1,11 @@
+/**
+  Time complexity: O(n)
+  Space complexity: O(height) + O(height) = O(h) 
+  : recursion stack + path stack
+*/
+
 import static java.lang.System.*;
 import java.util.*;
-
 
 class Node 
 {
@@ -9,7 +14,7 @@ class Node
 	Node(int data)
 	{
 		this.data = data;
-		right = left = null;;
+		right = left = null;
 	}
 }
 
@@ -20,39 +25,62 @@ class Ancestor
 
 public class PrintAnestorsOfGivenNode
 {
-	static void findAncestor(Node root, int value,
-	Stack<Node> path, Ancestor ancestor)
+	// In this solution extra stack is needed to store the path
+	// but no extra function calls once the required node is found
+   static void findAncestor(Node root, int value,
+   Stack<Node> stack, Ancestor ancestor)
+   {
+	   if(root == null)
+		   return;
+	   stack.push(root);
+	   
+	   findAncestor(root.left, value, stack, ancestor);
+	   if(root.left == null && root.right == null)
+	   {
+		   if(root.data == value)
+		   {
+			   ancestor.flag = true;
+			   stack.pop();
+			   printStack(stack);
+		   }
+	   }
+	   
+	   if(ancestor.flag)
+		   return;
+	   else
+		   findAncestor(root.right, value, stack, ancestor);
+	   stack.pop();
+   }
+   
+  static void printStack(Stack<Node> stack)
+  {
+	  for(Node node : stack)
+		  out.print(node.data+" ");
+	  out.println();
+  }
+	
+	// No extra space needed except the recursion stack
+	// T(n) = O(n)
+	// S(n) = O(n) : recursion stack
+	
+	static boolean findAncestor2(Node root, int value)
 	{
 		if(root == null)
-			return;
-		
-		path.push(root);
-		
-		findAncestor(root.left, value, path, ancestor);
-		if(root.left == null && root.right == null)
+			return false;
+		if(root.data == value)
+			return true;
+		boolean left = findAncestor2(root.left, value);
+		boolean right = findAncestor2(root.right, value);
+	     
+		if(left || right)
 		{
-			if(root.data == value)
-			{
-				ancestor.flag = true;
-				path.pop(); // remove the current node
-				printStack(path);
-			}
+			out.print(root.data+" ");
+			return true;
 		}
 		
-		if(ancestor.flag)
-			return;
-		else
-			findAncestor(root.right, value, path,ancestor);
-		path.pop();
+		return false;
 	}
 	
-	
-	static void printStack(Stack<Node> path)
-	{
-		for(Node node : path)
-			out.print(node.data+" ");
-		out.println();
-	}	
 	
 	public static void main(String [] args)
 	{
@@ -64,6 +92,8 @@ public class PrintAnestorsOfGivenNode
 		Node r6 = new Node(6);
 		Node r7 = new Node(7);
 		Node r8 = new Node(8);
+		Node r9 = new Node(9);
+		Node r10 = new Node(10);
 		
 		root.left = r2;
 		root.right = r3;
@@ -71,9 +101,13 @@ public class PrintAnestorsOfGivenNode
 		r2.right = r5;
 		r3.left = r6;
 		r3.right = r7;
+		r5.left = r8;
+		r5.right = r9;
+		r4.right = r10;
 		
-		Ancestor ancestor = new Ancestor();
-		Stack<Node> path = new Stack<>();
-		findAncestor(root,7, path, ancestor);
+		/*Ancestor ancestor = new Ancestor();
+		Stack<Node> stack = new Stack<>();
+		findAncestor(root,9, stack, ancestor);*/
+		findAncestor2(root, 9);
 	}
 }
