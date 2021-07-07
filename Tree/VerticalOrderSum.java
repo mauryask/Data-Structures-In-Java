@@ -1,10 +1,7 @@
 /**
 Time complexity   : O(n)
-Spasce complexity : O(n) : colud be O(n^2) > confused a bit
-This approach is combination of levelorder traversal
-and Map
-Each entry in map conatins Hd as key and an ArrayList containing
-node values with the same Hd
+Spasce complexity : O(n) 
+See vertical order traversal first
 */
 
 import static java.lang.System.*;
@@ -35,17 +32,15 @@ class QueueData
 	}
 }
 
-public class VerticalOrderTraversal
+public class VerticalOrderSum
 {
-	static void verticalOrderTraversal(Node root)
+	static void verticalOrderSum(Node root)
 	{
 		Queue<QueueData> q = new ArrayDeque<>();
-		Map<Integer, List<Integer>> map = new TreeMap<>();
+		Map<Integer, Integer> map = new TreeMap<>();
          
 		q.add(new QueueData(root,0));
-		List<Integer> list = new ArrayList<>();
-		list.add(root.data);
-		map.put(0,list);
+		map.put(0,root.data);
 	     
         while(!q.isEmpty())
 		{
@@ -57,12 +52,10 @@ public class VerticalOrderTraversal
 				q.add(new QueueData(root.left,qd.hd-1));
 				if(!map.containsKey(qd.hd-1))
 				{
-					 list = new ArrayList<>();
-					 list.add(root.left.data);
-					 map.put(qd.hd-1, list);
+					 map.put(qd.hd-1, root.left.data);
 				}
 				else
-					map.get(qd.hd-1).add(root.left.data);
+					map.replace(qd.hd-1, map.get(qd.hd-1) + root.left.data);
 			}
 			
 			if(root.right != null)
@@ -70,21 +63,17 @@ public class VerticalOrderTraversal
 				q.add(new QueueData(root.right, qd.hd+1));
 				if(!map.containsKey(qd.hd+1))
 				{
-					 list = new ArrayList<>();
-					 list.add(root.right.data);
-					 map.put(qd.hd+1, list);
+					 map.put(qd.hd+1, root.right.data);
 				}
 				else
-					map.get(qd.hd+1).add(root.right.data);
+					map.replace(qd.hd+1, map.get(qd.hd+1) + root.right.data);
 			}
 		}	
 
-       // printing nodes along each vertical line
-	   for(Map.Entry<Integer, List<Integer>> m : map.entrySet())
+       // printing vertical sum along each vertical line
+	   for(Map.Entry<Integer, Integer> m : map.entrySet())
 	   {
-		   for(int x: m.getValue())
-		   out.print(x+" ");
-	       out.println();
+		   out.println(m.getKey()+" ==> "+ m.getValue());
 	   }	   
 		
 	}
@@ -122,6 +111,6 @@ public class VerticalOrderTraversal
 		  r7.left = r14;
 		  r7.right = r15;
 		  
-		  verticalOrderTraversal(root);
+		  verticalOrderSum(root);
 	}
 }
