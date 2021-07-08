@@ -71,8 +71,8 @@ public class FindMinElement
 		// take the smallest of the three
 		// smae case applies on finding max element
 		
-		return Math.min(root.data, Math.min(findMinx(root.left),
-		findMinx(root.right)));
+		return Math.min(root.data, Math.min(findMin(root.left),
+		findMin(root.right)));
 	}
 	
 	public static void main(String [] args)

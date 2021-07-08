@@ -75,18 +75,18 @@ public class Test
 	   // what if node is not found
 	   if(root == null)
 	   {
-		   out.println("Node not found");
+		   out.println("Target node not found!!!");
 		   return;
 	   }
 
-	// if node has 0 child
+	// if node has no child
 	 if(root.left == null && root.right == null) 
 	 {
 		 if(parentNode.data  > target)
 			parentNode.left = null;
 		 else
 			parentNode.right = null; 
-	 } // if node has nly one children
+	 } // if node has only one children
 	 else if((root.left == null && root.right != null) ||
 	 (root.left != null && root.right == null)) 
 	 {
