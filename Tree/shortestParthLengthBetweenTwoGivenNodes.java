@@ -20,7 +20,7 @@ class Node
 	}
 }
 
-public class shortestParthLengthBetweenTwoGivenNodes
+public class ShortestParthLengthBetweenTwoGivenNodes
 {	
   static Node createBST(Node root, int data)
   {
