@@ -64,7 +64,8 @@ public class FindKthSmallestElement
 	{
 		Stack<Node> stack = new Stack<>();
 		int count = 0;
-		int myNode = 0;
+		Node myNode = null;
+		
 		while(true)
 		{
 			while(root != null)
@@ -72,21 +73,52 @@ public class FindKthSmallestElement
 				stack.push(root);
 				root = root.left;
 			}
-			
-			if(count == k)
-			{
-				out.println(myNode);
-				return;
-			}
-			
+					
 			if(stack.isEmpty())
 				break;
 			
 			root = stack.pop();
 			count++;
-			myNode = root.data;
+			
+			if(count == k)
+			{
+				myNode = root;
+				out.println(myNode!= null ? myNode.data : null);
+				return;
+			}
+			
 			root = root.right;
 		}
+	}
+	
+	// instead of declaring a class
+	// declare the required variables as static
+	// it will work same as the class vars work	
+	static int count = 0;
+	static boolean flag = false;
+	static Node node  = null;
+		
+	static void findKthSmallestRecusrsive(Node root, int k)
+	{
+	      if(root == null)
+			  return;
+		  
+		  findKthSmallestRecusrsive(root.left, k);
+		  
+		  //if required node found don't make unneccessary calls
+		  if(flag)
+			  return;
+		  
+		  count++;
+		  
+		  if(count == k)
+		  {
+			  node = root; 
+			  flag = true;
+			  return; // if node found then don't go further
+		  } 
+		  
+		  findKthSmallestRecusrsive(root.right, k);
 	}
 		
 	public static void main(String [] args)
@@ -103,6 +135,6 @@ public class FindKthSmallestElement
 		insertNode(48);
 		insertNode(80);
 		
-		findKthSmallest(root, count, 5);
+		findKthSmallest(root, 1);
 	}
 }
