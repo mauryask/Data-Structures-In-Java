@@ -52,8 +52,8 @@ public class LinkedListImplementationPriorityQueue
 				  ptr = ptr.next;
 			  }	
 
-                                   temp.next = ptr.next;
-				   ptr.next = temp;
+               temp.next = ptr.next;
+			   ptr.next = temp;
 			}
 		}
 	}

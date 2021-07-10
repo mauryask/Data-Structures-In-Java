@@ -1,7 +1,10 @@
+import static java.lang.System.*;
+
 public class ArrayImplementationOfBinaryTree
 {
 	static void setRoot(int A[],int key)
 	{
+		// check if root is not yet set
 		if(A[0] == 0)
 		    A[0] = key;
 		else

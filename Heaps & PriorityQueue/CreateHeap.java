@@ -1,3 +1,10 @@
+/**
+* Since for each element heapify operation 
+* is being performed
+Time complexity  : O(n * log n)
+Space complexity : O(n)
+*/
+
 import static java.lang.System.*;
 
 //creating Max Heap 
@@ -8,10 +15,8 @@ public class CreateHeap
 	static int heapSize = 0; 
 	static int A[] = new int[10];
 	
-	/**
-	* O(log(n)) (for all the cases)
-	*/
-	
+
+    // T(n) = O(log n)
 	static void maxHeapify(int i) 
 	{
 		if(heapSize == 1)
@@ -31,7 +36,7 @@ public class CreateHeap
 		if(r < heapSize && A[r]  > A[largest])
 			largest = r;
 		
-		if(largest != i) //swap 
+		if(largest != i) //root is already heapified
 		{
 			int temp;
 			temp = A[i];
@@ -44,10 +49,6 @@ public class CreateHeap
   }
 	
 	
-	/**
-	* O(n) >> worst case
-	* O(1) >> best case
-	*/
 	static void printHeap()
 	{
 		for(int i=0; i<heapSize ; i++)
@@ -57,23 +58,23 @@ public class CreateHeap
 	}		
 	
 	
-	/**
-     * O(log(n)) >> worst case
-	 * O(log(n)) >> best case
-	*/
+	// O(logn)
 	static void deleteRoot() 
 	{
+		// replace root with the last element
 		A[0] = A[heapSize-1];
+		A[heapSize-1] = 0; // this step is not required
 		heapSize--;
+		
+		// heapify all the elements again
 		for(int i=0; i < heapSize; i++)
 		   maxHeapify(i);
 	}
 	
-	/**
-	* O(1) >> best case
-	* O(log(n)) >> worst case
-	*/
-
+	
+	// T(n) = O(n * log n)
+	// for each element O(log n) and there are total n 
+	// elements
 	static void insertKey(int value)
 	{
 		 if(heapSize == 0)
