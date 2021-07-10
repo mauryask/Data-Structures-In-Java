@@ -1,3 +1,5 @@
+import static java.lang.System.*;
+
 //creating Max Heap 
 
 public class CreateHeap 
@@ -9,6 +11,7 @@ public class CreateHeap
 	/**
 	* O(log(n)) (for all the cases)
 	*/
+	
 	static void maxHeapify(int i) 
 	{
 		if(heapSize == 1)
@@ -24,9 +27,7 @@ public class CreateHeap
 			
 		if(l< heapSize && A[l] > A[largest])
 			largest = l;
-		else
-			largest = i;
-		
+				
 		if(r < heapSize && A[r]  > A[largest])
 			largest = r;
 		
@@ -83,18 +84,26 @@ public class CreateHeap
 		 else
 		 {
 			 A[heapSize] = value;
-			 heapSize++;
+			 // total umber of nodes in the heap
+			 heapSize++; 
+			 
+			 // we need to heapify only the non-leaf nodes
+			 // in complete binary tree number of non leaf nodes = n/2
+			 // And heap is a complete binary tree
+			 // n : total number of nodes
+			 // here if heapSize  = 4 then (heapSize/2)-1
+			 // will produce -> 1, 0 (non-leaf indexes)
+			 // we need to process only 0 and 1not 2 and 3
+			 
 			 for(int i = heapSize/2 - 1 ; i>=0; i--)
 			 {
 				 maxHeapify(i);
-			 }
-			 
+			 } 
 		 }
 	}
 	
 	public static void main(String [] args)
-	{
-						
+	{			
 		insertKey(10);
 		insertKey(45);
 		insertKey(32);
