@@ -18,18 +18,15 @@ public class HeapSort
 		
 		if(l < heapSize && A[l] > A[largest])
 			largest = l;
-		else
-			largest = i;
+
 		if(r < heapSize && A[r] > A[largest])
 			largest = r;
 		
-		if(largest != i) //swap
+		if(largest != i) //alreay heapified
 		{
-			int temp;
-			temp = A[i];
+			int temp = A[i];
 			A[i]  = A[largest];
-			A[largest] = temp;
-			
+			A[largest] = temp;	
 			maxHeapify(A,largest,heapSize);
 		}
 		
@@ -40,7 +37,8 @@ public class HeapSort
 	   buildMaxHeap(A);	 
 	   
 	   //extract max element from root and swap with 
-	   //farthest leaf element and apply maxHeapify at root(itndex: 0) 
+	   //farthest leaf element and apply maxHeapify at root(index: 0) 
+	   
 	   for(int i= A.length-1; i>=0; i--)
 	   {
 		   int temp = A[0];
@@ -49,7 +47,6 @@ public class HeapSort
 		   
 		   maxHeapify(A,0,i); //i is reduced heapSize here
 	   }
-	   
 	}
 	
 	 static void printHeap(int A[]) //this will print the sorted heap
