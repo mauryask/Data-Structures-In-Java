@@ -1,3 +1,7 @@
+/*
+Time complexity : O(n*logn)
+*/
+
 import static java.lang.System.*;
 
 //creating Max Heap 
