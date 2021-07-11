@@ -1,4 +1,4 @@
-============>>> Finding the array element address in the given 1D array <<<===============
+============>>>  Finding the array element address in the given 1D array  <<<===============
 
  Given an array (base address (B), size of each element (W), lowerbound (LB)-- the lower index from which the array started)(like 0 in normal cases)
  then findout the "address of the A[i] element" 
