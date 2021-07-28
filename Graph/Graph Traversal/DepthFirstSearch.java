@@ -49,10 +49,11 @@ class Graph
 		G[v].add(new Edge(u,w));
 	}
 	
-	void depthSearch(int s)
+	void depthFirstSearch(int s)
 	{
 		boolean visited[] = new boolean[v_num];
 		int parent[] = new int[v_num];
+		
 		for(int i=0; i<v_num; i++)
 		{
 		  visited[i] = false;
@@ -107,12 +108,14 @@ public class DepthFirstSearch
 		 g.addEdge(1,4,9);
 		 g.addEdge(1,2,2);
 		 g.addEdge(2,3,7);
+		 g.addEdge(4,3,1);
+		 g.addEdge(5,4,6);
 
 		System.out.println(g);
 		System.out.println("===============\n");
 		/*boolean visited[] = new boolean[7];
 		g.recursiveDFS(0, visited);*/
 		
-		g.depthSearch(0);
+		g.depthFirstSearch(0);
 	}
 }

@@ -2,7 +2,7 @@
 > https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/
 
 2: Spaning Tree Definition
-> https://www.javatpoint.com/spanning-tree
+> https://www.tutorialspoint.com/data_structures_algorithms/spanning_tree.htm
 
 3: sparse vs Dense Graph
 > https://stackoverflow.com/questions/12599143/what-is-the-distinction-between-sparse-and-dense-graphs

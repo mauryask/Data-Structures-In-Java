@@ -21,7 +21,8 @@ class Graph
 		}
 	}
 	
-	List<Edge> G[]; //array contains lists and lists contains Edge object
+	List<Edge> G[]; //array contains lists and lists contains
+//	Edge object
 	//you can say it is a generic array
 	
 	public Graph(int n)

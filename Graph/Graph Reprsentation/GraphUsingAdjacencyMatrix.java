@@ -60,8 +60,7 @@ public class GraphUsingAdjacencyMatrix
 		}
 		
 		System.out.println("The adjacency matrix is: ");
-		
-		
+				
 		for(int i=0; i<v; i++)
 		{
 			System.out.print(" ");
