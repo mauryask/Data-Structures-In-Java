@@ -1,5 +1,5 @@
 // Time Complexity  : O(V+E)
-// Space Complexity : O(V) // as Queue and Stack
+// Space Complexity : O(V) 
 // it uses BFS
 // inspired from Jenny's Lecture
 
@@ -10,6 +10,7 @@ class Graph
 {
 	int v_num;
 	List<Integer> adj[];
+	
 	Graph(int v_num)
 	{
 		this.v_num = v_num;
@@ -86,7 +87,7 @@ public class KahnsAlgorithm
 		g.addEdge(1,2);
 		g.addEdge(3,5);
 		g.addEdge(2,5);
-		g.addEdge(4,2);
+		//g.addEdge(4,2); //this edge creates cycle
 		g.addEdge(5,4);
 		g.addEdge(5,6);
 	    
