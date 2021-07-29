@@ -1,7 +1,7 @@
 /**
 * Time Complexity : O(V+E)
 * Space Complexi  : O(V)
-* Kahn's Algorithm  
+* Kahn's Algorithm : (It uses BFS)
 */
 
 import static java.lang.System.*;
