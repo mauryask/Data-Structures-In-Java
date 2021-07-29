@@ -54,29 +54,22 @@ public class KahnsAlgorithm
 		List<Integer> q = new LinkedList<>();
 		
 		/**
-		* finding vertex withn indegree 0
+		* add all the vertices in the Queue
+		* having indegree 0
+		* Because there could be multiple vertices 
+		* with indegree 0 (as in this example)
+		* Taking only one vertex with indegree 0
+		* is not going to work in this example
 		*/
-		
-		int src = -1;
-		
+			
 		// T(n) = O(V)
 		for(int i=0; i<n; i++)
 		{
 			if(indegree[i] == 0)
-				src = i;
+				q.add(i);
 		}
 		
-		/**
-		* Check if there is no vertex withn in degree 0 
-		*/
-		
-		if(src == -1)
-		{
-			out.println("Not a DAG!!");
-			return;
-		}
-		
-		q.add(src);
+	
 		
 		int count = 0;
 		
@@ -117,9 +110,9 @@ public class KahnsAlgorithm
 		g.addEdge(0,3);
 		g.addEdge(1,2);
 		g.addEdge(3,5);
-		g.addEdge(5,4);
+		g.addEdge(4,5);
 		g.addEdge(2,5);
-		g.addEdge(5,6);
+		g.addEdge(4,6);
 		//g.addEdge(4,2);
 		
 		out.println(g);
