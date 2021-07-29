@@ -1,33 +1,29 @@
-// Time Complexity  : O(V+E)
-// Space Complexity : O(V) 
-// it uses BFS
-// inspired from Jenny's Lecture
+/**
+* Time Complexity : O(V+E)
+* Space Complexi  : O(V)
+* Kahn's Algorithm  
+*/
 
 import static java.lang.System.*;
 import java.util.*;
 
-class Graph 
+public class KahnsAlgorithm
 {
-	int v_num;
-	List<Integer> adj[];
-	
-	Graph(int v_num)
-	{
-		this.v_num = v_num;
-		adj = new LinkedList[v_num];
-		for(int i=0; i<v_num; i++)
-			adj[i] = new LinkedList<>();
-	}
+   List<Integer> adj[];
+   
+   KahnsAlgorithm(int n)
+   {
+	   adj = new LinkedList[n];
+	   for(int i=0; i<n; i++)
+		   adj[i] = new LinkedList<Integer>();
+   }
 	
 	@Override
 	public String toString()
 	{
 		String result = "";
-		for(int i=0;i<v_num; i++)
-		{
-			result += i+" ==> "+adj[i]+"\n";
-		}
-		
+		for(int i=0; i<adj.length; i++)
+			result += i + " => " + adj[i] + "\n";
 		return result;
 	}
 	
@@ -36,61 +32,102 @@ class Graph
 		adj[u].add(v);
 	}
 	
-	void topologicalSort()
+	/**
+	* This methiod is going to compute the
+	* indegree of each vertex 
+	* T(n) = O(V+E)
+	*/
+    void computeIndegree(int indegree[], int n)
 	{
-		int indegree[] = new int[v_num];
-
-		// finding indegree of the vertices
-		for(int i=0; i<v_num; i++)
-		{
-			for(int v : adj[i])
+		 for(int i=0; i<n; i++)
+		 {
+     		 for(int v : adj[i])
+			 {
 				indegree[v]++;
+			 }
+		 }
+	}
+	
+	
+	void topoLogicalOrdering(int indegree[], int n)
+	{
+		List<Integer> q = new LinkedList<>();
+		
+		/**
+		* finding vertex withn indegree 0
+		*/
+		
+		int src = -1;
+		
+		// T(n) = O(V)
+		for(int i=0; i<n; i++)
+		{
+			if(indegree[i] == 0)
+				src = i;
 		}
 		
-		Queue<Integer> q = new ArrayDeque<>();
+		/**
+		* Check if there is no vertex withn in degree 0 
+		*/
 		
-		//get first vertex with indgree = 0
-		for(int i=0; i<v_num; i++)
-			if(indegree[i] == 0)
-				q.add(i);
+		if(src == -1)
+		{
+			out.println("Not a DAG!!");
+			return;
+		}
+		
+		q.add(src);
 		
 		int count = 0;
 		
+		// T(n) = O(V+E)
 		while(!q.isEmpty())
 		{
-			int u = q.poll();
-			out.print(u+" "); //printing topological ordering
+			int u = q.remove(0);
+			out.print(u+" ");
+			
 			for(int v : adj[u])
 			{
-		       indegree[v]--;	
-			   if(indegree[v] == 0)
-				  q.add(v);
+				indegree[v]--;
+				if(indegree[v] == 0)
+					q.add(v);
 			}
 			count++;
 		}
 		
-		// checking whether the graph is "acyclic or not"
-		if(count != v_num)
+		/**
+		* Check if there exists a cycle
+		* in the graph or not
+		*/
+		
+		if(count != n)
 		{
-			out.println("Not a DAG "+count);
+			out.println("..\nNot a DAG!!");
+			return;
 		}
 	}
-}
-
-public class KahnsAlgorithm
-{
+	
 	public static void main(String [] args)
 	{
-		Graph g = new Graph(7);
+		// number of vertices
+		int n = 7; 
+		KahnsAlgorithm g = new KahnsAlgorithm(n);
+		
 		g.addEdge(0,1);
 		g.addEdge(0,3);
 		g.addEdge(1,2);
 		g.addEdge(3,5);
-		g.addEdge(2,5);
-		//g.addEdge(4,2); //this edge creates cycle
 		g.addEdge(5,4);
+		g.addEdge(2,5);
 		g.addEdge(5,6);
-	    
-		g.topologicalSort();
+		//g.addEdge(4,2);
+		
+		out.println(g);
+		
+	    int indegree[] = new int[n];
+		// compute indegree
+		g.computeIndegree(indegree, n);
+		// print topological ordering
+        g.topoLogicalOrdering(indegree,n);	
 	}
 }
