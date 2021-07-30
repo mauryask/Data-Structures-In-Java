@@ -1,10 +1,9 @@
-// 2-ways to implemment topological sorting 
-// 1: Kahn's algorithm (indegree method)
-// 2: Using Stack
-// here we have implemented it using stack
+// It is a modification of DFS
 // Time Complexity: O(E+V)
 // Space Coplexity : O(V)
+// The algorithm is working even if Graph is not DAG
 // Recommended to use : Kahn's Algorithm
+
 
 import java.util.List;
 import java.util.LinkedList;
@@ -36,7 +35,8 @@ class Graph
 		G[u].add(0,v);
 	}
 	
-	void topologicalSortUtil(int u, boolean visited[], Stack<Integer> stack)
+	void topologicalSortUtil(int u, boolean visited[], 
+	Stack<Integer> stack)
 	{
 	   	visited[u] =  true; 
 		// print the element in case of DFS
@@ -56,7 +56,7 @@ class Graph
 		boolean visited[] = new boolean[v_num];
 		for(int i=0; i<v_num; i++)
 		{
-		   if(!visited[i])
+		   if(!visited[i]) 
 			  topologicalSortUtil(i,visited,stack);	
 		}
 			
@@ -70,13 +70,22 @@ public class TopologicalSort
 {
 	public static void main(String [] args)
 	{
-		Graph g = new Graph(6);
-		g.addEdge(4,0);
+		Graph g = new Graph(7);
+		/*g.addEdge(4,0);
 		g.addEdge(5,0);
 		g.addEdge(5,2);
 		g.addEdge(4,1);
 		g.addEdge(2,3);
-		g.addEdge(3,1);
+		g.addEdge(3,1);*/
+		
+		g.addEdge(0,1);
+		g.addEdge(0,3);
+		g.addEdge(1,2);
+		g.addEdge(3,5);
+		g.addEdge(5,4);
+		g.addEdge(2,5);
+		g.addEdge(5,6);
+		g.addEdge(4,2);
 		
 		System.out.println("\n"+g);
 		System.out.println("=================\n");
