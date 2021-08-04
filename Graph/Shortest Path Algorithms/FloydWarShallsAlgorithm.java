@@ -4,6 +4,7 @@
 
 class AllPairShortestPath
 {
+	static final int inf = Integer.MAX_VALUE;
 	void floydWarshall(int G[][], int v_num)
 	{
 		int i,j,k;			
@@ -14,9 +15,9 @@ class AllPairShortestPath
 					for(j=0; j<v_num; j++)
 					{
 						// the purpose to use G[i][k] != inf 
-						// id to prevent overflow
+						// is to prevent overflow
 						// because when you will add something to infinite
-						// it is going to be out of range og "int"
+						// it is going to be out of range of "int"
 						
 						if(G[i][k] != inf && G[k][j] != inf && 
 						(G[i][k] + G[k][j]) < G[i][j])
