@@ -30,23 +30,36 @@ public class DisjointSetPathCompression
 		// union with path compression
 		
 		int root =  x;
-		if(parent[root] == root)
+		
+		//Check if the elemnt is the parent itself
+		if(parent[root] == root)  
 			return root;
+		
 		while(parent[root] != root)
 			root = parent[root];
 		parent[x] = root;
+		
 		return parent[x];
 	}
 	
-	static void union(int x, int y, int ans[])
+	static void union(int x, int y)
 	{
 	   int xRoot = find(x); // parent of x
 	   int yRoot = find(y); // parent of y
+	   
+	   /* 
+	    * if the elements belong to same set
+	    * union can not be performed
+		*/
 	   if(xRoot == yRoot)
 		   return;
 	   
+	   /*
+	   * If they belong from different sets
+	   * One with the higher rank will be the parsent
+	   */
 	   if(rank[xRoot] < rank[yRoot])
-		   parent[xRoot] = yRoot;
+		   parent[xRoot] = yRoot; 
 	   else if(rank[xRoot] > rank[yRoot])
 		   parent[yRoot] = xRoot;
 	   else
@@ -59,13 +72,12 @@ public class DisjointSetPathCompression
 	public static void main(String [] args)
 	{
 	   	int n = 5;
-		int ans[] = new int[2];
 		makeSet(n);
-		union(0,1,ans);
-		union(1,2,ans);
-		union(2,3,ans);
-		union(0,3,ans);
-		union(0,4,ans);
+		union(0,1);
+		union(1,2);
+		union(2,3);
+		union(0,3);
+		union(0,4);
 		out.println(find(2));
 	}
 }
