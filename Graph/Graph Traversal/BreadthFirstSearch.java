@@ -1,3 +1,10 @@
+/*
+* Time complexity: O(|V| + |E|) : Adjacency List
+* Time complexity: O(|V|^2) : Adjacency Matrix
+* Space complexity: O(|V| + |E|) : Ajacency List
+* Space complexity: O(|V|^2): Adjacency Matrix
+**/
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,8 +41,8 @@ class Graph
 	void addEdge(int u, int v, int w)
 	{
 	   //two additions for undirected graph
-          	G[u].add(0,new Edge(v,w));		
-       		G[v].add(0,new Edge(u,w));		
+          	G[u].add(new Edge(v,w));		
+       		G[v].add(new Edge(u,w));		
 	}
 
 	public String toString()

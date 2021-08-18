@@ -1,8 +1,9 @@
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
-import static java.lang.System.out;
-import static java.lang.System.in;
+/*
+* Time complexity: O(|V|+|E|)
+* Space complexity: O(|V|+|E|)
+**/
+import java.util.*;
+import static java.lang.System.*;
 
 class Graph  
 {

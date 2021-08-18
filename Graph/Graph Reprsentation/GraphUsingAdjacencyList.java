@@ -1,4 +1,8 @@
-//Adjacency list implementation of graph
+/*
+* Space complexity: O(E+V)
+* Good for the Sparse graphs
+**/
+
 import java.util.*;
 
 class Graph
@@ -21,9 +25,7 @@ class Graph
 		}
 	}
 	
-	List<Edge> G[]; //array contains lists and lists contains
-//	Edge object
-	//you can say it is a generic array
+	List<Edge> G[]; //array contains lists and lists of edge object
 	
 	public Graph(int n)
 	{

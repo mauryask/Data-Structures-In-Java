@@ -1,6 +1,6 @@
 /**
 * Time Complexity : O(V+E)
-* Space Complexi  : O(V)
+* Space Complexity  : O(V)
 * Kahn's Algorithm : (It uses BFS)
 */
 
@@ -33,7 +33,7 @@ public class KahnsAlgorithm
 	}
 	
 	/**
-	* This methiod is going to compute the
+	* This method is going to compute the
 	* indegree of each vertex 
 	* T(n) = O(V+E)
 	*/

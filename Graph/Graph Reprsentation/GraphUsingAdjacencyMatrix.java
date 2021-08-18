@@ -1,4 +1,9 @@
-//graph representation using adjacency list
+/*
+* Space complexity: O(V^2)
+* Time to read the edges: O(v^2)
+* Good for the Dense grphs
+**/
+
 import java.util.*;
 public class GraphUsingAdjacencyMatrix 
 {
