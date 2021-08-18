@@ -1,9 +1,10 @@
 /**
+* Single source shortest path algorithm 
 * Time complaexity: O(V*E)
 * Space complaexity: O(V)
 * Works with both directed and undirected graphs
-* Works well with graph having -ve weight edges
-* Does not work in case of -ve weight cycle
+* ** Works well with graph having -ve weight edges
+* ** Does not work in case of -ve weight cycle (very important)
 */
 
 import static java.lang.System.*;
@@ -11,29 +12,30 @@ import java.util.*;
 
 public class BellmanfordAlgorithm
 {
-	class Edge 
+	static class Edge 
 	{
 		int u;
 		int v;
 		int w;
+	
+		Edge(int u, int v, int w)
+		{
+			this.v = v;
+			this.w = w;
+			this.u = u;
+		}
 	}
 	
-	Edge edge[];
-	
-	public BellmanfordAlgorithm(int e)
-	{
-		edge = new Edge[e];
-		for(int i=0; i<e; i++)
-			edge[i] = new Edge();
-	}
-	
-	void bellManFord(int src, int n, int e)
+	void bellManFord(int src, int n, int e, Edge edge[])
 	{
 		int dist[] = new int[n];
 		Arrays.fill(dist, Integer.MAX_VALUE);
 		
 		dist[src] = 0;
-		
+		/*
+		* Relaxing all the edges (n-1) times exactly
+		* Realxing means D[v] = D[u] + C[u, v] thing
+		**/
 		for(int j=1; j<n; j++)
 		{
 		   for(int i=0; i<e; i++)
@@ -72,41 +74,20 @@ public class BellmanfordAlgorithm
 	{
 		int n = 5; 
         int e = 8; 
-  
-        BellmanfordAlgorithm g = new BellmanfordAlgorithm(e); 
-  
-        g.edge[0].u = 0; 
-        g.edge[0].v = 1; 
-        g.edge[0].w = -1; 
-  
-        g.edge[1].u = 0; 
-        g.edge[1].v = 2; 
-        g.edge[1].w = 4; 
-  
-        g.edge[2].u = 1; 
-        g.edge[2].v = 2; 
-        g.edge[2].w = 3; 
-  
-        g.edge[3].u = 1; 
-        g.edge[3].v = 3; 
-        g.edge[3].w = 2; 
-  
-        g.edge[4].u = 1; 
-        g.edge[4].v = 4; 
-        g.edge[4].w = 2; 
-  
-        g.edge[5].u = 3; 
-        g.edge[5].v = 2; 
-        g.edge[5].w = 5; 
-  
-        g.edge[6].u = 3; 
-        g.edge[6].v = 1; 
-        g.edge[6].w = 1; 
-  
-        g.edge[7].u = 4; 
-        g.edge[7].v = 3; 
-        g.edge[7].w = -3; 
-  
-        g.bellManFord(0, n, e);
+   
+		Edge edge[] = new Edge[e];   
+        
+        BellmanfordAlgorithm g = new BellmanfordAlgorithm(); 
+  						 //u,v,w
+        edge[0] = new Edge(0,1,-1);
+        edge[1] = new Edge(0,2,4);
+        edge[2] = new Edge(1,2,3);
+        edge[3] = new Edge(1,3,2);
+        edge[4] = new Edge(1,4,2);
+        edge[5] = new Edge(3,2,5);
+        edge[6] = new Edge(3,1,1);
+        edge[7] = new Edge(4,3,-3);
+ 
+        g.bellManFord(0, n, e, edge);
 	}
 }

@@ -2,16 +2,10 @@
 * Single Source Shortest Path Algorithm
 *  Time complexity: 
 * O(E+V^2) : for linear search
-* O(E*logV): for min heap
+* O(E*logV): for min heap -> see notes to check how it is so.
 * Space complexity: O(V)
 * This algo works for both directed and
 * undirected graph as well
-*/
-
-/**
-* O(E*Log V) : is time to extract min
-* Since the heap may have atmost O(E) number 
-* of elements
 */
 
 /**
@@ -76,9 +70,7 @@ public class DijkstrasAlgorithm
 			return a.dist > b.dist ? 1 : -1;
 		});
 		
-		visited[src] = true;
-		distance[src] = 0;
-			
+		distance[src] = 0;	
 		q.add(new Util(src, 0));			
 		
 		for(int i=1; i<=n; i++)
