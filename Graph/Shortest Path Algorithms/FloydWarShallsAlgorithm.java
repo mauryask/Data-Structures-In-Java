@@ -1,27 +1,30 @@
-// this algo uses dynamic programming approach
-// time complexity  : O(V^3)
-// space complexity : O(V^2)
+/*
+* All pairs shortest path algorithm
+* This algo uses dynamic programming approach
+* Time complexity  : O(V^3)
+* Space complexity : O(V^2)
+* Works for both having +ve and -ve edges
+*/
 
 class AllPairShortestPath
 {
 	static final int inf = Integer.MAX_VALUE;
 	void floydWarshall(int G[][], int v_num)
-	{
-		int i,j,k;			
-			for(k=0; k<v_num; k++)
+	{		
+			for(int k=0; k<v_num; k++)
 			{
-				for(i=0; i<v_num; i++)
+				for(int i=0; i<v_num; i++)
 				{
-					for(j=0; j<v_num; j++)
+					for(int j=0; j<v_num; j++)
 					{
 						// the purpose to use G[i][k] != inf 
 						// is to prevent overflow
 						// because when you will add something to infinite
 						// it is going to be out of range of "int"
 						
-						if(G[i][k] != inf && G[k][j] != inf && 
-						(G[i][k] + G[k][j]) < G[i][j])
-							G[i][j] = G[i][k] + G[k][j];
+						if(G[i][k] != inf && G[k][j] != inf)
+							G[i][j] = Math.min(G[i][j], G[i][k] 
+						+ G[k][j]);
 					}
 				}
 			}

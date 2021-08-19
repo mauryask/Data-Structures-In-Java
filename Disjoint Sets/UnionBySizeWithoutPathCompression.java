@@ -1,6 +1,6 @@
 /*
 * Union by Size without path compression
-* Here initially each elemnt is kept in a separate set
+* Here initially each element is kept in a separate set
 * and size of each set is -1
 * The idea is to attach the tree with smaller size 
 * to root of the tree with higher size 
@@ -30,7 +30,7 @@ public class UnionBySizeWithoutPathCompression
 	static int find(int x, int size[])
 	{
 		int temp = x;
-		while(size[temp] > 0)
+		while(size[temp] >= 0)
 		{
 			temp = size[temp];
 		}

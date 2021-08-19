@@ -1,9 +1,10 @@
 /*
 *  Time complexity  : O(n^2)
 *  Space complexity : O(n)
-*  The array index represents elements
-*  The array value represents the name of
-*  The set to which the elemnts belongs
+*  The array index represents elements-
+*  set-name: to which the elements belongs
+*  The array values represent the parents 
+*  of the elements
 **/
 
 import static java.lang.System.*;
