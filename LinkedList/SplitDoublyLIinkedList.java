@@ -13,7 +13,7 @@ class Node
 	}
 }
 
-public class Rest 
+public class SplitDoublyLIinkedList
 {
 	static Node insertNode(int value, Node head)
 	{
@@ -43,27 +43,38 @@ public class Rest
 		  	p2 = p2.next;
 			p1 = p1.next.next;
 			
-		}while(p1!=head && p1.next != head);
+		}while(p1.next!=head && p1.next.next != head);
 		
 		if(p1.next == head) //odd number of nodes
 		{
+			// 2nd half
 			p1.next = p2.next;
+			Node head2 = p2.next;
+			
+			// 1st half
 			p2.next = head;
+			Node head1 = head;
 			
-			displayList(head);
+			displayList(head1);
 			System.out.println();
-			displayList(p1);
+			displayList(head2);
 		}
-		else if(p1 == head) //even number of nodes
+		
+		else if(p1.next.next == head) //even number of nodes
 		{
-			Node temp1 = head.next;
-			Node temp2 = p2.next;
-			head.next = temp2;
-			p2.next = temp1;
+			// 2nd half
 			
-			displayList(head);
+			p1 = p1.next;
+			p1.next = p2.next;
+			Node head2 = p2.next;
+			
+			// 1st half
+			p2.next = head;
+			Node head1 = head;
+			
+			displayList(head1);
 			System.out.println();
-			displayList(p2);
+			displayList(head2);
 		}
 	}
 

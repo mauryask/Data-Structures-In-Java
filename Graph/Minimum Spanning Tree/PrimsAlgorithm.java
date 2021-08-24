@@ -97,7 +97,7 @@ class Graph
 	}
 }
 
-public class PrimsAlgiorithm
+public class PrimsAlgorithm
 {
 	public static void main(String [] args)
 	{

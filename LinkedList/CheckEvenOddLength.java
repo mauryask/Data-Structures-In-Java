@@ -41,11 +41,26 @@ public class CheckEvenOddLength
 	 }
 	 
 	 
-	 static void mergeLists(Node head1, NOde head2)
+	 static String evenOrOdd(Node head)
 	 {
+		 if(head ==  null)
+			 return "Even";
 		 
+		 Node p1 = head;
+		 Node p2 = head;
+		 
+		 while(p2!=null && p2.next != null)
+		 {
+			 p1 = p1.next;
+			 p2 = p2.next.next;
+		 }
+		 
+		 if(p2 == null)
+			 return "Even";
+		 else
+			 return "Odd";
 	 }
-	 
+	
 	 static void displayList(Node head)
 	 {
 		 Node ptr = head;
@@ -61,15 +76,14 @@ public class CheckEvenOddLength
 	 			
 	public static void main(String [] args) 
 	{
-		Node head1 =  null;
-		head1 = insertNode(head1, 5);
-		insertNode(head1, 8);
-		insertNode(head1, 32);
-		insertNode(head1, 7);
-		insertNode(head1, 52);
-		insertNode(head1, 45);
-				
-		displayList(head1);
-		checkEvenOdd(head1);
+		Node head =  null;
+		head = insertNode(head, 5);
+		//insertNode(head, 8);
+		//insertNode(head, 32);
+		//insertNode(head, 7);
+		//insertNode(head, 52);
+		//insertNode(head, 45);		
+		displayList(head);
+		out.print(evenOrOdd(head));
 	}
 }

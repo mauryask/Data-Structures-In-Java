@@ -78,7 +78,7 @@ class MainLogic
 		  for(int i=1; i<m; i++)
 			 head = head.next;	
 		  head.next = head.next.next;
-		}
+		}                                                                          
 		
 		return head;
 	}

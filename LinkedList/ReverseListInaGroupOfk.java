@@ -43,6 +43,12 @@ public class ReverseListInaGroupOfk
 	}
 	
 	// reverse even if the number of nodes is not equal to 'k'
+	/*
+	* Time complexity  : O(n)
+	* Space complexity : O(n/k) --> Number of funtion calls
+	* = number of groups of size k
+	**/
+	
 	static Node reverseList(int k, Node head)
 	{
 		    Node cur = head;
@@ -127,7 +133,7 @@ public class ReverseListInaGroupOfk
 		
 		printList();
 		//head = reverseList(3, head);
-		head = reverseList(4, head);
+		head = reverseList(3, head);
 		printList();
 	}
 }

@@ -61,7 +61,7 @@ public class FindNthNodeFromEndBestMethod
 			count++;
 		}
    
-   		if(count != n)
+   		if(count < n)
 		{
 			out.println("Insufficient number of nodes");
 			return;
@@ -80,6 +80,11 @@ public class FindNthNodeFromEndBestMethod
 	public static void main(String [] args) 
 	{
       insertNode(10);
+      insertNode(12);
+      insertNode(15);
+      insertNode(23);
+      insertNode(85);
+      insertNode(74);
 
 	  display();
 	  out.println();

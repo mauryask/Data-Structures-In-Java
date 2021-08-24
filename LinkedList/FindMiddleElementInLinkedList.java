@@ -78,7 +78,11 @@ public class FindMiddleElementInLinkedList
 	{
 		Node head1 =  null;
 		head1 = insertNode(head1, 5);
-		
+		insertNode(head1, 12);
+		insertNode(head1, 35);
+		insertNode(head1, 44);
+		insertNode(head1, 7);
+		insertNode(head1, 24);
 		displayList(head1);
 		findMidNode(head1);
 	}
