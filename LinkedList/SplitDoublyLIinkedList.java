@@ -1,6 +1,11 @@
 // splitting doubly linked list into two 
 // two equal doubly linked lists (even number of nodes)
-// make one ode extra in first list (odd humber of noedes)
+// make one node extra in first list (odd humber of noedes)
+
+/*
+* T(n) : O(n)
+* S(n) : O(1)
+**/
 
 class Node 
 {
