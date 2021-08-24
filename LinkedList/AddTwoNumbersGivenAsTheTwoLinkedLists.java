@@ -54,53 +54,39 @@ public class AddTwoNumbersGivenAsTheTwoLinkedLists
 		 out.println();
 	 }	
 				
-	 static void addList(Node head1, Node head2)
+	 static void addList(Node l1, Node l2)
 	 {
-		 // handling base cases
-		 if(head1 == null && head2 != null)
-		 {
-			 displayList(head2);
-			 return;
-		 }
-		 
-		 if(head1 != null && head2 == null)
-		 {
-			 displayList(head1);
-			 return;
-		 }
-		 
-		 if(head1 == null && head2 == null)
-			 return;
-		 
-		 int carry = 0, sum = 0, cumSum  = 0;
-		 Node head = head1, prev = null;
-		 
-		 while(head1 != null && head2 != null)
-		 {
-			 cumSum = head1.data + head2.data + carry;
-			 sum = cumSum % 10;
-			 carry = cumSum / 10;
-			 			 
-			 head1.data = sum;
-			 			 			 
-			 if(head1.next == null && head2.next != null)
-			 {
-				 head1.next = new Node(0);
-			 }
-			 
-			 if(head1.next != null && head2.next == null)
-			 {
-				head2.next = new Node(0);
-			 }		
-
-             prev  = head1;
-             head1 = head1.next;
-			 head2 = head2.next;			 
-		 }
-		 
-		 if(carry != 0)
-			 prev.next = new Node(carry);
-		 displayList(head);
+		 if(l1==null)
+            displayList(l2);
+        if(l2==null)
+            displayList(l1);
+        
+        
+        int carry  = 0;
+        Node head = l1;
+        
+        while(true)
+        {   
+            int sum = l1.data + l2.data + carry;
+            carry = sum / 10;
+            int temp = sum % 10;
+            l1.data = temp;
+        
+            if(l1.next == null && l2.next != null)
+              l1.next = new Node(0);
+            else if(l1.next != null && l2.next == null)
+              l2.next = new Node(0);
+            else if(l1.next == null && l2.next == null)
+               break;
+            
+            l1 = l1.next;
+            l2 = l2.next;
+         }
+        
+        if(carry != 0)
+           l1.next = new Node(carry);
+        
+        displayList(head); 
 	 }	 
    		
 					
