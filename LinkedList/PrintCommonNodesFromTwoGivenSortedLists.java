@@ -1,3 +1,7 @@
+/**
+* Time Complexity: O(n+m)
+* Space Complexity: O(1)
+*/
 import static java.lang.System.*;
 import java.util.*;
 
@@ -11,7 +15,6 @@ class Node
 		next = null;
 	}
 }
-
 
 public class PrintCommonNodesFromTwoGivenSortedLists
 {

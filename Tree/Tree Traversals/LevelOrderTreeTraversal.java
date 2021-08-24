@@ -64,31 +64,27 @@ public class LevelOrderTreeTraversal
 
 	
 	
-static void levelOrderTraverse(Node root)
+static void levelOrderTraverse()
 {
-		Queue<Node> queue = new ArrayDeque<>();
-		Node temp;
+		Queue<Node> q = new ArrayDeque<>();
 		
 		if(root == null)
 			return;
 		
-		queue.add(root); //equivalent to EnQueue
+		q.add(root); 
 		
-		while(!queue.isEmpty())
+		while(!q.isEmpty())
 		{
-			temp = queue.remove(); //equivalent to DeQueue
-			System.out.print(temp.data+" ");
+			Node root = q.poll(); 
+			System.out.print(root.data+" ");
 			
-			if(temp.left != null)
-				queue.add(temp.left);
+			if(root.left != null)
+				q.add(root.left);
 			
-			if(temp.right != null)
-				queue.add(temp.right);
+			if(root.right != null)
+				q.add(root.right);
 		}
-			    
 	}
-	
-
 
 	  public static void main(String [] args)
 		{
@@ -100,7 +96,7 @@ static void levelOrderTraverse(Node root)
 		  insertNode(9);
 		  insertNode(2);
 		  
-		  levelOrderTraverse(root);
+		  levelOrderTraverse();
 		 	  
 		}
 
