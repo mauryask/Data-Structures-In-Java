@@ -60,19 +60,19 @@ public class SerachNodeInBSTIterative
 		}
 	}
 	
-	static boolean serachElementIterative(Node root, int value)
+	static Node serachElementIterative(Node root, int value)
 	{
 		while(root != null)
 		{
 			if(root.data == value)
-				return true;
+				return root;
 			if(root.data > value)
 				root = root.left;
 			else if(root.data < value)
 				root = root.right;
 		}
 		
-		return false;
+		return null;
 	}
 	
 	public static void main(String [] args)
@@ -87,6 +87,6 @@ public class SerachNodeInBSTIterative
 		
 		inorder(root);
 		out.println();
-		out.println(serachElementIterative(root, 100));
+		out.println(serachElementIterative(root, 100).data);
 	}
 }

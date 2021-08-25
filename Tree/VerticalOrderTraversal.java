@@ -1,6 +1,6 @@
 /**
 Time complexity   : O(n)
-Spasce complexity : O(n) : colud be O(n^2) > confused a bit
+Spasce complexity : O(n) 
 This approach is combination of levelorder traversal
 and Map
 Each entry in map conatins Hd as key and an ArrayList containing
@@ -41,15 +41,16 @@ public class VerticalOrderTraversal
 	{
 		Queue<QueueData> q = new ArrayDeque<>();
 		Map<Integer, List<Integer>> map = new TreeMap<>();
-         
+		
 		q.add(new QueueData(root,0));
-		List<Integer> list = new ArrayList<>();
+		
+		List<Integer> list = new LinkedList<>();
 		list.add(root.data);
 		map.put(0,list);
 	     
         while(!q.isEmpty())
 		{
-			QueueData qd =  q.remove();
+			QueueData qd =  q.poll();
 			root = qd.node;
 			
 			if(root.left != null)
@@ -57,10 +58,10 @@ public class VerticalOrderTraversal
 				q.add(new QueueData(root.left,qd.hd-1));
 				if(!map.containsKey(qd.hd-1))
 				{
-					 list = new ArrayList<>();
-					 list.add(root.left.data);
-					 map.put(qd.hd-1, list);
-				}
+					list = new LinkedList<>();
+					list.add(root.left.data);
+					map.put(qd.hd-1, list);
+				} 
 				else
 					map.get(qd.hd-1).add(root.left.data);
 			}
@@ -70,8 +71,8 @@ public class VerticalOrderTraversal
 				q.add(new QueueData(root.right, qd.hd+1));
 				if(!map.containsKey(qd.hd+1))
 				{
-					 list = new ArrayList<>();
-					 list.add(root.right.data);
+					list = new LinkedList<>();
+					list.add(root.right.data);
 					 map.put(qd.hd+1, list);
 				}
 				else
@@ -81,12 +82,7 @@ public class VerticalOrderTraversal
 
        // printing nodes along each vertical line
 	   for(Map.Entry<Integer, List<Integer>> m : map.entrySet())
-	   {
-		   for(int x: m.getValue())
-		   out.print(x+" ");
-	       out.println();
-	   }	   
-		
+		   out.println(m.getKey()+" => "+m.getValue());	   
 	}
 		
 	public static void main(String [] args)
@@ -98,14 +94,6 @@ public class VerticalOrderTraversal
 		  Node r5 = new Node(5);
 		  Node r6 = new Node(6);
 		  Node r7 = new Node(7);
-		  Node r8 = new Node(8);
-		  Node r9 = new Node(9);
-		  Node r10 = new Node(10);
-		  Node r11 = new Node(11);
-		  Node r12 = new Node(12);
-		  Node r13 = new Node(13);
-		  Node r14 = new Node(14);
-		  Node r15 = new Node(15);
 		  
 		  root.left = r2;
 		  root.right = r3;
@@ -113,14 +101,6 @@ public class VerticalOrderTraversal
 		  r2.right = r5;
 		  r3.left = r6;
 		  r3.right = r7;
-		  r4.left = r8;
-		  r4.right = r9;
-		  r5.left = r10;
-		  r5.right = r11;
-		  r6.left = r12;
-		  r6.right = r13;
-		  r7.left = r14;
-		  r7.right = r15;
 		  
 		  verticalOrderTraversal(root);
 	}

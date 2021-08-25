@@ -20,7 +20,7 @@ class Node
 	}
 }
 
-public class Test 
+public class DeletionInBST
 {
 	static Node root = null;
 	
@@ -82,7 +82,7 @@ public class Test
 	// if node has no child
 	 if(root.left == null && root.right == null) 
 	 {
-		 if(parentNode.data  > target)
+		 if(parentNode.left == root)
 			parentNode.left = null;
 		 else
 			parentNode.right = null; 
@@ -100,6 +100,9 @@ public class Test
 		 root.data = childPtr.data;
 		 root.left = childPtr.left;
 		 root.right = childPtr.right;
+		 
+		 childPtr.left  = null;
+		 childPtr.right = null;
 	 }
 	 else  //if node has both children
 	 {
@@ -145,7 +148,8 @@ public class Test
 		
 		inorder(root);
 		out.println();
-		deleteElement(root,12015);
+		deleteElement(root,36);
+		inorder(root);
 		}
 }
 

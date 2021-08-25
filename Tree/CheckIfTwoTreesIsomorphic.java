@@ -26,9 +26,7 @@ public class CheckIfTwoTreesIsomorphic
    {
 	   if(root1 == null && root2 == null)
 		   return true;
-	   if(root1 == null && root2 != null)
-		   return false;
-	   if(root1 != null && root2 == null)
+	   if(root1 == null || root2 == null)
 		   return false;
 	   
 	   Queue<Node> q1 = new ArrayDeque<>();
@@ -67,9 +65,7 @@ public class CheckIfTwoTreesIsomorphic
    {
 	   if(root1 == null && root2 == null)
 		   return true;
-	   if(root1 != null && root2 == null)
-		   return false;
-	   if(root1 == null && root2 != null)
+	   if(root1 == null || root2 == null)
 		   return false;
 	   
 	   boolean left = checkIsomorphicRecursive(root1.left, root2.left);
