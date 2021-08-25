@@ -1,4 +1,10 @@
+/*
+* Time complexity: O(n)
+* Space complexity: O(n) + O(n) = O(n)
+**/
+
 import java.util.*;
+import static java.lang.System.*;
 
 class Node
 {
@@ -14,62 +20,47 @@ class Node
 	}
 }
 
-
 public class ZigZagTraversal
 {
 	static void zizagTraversal(Node root)
 	{
-		List<Node> q = new LinkedList<>();
-		Stack<Node> stack = new Stack<>();
-		q.add(root);
-		q.add(null);
-		System.out.print(root.data+" ");
-		boolean flag = false;
+		Stack<Node> s1 = new Stack<>();
+		Stack<Node> s2 = new Stack<>();
 		
-		while(!q.isEmpty())
+	    s1.push(root);
+		boolean lr = true;
+		
+		while(!s1.isEmpty() || !s2.isEmpty())
 		{
-			root = q.remove(0);
-			if(root == null)
-			{
-				while(!stack.isEmpty())
-					System.out.print(stack.pop().data+" ");
-				
-				flag  = flag ? false : true;
-				
-				if(!q.isEmpty())
-					q.add(null);
-			}
+		    if(lr)
+		    {
+			   while(!s1.isEmpty())
+			   {
+				   root = s1.pop();
+				   out.print(root.data+" ");
+				   
+				   if(root.left != null)
+					   s2.push(root.left);
+				   if(root.right != null)
+					   s2.push(root.right);
+			   }
+			   
+			   lr = false;
+		    }	
 			else
 			{
-				if(flag == true)
+				while(!s2.isEmpty())
 				{
-					//adding into the queue
-					if(root.right != null)
-					   q.add(root.right);
-				    if(root.left != null)
-						q.add(root.left);
+					root = s2.pop();
+					out.print(root.data+" ");
 					
-				   //adding into stack
 					if(root.right != null)
-						stack.push(root.right);	
+						s1.push(root.right);
 					if(root.left != null)
-						 stack.push(root.left);  
+						s1.push(root.left);
 				}
-				else
-				{
-					//adding into queue
-					if(root.left != null)
-						q.add(root.left);
-					if(root.right != null)
-					   q.add(root.right);
-				   
-				   //adding into stack
-					if(root.left != null)
-						stack.push(root.left);	
-					if(root.right != null)
-					    stack.push(root.right);					   
-				}
-			}
+				lr = true;
+			}				
 		}
 	}
 	
@@ -97,26 +88,27 @@ public class ZigZagTraversal
 		  Node r9 = new Node(9);
 		  Node r10 = new Node(10);
 		  Node r11 = new Node(11);
-		  Node r16 = new Node(16);
-		  Node r18 = new Node(18);
-		  Node r20 = new Node(20);
-		  Node r22 = new Node(22);
+		  Node r12 = new Node(12);
+		  Node r13 = new Node(13);
+		  Node r14 = new Node(14);
+		  Node r15 = new Node(15);
+
 		  
 		  root.left = r2;
 		  root.right = r3;
 		  r2.left = r4;
 		  r2.right = r5;
-		  r4.left = r6;
-		  r4.right = r7;
-		  r3.left = r10;
-		  r3.right = r11;
-		  r5.left = r8;
-		  r5.right = r9;
-		  r10.left = r16;
-		  r10.right = r18;
-		  r11.left = r20;
-		  r11.right = r22;
-		  
+		  r3.left = r6;
+		  r3.right = r7;
+		  r4.left = r8;
+		  r4.right = r9;
+		  r5.left = r10;
+		  r5.right = r11;
+		  r6.left = r12;
+		  r6.right = r13;
+		  r7.left = r14;
+		  r7.right = r15;
+		
 		  zizagTraversal(root);
 		}
 }

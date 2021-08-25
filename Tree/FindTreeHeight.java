@@ -19,7 +19,7 @@ class Node
 	}
 }
 
-public class Test
+public class FindTreeHeight
 {
 	static int getLevel(Node root)
 	{   
@@ -38,21 +38,21 @@ public class Test
 				if(!q.isEmpty())
 					q.add(null);
 				level++;
+				continue;
 			}
-			else
-			{
+			
 				if(root.right != null)
 					q.add(root.right);
 				if(root.left != null)
 					q.add(root.left);
-			}
+			
 		}
 		return level;
 	}
 	
 	  public static void main(String [] args)
 		{
-		
+			
 		  Node root = new Node(1);
 		  Node r2 = new Node(2);
 		  Node r3 = new Node(3);

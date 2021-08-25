@@ -1,6 +1,8 @@
 /**
 Time complexity  : O(n)
 Space complexity : O(n)
+* You can check the number of function calls
+* is going to be equal to the number of nodes
 */
 
 import static java.lang.System.*;

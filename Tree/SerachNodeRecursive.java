@@ -14,7 +14,9 @@ class Node
 
 public class SerachNodeRecursive
 {
-	static Node insertNode(int data, Node root)
+	static Node root = null;
+	
+	static Node insertNode(int data)
 	{
 		Node parentNode = null, currentNode = null;
 		Node temp = new Node(data);
@@ -39,38 +41,94 @@ public class SerachNodeRecursive
 		}
 
 		return temp;
-	}
+	}	
 
-	static boolean isExist(Node root, int value)
-	{
-		if(root == null)
-			return false;
-		if(root.data == value)
-			return true;
-		else
+   
+   static void levelOrder()
+   {
+	   Stack<Integer> stack = new Stack<>();
+	   Queue<Node> q = new ArrayDeque<>();
+	   
+	   q.add(root);
+	   stack.push(root.data);
+
+		while(!q.isEmpty())
 		{
-			boolean left =  isExist(root.left, value);
-			if(left)   
-				return true;
-			else
-			{
-				boolean right = isExist(root.right, value);
-				return right;
-			}
-		}
-	}
+			Node root = q.poll();
+			stack.push(root.data);
+			
+			if(root.right != null)
+				q.add(root.right);
+			
+			if(root.left != null)
+				q.add(root.left);
+		}			
+		
+		for(;!stack.isEmpty();)
+			out.print(stack.pop()+" ");
+   }
+   
+   
+   static void postOrder()
+   {
+	   Stack<Node> stack = new Stack<>();
+	   Node prev = null;
+	   
+	   while(true)
+	   {
+		   while(root != null)
+		   {
+			   stack.push(root);
+			   root = root.left;
+		   }
+		   
+		   while(root == null && !stack.isEmpty())
+		   {
+			   root = stack.peek();
+			   
+			   if(root.right == null || root.right == prev)
+			   {
+				   root.left = null;
+				   root.right = null;
+				   prev = root;
+				   stack.pop();
+				   root = null;
+			   }
+			   else
+				   root = root.right;
+		   }
+		   
+		   if(stack.isEmpty())
+			   break;
+	   }
+   }
+
+  static void printTree(Node root)
+  {
+	  if(root != null)
+	  {
+		  printTree(root.left);
+		  printTree(root.right);
+		  out.print(root.data+" ");
+		  root.left = null;
+		  root.right = null;
+	  }
+  }
 
 	public static void main(String [] args)
 	{
-		Node root = null;
-		root = insertNode(58, root);
-		insertNode(45, root);
-		insertNode(62, root);
-		insertNode(59, root);
-		insertNode(42, root);
-		insertNode(75, root);
-		insertNode(20, root);
+		insertNode(58);
+		insertNode(45);
+		insertNode(62);
+		insertNode(59);
+		insertNode(42);
+		insertNode(75);
+		insertNode(20);
 
-		out.println(isExist(root, 59));
+        printTree(root);
+		out.println("\n===============");
+		//postOrder();
+		out.println("\n===============");
+		printTree(root);
 	}
 }

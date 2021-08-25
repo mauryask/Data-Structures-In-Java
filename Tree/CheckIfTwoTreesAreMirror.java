@@ -44,10 +44,8 @@ public class CheckIfTwoTreesAreMirror
 		// base case
 		if(root1 == null && root2 == null)
 			return true;
-		if(root1 != null && root2 == null)
+		if(root1 == null || root2 == null)
 			return false;
-		if(root1  == null && root2 != null)
-			return true;
 		
 		Queue<Node> q1 = new ArrayDeque<>();
 		Queue<Node> q2 = new ArrayDeque<>();

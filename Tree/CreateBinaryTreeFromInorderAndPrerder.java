@@ -68,6 +68,7 @@ public class CreateBinaryTreeFromInorderAndPrerder
 	{
 	   int in[]  = {3,1,4,0,5,2};
 	   int pre[] = {0,1,3,4,2,5};
+	   int n = 6;
 	   Node root = createTree(in, pre, 0, n-1);
 	   printTree(root);
 	   out.println();
