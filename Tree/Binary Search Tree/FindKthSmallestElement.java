@@ -83,7 +83,7 @@ public class FindKthSmallestElement
 			if(count == k)
 			{
 				myNode = root;
-				out.println(myNode!= null ? myNode.data : null);
+				out.println(myNode.data);
 				return;
 			}
 			
@@ -135,6 +135,6 @@ public class FindKthSmallestElement
 		insertNode(48);
 		insertNode(80);
 		
-		findKthSmallest(root, 1);
+		findKthSmallest(root, 5);
 	}
 }
