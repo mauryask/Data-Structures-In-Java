@@ -66,9 +66,12 @@ public class BinaryTreeToDoublLinkedList
 	{
 		Node prev = null;
 		Node head = null;
+		
 		if(root == null)
 			return null;
+		
 		Stack<Node> stack = new Stack<>();
+		
 		while(true)
 		{
 			while(root != null)
@@ -79,7 +82,9 @@ public class BinaryTreeToDoublLinkedList
 			
 			if(stack.isEmpty())
 				break;
+			
 			root = stack.pop();
+			
 			if(head == null)
 				head = root;
 			
@@ -88,6 +93,7 @@ public class BinaryTreeToDoublLinkedList
 				root.left = prev;
 				prev.right = root;
 			}
+			
 			prev = root;
 			root = root.right;
 		}

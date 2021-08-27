@@ -84,6 +84,7 @@ public class BinaryTreeToDLLRecursive
 			list.prev.right = root;
 			root.left = list.prev;
 		}
+		
 		list.prev = root;
 		bstToDLL(root.right,list);
 	}

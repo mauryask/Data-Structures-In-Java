@@ -1,6 +1,10 @@
 /*
 * Time complexity: O(n)
-* Space complexity: O(n) + O(n) = O(n)
+* Space complexity: O(n1) + O(n2) = O(n)
+* One level will be pushed in one stack
+* another level will be pushed in another stack
+* Hence total complexity: O(n)
+* Don't need to use "Queue DS" here
 **/
 
 import java.util.*;

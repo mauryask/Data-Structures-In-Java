@@ -47,23 +47,17 @@ public class CreatingNAryTree
 	}
 	
     //Time complexity O(n)
-	// Space complexity: O(height)
-	static void traversal(Node root) // it is like depth first search
+	// Space complexity: O(n)
+	// it is inorder traversal
+	
+	static void traversal(Node root) 
 	{
-		if(root == null)
-			return;
-		/*while(root != null)
+		if(root != null)
 		{
-			out.print(root.data+" ");
-			if(root.child != null)
-				traversal(root.child);
-			root = root.next;
-		}*/
-		
-		// same thing can be don ei below fashion
-		out.print(root.data+" ");
-		traversal(root.child);
-		traversal(root.next);
+		    out.print(root.data+" ");
+			traversal(root.child);
+			traversal(root.next);	
+		}
 	}
 	
 	//level order traversal	
@@ -114,9 +108,9 @@ public class CreatingNAryTree
 	   addChild(n7,n9);
 	   addChild(n8,n10);
 	   
-       //traversal(root);
+       traversal(root);
   
-       levelOrderTraversal(root);
+       //levelOrderTraversal(root);
 	}
 
 }

@@ -61,7 +61,7 @@ public class PrintAllTheRootToLeafPathIterative
 				root = stack.peek();
 				// add only the below code in 
 				// postorder traversal
-				// very important queation
+				// very important 
 				if(root.left == null && root.right == null)
 				{
 						printStack(stack);

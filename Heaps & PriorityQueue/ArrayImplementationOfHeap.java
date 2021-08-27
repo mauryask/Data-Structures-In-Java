@@ -9,7 +9,7 @@ import static java.lang.System.*;
 
 //creating Max Heap 
 
-public class CreateHeap 
+public class ArrayImplementationOfHeap
 {
 	//this is the number of elements in the array
 	static int heapSize = 0; 

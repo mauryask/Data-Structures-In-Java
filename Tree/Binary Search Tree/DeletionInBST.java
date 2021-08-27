@@ -125,9 +125,29 @@ public class DeletionInBST
 		 
 		 // handling case when both children are leaf nodes
 		 if(prevNode == null)
-			 root.left = temp.left;
+		 {
+			  root.left = temp.left;
+			  temp.left = null;
+		 }
 		 else // both chilren further contains children
-			 prevNode.right = null; 
+		 {
+			 prevNode.right = temp.left!=null ? temp.left :
+			 temp.right;
+		 }
+			 
+			 // handles all the cases
+			 
+/*			      50
+			    /     \
+	delete ->  19      80 <-- delete 
+			   / \    / \  
+	          17  20 70 85  
+			  /       \
+			 16       75 
+			           / 
+			          74 
+			  
+			  */
 	 }
   }
   

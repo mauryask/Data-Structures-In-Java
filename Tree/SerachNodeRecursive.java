@@ -1,3 +1,14 @@
+/*
+* Time complexity: O(n)
+* Spaxce complexity : O(n)
+* Issue with this solution is : even if node
+* is found it is going to search in other subtrees
+* hich is an overhead for us
+* time complexity can improved by restricting it
+* stop search once the node is found
+* see the best recursive implementation 
+**/
+
 import static java.lang.System.*;
 import java.util.*;
 
@@ -42,78 +53,35 @@ public class SerachNodeRecursive
 
 		return temp;
 	}	
-
-   
-   static void levelOrder()
-   {
-	   Stack<Integer> stack = new Stack<>();
-	   Queue<Node> q = new ArrayDeque<>();
-	   
-	   q.add(root);
-	   stack.push(root.data);
-
-		while(!q.isEmpty())
-		{
-			Node root = q.poll();
-			stack.push(root.data);
-			
-			if(root.right != null)
-				q.add(root.right);
-			
-			if(root.left != null)
-				q.add(root.left);
-		}			
+	
+	
+	static boolean search(Node root, int target)
+	{
+		if(root == null)
+			return false;
+		if(root.data == target)
+			return true;
+		return search(root.left, target) || search(root.right, target);
+	}
+	
+	static boolean searchNodeBestWay(Node root, int target)
+	{
+		if(root == null)
+			return false;
 		
-		for(;!stack.isEmpty();)
-			out.print(stack.pop()+" ");
-   }
-   
-   
-   static void postOrder()
-   {
-	   Stack<Node> stack = new Stack<>();
-	   Node prev = null;
-	   
-	   while(true)
-	   {
-		   while(root != null)
-		   {
-			   stack.push(root);
-			   root = root.left;
-		   }
-		   
-		   while(root == null && !stack.isEmpty())
-		   {
-			   root = stack.peek();
-			   
-			   if(root.right == null || root.right == prev)
-			   {
-				   root.left = null;
-				   root.right = null;
-				   prev = root;
-				   stack.pop();
-				   root = null;
-			   }
-			   else
-				   root = root.right;
-		   }
-		   
-		   if(stack.isEmpty())
-			   break;
-	   }
-   }
-
-  static void printTree(Node root)
-  {
-	  if(root != null)
-	  {
-		  printTree(root.left);
-		  printTree(root.right);
-		  out.print(root.data+" ");
-		  root.left = null;
-		  root.right = null;
-	  }
-  }
+		if(root.data == target)
+			return true;
+		
+		boolean left = searchNodeBestWay(root.left, target);
+		
+		if(left)
+			return left;
+		else
+		{
+			boolean right = searchNodeBestWay(root.right, target);
+			return right;
+		}
+	}
 
 	public static void main(String [] args)
 	{
@@ -124,11 +92,7 @@ public class SerachNodeRecursive
 		insertNode(42);
 		insertNode(75);
 		insertNode(20);
-
-        printTree(root);
-		out.println("\n===============");
-		//postOrder();
-		out.println("\n===============");
-		printTree(root);
+        
+		out.print(searchNodeBestWay(root, 59));
 	}
 }
