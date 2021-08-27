@@ -1,6 +1,8 @@
-/*
+/* Very Important
+***********
 * Time complexity  : O(log n)
 * Space complexity : O(1)
+* The solution below covers all the cases
 **/
 
 import static java.lang.System.*;
