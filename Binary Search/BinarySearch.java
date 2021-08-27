@@ -7,7 +7,7 @@ public class BinarySearch
 		{
 
 			int A[] = new int []{1,2,3,4,5,6,7,8,9}; 
-			int target = 12;
+			int target = 6;
 		    int index=BinarySearch.binary_search(A, target);
 		    out.println("The element is found at index: "+index);
 		}
@@ -20,7 +20,7 @@ public class BinarySearch
 			r_index = A.length-1;
 			while(l_index <= r_index)
 			{
-				m_index = (l_index+r_index)/2;
+				m_index = l_index + (r_index-l_index)/2;
 				if(target == A[m_index])
 				  return m_index;
 				else if(target > A[m_index])
