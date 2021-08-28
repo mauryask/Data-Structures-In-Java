@@ -1,4 +1,4 @@
-public class Stack 
+public class StackArrayImplementation
 {
 	static int top = -1;
 	static int max = 5;
