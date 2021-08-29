@@ -63,7 +63,7 @@ class MaxAreaHistogram
 	}
 }
 
-public class MaxAreaInBinaryMatrix
+public class MaxAreaRectangleInBinaryMatrix
 {
 	static int maxArea(int A[][], int m, int n)
 	{
