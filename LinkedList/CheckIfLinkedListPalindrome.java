@@ -18,7 +18,7 @@ class Node
 	}
 }
 
-public class Test 
+public class CheckIfLinkedListPalindrome
 {
 	 static Node tail = null;
 	
@@ -61,8 +61,7 @@ public class Test
 		Node revHead = reverseList(midNode);
 		boolean flag = true;
 
-		
-		while(head != midNode)
+		while(revHead != null)
 		{
 			if(head.data != revHead.data)
 			{
