@@ -1,6 +1,8 @@
 /*
 * Time complexity: O(n)
 * Space complexity: O(n)
+****************
+** https://www.geeksforgeeks.org/trapping-rain-water/
 */
 import static java.lang.System.*;
 
