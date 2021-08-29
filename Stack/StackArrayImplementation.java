@@ -1,77 +1,65 @@
+import static java.lang.System.*;
+
 public class StackArrayImplementation
 {
+	/*top pointer of stack*/
 	static int top = -1;
+	/*max size of stack*/
 	static int max = 5;
 	static int stack[] = new int[max];
-	public static void main(String [] args)
+		
+	static void push(int x)
 	{
-		push();	
-		push();	
-		push();	
-		push();
-        System.out.println("\nDisplaying teh elements");	
-        display();		
-		pop();
-		System.out.println("The elements after poping!");
-		display();
-		peak();
-	}
-	
-	static void push()
-	{
-		if(top == max)
+		/* Check if array if stack is completye full */
+		if(top == max-1)
 		{
-			System.out.println("Overflow!");
+			out.println("\n Stack Overflow!!");
 			return;
 		}
 		else
 		{
 			top++;
-			System.out.print("\nenter the element: ");
-			stack[top] = new java.util.Scanner(System.in).nextInt(); 
+			stack[top] = x;
 		}
 	}
 	
-	static void pop()
+	static int pop()
 	{
-		if(top==-1)
-		{
-			System.out.println("Undeflow!");
-			return;
-		}
+
+		/*Check if stack is empty*/
+		if(top == -1)
+			return -1;
 		else
 		{
-			System.out.println("The element "+stack[top]+" removed");
+			int data = stack[top];
 			top--;
-		}		
+			return data;
+		}	
 	}
 	
 	static void display()
 	{
-		if(top==-1)
-		{
-		   System.out.println("The stack is empty!");
-		   return;
-	    }
-		else
-		{
-			for(int i=top; i>=0; i--)
-			{
-				System.out.print(stack[i]+"  ");
-			}
-		}
+			for(int x : stack)
+				out.print(x+" ");
 	}
 	
-	static void peak() //printing the top element without deleting it
+	static int peak() 
 	{
-	   if(top==-1)
-	   {
-		   System.out.println("The stack is empty!");
-		   return;
-	   }		  
-		else
-		{
-			System.out.println("Thr top element is: "+ stack[top]);
-		}	
+	   if(top == -1)
+		   return -1;
+	   return stack[top];	
 	}
+	
+	
+	public static void main(String [] args)
+	{
+		push(5);	
+		push(12);	
+		push(25);	
+		push(20);	
+		push(15);	
+		push(10);	
+		out.println(pop());
+		out.println(pop());
+  	}
 }
