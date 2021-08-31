@@ -5,6 +5,18 @@
 * number is the floor of the number 
 */
 
+/*
+* One more thing we can do here
+* just apply simple binary search while looking 
+* for the element for which the floor is need to findFloor
+*********************************************
+* At the end of the loop you wil see that the
+* low pointer will be pointing to the ceiling and
+* high pointer will point to the floor of the
+* given element (just return end pointer) 
+**/
+
+
 import static java.lang.System.*;
 
 public class FindingFloorValueOfGivenNumber

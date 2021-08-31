@@ -26,7 +26,7 @@ public class SearchElementInANearLySortedArray
 			
 			// check the boundries of the array to prevent 
 			// ArrayIndexOutOfBounds
-			if(mid-1 > 0 && A[mid-1] == target)
+			if(mid-1 >= 0 && A[mid-1] == target)
 				return mid-1;
 			
 			if(mid+1 < n && A[mid+1] == target)

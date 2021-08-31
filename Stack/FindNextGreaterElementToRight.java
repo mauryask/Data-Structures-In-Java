@@ -34,7 +34,7 @@ public class FindNextGreaterElementToRight
 				list.add(0, -1);
 			/*If top is grater than Ai*/
 			else
-				list.add(0, stack.pop());
+				list.add(0, stack.peek());
 				   
 		   /*For each element push it to stack*/
 		   stack.push(A[i]);

@@ -30,7 +30,7 @@ public class FindingMinimumDifferenceElementForTheGivenKey
 	public static void main(String [] args)
 	{
 		int A[] = {15,20,25,63,95,100,102,115,140};
-		int key = 70;
+		int key = 500;
 		int n = A.length;
 		
 		out.println(findMinDiffElement(A, n, key));
