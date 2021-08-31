@@ -14,13 +14,14 @@
 
 import static java.lang.System.*;
 import java.util.*;
+
 public class MaxAreaHistogram
 {
 	static int findMaxArea(int height[], int n)
 	{
 		// find next smaller bar to the left of each
 		int leftSmaller[] = leftSmaller(height, n);
-		// find right smaller bar to the right of each
+		// find next smaller bar to the right of each
 		int rightSmaller[] = rightSmaller(height, n);
 		
 		int maxArea = Integer.MIN_VALUE;		
