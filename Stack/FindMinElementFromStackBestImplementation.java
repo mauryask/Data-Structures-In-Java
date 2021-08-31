@@ -75,7 +75,7 @@ public class FindMinElementFromStackBestImplementation
 				s.push(x);
 			/*
 			* If the element to be inserted
-			* is less than the min then 
+			* is less than or equal to the min then 
 			* push 2 * x  - min to stack
 			* update min = x
 			*/ 

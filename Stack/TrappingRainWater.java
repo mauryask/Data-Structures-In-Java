@@ -26,7 +26,12 @@ public class TrappingRainWater
 		/*
 		* Finding max height building to the left and 
 		* to the right of each and every building
+		* While doing this include the building height
+		* as well (if building height > left highest building)
+		* then building height itself will be largest buildings
+		* to the left same goes with highest right building
 		*/
+		
 		for(int i=1; i<n; i++)
 			maxLeft[i] = Math.max(maxLeft[i-1], height[i]);
 		for(int i=n-2; i>=0; i--)
@@ -37,9 +42,7 @@ public class TrappingRainWater
 		for(int i=0; i<n; i++)
 		{
 			int minHeight = Math.min(maxLeft[i], maxRight[i]);
-			
-			if(height[i] < minHeight)
-				waterSum += minHeight - height[i];
+		    waterSum += minHeight - height[i];
 		}
 		
 		return waterSum;
@@ -47,9 +50,9 @@ public class TrappingRainWater
 	
 	public static void main(String [] args)
 	{
-		int height[] = {3,0,0,2,0,4};
+		int height[] = {1,0,5,2,0,4};
 		int n = height.length;
 		
-		out.println(totalWater(height, n));
+		out.println("total water = " + totalWater(height, n) + " units");
 	}
 }
