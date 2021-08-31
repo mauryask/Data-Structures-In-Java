@@ -1,6 +1,6 @@
 import static java.lang.System.*;
 
-public class FindMinArrayImplementation
+public class FindMidArrayImplementation
 {
 	int top = -1;
 	int mid = -1;

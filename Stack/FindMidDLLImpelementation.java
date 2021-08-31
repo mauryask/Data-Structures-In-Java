@@ -30,7 +30,9 @@ public class FindMidDLLImpelementation
 	static void push(int x)
 	{
 		Node temp = new Node(x);
+		
 		count++;
+		
 		if(top == null)
 		{
 			mid = temp;
@@ -51,9 +53,7 @@ public class FindMidDLLImpelementation
 	static int pop()
 	{
 		if(top == null)
-		{
 			return -1;
-		}
 		
 		count--;
 		
@@ -64,14 +64,14 @@ public class FindMidDLLImpelementation
 			top = mid = null;
 			return data;
 		}
-		
-		if(count % 2 == 0)
-			mid = mid.next;
-		
+				
 		Node temp = top.next;
 		top.next = null;
 		temp.prev = null;
 		top = temp;
+		
+		if(count % 2 == 0)
+			mid = mid.next;
 		
 		return data;
 	}

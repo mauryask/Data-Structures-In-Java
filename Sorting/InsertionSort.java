@@ -1,4 +1,7 @@
-//insertion sort for sorting elements in ascending order
+/*
+* Time complexity: O(n*n)
+* Space complexity: O(1)
+*/
 
 import static java.lang.System.*;
 
@@ -29,18 +32,12 @@ public class InsertionSort
 		for(i=1; i<A.length; i++)
 		{
 			temp = A[i];
-			
-			// in algorithm index starts with --> 1 
-			// in our case index starts with --> 0
-			// so here we taken j>=0 instead of --> j>0
-			// as in the given array if j is not as above then it can't be sorted 
-			// completely
-			
-			//To sort the array in descending order just change
-			// temp > A[j] and keep remaining things as it is
-			for(j=(i-1); j>=0 && temp<A[j]; j--)  
+			for(j=(i-1); j>=0; j--)  
 			{
-			   A[j+1] = A[j];	
+				if(temp<A[j])
+			      A[j+1] = A[j];
+				else // if A0-Aj already sorted
+				  break;					
 			}
 			
 			A[j+1] = temp;

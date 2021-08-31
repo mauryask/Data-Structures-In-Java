@@ -1,6 +1,12 @@
-// Time Complxity : O(n*log n)
-// Space Cechnique : O(n) 
-// Divide and Conqure
+/* 
+* Time Complxity : O(n*log n)
+* Space Cechnique : O(n) 
+***************************
+** T(n) = 2 * T(n/2) + O(n)
+** Apply merge sort to get time complexity
+***************************
+* The algorithm uses divide and conqure strategy
+*/
 
 import static java.lang.System.*;
 
@@ -25,7 +31,8 @@ public class MergeSort
 		int R[] = new int[n2];
 		
 		int i = 0, j = 0, k = p;
-        
+		
+        // Copying
 		while(i<n1)
 			L[i++] = A[k++];
 		
@@ -34,6 +41,7 @@ public class MergeSort
 		
 		k = p; i = 0; j = 0;
 	
+	   // Merging
 		while(i<n1 && j<n2) 
 		{
 		  if(L[i] < R[j])
@@ -48,14 +56,14 @@ public class MergeSort
 			A[k++] = R[j++];
 	}
 	
-	static void mergeSort(int A[], int p, int r)
+	static void mergeSort(int A[], int p, int r) // T(n)
 	{
 		if(p < r)
 		{
 		   int q = (p+r)/2;
-		   mergeSort(A,p,q);
-		   mergeSort(A,q+1,r);
-		   merge(A,p,q,r);
+		   mergeSort(A,p,q); // T(n/2)
+		   mergeSort(A,q+1,r); // T(n/2)
+		   merge(A,p,q,r); // O(n)
 		}
 	}
 }
