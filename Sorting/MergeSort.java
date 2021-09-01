@@ -1,6 +1,6 @@
 /* 
-* Time Complxity : O(n*log n)
-* Space Cechnique : O(n) 
+* Time Complexity : O(n*log n)
+* Space Complexity : O(n) 
 ***************************
 ** T(n) = 2 * T(n/2) + O(n)
 ** Apply merge sort to get time complexity
@@ -9,7 +9,7 @@
 */
 
 import static java.lang.System.*;
-
+00
 public class MergeSort
 {
 	public static void main(String [] args)

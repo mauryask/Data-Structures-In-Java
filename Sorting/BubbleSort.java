@@ -16,9 +16,15 @@ public class BubbleSort
 	{
 
 		int i, j, temp;
-
+        boolean flag = false;
+		
 		for(i=0; i<A.length; i++)
 		{
+			// this checks if array is sorted 
+			// or not
+			
+			flag = false;
+			
 			for(j=0; j<A.length-i-1; j++)
 			{
 				if(A[j] > A[j+1])
@@ -26,7 +32,19 @@ public class BubbleSort
 					temp = A[j];
 					A[j] =  A[j+1];
 					A[j+1]  = temp;
+					
+					/*
+					* set it to true if sapping occurs 
+					*/
+					flag = true; 
 				}
+				
+				// if flag is still false
+				// means array is sorted
+				// no needs to execute the algo further
+				
+				if(!flag)
+					break;
 			}
 		}
 	}

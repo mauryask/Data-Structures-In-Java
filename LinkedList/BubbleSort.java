@@ -29,7 +29,7 @@ public class BubbleSort
 		
 		do
 		{		
-		    // in first iteration thismloop is not
+		    // in first iteration this loop is not
 			// going to be executed since (p2 = temp)
 			while(p2 != temp)
 			{ 

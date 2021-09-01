@@ -1,9 +1,10 @@
 /*
-** Bubble Sort 
-***************
-* Time complexity: O(n*n)
-* Space complexity: O(1)
+** Merge Sort 
+***************************
+* Time complexity: O(n*logn)
+* Space complexity: O(n)
 */
+
 import static java.lang.System.*;
 import java.util.*;
 
@@ -29,7 +30,24 @@ public class MergeSort
 		Node p1 = head; 
 		Node p2 = head;
 		
-		while(p2.next != null && p2.next.next != null)
+		/*
+		* Here we have to go up to one node before mid node
+		* **** don't use below condition
+		* while(p2 != null && p2.next != null)
+		* Instead use the condition given in code
+	    * else it is going to be running infinitely
+		***** If we use first condition condition
+		
+		 20 --> 30  null
+		 head   p1   p2      
+		 mid = 30, nextNode = mid.next =>  null
+         ms(head) and ms(nextNode)
+        
+		* again give > mid = 30, midNext = null
+		* it will run infinitely and won't achieve our goal	
+		*/
+		
+		while(p2.next != null && p2.next.next!= null)
 		{
 			p1 = p1.next;
 			p2 = p2.next.next;
@@ -48,7 +66,8 @@ public class MergeSort
 			mid.next = null;
 			Node left = meregeSort(head);
 			Node right = meregeSort(nextNode);
-			return merge(left, right);
+			Node sortedList = merge(left, right);
+			return sortedList;
 	}
 	
 	static Node merge(Node head1, Node head2)
