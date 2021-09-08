@@ -1,95 +1,102 @@
-// Queation Number : #17
+/*
+* T(n) : O(n)
+* S(n) : O(n)
+*/
 
 import static java.lang.System.*;
 
 public class TrapingRainWater
 {
-	public static void main(String [] args) throws Exception
+	static int trappedWater(int[] A, int n)
 	{
-	   int A[] = {0,1,0,2,1,0,1,3,2,1,2,1};
-	   out.println(findTrappedWater2(A));
+		if(n < 3)
+			return 0;
+		
+		int lMax[] = leftMax(A, n);
+		int rMax[] = rightMax(A, n);
+		
+		int waterSum = 0;
+		
+		for(int i=0; i<n; i++)
+		{
+			int min = Math.min(lMax[i], rMax[i]);
+			waterSum += min - A[i];
+		}
+		return waterSum;
 	}
 	
-	
-	// Time Complexity  : O(n)
-	// Space Complexity : O(n)
-	// Best approach
-	
-	static int findTrappedWater(int A[])
+	static int[] leftMax(int A[], int n)
 	{
-		int n = A.length;
-		int lMax[] =  new int[n]; // largest bar to the left of each bar
-		int rMax[] =  new int[n]; // largest bar to the right of each bar
-		
-	    int right_max_bar = A[n-1];
-		int left_max_bar = A[0];
-		int total_water = 0;
+		int Lmax[]  = new int[n];
+		Lmax[0] = A[0];
 		
 		for(int i=1; i<n; i++)
-		{
-			lMax[i] = left_max_bar;
-			rMax[i] = right_max_bar;
-			
-			if(A[i] > left_max_bar)
-				left_max_bar = A[i];
-			
-			if(A[n-i-1] > right_max_bar)
-				right_max_bar = A[n-i-1];
-		}
-		
-		for(int i=1;i<n-1; i++)
-		{
-			int min = Math.min(lMax[i],rMax[i]);
-			int net_water = min - A[i];
-			if(net_water > 0)
-				total_water+= net_water;
-		}
-		
-		return total_water;
+			Lmax[i] = Math.max(Lmax[i-1], A[i]);
+		return Lmax;
 	}
 	
-	// Time Complexity  : O(n^2)
-	// Space Complexity : O(1)
-	// Brute force approach
-	
-	static int findTrappedWater2(int A[])
+	static int[] rightMax(int A[], int n)
 	{
-		int n = A.length;
-		int total_water = 0;
+		int Rmax[]  = new int[n];
+		Rmax[n-1] = A[n-1];
+		
+		for(int i=n-2; i>=0; i--)
+			Rmax[i] = Math.max(Rmax[i+1], A[i]);
+		return Rmax;
+	}
+	
+	/* =========== Brute Force ============ */
+	
+	/*
+	* T(n) : O(n*n)
+	* S(n) : O(1)
+	*/
+	static int water(int A[], int n)
+	{
+		if(n < 3)
+			return 0;
+		
+		int sum = 0;
 		
 		for(int i=1; i<n-1; i++)
-        {
-			int lMax = getLeftMax(i,A,n);
-			int rMax = getRightMax(i,A,n);
-			int min = Math.min(lMax, rMax);
+		{
+			int lh = findLeft(A, i);
+			int rh = findRight(A, i);
 			
-			int net_water = min - A[i];
-			if(net_water > 0)
-				total_water += net_water;
+			int min = Math.min(lh, rh);
+			
+			if(min > A[i])
+				sum += min - A[i];
 		}
 		
-		return total_water;
+		return sum;
 	}
 	
-	static int getLeftMax(int a, int A[], int n)
+	
+	static int findLeft(int A[], int n)
 	{
-		int max = 0;
-		for(int i = a-1; i>=0; i--)
-		{
-			if(max < A[i])
-				max = A[i];
-		}
+		int max = Integer.MIN_VALUE;
+		for(int i=0; i<=n; i++)
+		   max = Math.max(A[i], max);
+		
+		return max;		
+	}
+	
+	static int findRight(int A[], int n)
+	{
+		int max = Integer.MIN_VALUE;
+				
+		for(int i=n; i<A.length; i++)
+		   max = Math.max(A[i], max);
+		
 		return max;
 	}
 	
-	static int getRightMax(int b, int A[], int n)
+	public static void main(String [] args) 
 	{
-		int max = 0;
-		for(int i=b+1; i<n; i++)
-		{
-			if(max < A[i])
-				max = A[i];
-		}
-		return max;
+	   int A[] = {0,1,0,2,1,0,1,3,2,1,2,1};
+	   int n = A.length;
+	   //out.println(trappedWater(A, n));
+	   out.println(water(A, n));
 	}
 }

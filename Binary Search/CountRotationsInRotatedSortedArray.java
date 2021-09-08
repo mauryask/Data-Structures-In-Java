@@ -13,6 +13,10 @@
 * But Since the array is sorted we can apply 
 * Binary search
 **/
+/*
+* This solution not working if
+* array is reverse sorted
+*/
 
 import static java.lang.System.*;
 
@@ -71,7 +75,7 @@ public class CountRotationsInRotatedSortedArray
 			return 0;
 		
 		int min = A[0];
-		int minIndex = -1;
+		int minIndex = 0;
 		
 		for(int i=0; i<n; i++)
 		{
@@ -87,7 +91,7 @@ public class CountRotationsInRotatedSortedArray
 	
 	public static void main(String [] args)
 	{
-		int A[] = {20,22,24,26,28,30,32,34,36,10,12,14,16,18};
+		int A[] = {1,2,3,4,5,6};//{20,22,24,26,28,30,32,34,36,10,12,14,16,18};
 		int n = A.length;
 		out.println(getRotationCount(A, 0, n-1));
 		//out.println(bruteForce(A, n));

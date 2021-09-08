@@ -6,10 +6,13 @@
 * Best case: O(n * log n)
 * Worst case: O(n*n)
 **************
-* Space complexity: 
+* Space complexity:
 ****
+** These are the space taken by recursion stack
 * Best case: O(log n)
 * Worst case: O(n)
+*****************
+in genral it is S(n) : O(1)
 */
 
 import static java.lang.System.*;

@@ -32,7 +32,7 @@ public class SearchElementInRotatedSortedArray
 				high = mid - 1;
 		}
 		
-		return -1;
+		return 0;
 	}
 	
 	static int binarySearch(int A[],int n, int start, 
@@ -56,9 +56,9 @@ public class SearchElementInRotatedSortedArray
 	
 	public static void main(String [] args)
 	{
-		int A[] = {20,22,24,26,28,30,32,34,36,10,12,14,16,18};
+		int A[] = {1,2,3,4,5};//{20,22,24,26,28,30,32,34,36,10,12,14,16,18};
 		int n = A.length;
-		int target = 30;
+		int target = 5;//30;
 		
 		/*
 		* Finding the index of the  element (say pivot)
@@ -68,17 +68,13 @@ public class SearchElementInRotatedSortedArray
 		*/
 		
 		int pivot = findPivot(A, n);
-		if(pivot != -1)
-		{
-			int leftSub = binarySearch(A, n, 0, pivot-1, target);
-		    int rightSub = binarySearch(A, n, pivot , n-1, target);
-		    out.println(leftSub == -1 ? rightSub : leftSub);
-		}
-		else
-		{
-			out.println("The Array is not rotated!!");
-			// find element in whole array 
-			out.println(binarySearch(A, n, 0, n-1, target));			
-		}			
+		
+        int leftSub = binarySearch(A, n, 0, pivot-1, target);
+		//int rightSub = binarySearch(A, n, pivot , n-1, target);
+		
+		//optimization
+		// if element found in lefgtSub don't go to rightSub
+		out.println(leftSub == -1 ? 
+		binarySearch(A, n, pivot , n-1, target) : leftSub);		
 	}
 }
