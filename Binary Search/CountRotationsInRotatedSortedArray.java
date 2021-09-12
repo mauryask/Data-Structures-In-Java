@@ -24,7 +24,7 @@ public class CountRotationsInRotatedSortedArray
 {
 	static int getRotationCount(int A[], int low, int high)
 	{
-		while(low < high)
+		while(low <= high)
 		{			
 			// if there is only one element
 			// if array is already sorted

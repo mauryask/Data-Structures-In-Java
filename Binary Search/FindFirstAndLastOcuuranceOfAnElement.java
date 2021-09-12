@@ -23,12 +23,8 @@ public class FindFirstAndLastOcuuranceOfAnElement
 			{
 				result = mid;
 				end = mid - 1;
-				/* this is important because it might be start > end*/
-				continue; 
-				/* want to find last occurance start = mid+1*/
 			}
-			
-			if(target > A[mid])
+			else if(target > A[mid])
 				start = mid + 1;
 			else 
 				end = mid - 1;

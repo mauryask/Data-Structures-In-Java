@@ -9,6 +9,8 @@
 * another in Descending order
 * Apply binary search on both
 * The key might be present in any one of them
+*****************
+https://www.geeksforgeeks.org/find-element-bitonic-array/
 */
 import static java.lang.System.*;
 
@@ -40,7 +42,7 @@ public class SearchInBitonoicArray
 				if(flag)
 				   end = mid-1;
 			    else
-				start = mid + 1;
+				   start = mid + 1;
 			}
 			
 			else if(A[mid] < target)

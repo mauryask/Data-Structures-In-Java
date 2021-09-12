@@ -9,7 +9,7 @@
 */
 
 import static java.lang.System.*;
-00
+
 public class MergeSort
 {
 	public static void main(String [] args)
@@ -60,7 +60,7 @@ public class MergeSort
 	{
 		if(p < r)
 		{
-		   int q = (p+r)/2;
+		   int q = p  + (r-p)/2;
 		   mergeSort(A,p,q); // T(n/2)
 		   mergeSort(A,q+1,r); // T(n/2)
 		   merge(A,p,q,r); // O(n)

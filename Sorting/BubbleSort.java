@@ -4,15 +4,15 @@ public class BubbleSort
 {
 	public static void main(String [] args)
 	{
-		int A[] =  new int[] {1,2,3,4,5,6,7,8,9,10};
+		int A[] = {10,8,5,4,1,2,74,63,20};
 		out.print("The array before sorting: ");
-		BubbleSort.printArray(A);
-		BubbleSort.bubble_sort(A);
+		printArray(A);
+		bubble_sort(A);
 		out.print("The array after sorting: ");
-		BubbleSort.printArray(A);
+		printArray(A);
 	}
 
-	static void bubble_sort(int A[])
+    static void bubble_sort(int A[])
 	{
 
 		int i, j, temp;
@@ -34,7 +34,7 @@ public class BubbleSort
 					A[j+1]  = temp;
 					
 					/*
-					* set it to true if sapping occurs 
+					* set it to true if swapping occurs 
 					*/
 					flag = true; 
 				}
