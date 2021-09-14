@@ -2,9 +2,11 @@
 * Time complexity : O(n)
 * Space complexity: O(n)
 *****************
-* What is stock Span mean for a day: 
-* On each day count number stock prices of past consecutive
-* days that or less or equal to the current day stock price
+* What is stock span means for a day: 
+* Maximum number of consecutive days just 
+* before the given day on which the price of 
+* stocks are less than or equal to the 
+* current day stock price
 * Note: current day stock price is inclusive
 *****************
 * Problem statement
@@ -41,7 +43,7 @@ public class StockSpanProblem
 			* next greater element
 			*/
 			if(stack.isEmpty())
-				list.add(i+1);  // i-(-1) = (i+1)
+				list.add(1);  // i-(-1) = (i+1)
 			else
 				list.add(i-stack.peek());
 			

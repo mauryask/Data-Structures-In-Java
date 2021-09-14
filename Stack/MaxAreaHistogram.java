@@ -2,7 +2,7 @@
 * Time complexity  : O(n)
 * Space complexity : O(n)
 **************************
-* The idea id to find the next smaller 
+* The idea is to find the next smaller 
 * bar to the left and next smaller bar to the rightSmaller
 * of the current bar (rightSmaller - leftSmaler - 1)
 * is going to be the width of the rectangle formed
@@ -10,6 +10,13 @@
 ******
 * area of rectangle formed by each bar
 * height of bar *  width of rectangle formed by this
+*/
+/*
+* Explanation: 
+* we can expand the width of the rectangle
+* to thr right and left until a bar is encountered 
+* which height is less than the height of the 
+* current bar forming the rectangle
 */
 
 import static java.lang.System.*;

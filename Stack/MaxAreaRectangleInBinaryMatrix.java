@@ -2,6 +2,8 @@
 *****************
 * Time complexity: O(m * n)
 * Space complexity: O(n) -> height array
+**********
+https://www.geeksforgeeks.org/maximum-size-rectangle-binary-sub-matrix-1s/
 */
 
 import static java.lang.System.*;
