@@ -5,6 +5,16 @@
 * pop    : O(1)
 * push   : O(1)
 * Space complexity : O(1)
+***********
+* In O(n) space implementation
+* we were maintaining the the previous min
+* in the supporting stack
+************
+* But here we are maintaining the previous min
+* in the stack and min variable contains the 
+* current min element
+***********
+https://www.geeksforgeeks.org/design-a-stack-that-supports-getmin-in-o1-time-and-o1-extra-space/
 */
 
 import static java.lang.System.*;
@@ -35,7 +45,7 @@ public class FindMinElementFromStackBestImplementation
 		* update min = 2 * min - data
 		* and return temp
 		*/ 
-		if(data < min)
+		if(data <= min)
 		{
 			int temp = min;
 			min = 2 * min - data;
@@ -53,7 +63,7 @@ public class FindMinElementFromStackBestImplementation
 	static void push(int x)
 	{
 		/*
-		* If dtack is empty 
+		* If stack is empty 
 		* push it to the stack at that time
 		* update min = x; since there is only 
 		* one element and it will be min itself
@@ -89,12 +99,14 @@ public class FindMinElementFromStackBestImplementation
 	
 	static int getMin()
 	{
+		if(s.isEmpty())
+			return -1;
 		return min;
 	}
 	
 	public static void main(String [] args)
 	{
-		int A[] = {3, 2, 6, 1, 8, 5, 5, 5, 5};
+		int A[] = {3, 2, 6, 1, 1, 8, 5, 5, 5, 5};
 		int n = A.length;
 		
 		for(int x : A)
@@ -109,6 +121,18 @@ public class FindMinElementFromStackBestImplementation
 		out.println(pop()+" : "+getMin());
 		out.println("==========");
 		out.println(pop()+" : "+getMin());
-		out.println("==========");		
+		out.println("==========");	
+		out.println(pop()+" : "+getMin());
+		out.println("==========");	
+		out.println(pop()+" : "+getMin());
+		out.println("==========");	
+		out.println(pop()+" : "+getMin());
+		out.println("==========");	
+		out.println(pop()+" : "+getMin());
+		out.println("==========");	
+		out.println(pop()+" : "+getMin());
+		out.println("==========");	
+		out.println(pop()+" : "+getMin());
+		out.println("==========");			
 	}
 }

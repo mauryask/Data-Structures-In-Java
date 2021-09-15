@@ -78,12 +78,12 @@ public class FindMidDLLImpelementation
 	
 	static int findMid()
 	{
-		return mid == null ? -1 : mid.data;
+		return top == null ? -1 : mid.data;
 	}
 	
 	static void deleteMid()
 	{
-		if(mid == null)
+		if(top == null)
 			return;
 		
 		count--;
@@ -104,6 +104,8 @@ public class FindMidDLLImpelementation
 			temp.next = null;
 			mid.next.prev = null;
 		}
+		else
+			temp = null;
 		
 		if(count % 2 != 0)
 			mid = mid.prev;
@@ -112,10 +114,10 @@ public class FindMidDLLImpelementation
 	public static void main(String [] args)
 	{
 		push(10);
-		push(12);
+		push(16);
 		push(14);
 		push(23);
-		push(16);
+		push(12);
 		push(18);
 	    
 		/*out.println(findMid());
@@ -126,7 +128,7 @@ public class FindMidDLLImpelementation
 		out.println(pop() + " : " + findMid());
 		out.println(pop() + " : " + findMid());*/
 		
-		out.println(findMid());
+		/*out.println(findMid());
 		deleteMid();
 		out.println(findMid());
 		deleteMid();
@@ -136,7 +138,11 @@ public class FindMidDLLImpelementation
 		deleteMid();
 		out.println(findMid());
 		deleteMid();
-		out.println(findMid());
+		out.println(findMid());*/
+		deleteMid();
+		deleteMid();
+		deleteMid();
+		deleteMid();
 		deleteMid();
 		out.println(findMid());		
 	}

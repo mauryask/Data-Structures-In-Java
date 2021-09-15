@@ -35,9 +35,9 @@ public class FindPeakElement
             {
                 if(A[mid] > A[mid+1] && A[mid] > A[mid-1])
                     return mid;
-                else if(A[mid+1] > A[mid])
+                else if(A[mid+1] > A[mid] && A[mid] > A[mid-1])
                     start = mid + 1;
-                else
+                else if(A[mid+1] < A[mid] && A[mid] < A[mid-1])
                     end = mid - 1;
             }
             else // if mid is either first or last element
@@ -63,7 +63,7 @@ public class FindPeakElement
 	
 	public static void main(String [] args)
 	{
-		int A[] = {30,4,52,0,1,7,9,5,23};
+		int A[] = {1,2,3,4,5};//{30,4,52,0,1,7,9,5,23};
 		int n = A.length;
 		
 		out.println(findPeak(A, n));
