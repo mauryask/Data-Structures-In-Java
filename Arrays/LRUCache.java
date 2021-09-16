@@ -1,58 +1,85 @@
-// Implementation of LRU Cache
-// Time Complexity  : O(n) 
-// Space Complexity : O(n)
-// "n" is number of of page requests
-
+/*
+* T(n) : O(n)
+* S(n) : O(n)
+***************
+*LRU Cache 
+****
+* Principle locality of reference
+*******
+* Recently reffered page is more 
+* likely to be reffered again
+* very soon
+*******
+** If page is not present in the cache 
+******** check if cahce is full
+**** If yes remove the last page from cache 
+**** add the new page in the front of the cache
+**** If no add the page to the front of the cache
+******** Check if page is present in the cache 
+***** Remove it from its current position 
+***** add it at the front of the cache
+*/
 import static java.lang.System.*;
 import java.util.*;
 
 public class LRUCache
 {	
-	public static void main(String [] args)
+    static void referPage(int pages[], int cacheSize)
 	{
-		// these are pages requetsed by 
-		// processor
+		Deque<Integer> q = new LinkedList<>();
+		Set<Integer> set = new HashSet<>();
+		int pageFault  = 0;
 		
-		int pages[] = {1,2,3,4,1,3};
-		// size of cache
-		int cache_size = 3;
-	    lruCache(pages, cache_size);
-	}
-	
-	static void lruCache(int pages[], int cache_size)
-	{
-		Deque<Integer> dq = new LinkedList<>();
-		Map<Integer, Integer> map = new HashMap<>();
-	
-     	int page_fault = 0;
-		for(int i=0; i<pages.length; i++)
+		for(int x : pages)
 		{
-			// if page is not present in the cache
-			// it indicates "pagefault"
-			
-			if(!map.containsKey(pages[i]))
+			/*
+			* Check if page is not present
+			*/
+			if(!set.contains(x))
 			{
-			  // if cache is full remove the 
-			  // least recently used page
-			  if(dq.size() == cache_size)
-				  map.remove(dq.removeFirst());  
-			  
-			  // put new page into the cache
-			  map.put(pages[i],1);
-			  dq.add(pages[i]);
-			  page_fault++;
+				/*
+				* Check if cache is full
+				*/
+				if(set.size() == cacheSize)
+				{
+					/*
+					* Remove last page to make space for
+					* newly arrived page
+					*/
+					int page =  q.removeLast();
+					set.remove(page);
+				}
+				/*
+				* Add new page at the front of the cache
+				*/
+				q.addFirst(x);
+				set.add(x);
+				/*
+				* If page is not present it is page fault
+				*/
+				pageFault++;
 			}
+			/*
+			* If page is present in the queue
+			*/
 			else
 			{
-				// if page is already present in the cache
-				// just simply remove it from its current position
-				// and add it to the front of the queue
-				
-			  	dq.remove(pages[i]);
-				dq.add(pages[i]);
+				/*
+				* remove it from its current location
+				* add it at the front
+				*/
+				 q.remove(x);
+				 q.addFirst(x);
 			}
 		}
-		//printing total page faults
-		out.println(page_fault);
+		
+		out.println(pageFault);
+	}
+   
+	public static void main(String [] args)
+	{
+		int pages[] = {1,2,3,1,4,5};
+		int cacheSize = 4;
+	    referPage(pages, cacheSize);
 	}
 }

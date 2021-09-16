@@ -1,3 +1,0 @@
-1: what is Abstract Datatype
->> https://www.geeksforgeeks.org/abstract-data-types/
->> Array is also abstract data type
