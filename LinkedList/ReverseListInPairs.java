@@ -2,6 +2,10 @@
 Time complexity: O(n)
 Space complexity: O(1)
 */
+
+import static java.lang.System.*;
+import java.util.*;
+
 class Node  
 {
 	int value;
@@ -63,15 +67,60 @@ public class ReverseListInPairs
 		 } 
 	 }
 
-   public static void displayNode()
+    public static void displayNode(Node ptr)
 	{
-		Node p = head;
-		while(p != null)
+		while(ptr != null)
 		{
-			System.out.print(p.value+" ");
-			p = p.next;
+			out.print(ptr.value+" ");
+			ptr = ptr.next;
 		}
+		
+		out.println();
 	}
+
+  /*
+  * T(n) : O(n)
+  * S(n) : O(n) > as stack
+  */
+   static void reverseListInPairs2()
+   {
+	   Node curr = head;
+	   Node prev = null;
+	   Node ptr = null;
+	   Node newHead = null;
+	   Stack<Node> stack = new Stack<>();
+	   
+	   while(curr != null)
+	   {
+		   int count = 0;
+		   
+		   while(curr != null && count < 2)
+		   {
+			   stack.push(curr);
+			   ptr = curr;
+			   curr = curr.next;
+			   ptr.next = null;
+			   count++;
+		   }
+		   		   
+		   while(!stack.isEmpty())
+		   {
+			   if(newHead == null)
+			   {
+				   newHead = stack.pop();
+				   prev = newHead;
+			   }
+			   else 
+			   {
+				   Node temp =  stack.pop();
+				   prev.next = temp;
+				   prev = temp;
+			   }
+		   }
+	   }
+	   
+	  displayNode(newHead);
+   }
 
 	public static void main(String [] args)
 	{
@@ -83,8 +132,8 @@ public class ReverseListInPairs
 		insertNode(78);    
 		insertNode(25);    
 		
-		reverseListInPairs();
-		displayNode();
+		reverseListInPairs2();
+		//displayNode(head);
 	}
 	
 }
