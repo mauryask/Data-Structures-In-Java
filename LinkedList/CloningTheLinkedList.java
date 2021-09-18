@@ -43,9 +43,9 @@ public class CloningTheLinkedList
 	}
 	
 	
-static  Node cloneList(Node head)
+ static  Node cloneList(Node head)
   {
-	  Node head2= null,temp = null,dummy = null;
+	  Node head2= null,temp = null,nextNode = null;
 	  
 	  while(head!=null)
 	  {
@@ -53,9 +53,9 @@ static  Node cloneList(Node head)
 		 if(head2 == null)
 			 head2 = temp;
 		 else
-		  dummy.next = temp;
+		  nextNode.next = temp;
 		 head = head.next;
-		 dummy = temp;
+		 nextNode = temp;
 	  }	
 
    return head2;	  
@@ -71,19 +71,10 @@ static  Node cloneList(Node head)
 	 insertNode(head,5);
 	 insertNode(head,6);
 	 Node end = insertNode(head,7);
- 
-   //cloning the list
-     Node clonedHead =	cloneList(head); 
-	 
-	 //chacking the whether the values are 
-	 //reflecting in each other or not
-	 xp.data = 1000;
-	 clonedHead.data  = 56245;
 
+     Node clonedHead =	cloneList(head);
 	 printList(head);
-
 	 System.out.println();	 
-
 	 printList(clonedHead);
 
   }  

@@ -73,13 +73,12 @@ class MainLogic
 {
 	public Node electLeader(Node head, int n,int m)
 	{	
-		for(int count = n; count>1; --count)
+		do
 		{
 		  for(int i=1; i<m; i++)
 			 head = head.next;	
-		  head.next = head.next.next;
-		}                                                                          
-		
+		  head.next = head.next.next; 
+		}while(head.next != head);                                                        
 		return head;
 	}
 }

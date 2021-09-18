@@ -31,7 +31,7 @@ public class ReverseListInaGroupOfk
 		}
 	}
 	
-	static void printList()
+	static void printList(Node head)
 	{
 		Node ptr = head;
 		while(ptr != null)
@@ -42,44 +42,9 @@ public class ReverseListInaGroupOfk
 		out.println();
 	}
 	
-	// reverse even if the number of nodes is not equal to 'k'
-	/*
-	* Time complexity  : O(n)
-	* Space complexity : O(n/k) --> Number of funtion calls
-	* = number of groups of size k
-	**/
-	
-	static Node reverseList(int k, Node head)
+	static void reverseList(int k)
 	{
-		    Node cur = head;
-		
-			Node nextPtr = null, prev = null;
-			int count = 0;
-				
-		    while(cur != null && count < k)		
-			{
-				nextPtr = cur.next;
-				cur.next = prev;
-				prev = cur;
-				cur = nextPtr;
-				count++;
-			}	
-			
-			if(nextPtr != null)
-				head.next = reverseList(k, nextPtr);
-			return prev;
-	}
-	
-	// recursive version
-	// this connects the rest of nodes as it is if number of
-	// nodes is not equal to 'k'
-	// best solution
-	// time complexity : O(n)
-	// space complexity : O(1)
-	
-	static Node reverseList2(int k)
-	{
-		Node temp =  new Node(-1); //create a temporary node
+		Node temp =  new Node(-1); 
 		Node cur = head;
 		Node prev = temp;
 		
@@ -93,15 +58,11 @@ public class ReverseListInaGroupOfk
 				count++;
 			}
 			
-			/*if(count != k)
-				prev.next = tail;
-			else
-			{*/
-				prev.next = reverseUtil(tail, k); // tail is head here of a group of 3 nodes
-				prev = tail;
-		//	}
+			prev.next = reverseUtil(tail, k);
+			prev = tail;
 		}
-		return temp.next;
+		
+	   printList(temp.next);
 	}
 	
 	static Node reverseUtil(Node head, int k)
@@ -118,6 +79,90 @@ public class ReverseListInaGroupOfk
 		return prev;
 	}
 	
+/*============== Method-2 ================*/		
+	/*
+	* T(n) : O(n)
+	* S(n) : O(n) : as Stack
+	*/
+	static void reverseList2(int k)
+	{
+		Node current  = head;
+		Node newHead = null;
+		int count = 0;
+		Stack<Node> stack = new Stack<>();
+	    Node tail = null;
+		Node prev = null;
+		
+		while(current != null)
+		{
+			count = 0;
+			
+			while(current != null && count < k)
+			{   
+				/*
+				* This variable helps to set head of the 
+				* new linkedlists for the first time
+				* It is only needed during the 
+				* first iteration
+				* and then it is useless
+				*/
+		        prev = current;
+				/*
+				* Push the k nodes in the stack every time 
+				*/
+				stack.push(current);
+				/*
+				* Update the current pointer
+				*/
+				current = current.next;
+				count++;
+			}
+			
+			/*
+			* Set the head of the new linkedlist for 
+			* for the first time
+			*/
+			if(newHead == null)
+				newHead = prev;
+			/*
+			* Tail points to last node of each Linked list 
+			* of size k
+			*/
+			tail = reverseListUtil2(stack, tail);
+		}
+		
+		printList(newHead);
+	}
+	
+	static Node reverseListUtil2(Stack<Node> stack,
+	Node tail)
+	{
+		while(!stack.isEmpty())
+		{
+			/*
+			* Set the tail to poin the first node initially
+			*/
+			if(tail == null)
+				tail = stack.pop();
+			else
+			{
+				/*
+				* Add th popped node after tail 
+				* and update the tail
+				*/
+			    Node temp = stack.pop();
+				tail.next = temp;
+				tail = temp;	
+			}
+		}
+		
+		/*
+		* Returning tail of the reversed linked list
+		*/
+		return tail;
+	}
+	
+	
 	public static void main(String [] args)
 	{
 		insertNode(10);
@@ -131,9 +176,8 @@ public class ReverseListInaGroupOfk
 		insertNode(25);
 		insertNode(47);
 		
-		printList();
-		//head = reverseList(3, head);
-		head = reverseList(3, head);
-		printList();
+		printList(head);
+		reverseList(3);
+		//reverseList2(3);
 	}
 }

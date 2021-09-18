@@ -60,12 +60,12 @@ public class AddTwoNumbersGivenAsTheTwoLinkedLists
             displayList(l2);
         if(l2==null)
             displayList(l1);
-        
-        
+                
         int carry  = 0;
         Node head = l1;
-        
-        while(true)
+        Node ptr = null;
+		
+        while(l1 != null && l2!= null)
         {   
             int sum = l1.data + l2.data + carry;
             carry = sum / 10;
@@ -76,15 +76,15 @@ public class AddTwoNumbersGivenAsTheTwoLinkedLists
               l1.next = new Node(0);
             else if(l1.next != null && l2.next == null)
               l2.next = new Node(0);
-            else if(l1.next == null && l2.next == null)
-               break;
             
-            l1 = l1.next;
+			ptr = l1;            
+            
+			l1 = l1.next;
             l2 = l2.next;
          }
         
         if(carry != 0)
-           l1.next = new Node(carry);
+           ptr.next = new Node(carry);
         
         displayList(head); 
 	 }	 
@@ -94,8 +94,8 @@ public class AddTwoNumbersGivenAsTheTwoLinkedLists
 	{
 		Node head1 =  null;
 		head1 = insertNode(head1, 2);
-		insertNode(head1, 4);
 		insertNode(head1, 3);
+		insertNode(head1, 5);
 		
 		Node head2 =  null;
 		head2 = insertNode(head2, 9);

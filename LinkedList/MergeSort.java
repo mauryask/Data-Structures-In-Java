@@ -2,7 +2,8 @@
 ** Merge Sort 
 ***************************
 * Time complexity: O(n*logn)
-* Space complexity: O(n)
+* Space complexity: O(n) (Recursion stack)
+* in place (in case of linkedlists)
 */
 
 import static java.lang.System.*;
@@ -56,7 +57,7 @@ public class MergeSort
 		return p1;
 	}
 	
-   	static Node meregeSort(Node head)
+   	static Node mergeSort(Node head)
 	{
 		if(head == null || head.next == null)
 			return head;
@@ -64,8 +65,8 @@ public class MergeSort
 			Node mid = findMid(head);
 			Node nextNode = mid.next;
 			mid.next = null;
-			Node left = meregeSort(head);
-			Node right = meregeSort(nextNode);
+			Node left = mergeSort(head);
+			Node right = mergeSort(nextNode);
 			Node sortedList = merge(left, right);
 			return sortedList;
 	}
@@ -151,7 +152,7 @@ public class MergeSort
 		n7.next = n8;
 		n8.next = n9;
 		
-		Node head1  = meregeSort(head);
+		Node head1  = mergeSort(head);
 		printList(head1);
 	}
 }
