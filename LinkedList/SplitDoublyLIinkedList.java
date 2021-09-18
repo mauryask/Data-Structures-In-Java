@@ -6,6 +6,7 @@
 * T(n) : O(n)
 * S(n) : O(1)
 **/
+import static java.lang.System.*;
 
 class Node 
 {
@@ -43,44 +44,53 @@ public class SplitDoublyLIinkedList
 	{
 		Node p1 = head;
 		Node p2 = head;
+		Node p1Prev = null;
+		Node p2Prev = null;
+		Node head1 = null, head2 = null;
+		
 		do
 		{
-		  	p2 = p2.next;
-			p1 = p1.next.next;
+			p1Prev = p1;
+			p2Prev = p2;
+		  	p1 = p1.next;
+			p2 = p2.next.next;
 			
-		}while(p1.next!=head && p1.next.next != head);
+		}while(p2 != head && p2.next != head);
 		
-		if(p1.next == head) //odd number of nodes
+		// when the number of noedes is less than 3
+		
+		// on node
+		if(p1 == p2)
 		{
-			// 2nd half
-			p1.next = p2.next;
-			Node head2 = p2.next;
-			
-			// 1st half
-			p2.next = head;
-			Node head1 = head;
-			
-			displayList(head1);
-			System.out.println();
-			displayList(head2);
+			head1 = head;
+			head2 = null; // doubt
+ 		}
+        // two nodes 
+        else if(p1Prev == p2Prev)
+		{
+			head1 = head;
+			head1.next = head1;
+			head2 = p1;
+			p1.next = p1;
+		}			
+		// more than two nodes
+		else if(p2 == head) 
+		{
+			head1 = head;
+			head2 = p1;
+			p1Prev.next = head1;
+			p2Prev.next.next = head2;
+		}
+		else if(p2.next == head)
+		{
+			head1 = head;
+			head2 = p1.next;
+			p2.next = head2;
+			p1.next = head1;
 		}
 		
-		else if(p1.next.next == head) //even number of nodes
-		{
-			// 2nd half
-			
-			p1 = p1.next;
-			p1.next = p2.next;
-			Node head2 = p2.next;
-			
-			// 1st half
-			p2.next = head;
-			Node head1 = head;
-			
-			displayList(head1);
-			System.out.println();
-			displayList(head2);
-		}
+		displayList(head1);
+		displayList(head2);
 	}
 
 	static  void displayList(Node head)
@@ -90,6 +100,7 @@ public class SplitDoublyLIinkedList
 			System.out.print(temp.data+" ");
 		 temp = temp.next;
 		}while(head != temp);
+		out.println();
 	}
 	
 	public static void main(String [] args)
@@ -97,12 +108,14 @@ public class SplitDoublyLIinkedList
 		Node head = null;
 		
 	    head = insertNode(10, head);
+		
 		insertNode(20, head);
 		insertNode(30, head);
 		insertNode(40, head);
 		insertNode(50, head);
 		insertNode(60, head);   
 		insertNode(56, head);   
+		insertNode(90, head);   
 		Node end = insertNode(78, head); 
         
 		end.next = head;

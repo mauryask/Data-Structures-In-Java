@@ -1,3 +1,8 @@
+/*
+* T(n) : O(n) 
+* S(n) : O(1)
+*/
+
 import static java.lang.System.*;
 import java.util.*;
 
