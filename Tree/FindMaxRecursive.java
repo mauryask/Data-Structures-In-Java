@@ -16,10 +16,10 @@ class Node
 
 public class FindMaxRecursive
  {
-	static int getMax(Node root)
+	static int findMax(Node root)
 	{	
 		if(root == null)
-			return 0;
+			return Integer.MIN_VALUE;
 		int left = findMax(root.left);
 		int right = findMax(root.right);
 		int max = Math.max(root.data, Math.max(left, right));
@@ -54,7 +54,7 @@ public class FindMaxRecursive
 		r3.left = r6;
 		r3.right = r7;
 		
-		out.println(getMax(root));	
+		out.println(findMax(root));	
     }
 
 }

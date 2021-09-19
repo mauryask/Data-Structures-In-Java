@@ -53,6 +53,28 @@ public class DeleteBinaryTree
 		}
 
 	}
+
+/*
+* Deleting tree usisng level order 
+* traversal
+*/
+static void deleteTree2(Node root)
+{
+	Queue<Node> q = new ArrayDeque<>();
+	q.add(root);
+	
+	while(!q.isEmpty())
+	{
+	    root = q.poll();
+		
+		if(root.left != null)
+			q.add(root.left);
+		if(root.right != null)
+			q.add(root.right);
+		root.left = null;
+		root.right = null;
+	}
+}
 	
 	static void printTree(Node root)
 	{
@@ -82,7 +104,7 @@ public class DeleteBinaryTree
 		r3.left = r6;
 		r3.right = r7;
 		
-		deleteTree(root);
+		deleteTree2(root);
 		root = null;
 		printTree(root);
 		
