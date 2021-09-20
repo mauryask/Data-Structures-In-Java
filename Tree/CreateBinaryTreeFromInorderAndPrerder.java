@@ -25,7 +25,7 @@ public class CreateBinaryTreeFromInorderAndPrerder
    startIndex, int endIndex, Map<Integer, Integer> map)
    {
 	   if(startIndex > endIndex)
-		   return null;
+		   return null;-
 	   
 	   Node root =  new Node(pre[preIndex++]);
 	   

@@ -1,10 +1,11 @@
-/**
-Time complexity   : O(n)
-Spasce complexity : O(n) 
-This approach is combination of levelorder traversal
-and Map
-Each entry in map conatins Hd as key and an ArrayList containing
-node values with the same Hd
+/*
+* Time complexity   : O(n)
+* Spasce complexity : O(n) 
+* This approach is combination of 
+* levelorder traversal and Map
+* Each entry in map conatins Hd as
+* key and an ArrayList containing
+* node values with the same Hd
 */
 
 import static java.lang.System.*;
@@ -40,44 +41,33 @@ public class VerticalOrderTraversal
 	static void verticalOrderTraversal(Node root)
 	{
 		Queue<QueueData> q = new ArrayDeque<>();
-		Map<Integer, List<Integer>> map = new TreeMap<>();
-		
+		Map<Integer, List<Integer>> map = new TreeMap<>();		
 		q.add(new QueueData(root,0));
-		
-		List<Integer> list = new LinkedList<>();
-		list.add(root.data);
-		map.put(0,list);
-	     
+
         while(!q.isEmpty())
 		{
 			QueueData qd =  q.poll();
 			root = qd.node;
+			int hd = qd.hd;
+  
+  			/*
+			* If hd is not present in the map 
+			* create getOrDefault will return a new list
+			* and add root.data to that
+			* if hd is already present get existing list and add 
+			* root.data and put it in the map			
+			*/
 			
+            List<Integer> list =  map.getOrDefault
+			(hd, new ArrayList<Integer>());
+            list.add(root.data);
+			
+		    map.put(hd, list);
+					
 			if(root.left != null)
-			{
-				q.add(new QueueData(root.left,qd.hd-1));
-				if(!map.containsKey(qd.hd-1))
-				{
-					list = new LinkedList<>();
-					list.add(root.left.data);
-					map.put(qd.hd-1, list);
-				} 
-				else
-					map.get(qd.hd-1).add(root.left.data);
-			}
-			
+				q.add(new QueueData(root.left,hd-1));
 			if(root.right != null)
-			{
-				q.add(new QueueData(root.right, qd.hd+1));
-				if(!map.containsKey(qd.hd+1))
-				{
-					list = new LinkedList<>();
-					list.add(root.right.data);
-					 map.put(qd.hd+1, list);
-				}
-				else
-					map.get(qd.hd+1).add(root.right.data);
-			}
+				q.add(new QueueData(root.right,hd+1));
 		}	
 
        // printing nodes along each vertical line
