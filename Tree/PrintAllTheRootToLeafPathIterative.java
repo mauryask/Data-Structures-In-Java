@@ -67,6 +67,7 @@ public class PrintAllTheRootToLeafPathIterative
 						printStack(stack);
 						out.println("Path sum: "+sum);
 				}
+				
 				if(root.right == null || root.right == prev)
 				{
 					// once done with a node 

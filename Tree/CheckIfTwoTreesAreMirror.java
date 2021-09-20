@@ -88,10 +88,8 @@ public class CheckIfTwoTreesAreMirror
 			return true;
 		if(root1 == null || root2 == null)
 			return false;
-		if(root1.data != root2.data)
-			return true;
 		
-		return isMirrorRecursive(root1.left, root2.right) &&
+		return (root1.data == root2.data) && isMirrorRecursive(root1.left, root2.right) &&
 		isMirrorRecursive(root1.right, root2.left);
 	}
 	

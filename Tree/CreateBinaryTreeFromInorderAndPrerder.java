@@ -1,9 +1,6 @@
 /**
-Time complexity  : O(n^2) : in case of linear search
-Space complexity : O(n)  : as recurssion stack
-Instead of using linear search, we cvan firest put the 
-'inorder' array elements into a map then we can access
-each and every element in O(n) time complexity
+Time complexity  : O(n)
+Space complexity : O(n)
 */
 
 import java.util.*;
@@ -23,9 +20,9 @@ class Node
 public class CreateBinaryTreeFromInorderAndPrerder
 {	
    static int preIndex = 0;
-
+   
    static Node createTree(int in[], int pre[], int
-   startIndex, int endIndex)
+   startIndex, int endIndex, Map<Integer, Integer> map)
    {
 	   if(startIndex > endIndex)
 		   return null;
@@ -35,11 +32,15 @@ public class CreateBinaryTreeFromInorderAndPrerder
 	   if(startIndex == endIndex)
 		   return root;
 	   
-	   int inOrderIndex = search(in, startIndex, endIndex
-	   , root.data);
+	   /*
+	   * Map is being used to overcome linear searching
+	   * get inorder index in O(1) 
+	   */
+	   int inOrderIndex = map.get(root.data);/*search(in, startIndex, endIndex
+	   , root.data);*/
 	   	   
-	   root.left = createTree(in, pre, startIndex, inOrderIndex-1);
-	   root.right = createTree(in, pre, inOrderIndex+1, endIndex);
+	   root.left = createTree(in, pre, startIndex, inOrderIndex-1, map);
+	   root.right = createTree(in, pre, inOrderIndex+1, endIndex, map);
 	   
 	   return root;
    }
@@ -69,7 +70,19 @@ public class CreateBinaryTreeFromInorderAndPrerder
 	   int in[]  = {3,1,4,0,5,2};
 	   int pre[] = {0,1,3,4,2,5};
 	   int n = 6;
-	   Node root = createTree(in, pre, 0, n-1);
+	   
+	   /*
+	   * Map is being used to overcome the 
+	   * The disadvantages of the linear search
+	   * since it causes O(n*n) time complexity
+	   * while searching while same task can be performed  
+	   * in O(1) using map
+	   */
+	   Map<Integer, Integer> map = new HashMap<>();
+	   for(int i=0; i<n; i++)
+		   map.put(in[i] , i);
+	   
+	   Node root = createTree(in, pre, 0, n-1, map);
 	   printTree(root);
 	   out.println();
 	}
