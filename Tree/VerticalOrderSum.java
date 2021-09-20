@@ -1,7 +1,7 @@
-/**
-Time complexity   : O(n)
-Spasce complexity : O(n) 
-See vertical order traversal first
+/*
+* Time complexity   : O(n)
+* Spasce complexity : O(n) 
+* See vertical order traversal first
 */
 
 import static java.lang.System.*;
@@ -40,34 +40,27 @@ public class VerticalOrderSum
 		Map<Integer, Integer> map = new TreeMap<>();
          
 		q.add(new QueueData(root,0));
-		map.put(0,root.data);
-	     
+	
         while(!q.isEmpty())
 		{
 			QueueData qd =  q.remove();
 			root = qd.node;
+			int hd = qd.hd;
+			
+			/*
+			* If hd is already present in the map 
+			* get existing sum and current root data 
+			* into it and put it n the map 
+			* else get 0 as sum
+			**/
+			int sum = map.getOrDefault(hd,0);
+			map.put(hd, sum+root.data);
 			
 			if(root.left != null)
-			{
-				q.add(new QueueData(root.left,qd.hd-1));
-				if(!map.containsKey(qd.hd-1))
-				{
-					 map.put(qd.hd-1, root.left.data);
-				}
-				else
-					map.replace(qd.hd-1, map.get(qd.hd-1) + root.left.data);
-			}
+				q.add(new QueueData(root.left,hd-1));
 			
 			if(root.right != null)
-			{
-				q.add(new QueueData(root.right, qd.hd+1));
-				if(!map.containsKey(qd.hd+1))
-				{
-					 map.put(qd.hd+1, root.right.data);
-				}
-				else
-					map.replace(qd.hd+1, map.get(qd.hd+1) + root.right.data);
-			}
+				q.add(new QueueData(root.right,hd+1));
 		}	
 
        // printing vertical sum along each vertical line

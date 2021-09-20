@@ -62,18 +62,25 @@ public class DeletionInBST
 		
   static void deleteElement(Node root, int target)
   { 
-	 Node parentNode = null;	
-	 while(root != null && root.data != target)
+	 Node parentNode = null;
+     boolean flag = false;
+	 
+	 while(root != null)
 	 {		 			   			 
  		parentNode = root;
-		 if(root.data < target)
+		if(root.data == target)
+		{
+			flag = true;
+			break;
+		}
+		else if(root.data < target)
 			 root = root.right;
-		 else if(root.data > target)
+		else if(root.data > target)
 			 root = root.left;
 	 }
        
 	   // what if node is not found
-	   if(root == null)
+	   if(!flag)
 	   {
 		   out.println("Target node not found!!!");
 		   return;

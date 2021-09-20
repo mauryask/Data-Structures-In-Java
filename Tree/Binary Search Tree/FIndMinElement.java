@@ -63,15 +63,10 @@ public class FIndMinElement
 	// S(n) = O(1) 
 	static int findMinElement(Node root)
 	{
-		int min = Integer.MAX_VALUE;
-		Node prev = null;
-		while(root != null)
-		{
-			prev = root;
+		while(root.left != null)
 			root = root.left;
-		}
-		
-		return prev.data;
+
+		return root.data;
 	}
 	
 	// S(n) = O(n) : recursion stack
