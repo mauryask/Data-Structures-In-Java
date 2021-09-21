@@ -1,6 +1,6 @@
-/**
-Time complexity  : O(n)
-Space complexity : O(n)
+/*
+* Time complexity  : O(n)
+* Space complexity : O(n)
 */
 
 import static java.lang.System.*;
@@ -60,6 +60,14 @@ public class PrintElementsInTheRangeK1AndK2
 		
 		if(root.data >=k1 && root.data <= k2)
 			out.print(root.data+" ");
+		/*
+		* If element exceeds then just break the 
+		* stop further function calls since it is 
+		* inorder traversal and after an element greater than k2 
+		* no element will fall between k1 and k2
+		*/
+        else if(root.data > k2) 
+			return;
 		
 		printNode(root.right, k1, k2);
 	}
@@ -78,6 +86,6 @@ public class PrintElementsInTheRangeK1AndK2
 		insertNode(48);
 		insertNode(80);
 		
-		printNode(root, 120, 145);
+		printNode(root, 45,80);
 	}
 }

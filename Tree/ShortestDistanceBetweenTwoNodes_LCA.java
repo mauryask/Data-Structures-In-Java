@@ -109,6 +109,6 @@ public class ShortestDistanceBetweenTwoNodes_LCA
 		Node lca = LCA(root, 11, 13);
 		int leftLevel = findLevel(lca.left,11,13);
 		int rightLevel = findLevel(lca.right,11,13);
-		out.println(leftLevel + rightLevel + 1);
+		out.println(leftLevel + rightLevel+1);
 	}
 }
