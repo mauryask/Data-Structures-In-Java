@@ -73,7 +73,7 @@ public class FindingLCAofTwoNodes
 		r4.left = r8;
 		r8.left = r9;
 		
-		Node deepNode = LCA(root, 9, 5);
-		System.out.println(deepNode.data);
+		Node lca = LCA(root, 9, 5);
+		System.out.println(lca.data);
 	}
 }
