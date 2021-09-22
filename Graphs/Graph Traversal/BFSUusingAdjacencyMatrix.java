@@ -3,6 +3,7 @@ class Graph
 {
 	int v_num;
 	int G[][];
+	
 	Graph(int v_num)
 	{
 		this.v_num = v_num;

@@ -1,8 +1,12 @@
-/**
-Time complexity  : O(n)
-Space complexity : O(n)
+/*
+* Time complexity  : O(n)
+* Space complexity : O(n)
 * You can check the number of function calls
 * is going to be equal to the number of nodes
+************
+** Diameter Definition :- 
+** Total number of nodes on the  
+** longest path of the binary tree
 */
 
 import static java.lang.System.*;
@@ -29,9 +33,15 @@ class Diameter
 
 public class FindTreeDiameterBestWay
 {
-	// since the tree diameter is nothing but 
-	// the max value of (lh+rh+1)
+	// since for every node longest path 
+	// is lh+rh+1	
 	// so we will do everything in height function itself
+		
+	/*
+	* What we are doing here 
+	* finding diameter passing through each node 
+	* and maintain the maximum diameter
+	*/		
 		
 	static int height(Node root, Diameter diameter)
 	{
@@ -42,7 +52,7 @@ public class FindTreeDiameterBestWay
 		diameter.length = Math.max(diameter.length, lh+rh+1);
 		return Math.max(lh, rh) + 1;
 	}
-		
+	
 	static void findDiameter(Node root, Diameter diameter)
 	{
 		if(root == null)
