@@ -30,7 +30,7 @@ public class UnionByRankUsinPathCompression
 			root = parent[root];
 		
 		/*
-		* Path compression implementatin
+		* Path compression implementation
 		**/
 		parent[x] = root;
 		return parent[x];
