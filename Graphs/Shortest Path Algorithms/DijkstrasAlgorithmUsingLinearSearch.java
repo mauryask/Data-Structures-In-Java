@@ -1,22 +1,11 @@
-/**
-* Single Source Shortest Path Algorithm
-* Time complexity: 
-* O(E+V^2) : for linear search
-* O(V + E*logV): for min heap -> see notes to check how it is so.
-* Space complexity: O(V)
-* This algo works for both directed and
-* undirected graph as well
+/*
+* T(n) : O(E + V*V)
+* S(n) : O(V+E)
 */
-
-/**
-* It does not works with graphs containing
-* edges with negative weights
-*/
-
 import static java.lang.System.*;
 import java.util.*;
 
-public class DijkstrasAlgorithm
+public class DijkstrasAlgorithmUsingLinearSearch
 {
 	class Edge
 	{
@@ -34,20 +23,9 @@ public class DijkstrasAlgorithm
 		}
 	}
 	
-	class Util
-	{
-		int vertex;
-		int dist;
-		Util(int vertex, int dist)
-		{
-			this.vertex = vertex;
-			this.dist = dist;
-		}
-	}
-	
 	List<Edge> adj[];
 	
-	public DijkstrasAlgorithm(int n)
+	public DijkstrasAlgorithmUsingLinearSearch(int n)
 	{
 		adj = new LinkedList[n];
 		for(int i=0; i<n; i++)
@@ -70,61 +48,67 @@ public class DijkstrasAlgorithm
 		adj[v].add(new Edge(u, w));
 	}
 	
-	void dijkstra(int src,int n)
+	
+	void dijkstra(int src, int n)
 	{
 		int distance[] = new int[n];
-		Arrays.fill(distance, Integer.MAX_VALUE);
+		int parent[] = new int[n];
 		boolean visited[] = new boolean[n];
 		
-		// Min heap to get the vertex with minimum distance
-		Queue<Util> q = new PriorityQueue<>((a, b)->{
-			return a.dist - b.dist;
-		});
+		Arrays.fill(distance, Integer.MAX_VALUE);
+		Arrays.fill(parent, -1);
 		
-		distance[src] = 0;	
-		q.add(new Util(src, 0));			
+		distance[src] = 0;
+		visited[src] = true;
 		
 		for(int i=1; i<=n; i++)
 		{
-			//int u = findMin(distance, visited, n);
-			
-			int u = q.remove().vertex;
-			
-			for(Edge e : adj[u])
+			int u = findMin(distance, visited, n);
+				
+			for(Edge e: adj[u])
 			{
-				if(!visited[e.v] && distance[u] + e.w < distance[e.v])
+				if(distance[u] != Integer.MAX_VALUE && !visited[e.v] && distance[u] + e.w < distance[e.v])
 				{
 					distance[e.v] = distance[u] + e.w;
-					q.add(new Util(e.v, distance[e.v]));
+					parent[e.v] = u;
 				}
 			}
 			
 			visited[u] = true;
 		}
 		
-		for(int i=0; i<n; i++)
-			out.println(src+" => "+i +" = "+distance[i]);
+		
+		for(int  i= 0; i<n; i++)
+			out.println(src+" => "+ distance[i]);
 	}
 	
-	int findMin(int distance[], boolean visited[], int n)
+	static int findMin(int[] distance, boolean[] visited, int n)
 	{
-		int index = 0;
 		int min = Integer.MAX_VALUE;
+		/*
+		* By default take 0 as min index 
+		* to prevent ArrayIndexOutOfBounds
+		*/
+		int minIndex = 0;
+		
 		for(int i=0; i<n; i++)
 		{
 			if(!visited[i] && min > distance[i])
 			{
 				min = distance[i];
-				index = i;
+				minIndex = i;
 			}
 		}
-		return index;
+		
+		return minIndex;
 	}
 	
 	public static void main(String [] args)
 	{
 	   int n = 9;
-	   DijkstrasAlgorithm g = new DijkstrasAlgorithm(n);
+	   DijkstrasAlgorithmUsingLinearSearch g =
+	   new DijkstrasAlgorithmUsingLinearSearch(n);
+	   
 	   g.addEdge(0,1,4);
 	   g.addEdge(0,4,8);
 	   g.addEdge(1,4,11);

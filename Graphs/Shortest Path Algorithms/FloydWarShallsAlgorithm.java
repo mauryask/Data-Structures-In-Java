@@ -53,6 +53,7 @@ public class FloydWarShallsAlgorithm
 		AllPairShortestPath a = new AllPairShortestPath();
 		int v_num = 4;
 		//create a n*n matrix : n is number of vertices
+		// It is a directed graph
 		int graph[][] = {
 							{0, 5, inf, 10},
 							{inf,0 , 3, inf},
