@@ -34,10 +34,7 @@ public class UnionBySizeWithPathCompression
 	{
 		int temp = x;
 		while(parent[temp] != temp)
-		{
 			temp = parent[temp];
-		}
-		
 		/*
 		* Path Compression
 		*/

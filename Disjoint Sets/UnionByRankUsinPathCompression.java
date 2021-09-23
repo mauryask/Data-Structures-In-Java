@@ -23,9 +23,6 @@ public class UnionByRankUsinPathCompression
 	{	
 		int root =  x;
 		
-		if(parent[root] == root)  
-			return root;
-		
 		while(parent[root] != root)
 			root = parent[root];
 		
@@ -33,7 +30,7 @@ public class UnionByRankUsinPathCompression
 		* Path compression implementation
 		**/
 		parent[x] = root;
-		return parent[x];
+		return root;
 	}
 	
 	static void union(int x, int y, int parent[], int rank[])
