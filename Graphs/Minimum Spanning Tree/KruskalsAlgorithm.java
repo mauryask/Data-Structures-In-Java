@@ -99,10 +99,7 @@ public class KruskalsAlgorithm
 	   * Size is |v|-1, since MST contains |v|-1 edges
  	   */
 		Edge[] result = new Edge[n-1];
-		
-		for(int i=0; i<n-1; i++)
-			result[i] = new Edge();
-		
+				
 		edge[0] = new Edge(0,1,4);
 		edge[1] = new Edge(0,2,12);
 		edge[2] = new Edge(1,2,10);
