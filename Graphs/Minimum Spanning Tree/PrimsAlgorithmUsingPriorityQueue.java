@@ -2,6 +2,9 @@
 * Time complexity is same as the 
 * Dikstra's algorithm
 * O(V + E * log V)
+*******
+* E * log V : because the heap contains the 
+* veritices at any time that are not yet visited 
 */
 
 import java.util.*;

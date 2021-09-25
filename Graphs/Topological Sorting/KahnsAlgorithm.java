@@ -37,6 +37,7 @@ public class KahnsAlgorithm
 	* indegree of each vertex 
 	* T(n) = O(V+E)
 	*/
+	
     void computeIndegree(int indegree[], int n)
 	{
 		 for(int i=0; i<n; i++)
@@ -85,6 +86,7 @@ public class KahnsAlgorithm
 				if(indegree[v] == 0)
 					q.add(v);
 			}
+			
 			count++;
 		}
 		
