@@ -41,6 +41,19 @@ class Graph
   void PMST(int src)
   {
 	int parent[] = new int[v_num]; 
+	
+	/*
+	* Each element of the weight array 
+	* contains the smallest edge weight from 
+	* the source vertex **
+	* and indices represent the destination vertex 
+	* both source and destination (u --> v) 
+	* are being stored in parent array
+    ***********
+	* elements reprsent 'u' and indices reprsent 'v' 
+	* in the parent array
+	*/
+	
 	int weight[] = new int[v_num];
 	boolean visited[] = new boolean[v_num];
 	
