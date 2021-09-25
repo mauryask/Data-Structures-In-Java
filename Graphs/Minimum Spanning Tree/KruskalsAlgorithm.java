@@ -1,6 +1,8 @@
 /*
 * Kruskal's Algorithm to find MST
-* Time complexity : O(E*log V)
+* Time complexity : O(E*log V) 
+**** log V is time taken by Union operation
+**** and we are performing it exactly E-times
 * Space complexity: O(V)
 * This is a  Greedy Algorithm
 */
