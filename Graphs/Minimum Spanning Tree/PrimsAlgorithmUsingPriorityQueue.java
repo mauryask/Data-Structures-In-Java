@@ -1,11 +1,13 @@
 /*
-* Time Complexity of this algorithm is : O(E log V)
-* This is a Greedy Algorithm
+* Time complexity is same as the 
+* Dikstra's algorithm
+* O(V + E * log V)
 */
 
 import java.util.*;
+import static java.lang.System.*;
 
-class Graph 
+class PrimsAlgorithmUsingPriorityQueue 
 {
 	class Edge
 	{
@@ -22,7 +24,7 @@ class Graph
 	int v_num;
 	List<Edge> G[]; 
 	
-	Graph(int v_num)
+	PrimsAlgorithmUsingPriorityQueue (int v_num)
 	{
 		this.v_num = v_num;
 		G = new LinkedList[v_num];
@@ -36,93 +38,111 @@ class Graph
 	  G[v].add(0, new Edge(u,w));
   }
   
-  //Nodes of the minHeap
-   class HeapNode 
+  // MinHeap
+   class Util
 	{
-		int vertex; //stores thw vertex of graph 
-		int key; //stores the weights
+		int vertex; 
+		int weight; 
+		
+		Util(int vertex, int weight)
+		{
+			this.vertex = vertex;
+			this.weight = weight;
+		}
 	}
 	
   
   void PMST(int src)
   {
 	int parent[] = new int[v_num];  
-	HeapNode e[] = new HeapNode[v_num]; //this array holds the HeapNode objects
 	boolean visited[] = new boolean[v_num];
+	int weight[] = new int[v_num];
 	
-	for(int i=0; i<v_num ; i++) //initialize the array with objects
-		 e[i] = new HeapNode();
+	Arrays.fill(weight, Integer.MAX_VALUE);
 	
-	for(int i=0; i < v_num; i++)
+	/* make sorce vertex weight as  0 */
+    weight[src] = 0;
+   
+	Queue<Util> q = new PriorityQueue<>((a, b)->
 	{
-	  parent[i] = -1;
-	  visited[i] = false;
-	  e[i].vertex = i;
-	  e[i].key = Integer.MAX_VALUE; //intialize keys with Infinite
-	}
-	
-	e[src].key = 0; //weight of the source node : 0
-	
-	// comparator to order the nodes in nondecreasing
-	// order of weights(keys)	
-	Comparator cmp = new Comparator<HeapNode>()
-	{
-		public int compare(HeapNode e1, HeapNode e2)
-		{
-		  return e1.key - e2.key;
-		}
-	};
-	
-	//instead of java PriorityQueue use TreeSet
-	//since PriorityQueue remove operation takes O(n)
-	// in java (I think TreeSet pollFirst() takes O(logN))
-	 TreeSet<HeapNode> queue = new TreeSet<>(cmp);
-	 for(int i=0; i<v_num ; i++)
-	 {
-		queue.add(e[i]); //add objects of into TreeSet 
-	 }
+		return a.weight - b.weight;
+	});
+ 	
+	/*
+	* Add source vertex in te heap 
+	* along with its weight as 0
+	*/
+    q.add(new Util(src, 0));
 	 	  
-     while(!queue.isEmpty())
+     while(!q.isEmpty())
 	 {
-	    HeapNode node  = queue.pollFirst();	//remove first smallest node forever
-		for(Edge edge : G[node.vertex])
+		 /*
+		 * Get vertex with minimum weight from the heap
+		 * It will not contain the visitedf vertices 
+		 * since visited verticers are being removed 
+		 * from the heap at the end
+		 */
+		 
+	    Util node  = q.element();
+        int u = node.vertex;
+        
+		for(Edge e : G[u])
 		{
-				if(!visited[edge.v] && e[edge.v].key  > edge.w)
+				if(!visited[e.v] && weight[e.v]  > e.w)
 				{
-					queue.remove(e[edge.v]);
-					e[edge.v].key = edge.w;
-					queue.add(e[edge.v]);
-					parent[edge.v] = node.vertex;
+					weight[e.v] = e.w;
+					parent[e.v] = u;
+					/*
+					* add adjacent vertices to the 
+					* heap along with the updated
+					* weight
+					*/
+					q.add(new Util(e.v, e.w));
 				}
 		}
 		
-		visited[node.vertex] = true;
+		/*
+		* Once sone with all the adjacent 
+		* Its time to say good bye to it 
+		* i.e. remove it from heap 
+		* and mark it as visited
+		*/
+		
+		visited[u] = true;
+		q.remove();
 	 } 
 	 
-	   for(int i=0; i<v_num ; i++)
-	   {                      //parent        //vertex  //weight 
-		   System.out.println(parent[i]+" ==> "+i+" ==> "+e[i].key);
-	   }
-  }
-  
-}
-
-public class PrimsAlgorithmUsingPriorityQueue 
-{
-	public static void main(String [] args)
-	{
-	   Graph g = new Graph(6);
-		g.addEdge(0,1,4);
-		g.addEdge(0,3,10);
-		g.addEdge(0,2,5);
-		g.addEdge(1,2,2);
-		g.addEdge(1,4,3);
-		g.addEdge(3,2,7);
-		g.addEdge(2,4,1);
-		g.addEdge(2,5,6);
-		g.addEdge(4,5,11);
-		g.addEdge(3,5,3);
-
-	    g.PMST(0);	
-	}
+	 /*
+	 * Printing MST
+	 */
+	   for(int i=1; i<v_num ; i++)
+		   out.println(parent[i]+" => "+ i + 
+	       " : " + weight[i]);
+ }
+	
+	  public static void main(String [] args)
+		{
+			/*
+			* Creating graph
+			*/
+			PrimsAlgorithmUsingPriorityQueue  g = new PrimsAlgorithmUsingPriorityQueue (7);
+			g.addEdge(0,1,8);
+			g.addEdge(0,3,2);
+			g.addEdge(0,2,3);
+			g.addEdge(1,2,5);
+			g.addEdge(1,4,6);
+			g.addEdge(1,5,11);
+			g.addEdge(2,4,12);
+			g.addEdge(2,5,7);
+			g.addEdge(4,6,9);
+			g.addEdge(3,6,5);
+			
+			/* 
+			* Lets take 0 as source vertex
+			* Though we can pick any random vertex 
+			* as source vertex
+			*/
+			
+			g.PMST(0);	
+		}
 }

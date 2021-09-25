@@ -85,9 +85,7 @@ public class DijkstrasAlgorithm
 		q.add(new Util(src, 0));			
 		
 		for(int i=1; i<=n; i++)
-		{
-			//int u = findMin(distance, visited, n);
-			
+		{		
 			int u = q.remove().vertex;
 			
 			for(Edge e : adj[u])
