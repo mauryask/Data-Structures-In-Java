@@ -94,7 +94,7 @@ public class ArrayImplementationOfHeap
 			 // n : total number of nodes
 			 // here if heapSize  = 4 then (heapSize/2)-1
 			 // will produce -> 1, 0 (non-leaf indexes)
-			 // we need to process only 0 and 1not 2 and 3
+			 // we need to process only 0 and 1 not 2 and 3
 			 
 			 for(int i = heapSize/2 - 1 ; i>=0; i--)
 			 {

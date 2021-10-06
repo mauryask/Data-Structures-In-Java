@@ -30,7 +30,7 @@ public class CountAllTheSubArraysWithSumK
 			
 			if(map.containsKey(sum-target))
 			  ans += map.get(sum-target);
-		  
+			
 		    map.put(sum, map.getOrDefault(sum,0)+1);
 		}
 		return ans;

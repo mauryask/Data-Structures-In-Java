@@ -32,7 +32,7 @@ public class CheckBracketBalencing
 			{
 				/*
 				* Stck will be empty if there are more 
-				* closisng brackets
+				* closing brackets
 				*/
 				if(stack.isEmpty())
 					return false;

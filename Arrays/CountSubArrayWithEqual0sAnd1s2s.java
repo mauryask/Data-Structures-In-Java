@@ -48,22 +48,10 @@ public class CountSubArrayWithEqual0sAnd1s2s
 		   
 		   String key = diff01+"#"+diff12;
 		   
-		   /*
-		   * Check if key already present 
-		   * increase count and increase the 
-		   * frequency of the key
-		   */
 		   if(map.containsKey(key))
-		   {
-			   count += 1;
-			   map.replace(key, map.get(key) + 1);
-		   }
-		   /*
-		   * If key encountered for the first time
-		   * put it in  the map with frequency one
-		   */
-		   else
-			   map.put(key, 1);
+			   count += map.get(key);
+		   
+           map.put(key, map.getOrDefault(key, 0)+1);    
 		}
 		
 		return count;

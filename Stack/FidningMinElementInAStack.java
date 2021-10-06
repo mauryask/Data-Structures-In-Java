@@ -27,7 +27,7 @@ public class FidningMinElementInAStack
 			return -1;
 		
 		int data = s.pop();
-		
+		g
 		if(data == ss.peek())
 			ss.pop();
 		

@@ -25,7 +25,7 @@ public class FindKthSmallestElement
 			/*
 			* Once the heap size becomes k+1
 			* remove top and put it at ith position
-			* oncwe this size obtained we will maintain 
+			* once this size obtained we will maintain 
 			* using sliding window technique
 			**/	
 		   if(j-i == k)

@@ -54,6 +54,5 @@ public class BubbleSort
 		for(int i=0; i<A.length; i++)
 	          out.print(A[i]+" ");
 		out.println();
-	}
-	
+	}	
 }

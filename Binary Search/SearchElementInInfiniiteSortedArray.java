@@ -52,7 +52,7 @@ public class SearchElementInInfiniiteSortedArray
 	
 	public static void main(String [] args)
 	{
-		int A[] = {2,4,5,6,8,10,12,14,45,78,96,100,102,108,114,115,150,222,400,541,632};
+		int A[] = {2,4,5,6,8,10,12,14,45,78,96,100,102,108,114,115,150,222,400,5414,632};
 		int key = 102;
 		
 		out.println(findElement(A, key));

@@ -56,7 +56,6 @@ public class ImplementingTwoStacks
 		  return data;
 	  }
 	  
-	  
 		public static void main(String [] srga)
 		{
 			push1(10);

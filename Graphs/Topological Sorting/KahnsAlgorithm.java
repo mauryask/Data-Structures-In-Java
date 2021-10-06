@@ -75,6 +75,11 @@ public class KahnsAlgorithm
 		int count = 0;
 		
 		// T(n) = O(V+E)
+		/*
+		* If graph is a DAG then each and every vertex will 
+		* come in the queue once hence the count will be 
+		* equal to 'n' 
+		*/
 		while(!q.isEmpty())
 		{
 			int u = q.remove(0);
