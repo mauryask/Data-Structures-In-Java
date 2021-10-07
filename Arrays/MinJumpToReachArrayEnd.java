@@ -1,3 +1,12 @@
+/*
+* T(n) : O(n*n)
+* S(n) : O(n)
+********
+// element at each index reprseents the 
+// length of the jump you can take
+https://leetcode.com/problems/jump-game/
+*/
+
 import static java.lang.System.*;
 import java.util.*;
 
@@ -7,11 +16,14 @@ public class MinJumpToReachArrayEnd
     {
         /*
         * This array holds the minimum number 
-        * of jumps needed to reach i from 0
+        * of jumps needed to reach location 'i' from '0'
         */
         int minJump[] = new int[n];
+        int jumpPath[] = new int[n];
+        
         Arrays.fill(minJump, Integer.MAX_VALUE);
         minJump[0] = 0;
+        jumpPath[0] = -1;
         
         for(int i=0; i<n; i++)
         {
@@ -19,19 +31,47 @@ public class MinJumpToReachArrayEnd
             {
                 if(i <= j+ A[j])
                 {
-                    minJump[i] = Math.min(minJump[i], minJump[j] + 1);
+                    if(minJump[i] > minJump[j] + 1)
+                    {
+                         minJump[i] = minJump[j] + 1;
+                         jumpPath[i] = j;
+                    }
                 }
             }
         }
         
-        return minJump[n-1];
+        // if end is not reachable
+        if(minJump[n-1] == Integer.MAX_VALUE)
+            return -1;
+        else // if end is reachable
+        {
+            printPath(jumpPath, n);
+            return minJump[n-1];
+        }
+    }
+    
+    static void printPath(int[] jumpPath, int n)
+    {
+        int temp = n-1;
+        List<Integer> list = new LinkedList<>();
+        
+        while(jumpPath[temp] != -1)
+        {
+            list.add(0, temp);
+            temp = jumpPath[temp];
+        }
+        out.println("Path followed to reach the end: ");
+        for(int x : list)
+            out.print(x+" ");
+        out.println();
     }
     
   	public static void main(String [] args)
     {
-        int A[] = {1, 3, 6, 3, 2, 3, 6, 8, 9, 5};
+        int A[] = //{1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9};
+         {3,2,1,0,4};// this the case when you can't reach end
         int n = A.length;
         
-        out.println(minJumps(A, n));
+        out.println("Minimum jumps needed: "+minJumps(A, n));
     }
 }
