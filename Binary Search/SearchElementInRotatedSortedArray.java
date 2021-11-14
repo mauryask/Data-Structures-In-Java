@@ -13,7 +13,7 @@ public class SearchElementInRotatedSortedArray
 		int low = 0;
 		int high = n-1;
 		
-		while(low < high)
+		while(low <= high)
 		{
 			if(high == low)
 				return low;
@@ -51,14 +51,15 @@ public class SearchElementInRotatedSortedArray
 				end = mid - 1;
 		}
 		
-		return -1; // if array is not rotated
+		return -1; // if element not found
 	}
 	
 	public static void main(String [] args)
 	{
-		int A[] = {1,2,3,4,5};//{20,22,24,26,28,30,32,34,36,10,12,14,16,18};
+		int A[] = //{1,2,3,4,5};
+		{20,22,24,26,28,30,32,34,36,10,12,14,16,18};
 		int n = A.length;
-		int target = 5;//30;
+		int target = 14;//30;
 		
 		/*
 		* Finding the index of the  element (say pivot)

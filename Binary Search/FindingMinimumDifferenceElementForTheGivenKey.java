@@ -1,3 +1,5 @@
+// return index of the min diff element
+
 import static java.lang.System.*;
 
 public class FindingMinimumDifferenceElementForTheGivenKey
@@ -6,8 +8,8 @@ public class FindingMinimumDifferenceElementForTheGivenKey
 	{
 		int start = 0;
 		int end = n-1;
-		int ceil = Integer.MAX_VALUE;
-		int floor = Integer.MAX_VALUE;
+		int ceil = -1;
+		int floor = -1;
 		
 		while(start <= end)
 		{
@@ -18,26 +20,24 @@ public class FindingMinimumDifferenceElementForTheGivenKey
 			
 			if(A[mid] < key)
 			{
-				floor = A[mid];
+				floor = mid;
 				start = mid + 1;
 			}
 			else if(A[mid] > key)
 			{
-				 ceil = A[mid];
+				 ceil = mid;
 				 end = mid - 1;
 			}
 		}
 		
-		//int floorEle = end >= 0 ? A[end] : Integer.MAX_VALUE;
-		//int ceilEle = 	start < n ? A[start]: Integer.MAX_VALUE;		
-	  
-	    //return Math.abs(floorEle-key) < Math.abs(ceilEle-key)
-		//? floorEle : ceilEle;
+		if(floor != -1 && ceil != -1)
+		{
+			int floorDif = Math.abs(A[floor] - key);
+            int ceilDiff  = Math.abs(A[ceil] - key);
+			return floorDif < ceilDiff ? floor : ceil;		
+		}
 		
-		int floorDiff = Math.abs(floor - key);
-		int ceilDiff = Math.abs(ceil - key);
-		
-		return floorDiff < ceilDiff ? floor : ceil;
+		return floor == -1 ? ceil : floor;
 	}
 	
 	public static void main(String [] args)

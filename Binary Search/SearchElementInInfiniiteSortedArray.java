@@ -22,6 +22,10 @@ public class SearchElementInInfiniiteSortedArray
 		int start = 0;
 		int end = start + 1;
 		
+		// If condition is true
+		// It means the element can not be found 
+		// between given start and end 
+		// so update current start ans end
 	    while(key > A[end])
 		{
 			start = end;

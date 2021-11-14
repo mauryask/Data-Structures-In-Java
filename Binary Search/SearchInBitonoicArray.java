@@ -69,7 +69,7 @@ public class SearchInBitonoicArray
 			
 			if(mid > 0 && mid < n-1)
 			{
-				if(A[mid] > A[mid+1] && A[mid] > A[mid-1])
+				if(A[mid+1] < A[mid] && A[mid] > A[mid-1])
 					return mid;
 				else if(A[mid+1] > A[mid])
 					start = mid  + 1;
