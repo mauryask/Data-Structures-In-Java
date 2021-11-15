@@ -24,7 +24,6 @@ public class FindNextGreaterElementToRight
 			*/
 			while(!stack.isEmpty() && stack.peek() <= A[i])
 				stack.pop();
-
 			/*
 			* There might be two reasons for loop termination
 			* Either stack is empty

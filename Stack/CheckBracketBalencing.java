@@ -21,7 +21,7 @@ public class CheckBracketBalencing
 				stack.push(ch[i]);
 			/*
 			* if a closing bracket encountered
-			* check if the stacik is not empty and
+			* check if the stack is not empty and
 			* and check top if there is opening bracket
 			* corresponing to the closing one
 			* pop it from stack

@@ -35,7 +35,7 @@ public class StockSpanProblem
 			* So we assume it as -1 and
 			*********
 			* If stack is not empty compare Ai
-			* with top of the stackm, if it is geater than 
+			* with top of the stack, if it is geater than 
 			* Ai it will be the next greater  to the left of Ai
 			**********
 			* Th span of the day is obtained by subtracting 

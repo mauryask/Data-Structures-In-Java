@@ -1,7 +1,7 @@
 /* Very Important
 *****************
 * Time complexity: O(m * n)
-* Space complexity: O(n) -> height array
+* Space complexity: O(m*n) 
 **********
 https://www.geeksforgeeks.org/maximum-size-rectangle-binary-sub-matrix-1s/
 */

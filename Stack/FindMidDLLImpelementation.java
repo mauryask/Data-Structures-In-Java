@@ -1,6 +1,6 @@
 /*
 * Implementing findMid() and deleteMid() in O(1)
-*******
+********************
 * Time complexity:
 * push : O(1)
 * pop  : O(1)
@@ -20,7 +20,6 @@ class Node
 		prev = next = null;
 	}
 }
-
 
 public class FindMidDLLImpelementation
 {
@@ -49,29 +48,27 @@ public class FindMidDLLImpelementation
 		}
 	}
 	
-	
 	static int pop()
 	{
 		if(top == null)
 			return -1;
 		
 		count--;
-		
+	
 		int data = top.data;
 		
 		if(count == -1)
-		{
 			top = mid = null;
-			return data;
-		}
-				
-		Node temp = top.next;
-		top.next = null;
-		temp.prev = null;
-		top = temp;
+		else
+		{	
+		    if(count % 2 == 0)
+			  mid = mid.next; 	
 		
-		if(count % 2 == 0)
-			mid = mid.next;
+		   	Node temp = top.next;
+			top.next = null;
+			temp.prev = null;
+			top = temp;
+		}		
 		
 		return data;
 	}

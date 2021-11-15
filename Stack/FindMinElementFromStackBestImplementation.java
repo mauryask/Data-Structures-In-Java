@@ -6,7 +6,7 @@
 * push   : O(1)
 * Space complexity : O(1)
 ***********
-* In O(n) space implementation
+* In O(n) space implementation 
 * we were maintaining the the previous min
 * in the supporting stack
 ************

@@ -39,7 +39,7 @@ public class TrappingRainWater
 		/*
 		* Finding max height building to the left and 
 		* to the right of each and every building
-		* While doing this include the building height
+		* While doing this include the current building height
 		* as well (if building height > left highest building)
 		* then building height itself will be largest buildings
 		* to the left same goes with highest right building
@@ -54,6 +54,9 @@ public class TrappingRainWater
 		
 		for(int i=0; i<n; i++)
 		{
+			// level of water from ground 
+			// on a particular building if water can 
+			// be trapped on it
 			int minHeight = Math.min(maxLeft[i], maxRight[i]);
 		    waterSum += minHeight - height[i];
 		}

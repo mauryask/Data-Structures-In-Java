@@ -16,25 +16,16 @@ public class FindKthSmallestElement
 			return b-a;
 		});
 		
-		int i = 0, j=0;
-		
-		while(j<n)
+		for(int i=0; i<n; i++)
 		{
-		   q.add(A[j]);
+		   q.add(A[i]);
            		
 			/*
 			* Once the heap size becomes k+1
-			* remove top and put it at ith position
-			* once this size obtained we will maintain 
-			* using sliding window technique
+			* remove top 
 			**/	
-		   if(j-i == k)
-		   {
-			  q.remove();
-			  i++;
-		   }	
-		   
-		  j++;		   
+		   if(q.size() > k)
+			  q.remove();		   
 		}
 		
 		return q.remove();
