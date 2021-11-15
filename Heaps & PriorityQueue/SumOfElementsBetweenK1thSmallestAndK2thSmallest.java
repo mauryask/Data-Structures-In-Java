@@ -22,19 +22,12 @@ public class SumOfElementsBetweenK1thSmallestAndK2thSmallest
 			  return b-a;
 		  });
 		  
-		  int i = 0, j = 0;
-		  
-		  while(j<n)
+		  for(int i=0; i<n; i++)
 		  {
-			 q.add(A[j]);
+			 q.add(A[i]);
 			 
-			 if(j-i == x)
-			 {
+			 if(q.size() > x)
 				  q.remove();
-				  i++;
-			 }
-			 
-			 j++;
 		  }
 		  
 		  int sum = 0;

@@ -35,7 +35,7 @@ public class KClosestPointsToOrigin
 		{
 			q.add(new Util(x[0], x[1]));
 			
-			if(q.size() == k+1)
+			if(q.size() > k)
 				q.remove();
 		}
 		

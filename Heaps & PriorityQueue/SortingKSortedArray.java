@@ -13,25 +13,21 @@ public class SortingKSortedArray
 		* Min Heap
 		*/
 		Queue<Integer> q = new PriorityQueue<>();
-		int i = 0, j=0;
+		int i = 0;
 		
-		while(j<n)
+		for(int j=0; j<n; j++)
 		{
 		   q.add(A[j]);
            		
 			/*
-			* Once the heap size becomes k+1
-			* remove top and put it at ith position
-			* oncwe this size obtained we will maintain 
-			* using sliding window technique
+			* Once the heap size becomes k
+			* remove top
 			**/	
-		   if(j-i == k)
+		   if(q.size() > k)
 		   {
 			   A[i] = q.remove();
 			   i++;
-		   }	
-		   
-		  j++;		   
+		   }			   
 		}
 		
 		/*
@@ -39,7 +35,7 @@ public class SortingKSortedArray
 		* left in the heap will be removed and kept in 
 		* the array since top will always be smallest element
 		*/
-		while(!q.isEmpty() && i<n)
+		while(!q.isEmpty())
 		 A[i++] = q.remove();
 
 	 for(int x : A)
@@ -48,7 +44,7 @@ public class SortingKSortedArray
 	
 	public static void main(String[] args)
 	{
-		int A[]  = {6, 5, 3, 2, 8, 10, 9};
+		int A[]  = {6, 5, 3, 2,8, 10, 9};
 		int n = A.length;
 		int k = 3;
 		sortArray(A, n, k);

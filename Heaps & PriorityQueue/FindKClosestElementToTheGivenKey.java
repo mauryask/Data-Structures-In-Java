@@ -32,19 +32,12 @@ public class FindKClosestElementToTheGivenKey
 			return b.diff - a.diff;
 		});
 
-		int i=0, j=0;
-		
-		while(j<n)
+		for(int j=0; j<n; j++)
 		{
-		   q.add(new Util(A[i], Math.abs(A[i]-key)));
+		   q.add(new Util(A[j], Math.abs(A[j]-key)));
 		   
-		   if(j-i == k)
-		   {
+		   if(q.size() > k)
 			   q.remove();
-			   i++;
-		   }
-		   
-		   j++;
 		}
 		
 		while(!q.isEmpty())

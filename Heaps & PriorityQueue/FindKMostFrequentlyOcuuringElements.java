@@ -33,16 +33,12 @@ public class FindKMostFrequentlyOcuuringElements
 			return a.frequency - b.frequency;
 		});
 		
-		int i=0, j=0;
-		
 		for(Map.Entry<Integer, Integer> m : map.entrySet())
 		{
 			q.add(new Util(m.getKey(), m.getValue()));
 			
-			if(q.size() == k+1)
-			{
+			if(q.size() > k)
 				q.remove();
-			}
 		}
 		
 		while(!q.isEmpty())
