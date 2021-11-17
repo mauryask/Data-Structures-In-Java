@@ -63,7 +63,7 @@ public class CountSubarraysWithSumDivisibleByK
 			if(map.containsKey(rem))
 				count += map.get(rem);
 			/*
-			* Update frequerncy of remainder in the map
+			* Update frequency of remainder in the map
 			*/
 			map.put(rem, map.getOrDefault(rem, 0)+1);
 		}

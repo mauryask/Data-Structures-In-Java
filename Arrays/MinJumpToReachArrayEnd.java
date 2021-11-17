@@ -5,6 +5,7 @@
 // element at each index reprseents the 
 // length of the jump you can take
 https://leetcode.com/problems/jump-game/
+// No Bruteforce available for this 
 */
 
 import static java.lang.System.*;
@@ -25,10 +26,13 @@ public class MinJumpToReachArrayEnd
         minJump[0] = 0;
         jumpPath[0] = -1;
         
-        for(int i=0; i<n; i++)
+        for(int i=1; i<n; i++)
         {
             for(int j=0; j<i; j++)
             {
+                // j+A[j], is nothing but the
+                // farthest index that can be reached
+                // from j
                 if(i <= j+ A[j])
                 {
                     if(minJump[i] > minJump[j] + 1)
@@ -68,8 +72,8 @@ public class MinJumpToReachArrayEnd
     
   	public static void main(String [] args)
     {
-        int A[] = //{1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9};
-         {3,2,1,0,4};// this the case when you can't reach end
+        int A[] = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9};
+         //{3,2,1,0,4};// this the case when you can't reach end
         int n = A.length;
         
         out.println("Minimum jumps needed: "+minJumps(A, n));
