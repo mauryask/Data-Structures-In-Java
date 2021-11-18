@@ -88,7 +88,6 @@ static void levelOrderTraverse()
 
 	  public static void main(String [] args)
 		{
-		
 		  insertNode(8);
 		  insertNode(5);
 		  insertNode(3);
@@ -96,8 +95,7 @@ static void levelOrderTraverse()
 		  insertNode(9);
 		  insertNode(2);
 		  
-		  levelOrderTraverse();
-		 	  
+		  levelOrderTraverse();	  
 		}
 
 }

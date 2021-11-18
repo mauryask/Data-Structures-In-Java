@@ -1,8 +1,7 @@
 /* 
 * finding least commom ancestor of two 
 * nodes in a given binary tree
-* Basically it is the first common node in
-* the ancestors of the two given nodes
+* Basically it is the first common ancestors of the two given nodes
 * https://www.youtube.com/watch?v=F-_1sbnPbWQ
 */
 
@@ -39,6 +38,7 @@ public class FindingLCAofTwoNodes
    {
 	  if(root == null)
 		  return null;
+	  
 	  if(root.data == d1 || root.data == d2)
 		  return root;
 	  
