@@ -45,6 +45,14 @@ public class LinkedList
 	//deleting a node
 	static void delete()
 	{
+		if(head == null) // no node
+			return;
+		if(head.next == null) // one node
+		{
+			head = null;
+			return;
+		}
+			
 		Node temp,ptr;
 		ptr=head;
 		temp = head.next;

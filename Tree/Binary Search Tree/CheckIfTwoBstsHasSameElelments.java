@@ -84,7 +84,7 @@ public class CheckIfTwoBstsHasSameElelments
 			 root2 = root2.right;
 		 }
 		 
-		 return true;
+		 return (stack1.isEmpty() && stack2.isEmpty()) ? true : false;
 	 }
  
 

@@ -47,7 +47,7 @@ public class InsertNodeInSortedList
 	static void addNode(int data)
 	{ 				
 	   Node temp = new Node(data);
-	   Node p1 = null, p2 = head;
+	   Node prev = null, ptr = head;
 	   
 	   // if list is empty
        if(head == null)
@@ -55,29 +55,23 @@ public class InsertNodeInSortedList
 		   head = temp;
 		   return;
 	   }
-	   
-	   // if data is less than the head nodes
-	   if(head.data > data)
-	   {
-		   temp.next = head;
-		   head = temp;
-		   return;
-	   }
-	   
+	  
 	   // for rest of the cases	   
-	   while(p2 != null)
+	   while(ptr != null && ptr.data < data)
 	   {
-		   if(p2.data < data)
-		   {
-			   p1 = p2;
-			   p2 = p2.next;
-		   }
-		   else
-			   break;
+			   prev = ptr;
+			   ptr = ptr.next;
 	   }
 	   
-	   p1.next = temp;
-	   temp.next = p2;
+ 	    if(prev == null)
+		{
+			temp.next = head;
+			head = temp;
+			return;
+		}
+		
+	   prev.next = temp;
+	   temp.next = ptr;
 	}
 	
 	public static void main(String [] args) 
@@ -89,7 +83,7 @@ public class InsertNodeInSortedList
 		insertNode(35);
 		
 		displayList();
-		addNode(200);
+		addNode(5);
 		displayList();
 	}
 }

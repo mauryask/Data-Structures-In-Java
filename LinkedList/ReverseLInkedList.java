@@ -46,6 +46,7 @@ public class ReverseLInkedList
 		Node nextPtr, ptr, prevPtr;
 		ptr = head;
 		nextPtr = prevPtr = null;
+		
 		while(ptr!= null)
 		{
 			nextPtr = ptr.next;

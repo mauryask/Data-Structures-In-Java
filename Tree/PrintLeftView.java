@@ -1,9 +1,3 @@
-/**
-https://www.geeksforgeeks.org/print-right-view-binary-tree-2/
-******
-Time complexity  : O(n)
-Space complexity : O(n)
-*/
 import static java.lang.System.*;
 import java.util.*;
 
@@ -21,14 +15,15 @@ class Node
 	}
 }
 
-public class PrintRightView
+public class PrintLeftView
 {
 		static void rightView(Node root)
 		{
 			List<Node> q = new LinkedList<>();
 			q.add(root);
 			q.add(null);
-			Node prev = null;
+			
+			out.print(root.data+" ");
 			
 			while(!q.isEmpty())
 			{
@@ -37,8 +32,11 @@ public class PrintRightView
 				if(root == null)
 				{
 					if(!q.isEmpty())
+					{
+						out.print(q.get(0).data+" ");
 						q.add(null);
-					out.print(prev.data+" ");
+					}
+					
 					continue;    
 				}
 				
@@ -46,8 +44,6 @@ public class PrintRightView
 					q.add(root.left);
 				if(root.right != null)
 					q.add(root.right);
-				
-				prev = root;
         }
     }
 		
