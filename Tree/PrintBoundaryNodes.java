@@ -17,57 +17,109 @@ class Node
 
 public class PrintBoundaryNodes
 {
-	
-	/* Consider thios case
-	            20
-		  8         22
-	  4      12         25
-	    9  10  14     5
-		 
-	*/
-	static void printLeftNodes(Node root)
+	static void printLeftBoundary(Node root)
 	{
-		if(root == null)
-			return;
-		
-		while(root.left != null)
+		Stack<Node> stack = new Stack<>();
+		Node prev = null;
+		while(true)
 		{
-			out.print(root.data+" ");
-			root  = root.left;
+			while(root != null)
+			{
+				stack.push(root);
+				root = root.left;
+			}
+			
+			while(root == null && !stack.isEmpty())
+			{
+				root = stack.peek();
+				if(root.left == null && root.right == null)
+				{
+					stack.pop(); //remove leaf nodfe
+					for(Node x: stack)
+						out.print(x.data+" ");
+					return;
+				}
+				
+				if(root.right == null || root.right == prev)
+				{
+					prev = root;
+					root = null;
+					stack.pop();
+				}
+				else
+					root = root.right;
+			}
+			
+			if(stack.isEmpty())
+				break;
 		}
-		
-		if(root.left == null && root.right != null)
-			out.print(root.data+" ");
-	}
-		
-	static void printLeafNodes(Node root)
-	{
-		if(root == null)
-			return;
-		printLeafNodes(root.left);
-		printLeafNodes(root.right);
-		if(root.left == null && root.right == null)
-			out.print(root.data+" ");
 	}
 	
-	static void printRightNodes(Node root)
+    static void printLeafNodes(Node root)
 	{
-		Stack<Integer> stack = new Stack<>();
-        root = root.right;
+		Queue<Node> q = new ArrayDeque<>();
+		q.add(root);
 		
-		while(root.right != null)
-		{  
-			stack.push(root.data);
-			root = root.right;
+		while(!q.isEmpty())
+		{
+			root = q.poll();
+			
+			if(root.left == null && root.right == null)
+				out.print(root.data+" ");
+			else
+			{
+				if(root.left != null)
+					q.add(root.left);
+				if(root.right != null)
+					q.add(root.right);
+			}
 		}
-		
-		if(root.right == null && root.left != null)
-			stack.push(root.left.data);
-	    
-		while(!stack.isEmpty())
-			out.print(stack.pop()+" ");
 	}
 	
+	// Reverse post order traversal
+	// R->L->D
+	static void printRightBoundary(Node root)
+	{
+		Stack<Node> stack = new Stack<>();
+		Node prev = null;
+		while(true)
+		{
+			while(root != null)
+			{
+				stack.push(root);
+				root = root.right;
+			}
+			
+			while(root == null && !stack.isEmpty())
+			{
+				root = stack.peek();
+				if(root.right == null && root.left == null)
+				{
+					stack.pop(); //remove leaf node 
+					// since we dont wanrt to print 
+					// the root again
+					while(stack.size() != 1)
+					{
+						out.print(stack.pop().data+" ");
+					}
+					return;
+				}
+				
+				if(root.left == null || root.left == prev)
+				{
+					prev = root;
+					root = null;
+					stack.pop();
+				}
+				else
+					root = root.left;
+				
+				if(stack.isEmpty())
+					break;
+			}
+		}
+	}
+		
 	public static void main(String[] args)
 	{
 		  Node root = new Node(20);
@@ -78,17 +130,23 @@ public class PrintBoundaryNodes
 		  Node r6 = new Node(25);
 		  Node r7 = new Node(10);
 		  Node r8 = new Node(14);
+		  Node r9 = new Node(23);
+		  Node r10 = new Node(52);
+		  Node r11 = new Node(7);
 
 		  root.left = r2;
 		  root.right = r3;
 		  r2.left = r4;
 		  r2.right = r5;
-		  r3.right = r6;
-		  r5.left = r7;
-		  r5.right = r8;
-		  
-		  printLeftNodes(root);
-		  printLeafNodes(root);
-		  printRightNodes(root);
+		  r3.left = r6;
+		  r3.right = r7;
+		  r4.right = r8;
+		  r8.right = r10;
+		  r7.left = r9;
+		  r9.left = r11;
+
+         printLeftBoundary(root);
+		 printLeafNodes(root);
+		 printRightBoundary(root);
 	}
 }
