@@ -56,13 +56,10 @@ public class ReverseListInaGroupOfk
 		while(cur != null)
 		{
 			Node tail = cur;
-			int count = 0;
-			while(cur != null && count<k)
-			{
+			int count = k;
+			while(cur != null && count-->0)
 				cur = cur.next;
-				count++;
-			}
-			
+					
 			prev.next = reverseUtil(tail, k);
 			prev = tail;
 		}
