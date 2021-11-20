@@ -21,35 +21,74 @@ class Node
 
 public class BubbleSort
 {
+	// sort by swapping data only
    	static void sort(Node head)
 	{
-		Node p1 = null;
-		Node p2 = null;
-		Node temp = null;
+		Node ptr = null, tail = null;
 		
-		do
-		{		
-		    // in first iteration this loop is not
-			// going to be executed since (p2 = temp)
-			while(p2 != temp)
-			{ 
-				if(p1.data > p2.data)
+		while(head != tail) 
+		{
+			ptr = head;			
+			while(ptr.next != tail)
+			{
+			   if(ptr.data > ptr.next.data)
+			   {
+				   int data = ptr.data;
+				   ptr.data = ptr.next.data;
+				   ptr.next.data = data;
+			   }
+               ptr = ptr.next;			   
+			}			
+			tail = ptr;		
+		}	
+	}
+	
+	//sort by swapping nodes 	
+	static Node deepSort(Node head)
+	{
+		Node ptr =  null, tail = null, prev = null;
+		// optimization
+		boolean isSwapped = true;
+		
+		while(head != tail)
+		{
+			ptr = head;
+			prev = null;
+			isSwapped = false;
+			
+			while(ptr.next != tail)
+			{
+				if(ptr.data > ptr.next.data)
 				{
-					int val = p1.data;
-					p1.data = p2.data;
-					p2.data = val;
+			     	ptr = swap(ptr);
+					
+					if(prev == null)
+					   head = ptr;
+					else
+					   prev.next = ptr;	
+				   isSwapped = true;
 				}
 				
-				p1 = p2;
-				p2 = p2.next;			
-			}
+			    prev = ptr;
+		        ptr = ptr.next;
+			}	
+			 tail = ptr;
+			 
+            if(!isSwapped)
+              break;				
+		}
 		
-			temp = p1;
-			
-			p1= head;
-			p2 = head.next;
-			
-		}while(p2 != temp);
+		return head;
+	}
+	
+	static Node swap(Node head)
+	{
+		Node p1 = head;
+		Node p2 = head.next;	
+		Node temp = p2.next;
+		p2.next = p1;
+		p1.next = temp;
+        return p2;
 	}
 	
 	static void printList(Node head)
@@ -66,29 +105,30 @@ public class BubbleSort
 	
 	public static void main (String[] args)
 	{
-		Node head = new Node(50);
-		//Node n1 = new Node(20);
-		/*Node n2 = new Node(8);
-		Node n3 = new Node(10);
-		Node n4 = new Node(12);
+		Node head = new Node(10);
+		Node n1 = new Node(3);
+		Node n2 = new Node(5);
+		Node n3 = new Node(16);
+		Node n4 = new Node(11);
 		Node n5 = new Node(80);
 		Node n6 = new Node(52);
 		Node n7 = new Node(50);
 		Node n8 = new Node(45);
-		Node n9 = new Node(39);*/
+		Node n9 = new Node(39);
 		
-		//head.next = n1;
-		/*n1.next = n2;
+		head.next = n1;
+		n1.next = n2;
 		n2.next = n3;
 		n3.next = n4;
 		n4.next = n5;
 		n5.next = n6;
 		n6.next = n7;
 		n7.next = n8;
-		n8.next = n9;*/
+		n8.next = n9;
 		
 		printList(head);
-		sort(head);
+		//sort(head);
+		head = deepSort(head);
         printList(head);
 		
 	}
