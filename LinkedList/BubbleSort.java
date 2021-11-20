@@ -62,6 +62,9 @@ public class BubbleSort
 				{
 			     	ptr = swap(ptr);
 					
+					// if head is greater than the 
+					// the head.next
+					// update head after swap
 					if(prev == null)
 					   head = ptr;
 					else

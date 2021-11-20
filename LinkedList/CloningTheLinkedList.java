@@ -54,6 +54,7 @@ public class CloningTheLinkedList
 			 head2 = temp;
 		 else
 		  nextNode.next = temp;
+	  
 		 head = head.next;
 		 nextNode = temp;
 	  }	
