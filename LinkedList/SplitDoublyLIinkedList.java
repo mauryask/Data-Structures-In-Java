@@ -41,13 +41,28 @@ public class SplitDoublyLIinkedList
 	
 
     static void splitList(Node head)
-	{
+	{		
 		Node p1 = head;
 		Node p2 = head;
 		Node p1Prev = null;
 		Node p2Prev = null;
 		Node head1 = null, head2 = null;
-		
+	
+	    // One node 
+  		if(head.next == head)
+		{
+			head1 = head;
+			head2 = null;
+		}
+		// two node 
+		if(head.next.next == head)
+		{
+			head1 = head;
+			head2 = head.next;
+			head1.next = head1;
+			head2.next = head2;
+		}
+	
 		do
 		{
 			p1Prev = p1;
@@ -56,32 +71,16 @@ public class SplitDoublyLIinkedList
 			p2 = p2.next.next;
 			
 		}while(p2 != head && p2.next != head);
-		
-		// when the number of noedes is less than 3
-		
-		// on node
-		if(p1 == p2)
-		{
-			head1 = head;
-			head2 = null; // doubt
- 		}
-        // two nodes 
-        else if(p1Prev == p2Prev)
-		{
-			head1 = head;
-			head1.next = head1;
-			head2 = p1;
-			p1.next = p1;
-		}			
-		// more than two nodes
-		else if(p2 == head) 
+					
+		// even number of nodes
+	    if(p2 == head) 
 		{
 			head1 = head;
 			head2 = p1;
 			p1Prev.next = head1;
 			p2Prev.next.next = head2;
 		}
-		else if(p2.next == head)
+		else if(p2.next == head) // odd number of nodes
 		{
 			head1 = head;
 			head2 = p1.next;
