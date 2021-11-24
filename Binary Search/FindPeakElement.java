@@ -28,6 +28,9 @@ public class FindPeakElement
         
         while(start <= end)
         {
+			if(start == end)
+				return start;
+			
             int mid = start + (end-start)/2;
             
 			// if mid is neither first nor last element
@@ -65,7 +68,7 @@ public class FindPeakElement
 	
 	public static void main(String [] args)
 	{
-		int A[] = {30,4,52,0,1,7,9,5};
+		int A[] = {8, 10, 20, 80, 100, 200, 400, 500, 3, 2, 1};
 		int n = A.length;
 		
 		out.println(findPeak(A, n));
