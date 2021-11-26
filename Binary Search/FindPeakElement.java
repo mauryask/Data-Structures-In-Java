@@ -27,10 +27,7 @@ public class FindPeakElement
         int end = n-1;
         
         while(start <= end)
-        {
-			if(start == end)
-				return start;
-			
+        {			
             int mid = start + (end-start)/2;
             
 			// if mid is neither first nor last element
