@@ -44,6 +44,7 @@ public class ReverseListInaGroupOfk
 			out.print(ptr.data+" ");
 			ptr = ptr.next;
 		}
+		
 		out.println();
 	}
 	

@@ -5,7 +5,6 @@
 // element at each index reprseents the 
 // length of the jump you can take
 https://leetcode.com/problems/jump-game/
-// No Bruteforce available for this 
 */
 
 import static java.lang.System.*;
@@ -13,6 +12,32 @@ import java.util.*;
 
 public class MinJumpToReachArrayEnd
 {
+   
+  // Bruteforce Solution
+  // T(n): O(n*n)
+  // S(n) : O(1)
+  // consider all the position where we can reach from 
+  // the current position
+  
+   static int minJump = Integer.MAX_VALUE;
+  
+   static int solve(int[]  A, int n,int start)
+   {
+       if(start >= n)
+           return Integer.MAX_VALUE;
+       
+       if(start == n-1)
+           return 0;
+
+      int jumpSize = start + A[start];
+           
+      for(int j = start+1; j<= jumpSize ; j++)
+        minJump = Math.min(minJump, solve(A, n, j));
+    
+       return minJump == Integer.MAX_VALUE ? minJump : minJump+1;
+   }
+    
+    // Dp solution
     static int minJumps(int A[], int n)
     {
         /*
@@ -35,7 +60,7 @@ public class MinJumpToReachArrayEnd
                 // from j
                 if(i <= j+ A[j])
                 {
-                    if(minJump[i] > minJump[j] + 1)
+                    if(minJump[i] >= minJump[j] + 1)
                     {
                          minJump[i] = minJump[j] + 1;
                          jumpPath[i] = j;
@@ -65,6 +90,7 @@ public class MinJumpToReachArrayEnd
             temp = jumpPath[temp];
         }
         out.println("Path followed to reach the end: ");
+        list.add(0,0);
         for(int x : list)
             out.print(x+" ");
         out.println();
@@ -73,9 +99,11 @@ public class MinJumpToReachArrayEnd
   	public static void main(String [] args)
     {
         int A[] = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9};
-         //{3,2,1,0,4};// this the case when you can't reach end
+            //{2,3,1,1,4};
+        //{3,2,1,0,4};// this the case when you can't reach end
         int n = A.length;
         
         out.println("Minimum jumps needed: "+minJumps(A, n));
+        //out.println(solve(A, n, 0));
     }
 }

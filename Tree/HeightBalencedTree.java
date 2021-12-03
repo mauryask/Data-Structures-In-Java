@@ -2,9 +2,10 @@
 //https://www.geeksforgeeks.org/how-to-determine-if-a-binary-tree-is-balanced/
 //checking whether tree is height balanced or not
 //but this is not a good algorithm for this
-//since rime complexity is :  O(n^2) 
+//since time complexity is :  O(n^2) 
 //there is a better algorithm for this
 //see HeightBalancedTree2
+
 package com.pnstech;
 
 class Node
@@ -45,6 +46,24 @@ public class HeightBalencedTree1 {
 		return 1 + Math.max(height(root.left), height(root.right));
 	}
 	
+	static boolean balanced = false;
+	
+	static int isBalanced2(Node root)
+	{
+		if(root == null)
+		{
+			balanced = true;
+			return 0;
+		}
+		
+		int lh = isBalanced2(root.left);
+		int rh = isBalanced2(roo.right);
+		
+		if(Math.abs(lh-rh-2 <= 1))
+			balanced = true;
+		
+		return Math.max(lh, rh)+1;
+	}
 	
 	public static void main(String[] args) {
 		
@@ -55,10 +74,13 @@ public class HeightBalencedTree1 {
 		root.left.right = new Node(5);
 		root.left.left.left = new Node(8);
 		
-		if(isBalenced(root))
+		/*if(isBalenced(root))
 			System.out.println("Tree is balenced!");
 		else
-			System.out.println("Tree is not balenced!");
+			System.out.println("Tree is not balenced!");*/
+		
+		isBalanced2(root);
+		out.println(balenced);
 		
 	}
 

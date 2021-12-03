@@ -1,4 +1,4 @@
-/**
+/*
 Time complexity  : O(n)
 Space complexity : O(n)
 The program also demonstrates ho to print the 

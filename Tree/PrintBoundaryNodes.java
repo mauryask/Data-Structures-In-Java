@@ -2,6 +2,7 @@
 
 import static java.lang.System.*;
 import java.util.*;
+
 class Node
 {
 	int data;
@@ -34,7 +35,7 @@ public class PrintBoundaryNodes
 				root = stack.peek();
 				if(root.left == null && root.right == null)
 				{
-					stack.pop(); //remove leaf nodfe
+					stack.pop(); //remove leaf node
 					for(Node x: stack)
 						out.print(x.data+" ");
 					return;
