@@ -1,5 +1,3 @@
-// boundary traversal of the binary tree
-
 import static java.lang.System.*;
 import java.util.*;
 
@@ -18,107 +16,49 @@ class Node
 
 public class PrintBoundaryNodes
 {
-	static void printLeftBoundary(Node root)
+	// O(n)
+	static void leftBoundary(Node root, List<Integer> list)
 	{
-		Stack<Node> stack = new Stack<>();
-		Node prev = null;
-		while(true)
+		if(root == null)
+			return;
+		if(root.left != null)
 		{
-			while(root != null)
-			{
-				stack.push(root);
-				root = root.left;
-			}
-			
-			while(root == null && !stack.isEmpty())
-			{
-				root = stack.peek();
-				if(root.left == null && root.right == null)
-				{
-					stack.pop(); //remove leaf node
-					for(Node x: stack)
-						out.print(x.data+" ");
-					return;
-				}
-				
-				if(root.right == null || root.right == prev)
-				{
-					prev = root;
-					root = null;
-					stack.pop();
-				}
-				else
-					root = root.right;
-			}
-			
-			if(stack.isEmpty())
-				break;
+			list.add(root.data);
+			leftBoundary(root.left, list);
+		}
+		else if(root.right != null)
+		{
+			list.add(root.data);
+			leftBoundary(root.right, list);
 		}
 	}
 	
-    static void printLeafNodes(Node root)
+	// O(n)
+	static void leafNode(Node root, List<Integer> list)
 	{
-		Queue<Node> q = new ArrayDeque<>();
-		q.add(root);
-		
-		while(!q.isEmpty())
-		{
-			root = q.poll();
-			
-			if(root.left == null && root.right == null)
-				out.print(root.data+" ");
-			else
-			{
-				if(root.left != null)
-					q.add(root.left);
-				if(root.right != null)
-					q.add(root.right);
-			}
-		}
+		if(root == null)
+			return;
+		leafNode(root.left, list);
+		if(root.left == null && root.right == null)
+			list.add(root.data);
+		leafNode(root.right, list);
 	}
 	
-	// Reverse post order traversal
-	// R->L->D
-	static void printRightBoundary(Node root)
+	// O(n)
+	static void rightBoundary(Node root, List<Integer> list)
 	{
-		Stack<Node> stack = new Stack<>();
-		Node prev = null;
-		while(true)
-		{
-			while(root != null)
-			{
-				stack.push(root);
-				root = root.right;
-			}
-			
-			while(root == null && !stack.isEmpty())
-			{
-				root = stack.peek();
-				if(root.right == null && root.left == null)
-				{
-					stack.pop(); //remove leaf node 
-					// since we dont wanrt to print 
-					// the root again
-					while(stack.size() != 1)
-					{
-						out.print(stack.pop().data+" ");
-					}
-					return;
-				}
-				
-				if(root.left == null || root.left == prev)
-				{
-					prev = root;
-					root = null;
-					stack.pop();
-				}
-				else
-					root = root.left;
-				
-				if(stack.isEmpty())
-					break;
-			}
-		}
+	   if(root == null)
+        return;
+       if(root.right != null)
+	   {
+		   rightBoundary(root.right, list);
+		   list.add(root.data);
+	   }		   
+	   else if(root.left != null)
+	   {
+		   rightBoundary(root.left, list);
+		   list.add(root.data);
+	   }
 	}
 		
 	public static void main(String[] args)
@@ -146,8 +86,11 @@ public class PrintBoundaryNodes
 		  r7.left = r9;
 		  r9.left = r11;
 
-         printLeftBoundary(root);
-		 printLeafNodes(root);
-		 printRightBoundary(root);
+          List<Integer> list = new ArrayList<>();
+		  list.add(root.data);
+		  leftBoundary(root.left, list);
+		  leafNode(root, list);
+		  rightBoundary(root.right, list);
+		  out.println(list);
 	}
 }
