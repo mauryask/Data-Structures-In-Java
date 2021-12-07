@@ -4,6 +4,9 @@
 * Time complexity  : O(V^3)
 * Space complexity : O(V^2)
 * Works for both having +ve and -ve edges
+** Note:- Here we have taken directed graph
+** but t works for both directed as well as 
+** undirected graphs
 */
 
 class AllPairShortestPath

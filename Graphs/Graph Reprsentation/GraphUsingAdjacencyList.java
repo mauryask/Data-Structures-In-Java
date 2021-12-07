@@ -26,11 +26,12 @@ class Graph
 	}
 	
 	List<Edge> G[]; //array contains lists and lists of edge object
-	
+	int n;
 	public Graph(int n)
 	{
+		this.n = n;
 		G = new LinkedList[n];
-		for(int i=0; i<G.length; i++)
+		for(int i=0; i<n; i++)
 			G[i] = new LinkedList<Edge>();
 	}	
 	

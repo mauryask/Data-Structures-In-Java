@@ -2,18 +2,18 @@ import java.util.*;
 class Graph 
 {
 	int v_num;
-	int G[][];
+	int adj[][];
 	
 	Graph(int v_num)
 	{
 		this.v_num = v_num;
-		G = new int[v_num][v_num];
+		adj = new int[v_num][v_num];
 	}
 	
 	void addEdge(int src, int dest)
 	{
-		  G[src][dest] = 1;	
-	      G[dest][src] = 1;
+		  adj[src][dest] = 1;	
+	      adj[dest][src] = 1;
 	}
 	
   void bfs(int src)
@@ -30,12 +30,12 @@ class Graph
 		  
 		  System.out.print(u+" ");
 		  
-		  for(int i=0;i<v_num; i++)
+		  for(int v=0; v<v_num; v++)
 		  {
-			  if(G[u][i] == 1 && !visited[i])
+			  if(adj[u][v] == 1 && !visited[v])
 			  {
-				  q.add(i);
-				  visited[i] = true;
+				  q.add(v);
+				  visited[v] = true;
 			  }				 
 		  }
 	  }

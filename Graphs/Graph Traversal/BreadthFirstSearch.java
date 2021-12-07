@@ -62,7 +62,7 @@ class Graph
 		visited[s] = true;
 		queue.add(s);
 		
-		while(queue.size() != 0)
+		while(!queue.isEmpty())
 		{
 			int u = queue.poll(); //retrievs and removes head of the queue
 			System.out.print(u+" ");			
@@ -76,7 +76,6 @@ class Graph
 			  }
 			}
 		}
-		
 	}
 }
 
