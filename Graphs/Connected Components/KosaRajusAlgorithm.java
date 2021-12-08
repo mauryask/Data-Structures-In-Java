@@ -1,6 +1,12 @@
 /*
 * T(n) : O(V+E)
 * S(n) : O(V)
+**Steps: 
+1: Apply DFS store the vertices in stack 
+before backtracking
+2: reverse the edges 
+3: aply DFS by removing the vertices from stack
+at the same time count the number of components
 */
 
 import static java.lang.System.*;
