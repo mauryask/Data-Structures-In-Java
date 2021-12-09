@@ -1,114 +1,113 @@
 /*
+* Kosa Raju's Algorithm 
+* To find number of strongly connected 
+* components
 * T(n) : O(V+E)
-* S(n) : O(V)
-**Steps: 
-1: Apply DFS store the vertices in stack 
-before backtracking
-2: reverse the edges 
-3: aply DFS by removing the vertices from stack
-at the same time count the number of components
+* S(n) : O(V+E)
 */
-
 import static java.lang.System.*;
 import java.util.*;
 
 public class KosaRajusAlgorithm
 {
-   static List<Integer> adj[];
-   
-   KosaRajusAlgorithm(int n)
-   {
-	   adj = new LinkedList[n];
-	   for(int i=0; i<n; i++)
-		   adj[i] = new LinkedList<Integer>();
-   }
-	
-	@Override
-	public String toString()
+	static int scc(List<ArrayList<Integer>> graph, int n)
 	{
-	  String result = "";
-	  for(int i=0; i<adj.length; i++)
-		  result += i+" => " + adj[i]+ "\n";
-	  return result;
+	  Stack<Integer> stack = new Stack<>();
+	  boolean visited[] = new boolean[n];
+	  
+	  for(int i=0; i<n; i++)
+	  {
+		  if(!visited[i])
+		  {
+			  stack.push(i);
+			  dfs1(i, graph, stack, visited);
+		  }	  
+	  }
+	  
+	  graph = revEdge(graph, n);
+	  
+	  Arrays.fill(visited, false);
+	  int count = 0;
+	  
+	  while(!stack.isEmpty())
+	  {
+		  int u  = stack.pop();
+		  if(!visited[u])
+		  {
+			  count++;
+			  dfs2(u, graph, visited);
+		  }
+	  }
+	  
+	  return count;
 	}
-	
-	static void addEdge(int u,int v)
-	{
-		adj[u].add(v);
-	}
-	
-	static void dfs(int u, boolean visited[], Stack<Integer> stack)
-	{	
-		visited[u] = true;
 		
-		for(int v : adj[u])
+	// O(V+E)
+	static void dfs1(int u, List<ArrayList<Integer>> graph, Stack<Integer> stack, boolean visited[])
+	{
+	   if(!visited[u])
+		   visited[u] = true;
+
+       for(int v : graph.get(u))
+	   {
+		   if(!visited[v])
+		   {
+			   dfs1(v, graph, stack, visited);
+			   stack.push(v);
+		   }
+	   }		   
+	}
+	
+	// O(V+E)
+	static List<ArrayList<Integer>> revEdge(List<ArrayList<Integer>> graph, int n)
+	{
+		List<ArrayList<Integer>> g = 
+		new ArrayList<ArrayList<Integer>>();
+		
+		for(int i=0; i<n; i++)
+			g.add(new ArrayList<Integer>());
+		
+		for(int i=0; i<n; i++)
+		{
+		    for(int u : graph.get(i))
+				g.get(u).add(i);
+		}
+		
+		return g;
+	}
+	
+	// O(V+E)
+	static void dfs2(int u, List<ArrayList<Integer>> graph, boolean visited[])
+	{
+		if(!visited[u])
+			visited[u] = true;
+		
+		for(int v : graph.get(u))
 		{
 			if(!visited[v])
-				dfs(v, visited, stack);
-		}	
-		
-		stack.push(u);
-	}
-	
-	static void dfs2(int u, boolean[] visited)
-	{
-		visited[u] = true;
-		
-		for(int v : adj[u])
-		{
-			if(!visited[v])
-				dfs2(v, visited);
+				dfs2(v, graph, visited);
 		}
 	}
 	
-   public static void main(String [] args)
-   {
-	   int n = 13;
-	   
-	   KosaRajusAlgorithm g = new KosaRajusAlgorithm(n);
-	  
-	   boolean visited[] = new boolean[n];
-	   Stack<Integer> stack = new Stack<>();
-	   int count = 0;
-	   
-	   g.addEdge(0,2);
-	   g.addEdge(2,3);
-	   g.addEdge(3,4);
-	   g.addEdge(4,2);
-	   g.addEdge(4,5);
-	   g.addEdge(3,2);
-	   g.addEdge(3,7);
-	   g.addEdge(8,3);
-	   g.addEdge(8,5);
-	   g.addEdge(2,9);
-	   g.addEdge(9,6);
-	   g.addEdge(6,2);
-	   g.addEdge(6,12);
-	   g.addEdge(7,10);
-	   g.addEdge(10,8);
-	   g.addEdge(8,7);
-	   g.addEdge(8,11);
-	  	  	   
-	   out.println(g);
-
-	   for(int i = n-1; i>=0; i--)
-		   if(!visited[i])
-			   g.dfs(i, visited, stack);
-		   
-	   out.println(stack);	
-	   
-	   Arrays.fill(visited, false); 	    
-	   
-       for(int u : stack)
-	   {
-		   if(!visited[u])
-		   {
-			   count++;
-			   g.dfs2(u, visited);
-		   }
-	   }
-
-      out.println(count);	
-	  
-   }   
+	public static void main(String [] args)
+	{
+		Scanner sc =  new Scanner(in);
+		int n = sc.nextInt();
+		int e = sc.nextInt();
+		
+        List<ArrayList<Integer>> graph =  
+		new ArrayList<ArrayList<Integer>>();
+		
+		for(int i=0; i<n; i++)
+			graph.add(new ArrayList<Integer>());
+		
+        while(e-->0)
+		{
+			int u = sc.nextInt();
+			int v = sc.nextInt();
+			graph.get(u).add(v);
+		}			
+		
+		out.println(scc(graph, n));
+	}
 }
