@@ -1,6 +1,9 @@
 /*
 ** https://www.geeksforgeeks.org/check-two-nodes-cousins-binary-tree/
+** T(n) : O(n) 
+** S(n) : O(n)
 */
+
 import static java.lang.System.*;
 import java.util.*;
 
@@ -17,72 +20,74 @@ class Node
 	}
 }
 
-class Parent 
-{
-	int parent;
-    int level;
-		
-	Parent(int parent, int level)
-	{
-		this.parent = parent;
-		this.level = level;
-	}		
-}
-
 public class CheckIfTwoNodesAreCousins
 {
-	// T(n) : O(n)
-	// S(n) : O(n)
-	
 	static boolean isCousin(Node root, int a, int b)
-	{
-		/*
-		* Map maintains parent and level
-		* number of the node
-		*/
-		
-		Map<Integer, Parent> map = new HashMap<>();
+	{		
 		List<Node> q = new LinkedList<>();
 		q.add(root);
-		// parent of node is -1 and level is 0
-		map.put(root.data, new Parent(-1, 0));
-		boolean aFound = false;
-		boolean bFound = false;
+		q.add(null);
 		
+	    Node aParent = null;
+		Node bParent = null;
+		int aLevel = 0;
+		int bLevel = 0;
+		int level = 0;
+
 		while(!q.isEmpty())
-		{
-			// Don't need to traverse the 
-			// tree further if both nodes have been found
-			
-			if(aFound && bFound)
+		{	
+			// check if both nodes are found
+			// no more traversal required
+            if(aParent != null && bParent != null)
 				break;
-			
+         	
 			root = q.remove(0);
-			int level = map.get(root.data).level;
-			
-			if(root.data == a)
-				aFound = true;
-			if(root.data == b)
-				bFound = true;
-			
-			if(root.left != null)
+		     
+            if(root == null)
 			{
-				q.add(root.left);
-				map.put(root.left.data, new Parent(root.data, level+1));
+               if(!q.isEmpty())
+					q.add(null);	
+			   level++;				
+			   
+			   continue;
+			}	
+			
+	   	    if(root.left != null)
+			{
+			   if(root.left.data == a)
+			   {
+				   aParent = root;
+				   aLevel = level+1;
+			   }
+			   else if(root.left.data == b)
+			   {
+				   bParent = root;
+				   bLevel = level+1;
+			   }
+			   
+			   q.add(root.left);
 			}
 			if(root.right != null)
 			{
-				q.add(root.right);
-				map.put(root.right.data, new Parent(root.data, level+1));
+			   if(root.right.data == a)
+			   {
+				   aParent = root;
+				   aLevel = level+1;
+			   }
+			   else if(root.right.data == b)
+			   {
+				   bParent = root;
+				   bLevel = level+1;
+			   }
+			   
+			   q.add(root.right);
 			}				
 		}
-		
-		// if nodes rae not present in the tree
-		// return get null
-		Parent p1 = map.getOrDefault(a, null);
-		Parent p2 = map.getOrDefault(b, null);
-		
-		return (p1!=null && p2!=null) && (p1.parent != p2.parent) && (p1.level == p2.level);
+				
+		// check if parents are not null at the same time
+		return (aParent != null && bParent != null) 
+		&& (aParent != bParent)
+		&& (aLevel== bLevel);
 	}
 	
 	public static void main(String[] args)
@@ -110,6 +115,6 @@ public class CheckIfTwoNodesAreCousins
 		  r7.left = r9;
 		  r9.left = r11;
           
-		  out.println(isCousin(root, 15, 7));
+		  out.println(isCousin(root, 4,10));
  	}
 }
