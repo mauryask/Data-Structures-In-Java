@@ -18,6 +18,8 @@ public class UnionBySizeWithPathCompression
 		/*
 		* Initialize the size of each set to 1
 		* and parent with the element itself
+		**** here in parent the set elements are reprsented by indices
+		** and the set names are reprsented by elements at particular index
 		*/
 			
 		for(int i=0; i<n; i++)

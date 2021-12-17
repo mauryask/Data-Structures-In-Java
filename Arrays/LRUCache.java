@@ -26,6 +26,13 @@ public class LRUCache
 {	
     static void referPage(int pages[], int cacheSize)
 	{
+		// the reason for using LinkedList instead
+		// of ArrayDeque is that ArrayDeque uses resizable array and on removing an elemnt from middle 
+		// it requires searching + deleting + shifting 
+		// But in case of LinkedList searching + deletion 
+		// But LinkedList internally uses doubly linkedlist 
+		// hence it takes more memory
+		
 		Deque<Integer> q = new LinkedList<>();
 		Set<Integer> set = new HashSet<>();
 		int pageFault  = 0;
