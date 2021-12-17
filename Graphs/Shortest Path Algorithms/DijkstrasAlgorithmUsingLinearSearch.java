@@ -59,7 +59,6 @@ public class DijkstrasAlgorithmUsingLinearSearch
 		Arrays.fill(parent, -1);
 		
 		distance[src] = 0;
-		visited[src] = true;
 		
 		for(int i=1; i<=n; i++)
 		{
@@ -67,7 +66,7 @@ public class DijkstrasAlgorithmUsingLinearSearch
 				
 			for(Edge e: adj[u])
 			{
-				if(distance[u] != Integer.MAX_VALUE && !visited[e.v] && distance[u] + e.w < distance[e.v])
+				if(!visited[e.v] && distance[u] + e.w < distance[e.v])
 				{
 					distance[e.v] = distance[u] + e.w;
 					parent[e.v] = u;
@@ -85,11 +84,7 @@ public class DijkstrasAlgorithmUsingLinearSearch
 	static int findMin(int[] distance, boolean[] visited, int n)
 	{
 		int min = Integer.MAX_VALUE;
-		/*
-		* By default take 0 as min index 
-		* to prevent ArrayIndexOutOfBounds
-		*/
-		int minIndex = 0;
+		int minIndex = -1;
 		
 		for(int i=0; i<n; i++)
 		{
