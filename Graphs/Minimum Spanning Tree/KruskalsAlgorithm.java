@@ -15,7 +15,7 @@ public class KruskalsAlgorithm
 	static class Edge 
 	{
 		int u, v, w;
-		Edge(){}
+	
 		Edge(int u, int v, int w)
 		{
 			this.u = u;
@@ -30,15 +30,21 @@ public class KruskalsAlgorithm
 		}
 	}    
 	
-	static int find(int x, int parent[])
+	static void makeSet(int parent[], int n)
 	{
-		int temp = x;
-		while(parent[temp] != temp)
-			temp = parent[temp];
-		parent[x] = temp;
-		return temp;
+		for(int i=0; i<n; i++)
+			parent[i] = i;
 	}
 	
+	static int find(int ele, int parent[])
+	{
+		int temp = ele;
+		while(parent[temp] != temp)
+			temp = parent[temp];
+		parent[ele] = temp;
+		return temp;
+	}
+		
 	static void union(int xSet, int ySet,
 	int parent[], int rank[])
 	{
@@ -69,8 +75,7 @@ public class KruskalsAlgorithm
 		int parent[] = new int[n];
 		int rank[] = new int[n];
 		
-		for(int i=0; i<n; i++)
-			parent[i] = i;
+		makeSet(parent, n);
 		
 		int j = 0;
 		
