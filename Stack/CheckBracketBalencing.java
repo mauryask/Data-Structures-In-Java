@@ -17,7 +17,7 @@ public class CheckBracketBalencing
 		
 		for(int i=0; i<n; i++)
 		{
-			if(ch[i] == '{' || ch[i] == '(' || ch[i] == '[')
+			if(Arrays.asList('{', '(', '[').contains(ch[i]))
 				stack.push(ch[i]);
 			/*
 			* if a closing bracket encountered
@@ -26,9 +26,7 @@ public class CheckBracketBalencing
 			* corresponing to the closing one
 			* pop it from stack
 			*/
-			else if(ch[i] == '}'
-				|| ch[i] == ')' 
-				|| ch[i] == ']')
+			else if(Arrays.asList('}', ')', ']').contains(ch[i]))
 			{
 				/*
 				* Stck will be empty if there are more 

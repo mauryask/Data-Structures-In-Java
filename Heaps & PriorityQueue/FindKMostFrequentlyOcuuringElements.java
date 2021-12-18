@@ -7,18 +7,6 @@ import java.util.*;
 
 public class FindKMostFrequentlyOcuuringElements 
 {
-	static class Util 
-	{
-		int element;
-		int frequency;
-		
-		Util(int element, int frequency)
-		{
-			this.element = element;
-			this.frequency = frequency;
-		}
-	}
-	
 	static void printKMostFrequentElements(int[] A, int n, int k)
 	{
 		Map<Integer, Integer> map = new HashMap<>();
@@ -29,20 +17,21 @@ public class FindKMostFrequentlyOcuuringElements
 		* Min Heap 
 		* put the elements based on the frequency
 		*/
-		Queue<Util> q = new PriorityQueue<>((a, b)->{
-			return a.frequency - b.frequency;
+		
+		Queue<Integer> q = new PriorityQueue<>((a, b)->{
+			return map.get(a) - map.get(b);
 		});
 		
 		for(Map.Entry<Integer, Integer> m : map.entrySet())
 		{
-			q.add(new Util(m.getKey(), m.getValue()));
+			q.add(m.getKey());
 			
 			if(q.size() > k)
 				q.remove();
 		}
 		
 		while(!q.isEmpty())
-			out.print(q.remove().element+" ");
+			out.print(q.remove()+" ");
 	}
 	
 	public static void main(String [] args)
