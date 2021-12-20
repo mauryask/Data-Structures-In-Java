@@ -105,6 +105,7 @@ public class KruskalsAlgorithm
 	   * This array holds the resulting MST
 	   * Size is |v|-1, since MST contains |v|-1 edges
  	   */
+	   
 		Edge[] result = new Edge[n-1];
 				
 		edge[0] = new Edge(0,1,4);

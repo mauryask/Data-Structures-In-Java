@@ -54,7 +54,7 @@ public class KahnsAlgorithm
 	{
 		List<Integer> q = new LinkedList<>();
 		
-		/**
+		/*
 		* add all the vertices in the Queue
 		* having indegree 0
 		* Because there could be multiple vertices 
@@ -69,8 +69,6 @@ public class KahnsAlgorithm
 			if(indegree[i] == 0)
 				q.add(i);
 		}
-		
-	
 		
 		int count = 0;
 		

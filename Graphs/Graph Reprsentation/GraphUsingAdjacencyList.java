@@ -43,9 +43,9 @@ class Graph
 	
 	@Override
 	public String toString()
-	{
+	{ 
 		String result = "";
-		for(int i=0; i<G.length; i++)
+		for(int i=0; i<n; i++)
 			result += i+" ==> "+G[i]+"\n";
 		return result;
 	}
@@ -75,6 +75,6 @@ public class GraphUsingAdjacencyList
 		g.addEdge(9,3,16);
 		
 		System.out.println(g); //toString() method will be called
-		System.out.println(g.isConnected(7,5));
+		System.out.println(g.isConnected(0,2));
 	}
 }
