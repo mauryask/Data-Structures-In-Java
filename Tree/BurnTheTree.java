@@ -53,28 +53,36 @@ public class BurnTheTree
   
    static int maxTime =  Integer.MIN_VALUE;
   
-   static void printNode(Node root, Node blocker, int time)
+   static void printNode(Node root, Node blocker, int time, List<Integer> list)
    {
        if(root == null || root == blocker)
            return; 
        
+	   //  recording the sequence in which the 
+       //  the tree wil be burnt 	   
+	   list.add(root.data);
+       
        if(root.left == null || root.right == null)
             maxTime  = Math.max(maxTime, time);
         
-       printNode(root.left, blocker, time+1);
-       printNode(root.right, blocker, time+1);
+       printNode(root.left, blocker, time+1, list);
+       printNode(root.right, blocker, time+1, list);
    }
 
    static void printKfarNodes(Node root, Node target)
    {
         List<Node> path = new ArrayList<>();
         nodeToRootPath(root,target, path); 
+		
+		List<Integer> list =  new ArrayList<>();
         
         int time = 0;
         
         for(int i=0 ; i<path.size(); i++)
-            printNode(path.get(i), i==0? null : path.get(i-1), time+i);
+            printNode(path.get(i), i==0? null : path.get(i-1), time+i, list);
         
+		for(int x: list)
+			out.print(x+" ");
         out.println(maxTime);
    }
   

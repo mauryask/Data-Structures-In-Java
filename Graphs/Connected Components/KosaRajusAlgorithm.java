@@ -6,7 +6,7 @@
 * S(n) : O(V+E)
 */
 import static java.lang.System.*;
-import java.util.*;
+import java.util.*; 
 
 public class KosaRajusAlgorithm
 {
@@ -18,10 +18,7 @@ public class KosaRajusAlgorithm
 	  for(int i=0; i<n; i++)
 	  {
 		  if(!visited[i])
-		  {
-			  stack.push(i);
 			  dfs1(i, graph, stack, visited);
-		  }	  
 	  }
 	  
 	  graph = revEdge(graph, n);

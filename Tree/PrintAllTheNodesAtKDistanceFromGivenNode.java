@@ -77,6 +77,8 @@ public class PrintAllTheNodesAtKDistanceFromGivenNode
         
         for(int i=0 ; i<path.size(); i++) // O(n*k)
         {
+			if(k-i < 0) // prevent unneccesary calls
+				break;
             printNode(path.get(i), i==0? null : path.get(i-1), k-i);
             out.println();
         }
