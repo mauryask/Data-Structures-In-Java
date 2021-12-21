@@ -37,6 +37,7 @@ public class ReverseInPairsRecursively
 		Node p2 = head.next;
 		Node temp = p2.next;
 		p2.next = p1;
+		
 		if(temp == null || temp.next == null)
 		{
 			p1.next = temp;
