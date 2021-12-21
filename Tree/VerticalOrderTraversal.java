@@ -11,7 +11,7 @@
 import static java.lang.System.*;
 import java.util.*;
 
-class Node 
+class Node  
 {
 	int data;
 	Node left, right;

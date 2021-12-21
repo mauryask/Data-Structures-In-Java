@@ -20,7 +20,7 @@ class Node
 	}
 }
 
-public class ShortestParthLengthBetweenTwoGivenNodes
+public class shortestParthLengthBetweenTwoGivenNodes
 {	
   static Node createBST(Node root, int data)
   {
@@ -68,88 +68,43 @@ public class ShortestParthLengthBetweenTwoGivenNodes
 		  return root;
 	  else 
 		  return left != null ? left : right;
-  }
-  
-  
-  // The shortest path is going to be
-  // sum of distances of both nodes from their
-  // lowest common ancestor
-  
-  
-   static Stack<Integer> stack = null;
-   static int findpathLength(Node root, int n1, int n2)
+  } 
+
+   static int dist = 0;
+   static List<Integer> path = new ArrayList<>();
+   
+   static boolean findPAthLength(Node root, int d1, int d2)
    {
 	   if(root == null)
-		   return -1;
-	   
-	   // find the LCA
-	   Node lca = findLCA(root, n1, n2);
-	   
-	   if(lca == null)
-		   return -1;
-	   
-	   // distance of first node from lca
-	   stack = new Stack<>();
-	   int d1 = findDistance(lca, n1);
-	  // print stack form bottom to top
-	  
-	  for(int x : stack)
-		  out.print(x+" ");
-	   
-	   // distance of second node from lca
-	   stack = new Stack<>();
-	   int d2 = findDistance(lca, n2);
-	   stack.pop();
-	   // print stack from top to bottom
-	   
-	   while(!stack.isEmpty())
-		   out.print(stack.pop()+" ");
-	   
-	   // the shortest path length
-	   return d1 + d2;
-   }
-   
-     // T(n) = O(n)
-     // S(n) = O(n)
-   static int findDistance(Node node, int n)
-   { 
-	   if(node == null)
-		   return -1;
-
-	   if(node.data == n) 
+		   return false;
+	   if(root.data ==d1 || root.data == d2)
 	   {
-		   stack.push(node.data);
-		   return 0;
+		   dist++;
+		   path.add(root.data);
+		   return true;
 	   }
 	   
-	   int ld = findDistance(node.left, n);
-	   
-	   // ld is not negative means 
-	   //required node found in the left subtree
-	   if(ld != - 1) 
+	   boolean left = findPAthLength(root.left,d1, d2);
+	   if(left)
 	   {
-		   stack.push(node.data);
-		   return ld+1;
+		   dist++;
+		   path.add(root.data);
+		   return true;
 	   }
-	   else // if ld is -ve make a call for right subtree
+	   else
 	   {
-		   int rd = findDistance(node.right, n);
-		   if(rd == -1)
-			   return -1;
-		   else
+		   boolean right  = findPAthLength(root.right, d1, d2);
+		   if(right)
 		   {
-			   stack.push(node.data);
-			   return rd+1;
+			  dist++;
+			  path.add(root.data);
+			  return true;
 		   }
+		   
 	   }
+	   
+	   return false;
    }
-
-   static void printStack()
-   {
-	   for(int x: stack)
-		   out.print(x+" ");
-   }
-
 
 	public static void main(String [] args)
 	{
@@ -168,10 +123,20 @@ public class ShortestParthLengthBetweenTwoGivenNodes
 		createBST(root, 38);
 		createBST(root, 39);
 		
-	   // Node node = findLCA(root,35,39);
-	   out.println("Printing the shortest path");
-	    int dist = findpathLength(root, 8,23);
-		out.println();
-		out.println("Shortest Path length: "+ dist);
+		// LCA
+	    Node node = findLCA(root,8,39);
+		// find left distance
+	    findPAthLength(node.left, 8, 39);
+		int leftDist = dist;
+		dist = 0;
+		path.add(node.data);
+		// find right distance
+		findPAthLength(node.right, 8,39);
+		int rightDist = dist;
+		out.println(leftDist+rightDist+1);
+		
+		out.println("--------------");
+		for(int x: path)
+			out.print(x+" ");
 	}
 }
