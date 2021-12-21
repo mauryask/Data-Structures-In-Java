@@ -25,62 +25,38 @@ class Ancestor
 
 public class PrintAnestorsOfGivenNode
 {
-	// In this solution extra stack is needed to store the path
-	// but no extra function calls once the required node is found
-   static void findAncestor(Node root, int value,
-   Stack<Node> stack, Ancestor ancestor)
-   {
-	   if(root == null)
-		   return;
-	   stack.push(root);
-	   
-	   findAncestor(root.left, value, stack, ancestor);
-	   if(root.left == null && root.right == null)
-	   {
-		   if(root.data == value)
-		   {
-			   ancestor.flag = true;
-			   stack.pop();
-			   printStack(stack);
-		   }
-	   }
-	   
-	   if(ancestor.flag)
-		   return;
-	   else
-		   findAncestor(root.right, value, stack, ancestor);
-	   stack.pop();
-   }
-   
-  static void printStack(Stack<Node> stack)
-  {
-	  for(Node node : stack)
-		  out.print(node.data+" ");
-	  out.println();
-  }
+    // list to record ancestors
+	static List<Integer> list = new ArrayList<>();
 	
-	// No extra space needed except the recursion stack
-	// T(n) = O(n)
-	// S(n) = O(n) : recursion stack
-	
-	static boolean findAncestor2(Node root, int value)
+    static boolean findAncestor(Node root, int target)
 	{
 		if(root == null)
-			return false;
-		if(root.data == value)
-			return true;
-		boolean left = findAncestor2(root.left, value);
-		boolean right = findAncestor2(root.right, value);
-	     
-		if(left || right)
+	        return false;
+		
+		if(root.data == target)
 		{
-			out.print(root.data+" ");
+			list.add(root.data);
 			return true;
 		}
 		
+		boolean left = findAncestor(root.left, target);
+		if(left)
+		{
+			list.add(root.data);
+			return true;
+		}
+		else
+		{
+			boolean right = findAncestor(root.right, target);
+			if(right)
+			{
+				list.add(root.data);
+				return true;
+			}
+		}
+		
 		return false;
-	}
-	
+	}	
 	
 	public static void main(String [] args)
 	{
@@ -105,9 +81,9 @@ public class PrintAnestorsOfGivenNode
 		r5.right = r9;
 		r4.right = r10;
 		
-		/*Ancestor ancestor = new Ancestor();
-		Stack<Node> stack = new Stack<>();
-		findAncestor(root,9, stack, ancestor);*/
-		findAncestor2(root, 9);
+		findAncestor(root, 10);
+		
+		for(int x: list)
+			out.print(x+" ");
 	}
 }
