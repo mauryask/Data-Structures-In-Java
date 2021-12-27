@@ -5,13 +5,6 @@ import java.util.*;
 
 public class CountAllTheSubArraysWithSumK
 {
-	public static void main(String [] args)
-	{
-		int A[] = {1,3,9,-2,4,1,-7,2,6,-5,8,-3,-7,6};
-		int target = 5;
-		out.println(subArrayCount2(A,target));
-	}
-
     // Time Complexity  : O(n)
 	// Space Complexity : O(n)
 	
@@ -43,20 +36,27 @@ public class CountAllTheSubArraysWithSumK
 	{
 		int current_sum = 0, count = 0;
 		int n = A.length;
+		
 		for(int i=0; i<n;i++)
 		{
-			current_sum = A[i];
-			for(int j=i+1; j<n; j++)
+			current_sum = 0;
+			
+			for(int j=i; j<n; j++)
 			{
+				current_sum += A[j];
+				
 				if(current_sum == target)
 					count++;
-				current_sum += A[j];	
 			}
-			
-			if(current_sum == target)
-				count++;
 		}
 		
 		return count;
+	}
+	
+	public static void main(String [] args)
+	{
+		int A[] = {1,3,9,-2,4,1,-7,2,6,-5,8,-3,-7,6};
+		int target = 5;
+		out.println(subArrayCount(A,target));
 	}
 }
