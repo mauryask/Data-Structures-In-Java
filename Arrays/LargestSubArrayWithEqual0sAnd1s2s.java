@@ -20,7 +20,7 @@ public class LargestSubArrayWithEqual0sAnd1s2s
 		
 		Map<String, Integer> map = new HashMap<>();
 		
-		map.put("0#0", 1);
+		map.put("0#0", -1);
 		
 		for(int i=0; i<n; i++)
 		{
@@ -35,14 +35,14 @@ public class LargestSubArrayWithEqual0sAnd1s2s
 		   int diff12 = count1 - count2;
 		   
 		   String key = diff01+"#"+diff12;
-		   
-		   map.putIfAbsent(key, i);
-		   
+		   		   
 		   if(map.containsKey(key))
 		   {
 			   start = map.get(key)+1;
 			   end = i;
 		   }			 
+		   
+		   map.putIfAbsent(key, i);
 		}
 		
 		out.println(start+", "+end);

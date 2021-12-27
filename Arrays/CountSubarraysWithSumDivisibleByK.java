@@ -55,7 +55,7 @@ public class CountSubarraysWithSumDivisibleByK
 		{
 			sum += A[i];
 			int rem = ((sum%k)+k)%k;
-			
+			out.println(rem);
 			/*
 			* Check if this remainder 
 			* already present update count
@@ -74,7 +74,7 @@ public class CountSubarraysWithSumDivisibleByK
 	public static void main(String [] args)
 	{   int A[] = {4, 5, 0, -12, -23, 1};
 		int k = 5;
-	    //countSubArrays(A, A.length, k);
-	    bruteForce(A, A.length, k);
+	    countSubArrays(A, A.length, k);
+	    //bruteForce(A, A.length, k);
 	}
 }
