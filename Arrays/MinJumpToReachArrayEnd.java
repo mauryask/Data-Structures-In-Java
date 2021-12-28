@@ -103,7 +103,7 @@ public class MinJumpToReachArrayEnd
         //{3,2,1,0,4};// this the case when you can't reach end
         int n = A.length;
         
-        out.println("Minimum jumps needed: "+minJumps(A, n));
-        //out.println(solve(A, n, 0));
+       //out.println("Minimum jumps needed: "+minJumps(A, n));
+        out.println(solve(A, n, 0));
     }
 }

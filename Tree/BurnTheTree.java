@@ -51,7 +51,7 @@ public class BurnTheTree
        return false;
    }
   
-   static int maxTime =  Integer.MIN_VALUE;
+   static int maxTime =  0;
   
    static void printNode(Node root, Node blocker, int time, List<Integer> list)
    {
@@ -120,5 +120,6 @@ public class BurnTheTree
 		r7.right = r11;
 	    
         printKfarNodes(root, r13);
+		out.println(maxTime);
     }
 }
