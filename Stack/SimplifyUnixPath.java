@@ -41,9 +41,9 @@ public class SimplifyUnixPath
 	
 	public static void main(String [] args)
 	{
-		 String path = "/../";
-		 /*
-		 * "/a/./b/./c/./d/"
+		 String path = /*"/../";
+		 */
+		  "/a/./b/./c/./d/";/*
 		 * "/../../../../../a";
 		 * "////"; 
 		 */

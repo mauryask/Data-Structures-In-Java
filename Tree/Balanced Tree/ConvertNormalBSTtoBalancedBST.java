@@ -61,6 +61,10 @@ public class ConvertNormalBSTtoBalancedBST
 		
 		int mid = start + (end-start)/2;
 		Node node = nodeList.get(mid);
+		// optional 
+		node.left = null;
+		node.right = null;
+		
 		node.left = buildBalanceTree(nodeList, start, mid-1);
 		node.right = buildBalanceTree(nodeList, mid+1, end);
 		

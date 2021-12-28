@@ -99,7 +99,7 @@ public class FindMidDLLImpelementation
 		if(temp.next != null)
 		{
 			temp.next = null;
-			mid.next.prev = null;
+			mid.next.prev = mid;
 		}
 		else
 			temp = null;
