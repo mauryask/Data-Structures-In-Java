@@ -25,14 +25,15 @@ public class PrintRightView
 {
 		static void rightView(Node root)
 		{
-			List<Node> q = new LinkedList<>();
+			LinkedList<Node> q = new LinkedList<>();
 			q.add(root);
 			q.add(null);
+			
 			Node prev = null;
 			
 			while(!q.isEmpty())
 			{
-				root = q.remove(0);
+				root = q.removeFirst();
 				
 				if(root == null)
 				{

@@ -14,7 +14,7 @@ public class CountOccuranceOfANumebrInSortedArray
 		
 		// if the element is not found
 		if(start == -1)
-			return -1;
+			return 0;
 		
         // find last occurance
 		int end = getIndex(A, start, n-1, target, false);

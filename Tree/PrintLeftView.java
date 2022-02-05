@@ -17,9 +17,9 @@ class Node
 
 public class PrintLeftView
 {
-		static void rightView(Node root)
+		static void leftView(Node root)
 		{
-			List<Node> q = new LinkedList<>();
+			LinkedList<Node> q = new LinkedList<>();
 			q.add(root);
 			q.add(null);
 			
@@ -27,13 +27,13 @@ public class PrintLeftView
 			
 			while(!q.isEmpty())
 			{
-				root = q.remove(0);
+				root = q.removeFirst();
 				
 				if(root == null)
 				{
 					if(!q.isEmpty())
 					{
-						out.print(q.get(0).data+" ");
+						out.print(q.getFirst().data+" ");
 						q.add(null);
 					}
 					
@@ -48,8 +48,7 @@ public class PrintLeftView
     }
 		
 	   public static void main(String [] args)
-		{
-		
+		{		
 		  Node root = new Node(1);
 		  Node r2 = new Node(2);
 		  Node r3 = new Node(3);
@@ -67,6 +66,6 @@ public class PrintLeftView
 		  r3.right = r7;
 		  r7.right = r8;
           
-		  rightView(root);
+		  leftView(root);
 		}
 }

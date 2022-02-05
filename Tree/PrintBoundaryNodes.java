@@ -86,10 +86,11 @@ public class PrintBoundaryNodes
 		  r7.left = r9;
 		  r9.left = r11;
 
-          List<Integer> list = new ArrayList<>();
-		  list.add(root.data);
-		  leftBoundary(root.left, list);
+          List<Integer> list = new ArrayList<>();		
+		  leftBoundary(root, list);
 		  leafNode(root, list);
+		  // since root is already printed
+		  // so pass root.right here
 		  rightBoundary(root.right, list);
 		  out.println(list);
 	}
