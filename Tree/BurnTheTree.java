@@ -53,37 +53,38 @@ public class BurnTheTree
   
    static int maxTime =  0;
   
-   static void printNode(Node root, Node blocker, int time, List<Integer> list)
+   static void storeNodeSequence(Node root, Node blocker, int time, Map<Integer, ArrayList<Integer>> map)
    {
        if(root == null || root == blocker)
            return; 
        
 	   //  recording the sequence in which the 
-       //  the tree wil be burnt 	   
-	   list.add(root.data);
+       //  the nodes will be burnt 	   
+	   ArrayList<Integer> tempList = map.getOrDefault(time, new ArrayList<Integer>());
+	   tempList.add(root.data);
+	   map.put(time, tempList);
        
        if(root.left == null || root.right == null)
             maxTime  = Math.max(maxTime, time);
         
-       printNode(root.left, blocker, time+1, list);
-       printNode(root.right, blocker, time+1, list);
+       storeNodeSequence(root.left, blocker, time+1, map);
+       storeNodeSequence(root.right, blocker, time+1, map);
    }
 
-   static void printKfarNodes(Node root, Node target)
+   static void burnTheTree(Node root, Node target)
    {
         List<Node> path = new ArrayList<>();
         nodeToRootPath(root,target, path); 
 		
-		List<Integer> list =  new ArrayList<>();
-        
-        int time = 0;
-        
+		Map<Integer, ArrayList<Integer>> map =  new TreeMap<>();        
+
         for(int i=0 ; i<path.size(); i++)
-            printNode(path.get(i), i==0? null : path.get(i-1), time+i, list);
+            storeNodeSequence(path.get(i), i==0? null : path.get(i-1), /*time*/i, map);
         
-		for(int x: list)
-			out.print(x+" ");
-        out.println(maxTime);
+		for(Map.Entry<Integer, ArrayList<Integer>> m : map.entrySet())
+			System.out.println(m.getKey()+": "+m.getValue());
+		
+        out.println("totalTime: "+maxTime);
    }
   
   public static void main(String [] args)
@@ -119,7 +120,6 @@ public class BurnTheTree
 		r7.left = r12;
 		r7.right = r11;
 	    
-        printKfarNodes(root, r13);
-		out.println(maxTime);
+       burnTheTree(root, r13);	   
     }
 }
