@@ -33,7 +33,13 @@ public class PrintAnestorsOfGivenNode
 		if(root == null)
 	        return false;
 		
-		if(root.data == target)
+		if(root.left != null && root.left.data == target)
+		{
+			list.add(root.data);
+			return true;
+		}
+		
+		if(root.right != null && root.right.data == target)
 		{
 			list.add(root.data);
 			return true;
