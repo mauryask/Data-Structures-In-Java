@@ -21,29 +21,46 @@ class Node
 
 public class BubbleSort
 {
-	// sort by swapping data only
-   	static void sort(Node head)
-	{
-		Node ptr = null, tail = null;
-		
-		while(head != tail) 
-		{
-			ptr = head;			
-			while(ptr.next != tail)
-			{
-			   if(ptr.data > ptr.next.data)
-			   {
-				   int data = ptr.data;
-				   ptr.data = ptr.next.data;
-				   ptr.next.data = data;
-			   }
-               ptr = ptr.next;			   
-			}			
-			tail = ptr;		
-		}	
-	}
+   // Sort by swapping data only
+   
+   static void sort(Node head)
+   {
+	   if(head == null || head.next == null)
+		   return;
+	   
+	   	  Node p1 = head;
+	      Node p2 = head.next;
+	      Node temp = null;         
+	      boolean isSwapped  = false;
+		  
+	   while(p2 != temp)
+	   {	   		   		  
+		  isSwapped  = false;
+		  
+		  while(p2!= null && p1.next != temp)   
+		  {
+		      if(p1.data > p2.data)
+			  {
+				  int tempData = p1.data;
+				  p1.data = p2.data;
+				  p2.data = tempData;
+				  isSwapped = true;
+			  }
+              p1 = p1.next;
+              p2 = p2.next;			  
+		  }
+		  
+		  if(!isSwapped)
+			  break;
+		  
+		  temp = p1;
+		  
+		  p1 = head;
+		  p2 = head.next;
+	   }
+   }
 	
-	//sort by swapping nodes 	
+	// Sort by swapping nodes 	
 	static Node deepSort(Node head)
 	{
 		Node ptr =  null, tail = null, prev = null;
@@ -130,8 +147,9 @@ public class BubbleSort
 		n8.next = n9;
 		
 		printList(head);
-		//sort(head);
-		head = deepSort(head);
+		
+		//head = deepSort(head);
+		sort(head);
         printList(head);
 		
 	}

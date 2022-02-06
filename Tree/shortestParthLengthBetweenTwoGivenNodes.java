@@ -32,6 +32,7 @@ public class shortestParthLengthBetweenTwoGivenNodes
 	 else
 	 {
 		 currentNode = root;
+		 
 		 while(currentNode != null)
 		 {
 			 parentNode = currentNode;
@@ -134,7 +135,10 @@ public class shortestParthLengthBetweenTwoGivenNodes
 		// find right distance
 		findPAthLength(node.right, 8,39);
 		int rightDist = dist;
-		out.println(leftDist+rightDist+1);
+		// total nodes in the path totalDist =  leftDist + rightDist +1 
+		// Hence distacne  = eftDist + rightDist
+		
+		out.println(leftDist+rightDist);
 		
 		out.println("--------------");
 		for(int x: path)

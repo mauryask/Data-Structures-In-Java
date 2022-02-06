@@ -24,7 +24,7 @@ public class CheckIfTwoNodesAreCousins
 {
 	static boolean isCousin(Node root, int a, int b)
 	{		
-		List<Node> q = new LinkedList<>();
+		LinkedList<Node> q = new LinkedList<>();
 		q.add(root);
 		q.add(null);
 		
@@ -41,7 +41,7 @@ public class CheckIfTwoNodesAreCousins
             if(aParent != null && bParent != null)
 				break;
          	
-			root = q.remove(0);
+			root = q.removeFirst();
 		     
             if(root == null)
 			{
@@ -54,12 +54,12 @@ public class CheckIfTwoNodesAreCousins
 			
 	   	    if(root.left != null)
 			{
-			   if(root.left.data == a)
+			   if(aParent == null && root.left.data == a)
 			   {
 				   aParent = root;
 				   aLevel = level+1;
 			   }
-			   else if(root.left.data == b)
+			   else if(bParent == null && root.left.data == b)
 			   {
 				   bParent = root;
 				   bLevel = level+1;
@@ -69,12 +69,12 @@ public class CheckIfTwoNodesAreCousins
 			}
 			if(root.right != null)
 			{
-			   if(root.right.data == a)
+			   if(aParent == null && root.right.data == a)
 			   {
 				   aParent = root;
 				   aLevel = level+1;
 			   }
-			   else if(root.right.data == b)
+			   else if(bParent == null && root.right.data == b)
 			   {
 				   bParent = root;
 				   bLevel = level+1;
@@ -115,6 +115,6 @@ public class CheckIfTwoNodesAreCousins
 		  r7.left = r9;
 		  r9.left = r11;
           
-		  out.println(isCousin(root, 4,10));
+		  out.println(isCousin(root, 22,8));
  	}
 }

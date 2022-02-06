@@ -43,7 +43,7 @@ public class SimplifyUnixPath
 	{
 		 String path = /*"/../";
 		 */
-		  "/a/./b/./c/./d/";/*
+		  "/a/./b/../c/./d/";/*
 		 * "/../../../../../a";
 		 * "////"; 
 		 */

@@ -28,13 +28,14 @@ public class FindLevelWithMaxSum
 		int maxSum = 0;
 		int currentSum = 0;
 		
-		List<Node> q = new LinkedList<>();
+		LinkedList<Node> q = new LinkedList<>();
 		q.add(root);
 		q.add(null);
 		
 		while(!q.isEmpty())
 		{
-			root = q.remove(0);
+			root = q.removeFirst();
+			
 			if(root == null)
 			{
 				if(!q.isEmpty())
@@ -55,15 +56,15 @@ public class FindLevelWithMaxSum
 				// after the end of each level 
 				// there should be a new sum
 				currentSum = 0;
+				continue;
 			}
-			else
-			{
-				currentSum += root.data;
+						
 				if(root.left != null)
 					q.add(root.left);
 				if(root.right != null)
-					q.add(root.right);
-			}
+					q.add(root.right);			
+			
+		  currentSum += root.data;
 		}
 		return maxLevel;
 	}

@@ -31,7 +31,7 @@ public class fillNextSibling
 	   
 	   while(!q.isEmpty())
 	   {
-		   root = q.remove(0);
+		   root = q.removeFirst();
 		   
 		   if(root == null)
 		   {
@@ -46,7 +46,7 @@ public class fillNextSibling
 		   if(root.right != null)
 			   q.add(root.right);
 		   
-		   root.nextSibling = q.element();
+		   root.nextSibling = q.getFirst();
 	   }
    }
 

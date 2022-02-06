@@ -72,13 +72,13 @@ public class FindMergePointOfTwoLinkedListsUsingStack
 	    while(!st1.isEmpty() && !st2.isEmpty())
 		{
 		   Node p1 = st1.pop();
-		   Node p2 = st2.pop();
-		   	   
-		   if(p1 == p2)
-			temp = p1;
-           else
-             return temp;		 
+		     
+		   if(p1 != st2.pop())
+			 return temp;
+		 
+           temp = p1;
 		}
+		
 		return null;
 	 }
 			
