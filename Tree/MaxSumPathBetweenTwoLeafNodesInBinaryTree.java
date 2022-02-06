@@ -2,7 +2,7 @@
 * T(n) : O(n) 
 * S(n) : O(n) 
 */
-import static java.lang.System.*;
+import static java.lang.Systems.*;
 import java.util.*;
 
 class Node
@@ -29,11 +29,12 @@ public class MaxSumPathBetweenTwoLeafNodesInBinaryTree
 		if(root == null)
 			return 0;
 		
-		int lh = findMaxPathSum(root.left);
-		int rh = findMaxPathSum(root.right);
+		int lSum = findMaxPathSum(root.left);
+		int rSum = findMaxPathSum(root.right);
 		
-		int temp = Math.max(lh, rh) + root.data;
-		maxPathSum = Math.max(maxPathSum, lh+rh+root.data);
+		int temp = Math.max(lSum, rSum) + root.data;
+		int ans = Math.max(temp, lSum+rSum+root.data);
+		maxPathSum =  Math.max(maxPathSum, ans);
 		return temp;
 	}
 	
