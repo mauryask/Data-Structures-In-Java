@@ -67,7 +67,11 @@ public class MaxHeapFromArrayOfElements
 	static void insertKey(int[] A, int key, int n)
 	{
 		if(heapSize == n)
+		{
 			out.println("Overflow!!");
+			return;
+		}
+		
 		A[heapSize] = key;
 		heapSize++;
 		

@@ -8,18 +8,6 @@ import java.util.*;
 
 public class SortArrayInDescendingOrderBasedOnFrequency
 {
-	static class Util 
-	{
-		int element;
-		int frequency;
-		
-		Util(int element, int frequency)
-		{
-			this.element = element;
-			this.frequency = frequency;
-		}
-	}
-	
 	static void printKMostFrequentElements(int[] A, int n)
 	{
 		Map<Integer, Integer> map = new HashMap<>();
@@ -30,20 +18,19 @@ public class SortArrayInDescendingOrderBasedOnFrequency
 		* max heap 
 		* put the elements based on the frequency
 		*/
-		Queue<Util> q = new PriorityQueue<>((a, b)->{
-			return b.frequency - a.frequency;
+		Queue<Integer> q = new PriorityQueue<>((a, b)->{
+			return map.get(b) - map.get(a);
 		});
 	
 		for(Map.Entry<Integer, Integer> m : map.entrySet())
-			q.add(new Util(m.getKey(), m.getValue()));
+			q.add(m.getKey());
 
 		int i = 0;
 		
 		while(!q.isEmpty())
 		{
-		   Util u = q.remove();
-		   int ele = u.element;
-		   int freq = u.frequency;
+		   int ele = q.remove();
+		   int freq = map.get(ele);
 		   
 		   while(freq-->0)
 			   A[i++] = ele;
@@ -55,8 +42,8 @@ public class SortArrayInDescendingOrderBasedOnFrequency
 	
 	public static void main(String [] args)
 	{
-		int A[] = {2, 5, 2, 6, -1, 9999999, 5, 8, 8, 8};
-		//{2, 5, 2, 8, 5, 6, 8, 8};
+		int A[] = //{2, 5, 2, 6, -1, 9999999, 5, 8, 8, 8};
+		{2, 5, 2, 8, 5, 6, 8, 8};
 		int n  = A.length;
 		printKMostFrequentElements(A , n);
 	}

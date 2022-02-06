@@ -8,18 +8,6 @@ import java.util.*;
 
 public class FindKClosestElementToTheGivenKey 
 {
-	static class Util
-	{
-	   int value;
-	   int diff;
-     
-	   Util(int value, int diff)
-	   {
-		   this.value = value;
-		   this.diff = diff;
-	   }
-	}
-	
 	static void printKClosetElements(int[] A, int n, int k,
 	int key)
 	{
@@ -28,20 +16,20 @@ public class FindKClosestElementToTheGivenKey
 		* Put the elements on the basis  
 		* of difference with the key
 		*/
-		Queue<Util> q = new PriorityQueue<>((a, b)->{
-			return b.diff - a.diff;
+		Queue<Integer> q = new PriorityQueue<>((a, b)->{
+			return (int)(Math.abs(b-key) - Math.abs(a-key));
 		});
 
 		for(int j=0; j<n; j++)
 		{
-		   q.add(new Util(A[j], Math.abs(A[j]-key)));
+		   q.add(A[j]);
 		   
 		   if(q.size() > k)
 			   q.remove();
 		}
 		
 		while(!q.isEmpty())
-			out.print(q.remove().value+" ");
+			out.print(q.remove()+" ");
 	}
 	
 	public static void main(String [] args)

@@ -23,11 +23,8 @@ public class SortingKSortedArray
 			* Once the heap size becomes k
 			* remove top
 			**/	
-		   if(q.size() > k)
-		   {
-			   A[i] = q.remove();
-			   i++;
-		   }			   
+		   if(q.size() > k)		   
+			   A[i++] = q.remove();			   
 		}
 		
 		/*
