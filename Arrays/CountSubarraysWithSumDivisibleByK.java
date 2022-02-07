@@ -54,7 +54,7 @@ public class CountSubarraysWithSumDivisibleByK
 		for(int i=0; i<n; i++)
 		{
 			sum += A[i];
-			int rem = ((sum%k)+k)%k;
+			int rem = ((sum%k)+k)%k;			
 			out.println(rem);
 			/*
 			* Check if this remainder 

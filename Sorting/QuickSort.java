@@ -45,7 +45,7 @@ public class QuickSort
 				 A[j] = A[i];
 				 A[i] = val;
 			 }
-		 }
+		 }0
 		
 		 A[r] = A[i+1];
 		 A[i+1] = temp;

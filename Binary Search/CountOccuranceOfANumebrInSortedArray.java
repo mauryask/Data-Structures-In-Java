@@ -34,6 +34,7 @@ public class CountOccuranceOfANumebrInSortedArray
 	int target, boolean flag)
 	{
 		int result = -1;
+		
 		while(start <= end)
 		{
 			int mid = start + (end-start)/2;
