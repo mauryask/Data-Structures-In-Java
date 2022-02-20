@@ -4,16 +4,9 @@ import java.util.*;
 class TrieNode 
 {
 	// word-length
-	int we;
-	char ch;	
-	TrieNode chArr[];
-	
-	TrieNode()
-	{
-		chArr = new TrieNode[26];
-		we = 0;
-		ch = '0';
-	}
+	int we = 0;
+	char ch=  '0';	
+	TrieNode chArr[] = new TrieNode[26];
 }
 
 public class AutoCompleteFeature
@@ -38,7 +31,6 @@ public class AutoCompleteFeature
         
       root.we += 1;		
 	}	
-	
 	
 	static void printSuggestions(TrieNode root, String word)
 	{

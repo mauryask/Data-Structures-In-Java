@@ -4,14 +4,8 @@ import java.util.*;
 class TrieNode 
 {
 	// prefix-count 
-	int pc; 
-	TrieNode chArr[];
-	
-	TrieNode()
-	{
-		chArr = new TrieNode[26];
-		pc = 0;
-	}
+	int pc = 0; 
+	TrieNode chArr[]  = new TrieNode[26];
 }
 
 public class CountNumberOfStringsWithGivenPrefix
@@ -63,6 +57,6 @@ public class CountNumberOfStringsWithGivenPrefix
 		insertWord(root, "pfet");
 		insertWord(root, "flex");
 
-		out.println(countString(root, "fcda"));
+		out.println(countString(root, "a"));
 	}
 }

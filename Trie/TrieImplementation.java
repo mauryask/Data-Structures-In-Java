@@ -9,14 +9,8 @@ import java.util.*;
 class TrieNode 
 {
 	// word-end = 1, indicates the end of a word
-	int we; 
-	TrieNode chArr[];
-	
-	TrieNode()
-	{
-		chArr = new TrieNode[26];
-		we = 0;
-	}
+	int we = 0; 
+	TrieNode chArr[] = new TrieNode[26];
 }
 
 public class TrieImplementation 
