@@ -43,7 +43,7 @@ public class CountFullNodeRecusrsive
      	if(root == null)
 			return 0;
 		int res = 0;
-		if(root.left != null && root.right !g= null)
+		if(root.left != null && root.right != null)
 			res++;
 		res += countFullNode(root.left) + 
 		countFullNode(root.right);
@@ -51,7 +51,7 @@ public class CountFullNodeRecusrsive
 	}
 		
 	  public static void main(String [] args)
-		{		
+	  {		
 			  Node root = new Node(1);
 			  Node r2 = new Node(2);
 			  Node r3 = new Node(3);

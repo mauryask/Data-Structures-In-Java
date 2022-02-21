@@ -31,6 +31,7 @@ public class IteartiveTreeTraversal
 		else
 		{
 			current_node = root;
+			
 			while(current_node != null)
 			{
 				parent_node = current_node;
