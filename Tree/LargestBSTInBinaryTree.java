@@ -43,6 +43,7 @@ public class LargestBSTInBinaryTree
 	{
 		if(root == null)
 			return new NodeInfo(Integer.MIN_VALUE,Integer.MAX_VALUE,true,0);
+		
 		if(root.left == null && root.right == null)
 		{
 			maxSizeSoFar = Math.max(maxSizeSoFar, 1);
