@@ -1,6 +1,17 @@
 /*
 * T(n) : O(n) 
 * S(n) : O(n)
+** The Idea is: 
+
+1) If '(' encountered push it in 'operator stack'
+2) If '+,-,/,*' encountered remove all the operators whose
+   precedence is greater than or equal to the current operator
+   do so until an operator with less precedence encountered 
+   or the opening bracket encountered
+3) If closing bracket encountered, pop all the operators in
+   the operator stack until closing bracket is encountered
+4) If digit encountered push it into operand stack
+
 */
 import static java.lang.System.*;
 import java.util.*;
