@@ -1,5 +1,3 @@
-// Queation Number : #12
-
 import static java.lang.System.*;
 import java.util.*;
 
@@ -20,12 +18,17 @@ public class CountAllTheSubArraysWithSumK
 		for(int i=0;i<n; i++)
 		{
 			sum += A[i]; 
+			// if sum is started from the starting
+            // of the array			
+			if(sum == k)
+				count++;
 			
 			if(map.containsKey(sum-target))
 			  ans += map.get(sum-target);
 			
 		    map.put(sum, map.getOrDefault(sum,0)+1);
 		}
+		
 		return ans;
 	}
 	
