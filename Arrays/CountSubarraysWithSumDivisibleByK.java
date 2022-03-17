@@ -55,7 +55,10 @@ public class CountSubarraysWithSumDivisibleByK
 		{
 			sum += A[i];
 			int rem = ((sum%k)+k)%k;			
-			out.println(rem);
+			// if cumSum from the start of the array divisibkle by k
+			 if(rem == 0)
+				 count++;
+			
 			/*
 			* Check if this remainder 
 			* already present update count
