@@ -7,24 +7,6 @@ import static java.lang.System.*;
 
 public class InsertionSort 
 {
-	public static void main(String [] args)
-	{
-		int A[] = new int[]{5,1,2,7,8,96,32,45,10};
-		
-		out.println("Array before sorting");
-		for(int a: A)
-			out.print(a+" ");
-		out.println();
-		
-		InsertionSort.insertionSort(A);
-		
-		out.println("The array after sorting");
-		for(int a : A)
-			out.print(a+" ");
-		out.println();
-		
-	}
-	
 	static void insertionSort(int A[])
 	{
 		int i,j,temp;
@@ -32,6 +14,7 @@ public class InsertionSort
 		for(i=1; i<A.length; i++)
 		{
 			temp = A[i];
+			
 			for(j=(i-1); j>=0; j--)  
 			{
 				if(temp<A[j])
@@ -43,4 +26,23 @@ public class InsertionSort
 			A[j+1] = temp;
 		}
 	}
+	
+		public static void main(String [] args)
+		{
+			int A[] = {5,1,2,7,8,96,32,45,10};
+			
+			out.println("Array before sorting");
+			for(int a: A)
+				out.print(a+" ");
+			out.println();
+			
+			InsertionSort.insertionSort(A);
+			
+			out.println("The array after sorting");
+			for(int a : A)
+				out.print(a+" ");
+			out.println();
+			
+		}
+	
 }

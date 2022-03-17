@@ -12,7 +12,7 @@
 * Best case: O(log n)
 * Worst case: O(n)
 *****************
-in genral it is S(n) : O(1)
+in genral it is S(n) : O(1) 
 */
 
 import static java.lang.System.*;
@@ -45,10 +45,10 @@ public class QuickSort
 				 A[j] = A[i];
 				 A[i] = val;
 			 }
-		 }0
+		 }
 		
 		 A[r] = A[i+1];
-		 A[i+1] = temp;
+		 A[i+1] = temp; 
 		 
 		 return i+1;
 	 }

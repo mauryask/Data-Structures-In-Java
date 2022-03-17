@@ -12,17 +12,6 @@ import static java.lang.System.*;
 
 public class MergeSort
 {
-	public static void main(String [] args)
-	{
-		int A[] = {10,5,7,3,1,14,9};
-		int p = 0;
-		int r = A.length-1;
-		mergeSort(A, p, r);
-		
-		for(int x : A)
-			out.print(x+" ");
-	}
-	
 	static void merge(int A[], int p, int q, int r)
 	{
 		int n1 = q-p+1;
@@ -65,5 +54,16 @@ public class MergeSort
 		   mergeSort(A,q+1,r); // T(n/2)
 		   merge(A,p,q,r); // O(n)
 		}
+	}
+	
+	public static void main(String [] args)
+	{
+		int A[] = {10,5,7,3,1,14,9};
+		int p = 0;
+		int r = A.length-1;
+		mergeSort(A, p, r);
+		
+		for(int x : A)
+			out.print(x+" ");
 	}
 }
