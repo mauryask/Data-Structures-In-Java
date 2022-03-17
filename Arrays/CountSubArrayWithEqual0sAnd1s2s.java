@@ -24,7 +24,7 @@ public class CountSubArrayWithEqual0sAnd1s2s
 		int count2 = 0;
 		/*
 		*  this variable holds total number
-		* of subarrays with equal 0s 1s and 2s
+		*  of subarrays with equal 0s 1s and 2s
 		*/
 		int count = 0;
 		

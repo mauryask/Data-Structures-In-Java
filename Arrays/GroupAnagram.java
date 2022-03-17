@@ -8,7 +8,7 @@ public class GroupAnagram
 	// S(n) : O(mn)
     static void groupAnagrams(String[] strs)
     {
-      Map<HashMap<Character, Integer>, ArrayList<String>> bmap = new HashMap<>();    
+      Map<HashMap<Character, Integer>, List<String>> bmap = new HashMap<>();    
      
         for(String str : strs) // O(n)
         {
@@ -20,17 +20,12 @@ public class GroupAnagram
                 fmap.put(c, fmap.getOrDefault(c, 0)+1);
             }
             
-            if(bmap.containsKey(fmap))
-                bmap.get(fmap).add(str);
-            else
-            {
-                ArrayList<String> list = new ArrayList<>();
-                list.add(str);
-                bmap.put(fmap, list);
-            }
+            List<String> list = bmap.getOrDefault(fmap, new ArrayList<String>());
+            list.add(str);
+            bmap.put(fmap, list);
         }
         
-        for(ArrayList<String> strList: bmap.values())
+        for(List<String> strList: bmap.values())
             out.println(strList);
     }
  
