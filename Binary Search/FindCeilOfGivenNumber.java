@@ -2,7 +2,7 @@
 * Time complexity  : O(log n)
 * Space complexity : O(1)
 * The smallest number greater than the given
-* number is the ceil of the number 
+* key is the ceil of the key
 */
 
 import static java.lang.System.*;
