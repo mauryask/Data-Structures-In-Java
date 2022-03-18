@@ -12,9 +12,7 @@ public class FindKthSmallestElement
 		/*
 		* Max Heap
 		*/
-		Queue<Integer> q = new PriorityQueue<>((a,b)->{
-			return b-a;
-		});
+		Queue<Integer> q = new PriorityQueue<>((a,b)->(b-a));
 		
 		for(int i=0; i<n; i++)
 		{

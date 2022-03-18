@@ -31,8 +31,8 @@ public class ImplementingQueueUsingTwoStacks
 		enQueue(10);
 		enQueue(15);
 		enQueue(5);
-		enQueue(8);
-		enQueue(23);
+		//enQueue(8);
+		//enQueue(23);
 		out.println(deQueue());
 		out.println(deQueue());
 		out.println(deQueue());
