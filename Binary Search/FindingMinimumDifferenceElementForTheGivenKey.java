@@ -36,7 +36,7 @@ public class FindingMinimumDifferenceElementForTheGivenKey
             int ceilDiff  = Math.abs(A[ceil] - key);
 			return floorDif < ceilDiff ? floor : ceil;		
 		}
-		
+		 
 		return floor == -1 ? ceil : floor;
 	}
 	

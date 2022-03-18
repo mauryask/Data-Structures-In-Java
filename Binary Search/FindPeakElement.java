@@ -7,7 +7,7 @@
 * which is greater than its neighbouring elements
 * i.e. if (Ai-1 < Ai > Ai+1) then 'Ai' is peak element
 * See the notebook for detailed description
-*******************
+************************
 * Here we are applying Binary Search algotrithm
 * But the given array may or may not be sorted
 * It will work for both of the cases
