@@ -48,9 +48,7 @@ public class TrieImplementation
 			  return false;
 		}
 		
-		if(root.we > 0)
-			return true;
-		return false;
+		return (root.we>0);
 	}
 	
 	// T(n) : O(word-length)
