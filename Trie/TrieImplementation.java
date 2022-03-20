@@ -2,7 +2,7 @@
 * T(n) : O(no of words * max word length)
 * S(n) : O(no of words * max word length)
 */
-
+ 
 import static java.lang.System.*;
 import java.util.*;
 
@@ -55,7 +55,6 @@ public class TrieImplementation
 	static void deleteWord(TrieNode root, String word)
 	{
 		char[] arrChar = word.toCharArray();
-		boolean isPresent = true;
 		
 		for(char ch : arrChar)
 		{
@@ -63,18 +62,19 @@ public class TrieImplementation
 			   root = root.chArr[ch-'a'];
 		    else
 			{
-				isPresent = false;
-				break;
+				out.println("The requested word is not found");
+				return;
 			}	
 		}
 		
-		if(isPresent && root.we > 0)
+		if(root.we > 0)
 		{
 			root.we--;
 			out.println("Word deleted successfully!");
+			return;
 		}
-		else		
-			out.println("Word is not found!");
+		
+		out.println("Word is not found!");
 	}
 	
 	public static void main(String [] args)
@@ -92,8 +92,8 @@ public class TrieImplementation
 		//out.println(searchWord(root, "bca"));
 		//out.println(searchWord(root, "abcd"));
 		
-		/*deleteWord(root, "abc");
+		/*deleteWord(root, "abc");*/
 		deleteWord(root, "ab");
-		out.println(searchWord(root, "ab"));*/
+		/*out.println(searchWord(root, "ab"));*/
 	}
 }
