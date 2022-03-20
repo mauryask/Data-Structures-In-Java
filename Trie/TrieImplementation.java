@@ -1,7 +1,6 @@
 /*
 * T(n) : O(no of words * max word length)
 * S(n) : O(no of words * max word length)
-** Very important datastructure
 */
 
 import static java.lang.System.*;
