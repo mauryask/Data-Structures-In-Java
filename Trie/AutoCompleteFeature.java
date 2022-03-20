@@ -62,10 +62,10 @@ public class AutoCompleteFeature
 			out.println(word.toString());
 			suggestionCount++;
 		}
-			
-		if(suggestionCount == 2)
+		
+        if(suggestionCount == 2)
 			return;
-			
+		
 		for(int i=0; i<26; i++)
 		{
 			if(root.chArr[i] != null)
@@ -73,10 +73,9 @@ public class AutoCompleteFeature
                 TrieNode temp = root.chArr[i];		
 				word.append(temp.ch);
                 
-				if(suggestionCount == 2)
-                  return;				  
+				if(suggestionCount != 2)
+				    suggestUtil(temp, word);
 				
-				suggestUtil(temp, word);
                 word.deleteCharAt(word.length()-1);			
 			}
 		}

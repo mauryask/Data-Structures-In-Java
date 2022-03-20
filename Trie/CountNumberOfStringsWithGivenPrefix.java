@@ -21,7 +21,7 @@ public class CountNumberOfStringsWithGivenPrefix
 			{
 				TrieNode temp = new TrieNode();
 				root.chArr[ch-'a'] = temp;
-				root = temp;
+				root = temp; 
 			}
 		    else
               root = root.chArr[ch-'a'];
