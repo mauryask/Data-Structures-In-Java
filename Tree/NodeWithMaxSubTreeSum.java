@@ -33,6 +33,7 @@ public class NodeWithMaxSubTreeSum
 		
 		int lSum = nodeWithMaxSum(root.left);
 		int rSum = nodeWithMaxSum(root.right);
+		
 		int sum = lSum + rSum + root.data;
 		
 		if(sum > maxSum)

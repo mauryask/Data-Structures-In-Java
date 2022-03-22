@@ -1,6 +1,8 @@
 /**
 Time complexity  : O(n)
 Space complexity : O(n)
+** Here are printing root to leaf 
+** paths
 */
 
 import static java.lang.System.*;
