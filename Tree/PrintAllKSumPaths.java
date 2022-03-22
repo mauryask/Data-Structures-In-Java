@@ -1,5 +1,5 @@
 /**
-Time complexity  : O(n^2)
+Time complexity  : O(n)
 Space complexity : O(n)
 */
 
@@ -8,7 +8,7 @@ import java.util.*;
 
 class Node
 {
-	int data;0
+	int data;
 	Node left;
 	Node right;
 	
@@ -26,34 +26,28 @@ public class PrintAllKSumPaths
    static Stack<Integer> stack = new Stack<>();
 	
    static void kSumPath(Node root, int k)
-   {
-	   // O(n)
-	   if(root != null)
-	   {
-		   answer.path.push(root);
-		   inorder(root.left,answer, requiredSum);
-		   inorder(root.right,answer,requiredSum);
-		   
-		   // O(n)
-		   // it is being done for each node
-		   int sum = 0;
-		   for(int i = answer.path.size()-1; i>=0; i--)
-		   {
-			   sum += answer.path.get(i).data;
-			   if(sum == requiredSum)
-				    printPath(answer.path, i);
-		   }
-		   
-		   // once done with a node pop it from path stack
-		   answer.path.pop();
-	   }
-   }	
+   {	   
+	   if(root == null)
+		   return;
+	   
+	   sum += root.data;
+	   stack.push(root.data);
+	   
+	   if(sum == k)
+		   printPath(stack);
+	   
+	   kSumPath(root.left, k);
+	   kSumPath(root.right, k);
+	   
+	   sum -= root.data;
+	   stack.pop();	   
+   }
    
-   static void printPath(Stack<Node> path, int j)
+   
+   static void printPath(Stack<Integer> stack)
    {
-	   for(int i=j; i<path.size(); i++)
-		out.print(path.get(i).data+" ");
-	   out.println();
+	   for(int x : stack)
+		   out.print(x+" ");
    }
    
 	  public static void main(String [] args)
@@ -75,8 +69,7 @@ public class PrintAllKSumPaths
 			  r3.right = r7;
 			  r4.right = r8;
 			 
-			  Answer answer = new Answer();
-			  // print all paths with sum k = 7
-			  inorder(root, answer, 7);
+			 
+			 kSumPath(root, 7);
 		}
 }
