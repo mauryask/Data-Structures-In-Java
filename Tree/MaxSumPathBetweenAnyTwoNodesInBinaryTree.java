@@ -34,14 +34,17 @@ public class MaxSumPathBetweenAnyTwoNodesInBinaryTree
 		// max path sum from right subtree
 		int rSum = findMaxPathSum(root.right);
 		
-		// case when max sum path pases through left subrtree or right subtree and then root...
-		int temp  = Math.max(Math.max(lSum, rSum) + root.data , root.data);
-		// case whene max sum path present within the same subtree
-		int ans  = Math.max(temp, lSum+rSum+root.data);
-		// update overall max sum path value
+		// max path that passes through left or 
+		// right sub tree
+		int pathSum1 = Math.max(lSum, rSum) + root.data;
+		// max path that exists within the subtree itself
+		int pathSum2 = lSum+rSum+root.data;
+		// pick max of the two to upate the overall max path sum
+		int ans  = Math.max(pathSum1, pathSum2);
+		// update overall max sum path
 		maxPathSum = Math.max(maxPathSum, ans);
-		//return max path sum for the current subree
-		return temp;
+		// return max path sum from this sub tree
+		return Math.max(Math.max(lSum, rSum) + root.data , root.data);
 	}
 	
 	  public static void main(String [] args)
