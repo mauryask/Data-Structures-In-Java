@@ -8,7 +8,7 @@ import java.util.*;
 
 class Node
 {
-	int data;
+	int data;0
 	Node left;
 	Node right;
 	
@@ -20,16 +20,12 @@ class Node
 	}
 }
 
-class Answer 
-{
-	int sum = 0;
-	Stack<Node> path = new Stack<>();
-}
-
 public class PrintAllKSumPaths
-{   
-   static void inorder(Node root,
-   Answer answer, int requiredSum)
+{
+   static  int sum = 0;
+   static Stack<Integer> stack = new Stack<>();
+	
+   static void kSumPath(Node root, int k)
    {
 	   // O(n)
 	   if(root != null)

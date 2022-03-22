@@ -19,7 +19,7 @@ public class PrintAllTheNodeAtKDistancedown
 {
    static void printNode(Node root, int k)
    {
-       if(root == null || k < 0)
+       if(root == null)
           return;
       
        if(k == 0)

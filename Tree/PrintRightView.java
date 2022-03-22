@@ -36,7 +36,7 @@ public class PrintRightView
 				root = q.removeFirst();
 				
 				if(root == null)
-				{
+				{ 
 					if(!q.isEmpty())
 						q.add(null);
 					out.print(prev.data+" ");

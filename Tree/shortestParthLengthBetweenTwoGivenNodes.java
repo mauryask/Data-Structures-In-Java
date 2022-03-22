@@ -73,6 +73,8 @@ public class shortestParthLengthBetweenTwoGivenNodes
 
    static int dist = 0;
    // path order is not correct so fix it
+   // you can use two diffrent lists to
+   // store left and right path separately
    static List<Integer> path = new ArrayList<>();
    
    static boolean findPAthLength(Node root, int d1, int d2)
