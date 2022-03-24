@@ -53,6 +53,7 @@ public class LargestBSTInBinaryTree
 		NodeInfo left = getMaxSize(root.left);
 		NodeInfo right = getMaxSize(root.right);
 		
+		// calcultae the size of the sub tree
 		int size = 1 + left.currSize + right.currSize;
 		NodeInfo nodeInfo = new NodeInfo();
 		nodeInfo.currSize = size;

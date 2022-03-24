@@ -41,17 +41,14 @@ public class DeleteBinaryTreeRecusrsive
 		out.println();
 	}
     
-	static Node deleteTree(Node root)
+	static void deleteTree(Node root)
 	{
 		if(root == null)
-			return null;
-		
+			return;		
 		deleteTree(root.left);
-		root.left = null;
 		deleteTree(root.right);
 		root.right = null;
-		root = null;
-		return root;
+		root.left = null;		
 	}
   
 	public static void main(String [] args)
@@ -72,7 +69,8 @@ public class DeleteBinaryTreeRecusrsive
 
 		levelOrder(root);
 		out.println("Tree after deletion!!");
-		root =  deleteTree(root);
+		deleteTree(root);
+		root = null;
 		levelOrder(root);
 	}
 }

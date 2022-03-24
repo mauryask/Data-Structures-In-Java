@@ -2,6 +2,7 @@
 ** https://www.geeksforgeeks.org/fix-two-swapped-nodes-of-bst/
 ** T(n) : O(n) 
 ** S(n) : O(1)
+** Yet to be solved
 */
 
 import static java.lang.System.*;
@@ -10,7 +11,7 @@ import java.util.*;
 class Node
 {
 	int data;
-	Node left;
+	Node left; 
 	Node right;
 	
 	Node(int data)
@@ -22,58 +23,10 @@ class Node
 
 public class FixTheBSTIfTwoNodesAreSwapped
 {
-	static void fixBST(Node root)
-	{		
-		 List<Node> q = new LinkedList<>();
-		 q.add(root);		 
-         Node aNode = null;
-		 Node bNode = null;
-		
-		while(!q.isEmpty())
-		{	
-	        // if both nodes found no more 
-			// traversal required
-	        if(aNode != null && bNode != null)
-				break;
-	 
-			root = q.remove(0);
-				    
-	   	    if(root.left != null)
-			{
-				// if this condition is true
-				// it means something wrong with 
-				// the root
-				if(root.data < root.left.data)
-					aNode = root;
-				q.add(root.left);
-			}
-			
-			if(root.right != null)
-			{
-				if(root.data > root.right.data)
-					bNode = root;
-				q.add(root.right);
-			}		
-		}
-		
-		// if nodes are not present
-		 if(aNode == null || bNode == null)
-			return;
-		
-		 int temp = aNode.data;
-		 aNode.data = bNode.data;
-		 bNode.data = temp;
-	}
-	
-	static void inorder(Node root)
+    static void fixBst(Node root)
 	{
-		if(root != null)
-		{
-			inorder(root.left);
-			out.print(root.data+" ");
-			inorder(root.right);
-		}
-	}
+		
+	}	
 	
 	public static void main(String[] args)
 	{
@@ -102,7 +55,7 @@ public class FixTheBSTIfTwoNodesAreSwapped
           
 		  inorder(root);
 		  out.println();
-		  fixBST(root);
+		  fixBst2(root);
 		  inorder(root);
  	}
 }

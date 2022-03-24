@@ -40,9 +40,8 @@ public class MaxSumPathBetweenAnyTwoNodesInBinaryTree
 		// max path that exists within the subtree itself
 		int pathSum2 = lSum+rSum+root.data;
 		// pick max of the two to upate the overall max path sum
-		int ans  = Math.max(pathSum1, pathSum2);
-		// update overall max sum path
-		maxPathSum = Math.max(maxPathSum, ans);
+		// and update overall max sum path
+		maxPathSum = Math.max(maxPathSum, Math.max(pathSum1, pathSum2));
 		// return max path sum from this sub tree
 		return Math.max(Math.max(lSum, rSum) + root.data , root.data);
 	}

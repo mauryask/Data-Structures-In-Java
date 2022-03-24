@@ -1,3 +1,7 @@
+/*
+* https://www.geeksforgeeks.org/find-height-of-a-special-binary-tree-whose-leaf-nodes-are-connected/
+*/
+
 import static java.lang.System.*;
 import java.util.*;
 
@@ -21,7 +25,8 @@ public class HeigtOfSpecialBinaryTree
 	*/
 	static boolean isLeafNode(Node node)
 	{
-		return node.left != null && node.left.right == node && node.right != null && node.right.left == node;
+		return node.left != null && node.left.right == node 
+		&& node.right != null && node.right.left == node;
 	}
 	
 	static int findHeight(Node root)

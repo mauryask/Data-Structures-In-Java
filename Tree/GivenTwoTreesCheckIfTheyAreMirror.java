@@ -1,7 +1,6 @@
-//==> given two binary trees check 
-//==> if they are mirror to each other
-
 import java.util.*;
+import static java.lang.System.*;
+
 class Node
 {
 	int data;
@@ -17,22 +16,12 @@ class Node
 }
 
 public class GivenTwoTreesCheckIfTheyAreMirror
-{
-	static void preOrder(Node root) 
-	{
-		if(root != null)
-		{
-			System.out.print(root.data+" ");
-			preOrder(root.left);
-			preOrder(root.right);
-		}
-	}
-	
-	static void isMirror(Node rootx, Node rooty)
+{	
+	static boolean isMirror(Node rootx, Node rooty)
 	{
 	   Queue<Node> qx = new ArrayDeque<>();	
 	   Queue<Node> qy = new ArrayDeque<>();	
-	   boolean flag = false;
+	   
 	   qx.add(rootx);
 	   qy.add(rooty);
 	   
@@ -41,13 +30,8 @@ public class GivenTwoTreesCheckIfTheyAreMirror
 		   rootx = qx.poll();
 		   rooty = qy.poll();
 		   
-		   if(!(rootx.data == rooty.data))
-		   {
-			flag = false;
-            break;			
-		   }
-		   else
-			 flag = true;
+		   if(rootx.data != rooty.data)
+		      return false;
 		   
 		   if(rootx.left != null && rooty.right != null)
 		   {
@@ -61,11 +45,20 @@ public class GivenTwoTreesCheckIfTheyAreMirror
 			   qy.add(rooty.left);
 		   }
 	   }
-	   
-	   if(flag == true)
-		   System.out.println("Mirror");
-	   else
-		   System.out.println("Not Mirror");
+       
+	   return true;
+	}
+	
+	static boolean recursive(Node root1, Node root2)
+	{
+		if(root1 == null && root2 == null)
+			return true;
+		else if(root1 == null || root2 == null)
+			return false;
+		
+		return (root1.data == root2.data 
+		&& recursive(root1.left , root2.right)
+		&& recursive(root1.right, root2.left));
 	}
 	
 	  public static void main(String [] args)
@@ -98,6 +91,7 @@ public class GivenTwoTreesCheckIfTheyAreMirror
 		  ry2.right = ry4;
 		  ry4.right = ry6;
  
-          isMirror(rootx, rooty);
+          //out.println(isMirror(rootx, rooty));
+          out.println(recursive(rootx, rooty));
 		}
 }

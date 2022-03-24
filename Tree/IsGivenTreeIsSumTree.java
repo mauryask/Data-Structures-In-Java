@@ -37,33 +37,7 @@ public class IsGivenTreeIsSumTree
 		
 		return root.data + lSum + rSum;
 	}
-	
-	
-	// T(n) : O(n*n)
-	// S(n) : O(n)
-	
-	static boolean bruteForce(Node root)
-	{
-		if(root == null || (root.left == null && root.right == null))
-			return true;
 		
-		int lSum = findSum(root.left);
-		int rSum = findSum(root.right);
-		int sum = lSum + rSum;
-		
-		if(sum == root.data && bruteForce(root.left) && bruteForce(root.right))
-			return true;
-		
-		return false;
-	}
-	
-	static int findSum(Node root)
-	{
-		if(root == null)
-			return 0;
-        return root.data + findSum(root.left) + findSum(root.right);		
-	}
-	
 	public static void main(String[] args)
 	{
 		  Node root = new Node(3);
@@ -92,6 +66,7 @@ public class IsGivenTreeIsSumTree
 		  /*sumTree(root);
 		  out.println(isSumTree);*/
 		  
-		  out.println(bruteForce(root));
+		  bruteForce(root);
+		  out.println(isSumTree);
 	}
 }
