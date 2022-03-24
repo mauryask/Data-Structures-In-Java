@@ -7,6 +7,7 @@ import static java.lang.System.*;
 import java.util.*;
 
 class Node  
+
 {
 	int data;
 	Node left, right;
