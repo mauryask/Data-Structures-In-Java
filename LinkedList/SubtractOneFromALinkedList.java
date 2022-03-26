@@ -1,7 +1,7 @@
 /*
 * T(n) : O(n)
 * S(n) : O(1)
-** Substract one to a number 
+** Subtract one to a number 
 ** given as a linkelist
 */
 import static java.lang.System.*;
