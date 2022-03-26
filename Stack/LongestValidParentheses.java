@@ -36,11 +36,66 @@ public class LongestValidParentheses
 		return  max;
 	}
 	
+	/*
+	** Method-2
+	* T(n) : O(n) 
+	* S(n) : O(1)
+	*/
+	
+	
+	static int validParen2(String str, int n)
+	{
+		int close = 0;
+		int open = 0;
+		int max = 0;
+		
+		// tarverse the string left to right
+		for(int i=0; i<n; i++)
+		{
+		    char ch  = str.charAt(i);
+		    
+			if(ch == '(')
+				open++;
+			else if(ch == ')')
+				close++;
+			
+			if(close == open)
+			{
+				int len = close + open;
+				max = Math.max(len, max);
+			}
+			else if(close > open)
+				close = open = 0;
+		}
+		
+		// traverse the string right to left
+		close  = open = 0;		
+		
+		for(int i=n-1; i>=0; i--)
+		{
+		    char ch  = str.charAt(i);
+		    
+			if(ch == '(')
+				open++;
+			else if(ch == ')')
+				close++;
+			
+			if(close == open)
+			{
+				int len = close + open;
+				max = Math.max(len, max);
+			}
+			else if(open > close)
+				close = open = 0;
+		}
+		
+		return max;
+	}
+	
   	public static void main(String [] args)
 	{
 		String str  = ")()())";
-		int n = str.length();
-		
-		out.println(validParen(str, n));
+		int n = str.length();		
+		out.println(validParen2(str, n));
 	}
 }
