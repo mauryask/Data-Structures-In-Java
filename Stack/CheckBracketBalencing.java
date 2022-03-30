@@ -11,14 +11,27 @@ import java.util.*;
 
 public class CheckBracketBalencing
 {
-	static boolean isBalenced(char ch[], int n)
+	Map<Character,Character> map;
+	
+	CheckBracketBalencing()
+	{
+		map = new HashMap<>();
+		map.put('(',')');
+		map.put('[',']');
+		map.put('{','}');		
+	}
+		
+	public boolean isBalenced(String str, int n)
 	{
 		Stack<Character> stack = new Stack<>();
 		
 		for(int i=0; i<n; i++)
 		{
-			if(Arrays.asList('{', '(', '[').contains(ch[i]))
-				stack.push(ch[i]);
+			char c = str.charAt(i);
+			
+			// If opening bracket encountered
+			if(map.containsKey(c))
+				stack.push(c);
 			/*
 			* if a closing bracket encountered
 			* check if the stack is not empty and
@@ -26,7 +39,7 @@ public class CheckBracketBalencing
 			* corresponing to the closing one
 			* pop it from stack
 			*/
-			else if(Arrays.asList('}', ')', ']').contains(ch[i]))
+			else if(map.containsValue(c))
 			{
 				/*
 				* Stck will be empty if there are more 
@@ -40,9 +53,7 @@ public class CheckBracketBalencing
 				/*
 				* Check for appropriate counter part
 				*/
-				if((ch[i] == ')' && top == '(') 
-					|| (ch[i] == '}' && top == '{')
-					|| (ch[i] == ']' && top == '['))
+				if(map.get(top) == c)
 					stack.pop();
 				else
 					return false;
@@ -55,14 +66,68 @@ public class CheckBracketBalencing
 		* return false
 		* if stack is empty return true
 		*/
-		return !stack.isEmpty() ? false : true;
+		return stack.isEmpty();
+	}
+	
+	/*
+	* Constant space complexity solution 
+	* T(n) : O(n*n)
+	* S(n) : O(1)
+	*/
+	
+	 boolean isBalenced2(String str, int n)
+	 {
+		 
+		 int top = -1;
+		 
+		 for(int i=0; i<n; i++)
+		 {
+			 char ch = str.charAt(i);
+			 
+			 if(map.containsKey(ch))
+			   top = i;
+		     else if(map.containsValue(ch))
+			 {
+				if(top == -1)
+					return false;
+				
+				if(map.get(str.charAt(top)) == ch)
+                    top = getTop(str, top-1);
+                
+                else return false; 				
+			 }
+		 }
+		 
+		 return top == -1;
+	 }
+	
+	
+	int getTop(String str, int top)
+	{
+		int right = 0;
+		
+		while(top>=0)
+		{
+			char ch = str.charAt(top);
+			
+			if(map.containsValue(ch))
+				right++;
+			else if(map.containsKey(ch))
+				right--;
+			
+			if(right < 0)
+				return top;
+			top--;
+		}
+		
+		return -1;
 	}
 	
 	public static void main(String [] args)
 	{
 		String exp = "[a+(b+c)*{c+(d+e)+(b+e)}]";
-		char ch[] = exp.toCharArray();
-		int n = ch.length;
-		out.println(isBalenced(ch, n));
+		int n = exp.length();
+		CheckBracketBalencing check = new CheckBracketBalencing();
+		out.println(check.isBalenced2(exp, n));
 	}
 }
