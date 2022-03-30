@@ -77,49 +77,68 @@ public class CheckBracketBalencing
 	
 	 boolean isBalenced2(String str, int n)
 	 {
-		 
+		 /*
+		 * This variable maintains the current top
+		 * It replaces the stack
+		 ** top =-1  means stack is empty initially
+		 */
 		 int top = -1;
-		 
+          		 
 		 for(int i=0; i<n; i++)
 		 {
 			 char ch = str.charAt(i);
-			 
+			 // if opening bracket encountered
+			 // push it in the stack (update top)
 			 if(map.containsKey(ch))
 			   top = i;
+		     // if closing bracket encountered 			 
 		     else if(map.containsValue(ch))
 			 {
+				 // top -1 means stack is empty
 				if(top == -1)
 					return false;
-				
+                // if top is opening bracket 
+                // and ch is corresponing closing bracket
+                // find next top				
 				if(map.get(str.charAt(top)) == ch)
                     top = getTop(str, top-1);
                 
                 else return false; 				
 			 }
 		 }
-		 
+         // if top is -1 (stack is empty) then brackets 
+		 // are balanced else not
 		 return top == -1;
 	 }
 	
 	
 	int getTop(String str, int top)
 	{
+		//  we are prety sure that the  
+		// next top will lie between 0 and top-1
 		int right = 0;
 		
 		while(top>=0)
 		{
 			char ch = str.charAt(top);
-			
+			// if closing bracket encountered
+			// increase right 
 			if(map.containsValue(ch))
 				right++;
+			// if opening bracket encountered 
+			// decrease right
 			else if(map.containsKey(ch))
 				right--;
-			
+            // if right becomes -1
+			// that means we have more number of opeing 
+			// brackets than the closing  brackets
+			// in this case top will point to next top 
 			if(right < 0)
 				return top;
+			// decrease top
 			top--;
 		}
-		
+        		
 		return -1;
 	}
 	
