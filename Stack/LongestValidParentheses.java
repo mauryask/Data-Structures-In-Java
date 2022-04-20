@@ -25,7 +25,9 @@ public class LongestValidParentheses
 				stack.pop();
 				if(stack.isEmpty())
 					stack.push(i);
-				else
+				else // we are pretty sure
+                     //	that we have valid parenteses
+					 //	of some length
 				{
 					int len = i - stack.peek();
 					max = Math.max(max, len);
@@ -44,7 +46,9 @@ public class LongestValidParentheses
 	* Anlogy : lets take : "()()" this string 
 	* here we can see in order to be valida parentheses
 	* number of opening brfaces should be same as 
-	* number of closing brackets
+	* number of closing brackets 
+	*  from left to right and from right to left as well
+	* the same analogy used here to solve this problem
 	*/	
 	
 	static int validParen2(String str, int n)
@@ -68,6 +72,9 @@ public class LongestValidParentheses
 				int len = close + open;
 				max = Math.max(len, max);
 			}
+			// if at any point close > open 
+			// we are pretty sure that at this point 
+			// we encountered an invalid length of braces
 			else if(close > open)
 				close = open = 0;
 		}
