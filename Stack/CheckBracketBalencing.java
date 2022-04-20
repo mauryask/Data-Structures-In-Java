@@ -97,7 +97,7 @@ public class CheckBracketBalencing
 				 // top -1 means stack is empty
 				if(top == -1)
 					return false;
-                // if top is opening bracket 
+                // if top is pointing to opening bracket 
                 // and ch is corresponing closing bracket
                 // find next top				
 				if(map.get(str.charAt(top)) == ch)

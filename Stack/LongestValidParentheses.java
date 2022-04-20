@@ -40,8 +40,12 @@ public class LongestValidParentheses
 	** Method-2
 	* T(n) : O(n) 
 	* S(n) : O(1)
-	*/
-	
+	*******
+	* Anlogy : lets take : "()()" this string 
+	* here we can see in order to be valida parentheses
+	* number of opening brfaces should be same as 
+	* number of closing brackets
+	*/	
 	
 	static int validParen2(String str, int n)
 	{
