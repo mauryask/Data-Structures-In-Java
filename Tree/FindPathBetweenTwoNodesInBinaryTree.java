@@ -42,13 +42,13 @@ public class FindPathBetweenTwoNodesInBinaryTree
 	}
 	
 	// T(n) : O(n)
-	static boolean nodeToRootPath(Node root, int m, int n, List<Integer> path, boolean bottom2Top)
+	static boolean nodeToRootPath(Node root, int d, List<Integer> path, boolean isSource)
 	{
 		if(root == null)
 			return false;
-		if(root.data == m || root.data == n)
+		if(root.data == d)
 		{
-			if(bottom2Top)  
+			if(isSource)  
 				path.add(root.data); 
 			else
 				path.add(0, root.data);
@@ -56,11 +56,11 @@ public class FindPathBetweenTwoNodesInBinaryTree
 			return true; 
 		}
 		
-		boolean left = nodeToRootPath(root.left, m, n, path, bottom2Top);
+		boolean left = nodeToRootPath(root.left, d, path, isSource);
 		
 		if(left)
 		{
-			if(bottom2Top)  
+			if(isSource)  
 				path.add(root.data);
 			else
 				path.add(0, root.data);
@@ -68,10 +68,10 @@ public class FindPathBetweenTwoNodesInBinaryTree
 		}
 		else
 		{
-			boolean right = nodeToRootPath(root.right, m, n, path, bottom2Top);
+			boolean right = nodeToRootPath(root.right, d, path,isSource);
 			if(right)
 			{
-				if(bottom2Top)  
+				if(isSource)  
 					path.add(root.data); 
 				else
 					path.add(0, root.data);			
@@ -89,16 +89,15 @@ public class FindPathBetweenTwoNodesInBinaryTree
 		
 	   	Node lca = findLCA(root, m, n);
 		
-		List<Integer> leftPath = new ArrayList<>();
-		List<Integer> rightPath = new ArrayList<>();
+		List<Integer> srcToRootPath = new ArrayList<>();
+		List<Integer> rootToDestPath = new ArrayList<>();
 		
-        nodeToRootPath(lca.left, m, n,leftPath, true);
-		leftPath.add(lca.data);
-        nodeToRootPath(lca.right, m, n, rightPath, false);
+        nodeToRootPath(lca, m,srcToRootPath, true);		
+        nodeToRootPath(lca.right,n, rootToDestPath, false);
 		
-		leftPath.addAll(rightPath);
+		srcToRootPath.addAll(rootToDestPath);
 		
-		out.println(leftPath);
+		out.println(srcToRootPath);
 	}
 
 		
