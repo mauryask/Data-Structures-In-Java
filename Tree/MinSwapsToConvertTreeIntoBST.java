@@ -2,7 +2,7 @@
 * Here the concept is same as
 * finding minimum number of swaps to 
 * to sort the array
-* T(n) : O(n log n)
+* T(n) : O(n * log n)
 * S(n) : O(n)
 */
 

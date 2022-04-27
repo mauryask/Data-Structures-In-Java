@@ -20,8 +20,8 @@ public class CountAllTheSubArraysWithSumK
 			sum += A[i]; 
 			// if sum is started from the starting
             // of the array			
-			if(sum == k)
-				count++;
+			if(sum == target)
+				ans++;
 			
 			if(map.containsKey(sum-target))
 			  ans += map.get(sum-target);
