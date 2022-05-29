@@ -52,7 +52,7 @@ public class GraphUsingAdjacencyMatrix
 		System.out.print("Enter number of vertices: ");
 		v = sc.nextInt();
 		System.out.print("\nEnter number of edges: ");
-		e =  sc.nextInt();
+		e = sc.nextInt();
 		
 		makeGraph(v);
 		
