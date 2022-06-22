@@ -18,10 +18,9 @@ public class TrieImplementation
     // T(n) : O(word-length)
 	static void  insertWord(TrieNode root, String word)
 	{
-		char [] arrChar = word.toCharArray();
-		
-		for(char ch : arrChar)
+		for(int i=0; i<word.length(); i++)
 		{			
+	        char ch = word.charAt(i);
 			if(root.chArr[ch-'a'] == null)
 			{
 				TrieNode temp = new TrieNode();
@@ -38,10 +37,10 @@ public class TrieImplementation
 	// T(n) : O(word-length)
 	static boolean searchWord(TrieNode root, String word)
 	{
-		char arrChar[] = word.toCharArray();
-        
-		for(char ch : arrChar)
+		for(int i=0; i<word.length(); i++)
 		{
+		   char ch = word.charAt(i);
+		   
 		   if(root.chArr[ch-'a'] != null)
 			   root = root.chArr[ch-'a'];
 		   else
@@ -54,10 +53,10 @@ public class TrieImplementation
 	// T(n) : O(word-length)
 	static void deleteWord(TrieNode root, String word)
 	{
-		char[] arrChar = word.toCharArray();
-		
-		for(char ch : arrChar)
+		for(int i=0; i<word.length(); i++)
 		{
+			char ch = word.charAt(i);
+			
 			if(root.chArr[ch-'a'] != null)
 			   root = root.chArr[ch-'a'];
 		    else
