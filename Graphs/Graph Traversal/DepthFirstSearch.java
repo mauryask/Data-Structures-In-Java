@@ -68,20 +68,21 @@ class Graph
 		while(!stack.isEmpty())
 		{
 			int u  = stack.pop();
+			
 			if(!visited[u])
 			{
 			   System.out.print(u+" ");
 			   visited[u] = true;
-			}
 			
-			for(Edge e : G[u])
-			{
-				if(!visited[e.v])
+				for(Edge e : G[u])
 				{
-					stack.push(e.v);
-					parent[e.v] = u;
+					if(!visited[e.v])
+					{
+						stack.push(e.v);
+						parent[e.v] = u;
+					}
 				}
-			}
+		    }
 		}		
 	}
 
