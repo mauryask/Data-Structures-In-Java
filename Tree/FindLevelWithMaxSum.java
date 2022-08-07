@@ -4,6 +4,7 @@ Space complexity: O(n)
 */
 
 import java.util.*;
+import static java.lang.System.*;
 
 class Node
 {
@@ -21,6 +22,49 @@ class Node
 
 public class FindLevelWithMaxSum
 {
+	//Best method without putting null in the queue
+	
+	static int getMaxSumLevel(Node root)
+	{
+		if(root == null)
+            return 0;
+		
+		int maxSum = 0;
+		int level = 0;
+		int maxLevel = 0;
+		
+        Queue<Node> q = new ArrayDeque<>();
+        q.add(root);
+         
+        while(!q.isEmpty())
+		{
+			int count = q.size();
+			int sum = 0;	
+
+			while(count-->0)
+			{				
+				root = q.poll();
+				
+				sum += root.data;
+				
+				if(root.left != null)
+					q.add(root.left);
+				if(root.right != null)
+					q.add(root.right);							
+			}
+			
+			if(maxSum < sum)
+			{
+				maxSum = sum;
+				maxLevel = level;
+			}
+			
+			level++;
+		}
+
+        return maxLevel;		
+	}
+	
 	static int findLevelOfMaxSum(Node root)
 	{
 		int level = 0;
@@ -43,6 +87,7 @@ public class FindLevelWithMaxSum
 			   				
 				if(currentSum > maxSum)
 				{
+					out.println(level);
 					maxSum = currentSum;
 					maxLevel = level;
 				}
@@ -93,6 +138,7 @@ public class FindLevelWithMaxSum
 		  r4.right = r9;
 		  r5.left = r10;
 		  
-		  System.out.println(findLevelOfMaxSum(root));
+		 //System.out.println(findLevelOfMaxSum(root));
+		  System.out.println(getMaxSumLevel(root));
 		}
 }
