@@ -11,7 +11,7 @@ class Node
 	int data;
 	Node next;
 	Node(int data)
-	{0
+	{
 		this.data = data;
 		next = null;
 	}
