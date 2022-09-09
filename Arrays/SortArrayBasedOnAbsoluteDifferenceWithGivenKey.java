@@ -1,7 +1,7 @@
 /*
 * T(n) : O(n*logn)
 * S(n) : O(n)
-*** Merge sort variation
+*** (Merge sort variation)
 */
 import static java.lang.System.*;
 import java.util.*;
