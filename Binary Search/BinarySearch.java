@@ -3,7 +3,7 @@ import static java.lang.System.*;
 
 public class BinarySearch 
 {
-		static int binary_search(int A[], int target)
+		private static int binarySearch(int A[], int target)
 		{
 			int m_index, l_index, r_index;
 			m_index=0;
@@ -28,8 +28,7 @@ public class BinarySearch
 		{
 			int A[] = new int []{1,2,3,4,5,6,7,8,9}; 
 			int target = 6;
-		    int index=BinarySearch.binary_search(A, target);
+		    int index = binarySearch(A, target);
 		    out.println("The element is found at index: "+index);
 		}
-
 }
