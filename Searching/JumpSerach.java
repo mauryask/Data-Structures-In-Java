@@ -17,6 +17,7 @@ public class JumpSerach
 	{
 		int jump = (int)Math.sqrt(n);
 		int i,j;
+		
 		for(i=0,j=jump; j<n ; i=j,j+=jump) 
 		{
 			if(A[i] == item)
