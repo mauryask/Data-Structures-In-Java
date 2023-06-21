@@ -1,6 +1,4 @@
 /*
-* Finding first occurance of a given nuumber
-* in a sorted array
 * Time complexity  : O(log n)
 * Space complexity : O(1)
 */
@@ -9,10 +7,10 @@ import static java.lang.System.*;
 
 public class FindFirstAndLastOcuuranceOfAnElement
 {
-    static int findFirstOccuirrance(int A[], int n, int target)
+    static int getFirstOccurrance(int A[], int target)
 	{
 		int start = 0;
-		int end = n-1;
+		int end = A.length-1;
 		int result = -1;
 		
 		while(start <= end)
@@ -24,9 +22,9 @@ public class FindFirstAndLastOcuuranceOfAnElement
 				result = mid;
 				end = mid - 1;
 			}
-			else if(target > A[mid])
+			else if(A[mid] < target)
 				start = mid + 1;
-			else 
+			else if(A[mid] > target)
 				end = mid - 1;
 		}
 		
@@ -36,6 +34,6 @@ public class FindFirstAndLastOcuuranceOfAnElement
 	public static void main(String [] args)
 	{
 		int A[] = {1,2,3,5,10,10,10,10,12,13,14,15,16};
-		out.println(findFirstOccuirrance(A, A.length, 10));
+		out.println(getFirstOccurrance(A, A.length, 10));
 	}
 }

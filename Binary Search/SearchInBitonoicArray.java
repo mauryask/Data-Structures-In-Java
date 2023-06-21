@@ -1,30 +1,17 @@
 /*
 * Time complexity  : O(log n)
 * Space complexity : O(1)
-***********
-* It is basically a variation of problem 
-* finding peak element int the in the Bitonic array
-* After peak is found the array will be divided into
-* two sorted arrays one sorted in ascendin order
-* another in Descending order
-* Apply binary search on both
-* The key might be present in any one of them
-*****************
-https://www.geeksforgeeks.org/find-element-bitonic-array/
 */
 import static java.lang.System.*;
 
 public class SearchInBitonoicArray
 {
-	static int searchElement(int A[], int n, int target)
+	static int getElement(int A[], int target)
 	{  
-		 int peek = findPeek(A, 0, n-1, n);
+		 int peekIndex = getPeekElementIndex(A);
 		 
-		 int lSub = binarySearch(A, 0, peek, target, true);
-		 if(lSub != -1)
-			 return lSub;
-		 
-		 return binarySearch(A, peek+1, n-1, target, false);		 
+		 int lSub = binarySearch(A, 0, peekIndex, target, true);
+		 return lSub == -1 ?  binarySearch(A, peek+1, A.length-1, target, false) : lSub;		 
 	}
 	
 	static int binarySearch(int A[], int start, 
@@ -57,11 +44,13 @@ public class SearchInBitonoicArray
 		return -1;
 	}
 	
-	static int findPeek(int A[], int start,int end, 
-	int n)
+	static int getPeekElementIndex(int A[])
 	{
 		if(n==1)
 			return 0;
+		
+		int start = 0;
+		int end = A.length-1;
 		
 		while(start <= end)
 		{
@@ -78,20 +67,9 @@ public class SearchInBitonoicArray
 			}
 			else
 			{
-				if(mid == 0)
-				{
-					if(A[mid] > A[mid+1])
-						return mid;
-					else
-						start = mid + 1;
-				}
-				else if(mid == n-1)
-				{
-					if(A[mid] > A[mid-1])
-						return mid;
-					else
-						end = mid -1;
-				}
+				if((mid == 0 && A[mid] > A[mid+1]) ||
+				(mid == A.length-1 && A[mid] > A[mid-1])) 
+					  return mid;
 			}
 		}
 		
@@ -100,9 +78,8 @@ public class SearchInBitonoicArray
 	
 	public static void main(String [] args)
 	{
-		int A[] = {1,3,8,12,14,16,18,24,26,10,9,7,6,5};
-		int n = A.length;
-		
-		out.println(searchElement(A, n, 3));
+		int A[] = {1,3,8,12,14,16,18,24,26,10,9,7,6,5};			
+		int target = 3;
+		out.println(getElement(A, target));
 	}
 }

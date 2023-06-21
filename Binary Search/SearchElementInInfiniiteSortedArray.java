@@ -1,38 +1,29 @@
 /*
 * Space complexity : O(1)
 * Time complexity  : O(log n)
-************
-* Here we will apply binary search but the 
-* Issue is we don't know where to put the "end" pointer
-* Since the array has infinite number of element
-* so we will put the end pointer at start + 1 (where start = 0)
-* Now we will move the end pointer twice every time until the 
-* key greater than the Aend
-* Once we found the end index (where key < Aend)
-* We got the sub array (start to end) where the element might be found
-* Now we can apply binary search here 
+* A variation of exponential search
 */
 
 import static java.lang.System.*;
 
 public class SearchElementInInfiniiteSortedArray
 {
-	static int findElement(int A[], int key)
+	static int getElementIndex(int A[], int key)
 	{
-		int start = 0;
-		int end = start + 1;
+		if(A[0] == key)
+			return 0;
 		
-		// If condition is true
-		// It means the element can not be found 
-		// between given start and end 
-		// so update current start ans end
-	    while(key > A[end])
+		int index = 1;
+				
+	    while(A[index] <= key)
 		{
-			start = end;
-			end = end * 2;
+			if(A[index] == key)
+				return index;
+			
+			index = index * 2;
 		}
 		
-		return binarySearch(A, start, end, key);
+		return binarySearch(A, index/2, index, key);
 	}
 	
 	static int binarySearch(int A[], int start,int end, int key)
@@ -42,11 +33,9 @@ public class SearchElementInInfiniiteSortedArray
 			int mid = start + (end-start)/2;
 			
 			if(A[mid] == key)
-				return mid;
-			
-			if(A[mid] < key)
-				start = mid+1;
-			
+				return mid;			
+			else if(A[mid] < key)
+				start = mid+1;			
 			else if(A[mid] > key)
 				end = mid - 1;
 		}
@@ -58,7 +47,6 @@ public class SearchElementInInfiniiteSortedArray
 	{
 		int A[] = {2,4,5,6,8,10,12,14,45,78,96,100,102,108,114,115,150,222,400,5414,632};
 		int key = 102;
-		
-		out.println(findElement(A, key));
+		out.println(getElementIndex(A, key));
 	}
 }

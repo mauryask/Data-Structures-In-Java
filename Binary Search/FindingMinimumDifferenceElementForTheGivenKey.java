@@ -4,10 +4,10 @@ import static java.lang.System.*;
 
 public class FindingMinimumDifferenceElementForTheGivenKey
 {
-	static int findMinDiffElement(int A[], int n,int key)
+	static int getMinDiffElement(int A[], int key)
 	{
 		int start = 0;
-		int end = n-1;
+		int end = A.length-1;
 		int ceil = -1;
 		int floor = -1;
 		
@@ -16,24 +16,23 @@ public class FindingMinimumDifferenceElementForTheGivenKey
 			int mid = start + (end - start) / 2;
 			
 			if(A[mid] == key)
-				return key;
-			
-			if(A[mid] < key)
+				return key;			
+			else if(A[mid] < key)
 			{
-				floor = mid;
+				floor = A[mid];
 				start = mid + 1;
 			}
 			else if(A[mid] > key)
 			{
-				 ceil = mid;
+				 ceil = A[mid];
 				 end = mid - 1;
 			}
 		}
 		
 		if(floor != -1 && ceil != -1)
 		{
-			int floorDif = Math.abs(A[floor] - key);
-            int ceilDiff  = Math.abs(A[ceil] - key);
+			int floorDif = Math.abs(floor - key);
+            int ceilDiff  = Math.abs(ceil - key);
 			return floorDif < ceilDiff ? floor : ceil;		
 		}
 		 
@@ -44,8 +43,7 @@ public class FindingMinimumDifferenceElementForTheGivenKey
 	{
 		int A[] = {15,20,25,63,95,100,102,115,140};
 		int key = 98;
-		int n = A.length;
-		
-		out.println(findMinDiffElement(A, n, key));
+				
+		out.println(getMinDiffElement(A, key));
 	}
 }
