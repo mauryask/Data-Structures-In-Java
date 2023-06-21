@@ -1,5 +1,6 @@
 //T(n) : O(log n)
 //S(n) : O(1)
+
 import static java.lang.System.*;
 
 public class BinarySearch 

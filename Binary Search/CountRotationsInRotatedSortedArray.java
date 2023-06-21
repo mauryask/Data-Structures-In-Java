@@ -1,21 +1,6 @@
-/* Very Important
-***********
+/*
 * Time complexity  : O(log n)
 * Space complexity : O(1)
-* The solution below covers all the cases
-***********
-* The idea is to find min element index
-* Since before this element 
-* The rotated array exists
-* in bruteForce solution we can directly find the 
-* the index of smallest element
-***********
-* But Since the array is sorted we can apply 
-* Binary search
-**/
-/*
-* This solution not working if
-* array is reverse sorted
 */
 
 import static java.lang.System.*;
@@ -26,8 +11,6 @@ public class CountRotationsInRotatedSortedArray
 	{
 		while(low <= high)
 		{			
-			// if there is only one element
-			// if array is already sorted
 			if(high == low)
 				return low;
 			
@@ -35,11 +18,9 @@ public class CountRotationsInRotatedSortedArray
 			
 			// check if (mid+1) is min element
 			if (mid < high && A[mid+1] < A[mid])
-				return mid+1;
-			
-
+				return mid+1;			
 			// check if mid itself is min element
-			if (mid > low && A[mid] < A[mid - 1])
+			else if (mid > low && A[mid] < A[mid - 1])
 				return mid;
 
 			/*
