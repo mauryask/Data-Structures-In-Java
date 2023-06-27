@@ -41,11 +41,12 @@ public class HeapSort
 	   
 	   for(int i= A.length-1; i>=0; i--)
 	   {
+		   //Removing the largest element from top of the heap maxHEapifying the rest of the tree
 		   int temp = A[0];
 		   A[0] = A[i];
 		   A[i] = temp;
 		   
-		   maxHeapify(A,0,i); //i is reduced heapSize here
+		   maxHeapify(A,0,i); //i is reduced heapSize here (we need to leave this element (at index i) since it is at right place now)
 	   }
 	}
 	
