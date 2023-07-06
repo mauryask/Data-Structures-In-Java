@@ -18,10 +18,6 @@ public class CountAllTheSubArraysWithSumK
 		for(int i=0;i<n; i++)
 		{
 			sum += A[i]; 
-			// if sum is started from the starting
-            // of the array			
-			if(sum == target)
-				ans++;
 			
 			if(map.containsKey(sum-target))
 			  ans += map.get(sum-target);
