@@ -55,44 +55,47 @@ public class MinimumSwapsRequiredToSortTheArray
 		return swapCount;
 	}
 	
+
 	// T(n) : O(n*n)
 	// S(n) : O(1)
-	static int bruteForce(int[] A,int n)
+	//This is nothing but the selection sort
+	static int getMinIndex(int[] A, int index)
 	{
-		int count = 0;
+		int minIndex = index;
+		int minVal = A[index];
 		
-		for(int i=0; i<n; i++)
+		for(int i=index+1; i<A.length; i++)
 		{
-			int min = minIndex(A, i, n);
-			
-			if(min != i)
+			if(minVal > A[i])
 			{
-				int temp = A[i];
-				A[i] = A[min];
-				A[min] = temp;
-				count++;
-			}
-		}
-		
-		return count;
-	}
-	
-	static int minIndex(int[] A,int i, int n)
-	{
-		int minIndex = i;
-		int min = A[i];
-		
-		for(int j=i+1; j<n; j++)
-		{
-			if(min > A[j])
-			{+
-				min = A[j];
-				minIndex = j;
+				minVal = A[i];
+				minIndex = i;
 			}
 		}
 		
 		return minIndex;
 	}
+	
+	static int bruteForce(int[] A)
+	{
+		int swapCount = 0;
+		
+		for(int i=0; i<A.length; i++)
+		{
+			int minIndex = getMinIndex(A, i);
+			
+			if(minIndex == i)
+				continue;
+			
+			int temp = A[minIndex];
+			A[minIndex] = A[i];
+			A[i] = temp;
+			swapCount++;
+		}
+		
+		return swapCount;
+	}
+	
 	
 	public static void main(String [] args)
 	{
