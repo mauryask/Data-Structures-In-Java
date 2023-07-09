@@ -13,8 +13,7 @@ public class LargestSubArrayWithEqual0sAnd1s2s
 	    int maxLen = 0;
 		int count0 = 0;
 		int count1 = 0;
-		int count2 = 0;
-		
+		int count2 = 0;	
 		int start = 0;
 		int end = 0;
 		
@@ -31,18 +30,15 @@ public class LargestSubArrayWithEqual0sAnd1s2s
 		   else
 			   count2 += 1;
 		   
-		   int diff01 = count0 - count1;
-		   int diff12 = count1 - count2;
-		   
-		   String key = diff01+"#"+diff12;
+		    String diff = (count0 - count1)+"0"+(count1 - count2);
 		   		   
-		   if(map.containsKey(key))
+		   if(map.containsKey(diff))
 		   {
-			   start = map.get(key)+1;
+			   start = map.get(diff)+1;
 			   end = i;
 		   }			 
-		   
-		   map.putIfAbsent(key, i);
+		   else 
+		     map.put(diff, i);
 		}
 		
 		out.println(start+", "+end);

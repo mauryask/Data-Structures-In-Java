@@ -7,25 +7,23 @@ public class CountAllTheSubArraysWithSumK
 	// Space Complexity : O(n)
 	
 	static int subArrayCount2(int A[], int target)
-	{
-		int n = A.length;
+	{		
 		Map<Integer, Integer> map = new HashMap<>();
-		map.put(0,1);
-		
-		int ans = 0;
+		map.put(0,1);		
+		int count = 0;
 		int sum = 0;
 		
-		for(int i=0;i<n; i++)
+		for(int x : A)
 		{
-			sum += A[i]; 
+			sum += x; 
 			
 			if(map.containsKey(sum-target))
-			  ans += map.get(sum-target);
+			  count += map.get(sum-target);
 			
 		    map.put(sum, map.getOrDefault(sum,0)+1);
 		}
 		
-		return ans;
+		return count;
 	}
 	
 	// Time Complexity  : O(n^2)

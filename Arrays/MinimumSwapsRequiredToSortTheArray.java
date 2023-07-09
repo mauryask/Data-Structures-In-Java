@@ -13,7 +13,7 @@ class Element
 	}
 }
 
-public class MinimumSwapsRequiredToSwapTheArray 
+public class MinimumSwapsRequiredToSortTheArray
 {	
     // O(n log n)
 	// S(n) : O(n)

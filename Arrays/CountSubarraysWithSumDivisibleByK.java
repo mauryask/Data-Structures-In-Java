@@ -48,16 +48,12 @@ public class CountSubarraysWithSumDivisibleByK
 		*/
 		int sum = 0;
 		map.put(0, 1);
-		// subarray count
 		int count = 0;
 		
-		for(int i=0; i<n; i++)
+		for(int x : A)
 		{
-			sum += A[i];
+			sum += x;
 			int rem = ((sum%k)+k)%k;			
-			// if cumSum from the start of the array divisibkle by k
-			 if(rem == 0)
-				 count++;
 			
 			/*
 			* Check if this remainder 

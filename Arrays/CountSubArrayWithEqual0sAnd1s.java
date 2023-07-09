@@ -9,25 +9,20 @@ public class CountSubArrayWithEqual0sAnd1s
 {
 	static int countSubArray(int A[], int n)
 	{
-		int sum = 0; // cum-sum				
-		int count = 0; // count subarrays 
-		
+		int sum = 0; 		
+		int count = 0; 
 		Map<Integer, Integer> map = new HashMap<>();
-				
-		for(int i=0; i<n; i++)
+		map.put(0, 1);
+		
+		for(int x : A)
 		{
-			if(A[i] == 0)
+			if(x == 0)
 				sum += -1;
             else 		
 			    sum += 1;
 			
-			// if sum zero startes from the startes
-			// of the array
-			if(sum == 0)
-				count++;
-			
-			if(map.containsKey(sum-0))
-				count += map.get(sum-0);
+			if(map.containsKey(sum))
+				count += map.get(sum);
 			
 			map.put(sum, map.getOrDefault(sum, 0)+1);
 		}

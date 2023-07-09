@@ -43,15 +43,12 @@ public class CountSubArrayWithEqual0sAnd1s2s
 		   else
 			   count2 += 1;
 		   
-		   int diff01 = count0 - count1;
-		   int diff12 = count1 - count2;
+		   String diff  = (count0 - count1) +"#" + (count1-count2);
 		   
-		   String key = diff01+"#"+diff12;
+		   if(map.containsKey(diff))
+			   count += map.get(diff);
 		   
-		   if(map.containsKey(key))
-			   count += map.get(key);
-		   
-           map.put(key, map.getOrDefault(key, 0)+1);    
+           map.put(diff, map.getOrDefault(diff, 0)+1);    
 		}
 		
 		return count;
