@@ -47,8 +47,7 @@ public class BucketSort
 		 {
 			 while(!bucket[i].isEmpty())
 				 arr[index++] = bucket[i].remove(0);
-		 }
-		
+		 }		
 	}
 	
 	public static void main(String [] args)
