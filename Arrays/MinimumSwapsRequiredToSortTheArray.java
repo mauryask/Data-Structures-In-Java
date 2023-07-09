@@ -1,18 +1,6 @@
 import java.util.*;
 import static java.lang.System.*;
 
-class Element
-{
-	int ele;
-	int index;
-	
-	Element(int ele, int index)
-	{
-	  this.ele = ele;
-	  this.index = index;
-	}
-}
-
 public class MinimumSwapsRequiredToSortTheArray
 {	
     // O(n log n)
@@ -22,36 +10,49 @@ public class MinimumSwapsRequiredToSortTheArray
 	// original array by swapping the coresponding 
     // elements and count number of swaps at the same time
 	
-	static int minSwap(int[] A,int n)
+	static class Element 
+	{
+		int value;
+		int index;
+		
+		Element(int value, int index)
+		{
+			this.value = value;
+			this.index = index;
+		}
+	}
+	
+	static int getMinSwaps(int[] A)
 	{
 		List<Element> list = new ArrayList<>();
+
+	    for(int i=0; i<A.length; i++)
+			list.add(new Element(A[i], i));
 		
-	   	for(int i=0; i<n; i++)
-	       list.add(new Element(A[i], i));
-	   
-        Collections.sort(list, (a,b)->{
-			return a.ele - b.ele;
-		});	   
+		int swapCount = 0;
 		
-		int i=0;
-		int count = 0;
+		Collections.sort(list, (a, b)->a.value-b.value);
 		
-		while(i<n)
+		//This runs in O(n) actually
+		//Since every round of innter whilev loop
+		//Places an element at its proper place
+		for(int i=0; i<A.length; i++)
 		{
-			Element ele = list.get(i);
-			int index = ele.index;
-			
-			if(index != i)
+		    int index = list.get(i).index;
+						
+			//If element is alreay at proper location don't go inside the loop			
+			while(index != i)
 			{
-				list.set(i, list.get(index));
-				list.set(index, ele);
-				count++;
-			}
-			else
-				i++;
+			    Element e2 = list.get(index);
+				Element e1 = list.get(i);
+				list.set(index, e1);
+				list.set(i, e2);
+				index = list.get(i).index;
+				swapCount++;
+			}				
 		}
 		
-		return count;
+		return swapCount;
 	}
 	
 	// T(n) : O(n*n)
@@ -84,7 +85,7 @@ public class MinimumSwapsRequiredToSortTheArray
 		for(int j=i+1; j<n; j++)
 		{
 			if(min > A[j])
-			{
+			{+
 				min = A[j];
 				minIndex = j;
 			}
@@ -95,10 +96,8 @@ public class MinimumSwapsRequiredToSortTheArray
 	
 	public static void main(String [] args)
 	{
-		int A[] = {101,758,315,730,472,619,460,479};
-		int n = A.length;
-		
-		//out.println(minSwap(A, n));
+		int A[] = {101,758,315,730,472,619,460,479};				
+		//out.println(getMinSwaps(A));
 		out.println(bruteForce(A, n));
 	}
 }
