@@ -6,7 +6,7 @@
 import static java.lang.System.*;
 import java.util.*;
 
-public class SmallestPositiveNumber 
+public class SmallestMissingPositiveNumber 
 {
 	//Shifting all the positive nbumbers to the left
 	static int arrangePositiveValues(int[] A)
