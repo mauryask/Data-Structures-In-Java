@@ -1,3 +1,7 @@
+/*
+*https://practice.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream1216/1
+*/
+
 import java.util.*;
 import static java.lang.System.*;
 
