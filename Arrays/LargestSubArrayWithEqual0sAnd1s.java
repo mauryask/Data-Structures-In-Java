@@ -17,7 +17,7 @@ public class LargestSubArrayWithEqual0sAnd1s
 		for(int i=0; i<n; i++)
 		{			
 			if(A[i] == 0)
-				sum += 1;
+				sum += -1;
 			else 
 				sum += 1;
 								 	

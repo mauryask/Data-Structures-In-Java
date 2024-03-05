@@ -101,6 +101,6 @@ public class MinimumSwapsRequiredToSortTheArray
 	{
 		int A[] = {101,758,315,730,472,619,460,479};				
 		//out.println(getMinSwaps(A));
-		out.println(bruteForce(A, n));
+		out.println(bruteForce(A));
 	}
 }

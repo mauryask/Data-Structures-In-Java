@@ -33,7 +33,8 @@ public class LRUCache
 		// But LinkedList internally uses doubly linkedlist 
 		// hence it takes more memory
 		
-		Deque<Integer> q = new ArrayDeque<>();
+		// Deque<Integer> q = new ArrayDeque<>();
+		Deque<Integer> q = new LinkedList<>();
 		Set<Integer> set = new HashSet<>();
 		int pageFault  = 0;
 		
