@@ -17,10 +17,10 @@ public class BubbleSort
 					A[j+1]  = temp;									
 					flag = true; 
 				}
-				
-				if(!flag)
-					break;
 			}
+										
+			if(!flag)
+				break;
 		}
 		
 		for(int x : A)

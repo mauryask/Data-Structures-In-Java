@@ -22,15 +22,17 @@ public class SortArrayInDescendingOrderBasedOnFrequency
 			return map.get(b) - map.get(a);
 		});
 	
-		for(int i=0; i<n; i++)
-			q.add(A[i]);
+		for(Map.Entry<Integer, Integer> m : map.entrySet())
+			q.add(m.getKey());
 
 		int i = 0;
 		
 		while(!q.isEmpty())
 		{
 		   int ele = q.remove();
-		   A[i++] = ele;
+		   int freq = map.get(ele);
+		   while(freq-->0)
+		      A[i++] = ele;
 		}
 		
 		for(int x : A)
