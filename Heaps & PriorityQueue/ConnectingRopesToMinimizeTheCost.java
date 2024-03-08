@@ -20,11 +20,12 @@ public class ConnectingRopesToMinimizeTheCost
       
 	   int minCost = 0;
 	   
-       while(q.size() != 1)
+       while(q.size() > 1)
 	   {
-		   int ropeLength = q.remove() + q.remove();
-		   minCost += ropeLength; 	
-		   q.add(ropeLength);		   
+		   int l1 = q.remove();
+           int l2 = q.remove();
+		   minCost += l1+l2; 	
+		   q.add(l1+l2);		   
 	   }
 
        return minCost;	   

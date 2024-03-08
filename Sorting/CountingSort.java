@@ -26,16 +26,17 @@ public class CountingSort
 	  
 	  //updating count array
 	  for(int i=1; i<count.length; i++)
-		  count[i] = count[i] + count[i-1];
+		  count[i] += count[i-1];
 	}
 	
 	static void countingSort(int input[], int count[], int n)
 	{
 		int output[] = new int[n];
+		//We go from right to left to maintrain the statbility of the count sort
+		//that is the elemnts should come in the same order that they appeared in original array
 		for(int i = n-1; i>=0; i--)
 		{
-			count[input[i]]--;
-			int index =  count[input[i]];
+			int index =  --count[input[i]];
 			output[index] = input[i];
 		}
 		

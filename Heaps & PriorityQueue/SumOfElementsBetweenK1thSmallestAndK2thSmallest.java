@@ -14,8 +14,7 @@ public class SumOfElementsBetweenK1thSmallestAndK2thSmallest
 {
 	 static int getSum(int[] A, int n, int k1, int k2)
 	 {
-		  int x = Math.max(k1, k2);
-		  int y = Math.min(k1, k2);
+		  int max = Math.max(k1, k2);
 		  
 		  // Max Heap
 		  Queue<Integer> q = new PriorityQueue<>((a,b)->{
@@ -26,7 +25,7 @@ public class SumOfElementsBetweenK1thSmallestAndK2thSmallest
 		  {
 			 q.add(A[i]);
 			 
-			 if(q.size() > x)
+			 if(q.size() > max)
 				  q.remove();
 		  }
 		  
@@ -35,8 +34,10 @@ public class SumOfElementsBetweenK1thSmallestAndK2thSmallest
 		  // remove xth smallest
 		  q.remove();
 		  
+		  int stepCount = Math.abs(k1-k2) - 1;
+		  
 		  // find sum till yth smallest encountered
-		  while(q.size() != y)
+		  while(!q.isEmpty() && stepCount-->0)
 			  sum += q.remove();
 		  return sum;
 	 }

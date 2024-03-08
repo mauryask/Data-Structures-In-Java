@@ -32,12 +32,11 @@ public class RadixSort
 		 
 		 //update the count array
 		 for(int i=1; i<10; i++) // O(b)
-			 count[i] = count[i] + count[i-1];
+			 count[i] +=  count[i-1];
 		 
 		 for(int i=n-1; i>=0; i--)
 		 {
-			 count[(input[i]/exp)%10]--;
-			 int index = count[(input[i]/exp)%10];
+			 int index = --count[(input[i]/exp)%10];
 			 output[index] = input[i]; 
 		 }
 		 
@@ -51,7 +50,7 @@ public class RadixSort
 		int max = findMax(input, n);
 		
 		// O(d), where d = number of digits in largest number
-		for(int exp =1 ; max/exp >0; exp *= 10) 
+		for(int exp = 1 ; max/exp >0; exp *= 10) 
 			countingSort(input, exp, n);
 	}
 	
