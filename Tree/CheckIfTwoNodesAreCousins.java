@@ -24,70 +24,39 @@ public class CheckIfTwoNodesAreCousins
 {
 	static boolean isCousin(Node root, int a, int b)
 	{		
-		LinkedList<Node> q = new LinkedList<>();
+		Queue<Node> q = new ArrayDeque<>();
 		q.add(root);
-		q.add(null);
-		
-	    Node aParent = null;
-		Node bParent = null;
-		int aLevel = 0;
-		int bLevel = 0;
-		int level = 0;
 
 		while(!q.isEmpty())
-		{	
-			// check if both nodes are found
-			// no more traversal required
-            if(aParent != null && bParent != null)
-				break;
-         	
-			root = q.removeFirst();
-		     
-            if(root == null)
-			{
-               if(!q.isEmpty())
-					q.add(null);	
-			   level++;				
-			   
-			   continue;
-			}	
+		{	            
+			root = q.poll();		     
+			boolean aFound = false;
+		    boolean bFound = false;
 			
 	   	    if(root.left != null)
 			{
-			   if(aParent == null && root.left.data == a)
-			   {
-				   aParent = root;
-				   aLevel = level+1;
-			   }
-			   else if(bParent == null && root.left.data == b)
-			   {
-				   bParent = root;
-				   bLevel = level+1;
-			   }
+			   if(root.left.data == a)
+				   aFound = true;			   
+			   else if(root.left.data == b)
+				   bFound = true;
 			   
 			   q.add(root.left);
 			}
 			if(root.right != null)
 			{
-			   if(aParent == null && root.right.data == a)
-			   {
-				   aParent = root;
-				   aLevel = level+1;
-			   }
-			   else if(bParent == null && root.right.data == b)
-			   {
-				   bParent = root;
-				   bLevel = level+1;
-			   }
-			   
+			   if(root.right.data == a)
+					aFound = true;
+			   else if(root.right.data == b)
+				   bFound = true;
+			
 			   q.add(root.right);
-			}				
+			}	
+
+			if(aFound && bFound)
+				return true;			
 		}
 				
-		// check if parents are not null at the same time
-		return (aParent != null && bParent != null) 
-		&& (aParent != bParent)
-		&& (aLevel== bLevel);
+        return false;
 	}
 	
 	public static void main(String[] args)

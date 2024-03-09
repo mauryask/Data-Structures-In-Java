@@ -19,22 +19,22 @@ public class CheckIfBinaryTreeIsBalanced
 	// T(n) : O(n)
 		
 	static boolean isBalanced = true;
+	
     static int balanceBinaryTree(Node root)
-	{
-		if(root == null)
-			return 0;
+	{	
+        if(root != null && isBalanced)
+		{
+			int lHeight = balanceBinaryTree(root.left);
+			int rHeight = balanceBinaryTree(root.right);
+			int diff = Math.abs(lHeight - rHeight);
+			
+			if(diff > 1)
+				isBalanced = false;
+		    
+			return Math.max(lHeight, rHeight) + 1;
+		}			
 		
-		if(!isBalanced)
-			return 0;
-		
-		int lHeight = balanceBinaryTree(root.left);
-		int rHeight = balanceBinaryTree(root.right);
-		int diff = Math.abs(lHeight - rHeight);
-		
-		if(!(diff <= 1))
-			isBalanced = false;
-		
-		return Math.max(lHeight, rHeight) + 1;
+		return 0;
 	}
 	
 	public static void main(String[] args)
@@ -58,9 +58,9 @@ public class CheckIfBinaryTreeIsBalanced
 		  r3.left = r6;
 		  r3.right = r7;
 		  r4.right = r8;
-		  r8.right = r10;
+		  //r8.right = r10;
 		  r7.left = r9;
-		  r9.left = r11;
+		  //r9.left = r11;
 		  
 		  balanceBinaryTree(root);
 		  out.println(isBalanced);
