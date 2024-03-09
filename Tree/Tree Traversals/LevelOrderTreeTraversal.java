@@ -65,12 +65,11 @@ public class LevelOrderTreeTraversal
 	
 	
 static void levelOrderTraverse()
-{
-		Queue<Node> q = new ArrayDeque<>();
-		
+{		
 		if(root == null)
 			return;
 		
+		Queue<Node> q = new ArrayDeque<>();		
 		q.add(root); 
 		
 		while(!q.isEmpty())

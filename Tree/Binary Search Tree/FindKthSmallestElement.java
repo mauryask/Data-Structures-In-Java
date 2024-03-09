@@ -82,20 +82,20 @@ public class FindKthSmallestElement
 			
 			if(count == k)
 			{
-				myNode = root;
-				out.println(myNode.data);
+				out.println(root.data);
 				return;
 			}
 			
 			root = root.right;
 		}
+		
+		out.println("Elemnet not found!!");
 	}
 	
 	// instead of declaring a class
 	// declare the required variables as static
 	// it will work same as the class vars work	
 	static int count = 0;
-	static boolean flag = false;
 	static Node node  = null;
 		
 	static void findKthSmallestRecusrsive(Node root, int k)
@@ -105,17 +105,12 @@ public class FindKthSmallestElement
 		  
 		  findKthSmallestRecusrsive(root.left, k);
 		  
-		  //if required node found don't make unneccessary calls
-		  if(flag)
-			  return;
-		  
 		  count++;
 		  
 		  if(count == k)
 		  {
 			  node = root; 
-			  flag = true;
-			  return; // if node found then don't go further
+			  return;
 		  } 
 		  
 		  findKthSmallestRecusrsive(root.right, k);
@@ -135,6 +130,7 @@ public class FindKthSmallestElement
 		insertNode(48);
 		insertNode(80);
 		
-		findKthSmallest(root, 5);
+		findKthSmallestRecusrsive(root, 3);
+		out.println(node.data);
 	}
 }

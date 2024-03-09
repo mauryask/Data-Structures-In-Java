@@ -57,19 +57,15 @@ public class TreeSort
 	    if(root != null)
 		{
 		   inorder(root.left);
-	       buildSortedArray(root.value);
+	       arr[index++] = root.value;
 		   inorder(root.right);
 		}			
 	}
-	
-	static void buildSortedArray(int element)
-	{
-		arr[index++] = element;
-	}
-	
+		
    public static void main(String [] args)
    {
 		 arr = new int []{45,10,2,30,12,78,44,36,21};
+		 
 		 for(int i=0; i<arr.length; i++)
 			insertNode(arr[i]);
 		

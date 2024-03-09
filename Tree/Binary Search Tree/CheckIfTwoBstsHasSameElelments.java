@@ -2,6 +2,7 @@
 Time complexity  : O(n)
 Space complexity : O(n)
 Quetion Number : 69 (Made Easy BST)
+:: Means same shape as well
 */
 
 import java.util.*;
@@ -22,8 +23,7 @@ class Node
 
 public class CheckIfTwoBstsHasSameElelments 
 {	
- 
-    static Node createBST(Node root, int data)
+   static Node createBST(Node root, int data)
 	{
 		Node currentNode = null, parentNode = null;
 		Node temp = new Node(data);
@@ -51,69 +51,34 @@ public class CheckIfTwoBstsHasSameElelments
 		return temp;
 	}
  
-	 static boolean isSame(Node root1, Node root2)
-	 {
-		 Stack<Node> stack1 = new Stack<>();
-		 Stack<Node> stack2 = new Stack<>();
-		 
-		 while(true)
-		 {
-			 while(root1 != null)
-			 {
-				 stack1.push(root1);
-				 root1 = root1.left;
-			 }
+    static boolean isSame(Node root1, Node root2)
+	{
+		if (root1 == null && root2 == null)
+			return true;
 			 
-			 while(root2 != null)
-			 {
-				 stack2.push(root2);
-				 root2= root2.left;
-			 }
-			 
-			 
-			 if(stack1.isEmpty() || stack2.isEmpty())
-				 break;
-			 
-			 root1 = stack1.pop();
-			 root2 = stack2.pop();
-			 
-			 if(root1.data != root2.data)
-				 return false;
-			 
-			 root1 = root1.right;
-			 root2 = root2.right;
-		 }
-		 
-		 return (stack1.isEmpty() && stack2.isEmpty()) ? true : false;
-	 }
- 
+		if(root1 == null || root2 == null)
+			return false;
+		
+		return root1.data == root2.data 
+			&& isSame(root1.left, root2.left) 
+			&& isSame(root1.right, root2.right);		
+	}
 
 	public static void main(String [] args)
 	{
         Node root1 = null;
-		root1 = createBST(root1, 44);
-		createBST(root1, 35);
-		createBST(root1,20);
-		createBST(root1, 10);
-		createBST(root1, 58);
-		createBST(root1, 36);
-		createBST(root1, 78);
-		createBST(root1, 12);
-		createBST(root1, 8);
-		createBST(root1, 23);
+		root1 = createBST(root1, 10);
+		createBST(root1, 20);
+		createBST(root1,15);
+		createBST(root1, 30);
+		createBST(root1, 5);
 		
         Node root2 = null;
-		root2 = createBST(root2, 44);
-		createBST(root2,20);
-		createBST(root2, 8);
-		createBST(root2, 10);
-		createBST(root2, 35);
-		createBST(root2, 58);
-		createBST(root2, 12);
-		createBST(root2, 23);
-		createBST(root2, 36);
-		createBST(root2, 78);
-
+		root2 = createBST(root2, 10);
+		createBST(root2,5);
+		createBST(root2, 20);
+		createBST(root2, 15);
+		createBST(root2, 30);
 		
 		out.println(isSame(root1, root2));
 	}

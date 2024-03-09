@@ -63,9 +63,12 @@ public class FIndMinElement
 	// S(n) = O(1) 
 	static int findMinElement(Node root)
 	{
+		if(root == null)
+			return null;
+		
 		while(root.left != null)
 			root = root.left;
-
+		
 		return root.data;
 	}
 	
@@ -77,8 +80,8 @@ public class FIndMinElement
 		
 		if(root.left == null)
 			return root;
-		else
-			return findMinRecursive(root.left);
+
+		return findMinRecursive(root.left);
 	}
 	
 	public static void main(String [] args)
