@@ -64,9 +64,8 @@ public class BurnTheTree
 	   ArrayList<Integer> tempList = map.getOrDefault(time, new ArrayList<Integer>());
 	   tempList.add(root.data);
 	   map.put(time, tempList);
-       
-       if(root.left == null || root.right == null)
-            maxTime  = Math.max(maxTime, time);
+
+       maxTime  = Math.max(maxTime, time);
         
        storeNodeSequence(root.left, blocker, time+1, map);
        storeNodeSequence(root.right, blocker, time+1, map);

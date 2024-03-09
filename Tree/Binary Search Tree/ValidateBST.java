@@ -78,11 +78,12 @@ public class ValidateBST
 					break;
 				
 				root = stack.pop();
-				int cur = root.data;
-				if(prev > cur)
+				
+				if(prev >= root.data)
 					return false;
-				root = root.right;
-				prev = cur;
+				
+				prev = root.data;				
+				root = root.right;	
 			}
 			
 			return true;

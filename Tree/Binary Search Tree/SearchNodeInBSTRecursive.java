@@ -64,7 +64,7 @@ public class SearchNodeInBSTRecursive
 	{
 		if(root == null)
 			return false;
-		
+				
 		else if(root.data > value)
 			return serachElement(root.left, value);
 		else if(root.data < value)

@@ -38,15 +38,13 @@ public class ValidateBSTRecursive
 			return true;
 	
 		if(root.left != null && root.left.data > root.data)
-			return false;
+            return false;
+		
 		if(root.right != null && root.right.data < root.data)
 			return false;
 		
 		// if both sub tress are BST
-		if(isBST(root.left) && isBST(root.right))
-			return true;
-		
-		return false;		
+		return isBST(root.left) && isBST(root.right);
 	}
 	
 	public static void main(String [] args)
