@@ -21,7 +21,7 @@ class PathSum
 {
 	int sum = 0;
 	// Is path with required sum exists
-	boolean isExisists = false; 
+	boolean isExists = false; 
 	// path stack
 	Stack<Node> path =  new Stack<>();
 }
@@ -48,7 +48,7 @@ public class CheckPathForGivenSum
 		// unneccessary function calls
 		// after path with required sum is found
 		
-		if(!p.isExisists) // call if only if path not found
+		if(!p.isExists) // call if only if path not found
 			checkPathSum(root.right, p, target);
 		else
 			return;

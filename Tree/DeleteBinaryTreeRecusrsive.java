@@ -45,8 +45,10 @@ public class DeleteBinaryTreeRecusrsive
 	{
 		if(root == null)
 			return;		
+		
 		deleteTree(root.left);
 		deleteTree(root.right);
+		
 		root.right = null;
 		root.left = null;		
 	}

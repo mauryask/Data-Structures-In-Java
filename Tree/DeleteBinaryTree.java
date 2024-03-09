@@ -71,8 +71,8 @@ static void deleteTree2(Node root)
 			q.add(root.left);
 		if(root.right != null)
 			q.add(root.right);
-		root.left = null;
-		root.right = null;
+		
+		root = null;
 	}
 }
 	
@@ -85,6 +85,7 @@ static void deleteTree2(Node root)
 			printTree(root.right);
 		}
 	}
+
 	
     public static void main(String args[] ) throws Exception
 	{
