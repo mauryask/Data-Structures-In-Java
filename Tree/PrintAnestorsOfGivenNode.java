@@ -33,17 +33,8 @@ public class PrintAnestorsOfGivenNode
 		if(root == null)
 	        return false;
 		
-		if(root.left != null && root.left.data == target)
-		{
-			list.add(root.data);
+		if(root.data == target)
 			return true;
-		}
-		
-		if(root.right != null && root.right.data == target)
-		{
-			list.add(root.data);
-			return true;
-		}
 		
 		boolean left = findAncestor(root.left, target);
 		if(left)

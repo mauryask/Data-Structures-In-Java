@@ -14,6 +14,8 @@ class Node
 	}
 }
 
+//Can be printed directly instead of storing in list
+//To make space O(1)
 public class PrintBoundaryNodes
 {
 	// O(n)
@@ -21,6 +23,7 @@ public class PrintBoundaryNodes
 	{
 		if(root == null)
 			return;
+		
 		if(root.left != null)
 		{
 			list.add(root.data);

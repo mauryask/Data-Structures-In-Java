@@ -25,32 +25,30 @@ public class PrintRightView
 {
 		static void rightView(Node root)
 		{
-			LinkedList<Node> q = new LinkedList<>();
-			q.add(root);
-			q.add(null);
-			
-			Node prev = null;
+			Queue<Node> q = new LinkedList<>();
+			q.add(root);			
 			
 			while(!q.isEmpty())
 			{
-				root = q.removeFirst();
+				int count = q.size();
+				Node prev = null;
 				
-				if(root == null)
+				while(count-->0)
 				{ 
-					if(!q.isEmpty())
-						q.add(null);
-					out.print(prev.data+" ");
-					continue;    
-				}
+					root = q.poll();
+					
+					if(root.left != null)
+						q.add(root.left);
+					if(root.right != null)
+						q.add(root.right);
+					
+					prev = root;
+				}				
 				
-				if(root.left != null)
-					q.add(root.left);
-				if(root.right != null)
-					q.add(root.right);
-				
-				prev = root;
+				//Print right view
+				out.print(prev.data+" ");
+             }
         }
-    }
 		
 	   public static void main(String [] args)
 		{

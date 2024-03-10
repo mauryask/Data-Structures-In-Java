@@ -30,32 +30,32 @@ public class PrintTopView
 {
 		static void topView(Node root)
 		{
-			List<QueueData> q = new LinkedList<>();
-			Map<Integer, List<Integer>> map = new TreeMap<>();
+			Queue<QueueData> q = new LinkedList<>();
+			Map<Integer, Integer> map = new TreeMap<>();
 			q.add(new QueueData(root, 0));
-			
+								
 			while(!q.isEmpty())
 			{
-				QueueData queueData = q.remove(0);
+				QueueData queueData = q.poll();
 				int hd = queueData.hd;
 				Node node = queueData.node;
 				
-			    List<Integer> list = map.getOrDefault(hd, new ArrayList<Integer>());
-				list.add(node.data);
-				map.put(hd, list);
-				
+				//Udate the value even if it is found for bottom view
+				if(!map.containsKey(hd))
+				   map.put(hd, node.data);
+								
 				if(node.left != null)
 					q.add(new QueueData(node.left, hd-1));
 				if(node.right != null)
 				    q.add(new QueueData(node.right, hd+1));	
              }
 			 
-			 for(Map.Entry<Integer, List<Integer>> m : map.entrySet())
+			 for(Map.Entry<Integer, Integer> m : map.entrySet())
 			 {
 				 /*int topElement = m.getValue().get(0);
 				 out.print(topElement+" ");*/
 				 // bottom view 
-				 out.print(m.getValue().get(m.getValue().size()-1)+" ");
+				 out.println(m.getKey()+" : "+m.getValue());
 			 }
     }
 		
