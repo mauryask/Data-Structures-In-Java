@@ -21,23 +21,34 @@ class Node
 
 public class MaxSumPathBetweenTwoLeafNodesInBinaryTree
 {
-	// overall max sum path value
-	static int maxPathSum = 0;
+	static int sum = 0;
+	static int max1 = 0;
+	static int max2 = 0;
 	
-	static int findMaxPathSum(Node root)
+	static void calcMax(Node root)
 	{
-		if(root == null)
-			return 0;
-		
-		int lSum = findMaxPathSum(root.left);
-		int rSum = findMaxPathSum(root.right);
-
-		// because here we are interested in max 
-		// sum path between any two leaf nodes
-		// not between any two nodes
-		maxPathSum =  Math.max(maxPathSum, lSum+rSum+root.data);
-        // return max sum path from this sub tree
-		return Math.max(lSum, rSum) + root.data;
+		if(root != null)
+		{
+			sum += root.data;
+			
+			calcMax(root.left);
+			calcMax(root.right);
+			
+			if(root.left == null && root.right == null)
+			{
+				if(sum > max1)
+				{
+					max2 = Math.max(max1, max2);
+					max1 = Math.max(max1, sum);
+				}
+				else
+				{
+					max2 = Math.max(max2, sum);
+				}
+			}
+			
+			sum -= root.data;
+		}
 	}
 	
 	  public static void main(String [] args)
@@ -59,7 +70,7 @@ public class MaxSumPathBetweenTwoLeafNodesInBinaryTree
 			  r3.right = r7;
 			  r4.right = r8;
 			  
-              findMaxPathSum(root);
-			  out.println("Max path sum: "+ maxPathSum);
+			  calcMax(root);			  
+			  out.println(max1 + max2);
 		}
 }

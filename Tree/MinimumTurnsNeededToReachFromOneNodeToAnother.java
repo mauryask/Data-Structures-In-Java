@@ -22,71 +22,84 @@ class Node
 
 public class MinimumTurnsNeededToReachFromOneNodeToAnother 
 {
-	static Node findLCA(Node root, int a, int b)
-	{
-		if(root == null)
-			return null;
-		if(root.data == a || root.data == b)
-			return root;
-		
-		Node left = findLCA(root.left, a, b);
-		Node right = findLCA(root.right, a, b);
-		
-		if(left != null && right != null)
-			return root;
-        return  left == null ? right : left;
-	}
-	
-	static String prev = "X";
-	static int srcTurnCount = 0;
-	static int destTurnCount = 0;
-	
-	static boolean
-	turnCount(Node root, int k, boolean isSource)
-	{
+    static String prev = "X";
+	static int count = 0;
+    
+    static Node getLca(Node root, int first, int second)
+    {
         if(root == null)
-		  return false;			
-	    
-		if(root.data == k)
-			return true;
+          return null;
+        
+        if(root.data == first || root.data == second)
+           return root;
+           
+        Node left = getLca(root.left, first, second);
+        Node right =  getLca(root.right, first, second);
+        
+        if(left != null && right != null)
+          return root;
+        
+        return left == null ? right : left;  
+    }
+        
+    static boolean turnCount(Node root, int value)
+    {
+        if(root == null)
+          return false;
+          
+        if(root.data == value)
+            return true;
+            
+        boolean left = turnCount(root.left, value);
+        
+        if(left)
+        {
+            if(!prev.equals("L"))
+            {
+                prev = "L";
+                count++;
+            }
+            
+            return true;
+        }
+        else
+        {
+            boolean right = turnCount(root.right, value);
+            
+            if(right)
+            {
+                if(!prev.equals("R"))
+                {
+                    prev = "R";
+                    count++;
+                }
+            }
+            
+            return right;
+        }
+        
+    }
+    
+    static int NumberOfTurns(Node root, int first, int second)
+    {
+        Node lca = getLca(root, first, second);
 		
-		boolean left = turnCount(root.left, k, isSource);
+		out.println(lca.data);
 		
-		if(left)
-		{
-			if(isSource)
-				srcTurnCount = 1;
-			else
-			{
-				if(prev != "L")
-				{
-					prev = "L";
-					destTurnCount++;
-				}
-			}
-			return true;
-		}
-		else
-		{
-			boolean right = turnCount(root.right, k, isSource);
-			if(right)
-			{
-				if(isSource)
-					srcTurnCount = 1;
-				else
-				{
-					if(prev != "R")
-					{
-						prev = "R";
-					    destTurnCount++;
-					}
-				}
-				return true;
-			}
-		}
+        turnCount(lca, first);
+        int count1 = count;
 		
-		return false;
-	}
+		out.println(count1);
+		
+        count = 0;
+        prev = "X";
+		
+        turnCount(lca, second);
+		
+		out.println(count);
+		
+        return count1 + count - 1;
+    }
 	
 	public static void main(String [] args)
 	{
@@ -99,6 +112,12 @@ public class MinimumTurnsNeededToReachFromOneNodeToAnother
 		  Node r7 = new Node(7);
 		  Node r8 = new Node(8);
 		  
+		  Node r9 = new Node(9);
+		  Node r10 = new Node(10);
+		  Node r11 = new Node(11);
+		  Node r12 = new Node(12);
+		  
+		  
 		  root.left = r2;
 		  root.right = r3;
 		  r2.left = r4;
@@ -107,13 +126,14 @@ public class MinimumTurnsNeededToReachFromOneNodeToAnother
 		  r3.right = r7;
 		  r7.right = r8;
 		  
-		  int src = 4;
-		  int dest = 1;
+		  r4.left = r9;
+		  r4.right = r10;
+		  r5.right = r11;
+		  r7.left = r12;
 		  
-		  Node lca = findLCA(root, src, dest);
-		  turnCount(lca, src, true);
-		  turnCount(lca, dest, false);
+		  int src = 11;
+		  int dest = 5;
 		  
-		  out.println(srcTurnCount + destTurnCount);
+		  out.println(NumberOfTurns(root, src, dest));		  
 	}
 }

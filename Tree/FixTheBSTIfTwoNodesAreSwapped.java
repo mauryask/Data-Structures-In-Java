@@ -1,61 +1,57 @@
 /*
-** https://www.geeksforgeeks.org/fix-two-swapped-nodes-of-bst/
-** T(n) : O(n) 
-** S(n) : O(1)
-** Yet to be solved
+* T(n) : O(n)
+* S(n) : O(n)
 */
+class Solution {
+        void inorder(TreeNode root, List<Integer> list)    
+    {
+        if(root == null)
+            return;
+        inorder(root.left, list);
+        list.add(root.val);
+        inorder(root.right, list);
+    }
+    
+    void fixOrder(List<Integer> list)
+    {
+        int index1 = -1;
+        int index2 = -1;
+        int n = list.size();         
 
-import static java.lang.System.*;
-import java.util.*;
+        for(int i=0; i<n; i++)
+        {
+            if((i==0 && i+1<n && list.get(i) > list.get(i+1)) 
+				|| (i==n-1 && i-1 >=0 && list.get(i) < list.get(i-1)) 
+			    || (i-1 >=0 && i+1 < n && !(list.get(i) > list.get(i-1) && list.get(i) < list.get(i+1))))
+            {
+                if(index1 == -1)
+                     index1 = i;
+                 else 
+                     index2 = i;    
+            } 
+        }
+ 
+            int temp = list.get(index1);
+            list.set(index1, list.get(index2));
+            list.set(index2, temp);
+    }
 
-class Node
-{
-	int data;
-	Node left; 
-	Node right;
-	
-	Node(int data)
-	{
-		this.data = data;
-	   right = left = null;
-	}
-}
+    int index = 0;
+    
+    void fixTree(TreeNode root, List<Integer> list)
+    {
+        if(root == null)
+          return;
 
-public class FixTheBSTIfTwoNodesAreSwapped
-{
-    static void fixBst(Node root)
-	{
-		
-	}	
-	
-	public static void main(String[] args)
-	{
-		  Node root = new Node(50);
-		  Node r2 = new Node(45);
-		  Node r3 = new Node(90);
-		  Node r4 = new Node(40);
-		  Node r5 = new Node(46);
-		  Node r6 = new Node(85);
-		  Node r7 = new Node(95);
-		  Node r8 = new Node(93);
-		  Node r9 = new Node(42);
-		  Node r10 = new Node(43);
-		  Node r11 = new Node(92);
+        fixTree(root.left, list);
+        root.val = list.get(index++);
+        fixTree(root.right, list);  
+    }
 
-		  root.left = r2;
-		  root.right = r3;
-		  r2.left = r4;
-		  r2.right = r5;
-		  r3.left = r6;
-		  r3.right = r7;
-		  r4.right = r8;
-		  r8.right = r10;
-		  r7.left = r9;
-		  r9.left = r11;
-          
-		  inorder(root);
-		  out.println();
-		  fixBst2(root);
-		  inorder(root);
- 	}
+    public void recoverTree(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        inorder(root, list);
+        fixOrder(list);
+        fixTree(root, list);
+    }
 }

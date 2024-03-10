@@ -55,19 +55,19 @@ public class PrintAllTheNodesAtKDistanceFromGivenNode
   
    // T(n) =  O(k)
    // Print k nodes down from the given node
-   static void printNode(Node root, Node blocker, int k)
+   static void printNode(Node root, Node blocker, int k, int dist)
    {
-       if(root == null || k < 0 || root == blocker)
+       if(root == null || root  == blocker)
           return;
       
-       if(k == 0)
+       if(dist == k)
        {
            out.print(root.data+" ");
            return;
        }
        
-       printNode(root.left, blocker, k-1);
-       printNode(root.right, blocker, k-1);
+       printNode(root.left, blocker, k, dist+1);
+       printNode(root.right, blocker, k, dist+1);
    }
 
    static void printKfarNodes(Node root, Node target, int k)
@@ -77,9 +77,9 @@ public class PrintAllTheNodesAtKDistanceFromGivenNode
         
         for(int i=0 ; i<path.size(); i++) // O(n*k)
         {
-			if(k-i < 0) // prevent unneccesary calls
+			if(i > k) // prevent unneccesary calls
 				break;
-            printNode(path.get(i), i==0? null : path.get(i-1), k-i);
+            printNode(path.get(i), i==0 ? null : path.get(i-1), k, i);
             out.println();
         }
    }
