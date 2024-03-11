@@ -8,7 +8,7 @@
 * Best Case: It Occurs when the elemnts are uniformly distributes in the buckets
 * with neary equal number of elements in each bucket
 * Complexity wil be more better if the elemnts in thebucket already sorted  
-* Time Complexity : O(n+k) : k -> time o sort all the elements in the bucket
+* Time Complexity : O(n+k) : k -> time to sort all the elements in the bucket
 */
 
 import java.util.List;
@@ -43,10 +43,11 @@ public class BucketSort
 		//get the sorted array
 	
 	     int index = 0;
+		 
 		 for(int i=0; i<n; i++)
 		 {
-			 while(!bucket[i].isEmpty())
-				 arr[index++] = bucket[i].remove(0);
+			 for(int j = 0; j<bucket[i].size(); j++)
+				 arr[index++] = bucket[i].get(j);
 		 }		
 	}
 	
@@ -58,7 +59,6 @@ public class BucketSort
 		sort(arr, arr.length);
 		
 		for(float x : arr)
-			System.out.print(x+" ");
-		
+			System.out.print(x+" ");		
 	}
 }

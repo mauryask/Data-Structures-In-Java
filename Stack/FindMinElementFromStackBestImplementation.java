@@ -45,7 +45,7 @@ public class FindMinElementFromStackBestImplementation
 		* update min = 2 * min - data
 		* and return temp
 		*/ 
-		if(data <= min)
+		if(data < min)
 		{
 			int temp = min;
 			min = 2 * min - data;
@@ -81,11 +81,11 @@ public class FindMinElementFromStackBestImplementation
 			* directly insert it
 			* min will remain unchanged
 			*/
-			if(x > min)
+			if(x >= min)
 				s.push(x);
 			/*
 			* If the element to be inserted
-			* is less than or equal to the min then 
+			* is less than the min then 
 			* push 2 * x  - min to stack
 			* update min = x
 			*/ 
