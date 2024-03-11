@@ -1,98 +1,84 @@
 import static java.lang.System.*;
 import java.util.*;
 
-class TrieNode 
-{
-	// word-length
-	int we = 0;
-	char ch=  '0';	
-	TrieNode chArr[] = new TrieNode[26];
-}
-
 public class AutoCompleteFeature
 {	
-   // T(n) : O(word-length)
-	static void  insertWord(TrieNode root, String word)
+	static class Node 
 	{
-		char [] arrChar = word.toCharArray();
-		
-		for(char ch : arrChar)
-		{			
-			if(root.chArr[ch-'a'] == null)
-			{
-				TrieNode temp = new TrieNode();
-				temp.ch = ch;
-				root.chArr[ch-'a'] = temp;
-				root = temp;
-			}
-		    else
-              root = root.chArr[ch-'a'];		  
-		}
-        
-      root.we += 1;		
-	}	
-	
-	static void printSuggestions(TrieNode root, String word)
-	{
-		char [] arrChar = word.toCharArray();
-		
-		for(char ch : arrChar)
-		{
-			if(root.chArr[ch-'a'] != null)
-               root = root.chArr[ch-'a'];
-		    else 
-				// here you cann insrt the rest of the part
-				{
-					out.println(word);
-					return;
-				} 
-		}
-				
-				//out.println(root.chArr[3].we > 0);
-		suggestUtil(root, new StringBuilder(word));
+		int we;
+		Node[] arr= new Node[26];
 	}
 	
-	// restrict to top 3 suggestions
-	static int suggestionCount = 0;
+	static void createTrie(Node root, String word)
+	{
+		for(int i=0; i<word.length(); i++)
+		{
+			char ch = word.charAt(i);
+			
+			if(root.arr[ch-'a'] ==  null)
+			{
+				Node node = new Node();
+				root.arr[ch-'a'] = node;
+				root = node;
+			}
+			else
+			{
+				root = root.arr[ch-'a'];
+			}
+		}
+		
+		root.we++;
+	}
 	
-	static void suggestUtil(TrieNode root, StringBuilder  word)
+    static void printSuggestion(String prefix, Node root)
+	{		
+		for(int i=0; i<prefix.length(); i++)
+		{
+			char ch = prefix.charAt(i);
+			
+			if(root.arr[ch-'a'] == null)
+				return;
+			else
+			{
+				root = root.arr[ch-'a'];
+			}
+		}
+		
+		suggestUtil(root, new StringBuilder(prefix));
+	}
+	
+	static int sugestionCount = 0;
+	
+	static void suggestUtil(Node root, StringBuilder word)
 	{
 		if(root.we > 0)
 		{
-			out.println(word.toString());
-			suggestionCount++;
+			out.println(word);
+			sugestionCount++;
 		}
 		
-        if(suggestionCount == 2)
+		if(sugestionCount == 2)
 			return;
 		
 		for(int i=0; i<26; i++)
 		{
-			if(root.chArr[i] != null)
-			{		
-                TrieNode temp = root.chArr[i];		
-				word.append(temp.ch);
-                
-				if(suggestionCount != 2)
-				    suggestUtil(temp, word);
-				
-                word.deleteCharAt(word.length()-1);			
+		   	if(root.arr[i] != null && sugestionCount < 2)
+			{
+				word.append((char)(i+'a'));
+				suggestUtil(root.arr[i], word);
+				word.deleteCharAt(word.length()-1);
 			}
-		}
+		}		
 	}
-		
-	public static void main(String [] args)
-	{
-		TrieNode root = new TrieNode();
-		
-		insertWord(root, "abc");
-		insertWord(root, "abd");
-		insertWord(root, "abb");
-		insertWord(root, "abd");
-		insertWord(root, "abdcde");
-		insertWord(root, "bcd");
-		insertWord(root, "cde");
-
-		printSuggestions(root, "a");
-	}
+	
+    public static void main(String [] args)
+	{		
+	    Node root = new Node();
+	    createTrie(root, "abc");
+	    createTrie(root, "abd");
+	    createTrie(root, "abfd");
+	    createTrie(root, "agtr");
+		String prefix = "a";
+		printSuggestion(prefix, root);
+	} 
 }
