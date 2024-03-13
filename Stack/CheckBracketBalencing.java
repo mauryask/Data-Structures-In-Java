@@ -20,7 +20,7 @@ public class CheckBracketBalencing
 		map.put('[',']');
 		map.put('{','}');		
 	}
-		
+			
 	public boolean isBalenced(String str, int n)
 	{
 		Stack<Character> stack = new Stack<>();

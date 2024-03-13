@@ -8,6 +8,14 @@ public class LongestValidParentheses
 	* T(n) : O(n)
 	* S(n) : O(n)
 	*/
+	
+	/* 
+	* In this approach the peek reprsents the 
+	* boundary from which the valid parentheses starts
+	* Our initial asumption was that -1 is index after which the valid 
+    * parentheses starts 	
+	*/
+	
 	static int validParen(String str, int n)
 	{
 		Stack<Integer> stack = new Stack<>();
@@ -103,6 +111,8 @@ public class LongestValidParentheses
 		return max;
 	}
 	
+	//"())" left to right len = 1, right to left len = 0
+	//")()" rigth to left len = 1, left to right len = 0
   	public static void main(String [] args)
 	{
 		String str  = ")()())";

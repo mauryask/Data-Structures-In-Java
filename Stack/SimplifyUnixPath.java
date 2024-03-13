@@ -12,26 +12,18 @@ public class SimplifyUnixPath
 	{
 		String[] tokens = path.split("/+"); 
 		Stack<String> stack = new Stack<>();
-	    		
+	    						
 		for(String token : tokens)
 		{
-			if(!stack.isEmpty() && token.equals(".."))
+			if(token.equals("..") && !stack.isEmpty())
 				stack.pop();
-			/*
-			* Here checking for "" because 
-			* "/a/b" : on splitting by '/+'
-			* first we will get empty string i.e. ("") 
-			* and then a, b and so on 
-			*/
-			else if(!Arrays.asList(".", "", "..").contains(token))
+			else if(!token.equals(".") && !token.equals(""))
 				stack.push(token);
-		}
-		
-		out.println(stack);
+		}			
 		
 		StringBuilder sb = new StringBuilder();
 		for(String str : stack)
-			sb.append("/"+str);
+		  sb.append("/"+str);
 		
 		/*
 		* check if stack is empty for the case: /////
