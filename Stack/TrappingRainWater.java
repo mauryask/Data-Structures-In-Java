@@ -46,17 +46,17 @@ public class TrappingRainWater
 		*/
 		
 		for(int i=1; i<n; i++)
+		{
+			//corresponding index at right side
+			int j = n-i-1;
 			maxLeft[i] = Math.max(maxLeft[i-1], height[i]);
-		for(int i=n-2; i>=0; i--)
-			maxRight[i] = Math.max(maxRight[i+1], height[i]);
-		
+			maxRight[j] = Math.max(maxRight[j+1], height[j]);
+		}
+				
 		int waterSum = 0;
 		
 		for(int i=0; i<n; i++)
 		{
-			// level of water from ground 
-			// on a particular building if water can 
-			// be trapped on it
 			int minHeight = Math.min(maxLeft[i], maxRight[i]);
 		    waterSum += minHeight - height[i];
 		}
