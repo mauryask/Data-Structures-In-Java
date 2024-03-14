@@ -20,6 +20,10 @@ class AllPairShortestPath
 				{
 					for(int j=0; j<v_num; j++)
 					{
+						//Here G[i][j] always be 0
+						//If i or j is k, that row and column will remain unchanged
+						if(i==j || i==k || j==k) continue;
+						
 						// the purpose to use G[i][k] != inf 
 						// is to prevent overflow
 						// because when you will add something to infinite

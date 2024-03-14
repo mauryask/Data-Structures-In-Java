@@ -18,39 +18,19 @@ import java.util.*;
 
 public class StockSpanProblem
 {
-	static List<Integer> countStack(int[] A, int n)
+	static List<Integer> stackSpan(int[] A, int n)
 	{
-		List<Integer> list = new LinkedList<>();
 		Stack<Integer> stack = new Stack<>();
+		stack.push(0);
+		out.print(1+" ");
 		
-		for(int i=0; i<n; i++)
+		for(int i=1; i<A.length; i++)
 		{
 			while(!stack.isEmpty() && A[stack.peek()] <= A[i])
-				stack.pop();
-			
-			/*
-			* If stack is empty that means
-			* there is no such element to the left of 
-			* Ai which is greter than this
-			* So we assume it as -1 and
-			*********
-			* If stack is not empty compare Ai
-			* with top of the stack, if it is geater than 
-			* Ai it will be the next greater  to the left of Ai
-			**********
-			* Th span of the day is obtained by subtracting 
-			* the index of curent day with the index of the 
-			* next greater element
-			*/
-			if(stack.isEmpty())
-				list.add(1);  // i-(-1) = (i+1)
-			else
-				list.add(i-stack.peek());
-			
+				stack.pop();			
+			out.print(stack.isEmpty() ? 1 : i-stack.peek() + " ");
 			stack.push(i);
 		}
-		
-		return list;
 	}
 	
 	/*
@@ -90,7 +70,7 @@ public class StockSpanProblem
 		int A[] = {100,80,60,70,60,75,85};
 		int n = A.length;
 		
-		//out.println(countStack(A, n));
-		out.println(bruteForce(A, n));
+		//out.println(bruteForce(A, n));
+		stackSpan(A);
 	}
 }

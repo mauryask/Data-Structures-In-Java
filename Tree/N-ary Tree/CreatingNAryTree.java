@@ -112,5 +112,4 @@ public class CreatingNAryTree
   
        //levelOrderTraversal(root);
 	}
-
 }

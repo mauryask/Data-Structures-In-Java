@@ -73,23 +73,22 @@ class Graph
 			{
 			   System.out.print(u+" ");
 			   visited[u] = true;
+			}
 			
-				for(Edge e : G[u])
+			for(Edge e : G[u])
+			{
+				if(!visited[e.v])
 				{
-					if(!visited[e.v])
-					{
-						stack.push(e.v);
-						parent[e.v] = u;
-					}
+					stack.push(e.v);
+					parent[e.v] = u;
 				}
-		    }
+			}
 		}		
 	}
 
 	void recursiveDFS(int v, boolean visited[])
 	{
-	    visited[v] = true;	
-		
+	    visited[v] = true;			
 		System.out.print(v+" ");
 		
 		for(Edge e : G[v])

@@ -34,7 +34,7 @@ public class DijkstrasAlgorithm
 		}
 	}
 	
-	class Util
+	class Util implements Comparable<Util>
 	{
 		int vertex;
 		int dist;
@@ -43,6 +43,11 @@ public class DijkstrasAlgorithm
 			this.vertex = vertex;
 			this.dist = dist;
 		}
+		
+		@Override
+		public int compareTo(Util o)
+		
+		return this.dist - o.dist;
 	}
 	
 	List<Edge> adj[];
@@ -77,15 +82,13 @@ public class DijkstrasAlgorithm
 		boolean visited[] = new boolean[n];
 		
 		// Min heap to get the vertex with minimum distance
-		Queue<Util> q = new PriorityQueue<>((a, b)->{
-			return a.dist - b.dist;
-		});
+		Queue<Util> q = new PriorityQueue<>();
 		
 		distance[src] = 0;	
 		q.add(new Util(src, 0));			
 		
-		for(int i=1; i<=n; i++)
-		{		
+		while(!q.isEmpty())
+		{			
 			int u = q.remove().vertex;
 			
 			for(Edge e : adj[u])

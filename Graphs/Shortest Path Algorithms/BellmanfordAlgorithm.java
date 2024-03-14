@@ -1,6 +1,7 @@
 /**
 * Single source shortest path algorithm 
 * Time complexity: O(V*E)
+* Worrst case T(n) : O(V^3) : I f graph is a complete graph
 * Space complaexity: O(V)
 * Works with both directed and undirected graphs
 * ** Works well with graph having -ve weight edges
