@@ -48,7 +48,7 @@ class Graph
 				// is already visited and it is not the parent of
 				// the given node it means thet there is a cycle
 				
-				if(visited[v] == true && parent[u] != v)
+				if(visited[v] && parent[u] != v)
 					return true;
 			   
 			    if(!visited[v])

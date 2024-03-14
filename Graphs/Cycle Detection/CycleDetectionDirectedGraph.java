@@ -9,13 +9,13 @@
 import java.util.*;
 class Graph 
 {
-	int v_num;
+	int v;
 	List<Integer> G[];
-	Graph(int v_num)
+	Graph(int v)
 	{
-		this.v_num = v_num;
-		G = new LinkedList[v_num];
-		for(int i=0; i<v_num; i++)
+		this.v = v;
+		G = new LinkedList[v];
+		for(int i=0; i<v; i++)
 			G[i] = new LinkedList<Integer>();
 	}
 	
@@ -24,40 +24,36 @@ class Graph
 		G[u].add(v);
 	}
 	
-	boolean isCycleUtil(int u, int state[])
+	boolean isCycleUtil(int u, boolean visited[])
 	{
-		state[u] = -1;
+		visited[u] = true;
 		
 		for(int v : G[u])
 		{
 			// if we discover a node and any
-			// of its neighbor is alrady discovered
-			// then there is a cycle
+			// of its neighbor is alrady visited
+			// then there is a cycle			
 			
-			if(state[v] == -1)
+			if(visited[v])
 				return true;
-			if(state[v] == 0 && isCycleUtil(v,state))
-				return true;
+			
+			isCycleUtil(v);					
 		}
 		
-		state[u] = 1;
-		return false;
+		visited[u] = false;
+		
+        return false;		
 	}
 	
 	boolean isCycle()
 	{
-		int state[] = new int[v_num];
-		for(int i=0; i<v_num; i++)
-			state[i] = 0;
-		
-		for(int i=0; i<v_num ; i++)
+		boolean visited[] =  new boolean[v];
+			
+		for(int i=0; i<v ; i++)
 		{
-			if(state[i]==0)
-			{
-				if(isCycleUtil(i,state))
-					return true;
-			}
+			isCycleUtil(i, visited);
 		}
+		
 		return false;
 	}
 }
