@@ -10,101 +10,106 @@ import java.util.*;
 
 public class KosaRajusAlgorithm
 {
-	static int scc(List<ArrayList<Integer>> graph, int n)
-	{
-	  Stack<Integer> stack = new Stack<>();
-	  boolean visited[] = new boolean[n];
-	  
-	  for(int i=0; i<n; i++)
-	  {
-		  if(!visited[i])
-			  dfs1(i, graph, stack, visited);
-	  }
-	  
-	  graph = revEdge(graph, n);
-	  
-	  Arrays.fill(visited, false);
-	  int count = 0;
-	  
-	  while(!stack.isEmpty())
-	  {
-		  int u  = stack.pop();
-		  if(!visited[u])
-		  {
-			  count++;
-			  dfs2(u, graph, visited);
-		  }
-	  }
-	  
-	  return count;
-	}
-		
-	// O(V+E)
-	static void dfs1(int u, List<ArrayList<Integer>> graph, Stack<Integer> stack, boolean visited[])
-	{
-	   if(!visited[u])
-		   visited[u] = true;
-
-       for(int v : graph.get(u))
-	   {
-		   if(!visited[v])
-		   {
-			   dfs1(v, graph, stack, visited);
-			   stack.push(v);
-		   }
-	   }		   
-	}
+    static void dfs1(int u, ArrayList<ArrayList<Integer>> adj,
+	Stack<Integer> stack, boolean visited[]){
+        visited[u] = true;
+        
+        for(int v : adj.get(u))
+        {
+            if(!visited[v])
+            {
+                dfs1(v, adj, stack, visited);
+            }
+        }
+        
+        stack.push(u);
+    }
+    
+    
+    static void dfs2(int u, ArrayList<ArrayList<Integer>> adj,
+	boolean[] visited)
+    {
+        visited[u] = true;
+        
+        for(int v : adj.get(u))
+        {
+            if(!visited[v])
+            {
+                dfs2(v, adj, visited);
+            }
+        }
+    }
+    
+    static ArrayList<ArrayList<Integer>> reverse(ArrayList<ArrayList<Integer>> adj, int V)
+    {
+        ArrayList<ArrayList<Integer>> revAdj = new ArrayList<>();
+        
+        for(int i=0; i<V; i++)
+           revAdj.add(new ArrayList<>());
+          
+        for(int i=0; i<V; i++)
+        {
+            for(int u : adj.get(i))
+            {
+                revAdj.get(u).add(i);
+            }
+        }
+        
+        return revAdj;
+    }
+    
+    static int kosaraju(int V, ArrayList<ArrayList<Integer>> adj)
+    {
+        boolean visited[] =  new boolean[V];
+        Stack<Integer> stack = new Stack<>();
+        
+        for(int i=0; i<V; i++)
+        {
+            if(!visited[i])
+              dfs1(i, adj, stack, visited);
+        }
+        
+        adj = reverse(adj, V);
+        
+        Arrays.fill(visited, false);
+        
+        int count = 0;
+        
+        while(!stack.isEmpty())
+        {
+             int v = stack.pop();
+             
+             if(!visited[v])
+             {
+                count++;
+                dfs2(v, adj, visited);
+             }
+        }
+        
+        return count;
+    }
 	
-	// O(V+E)
-	static List<ArrayList<Integer>> revEdge(List<ArrayList<Integer>> graph, int n)
+	static void addEdge(ArrayList<ArrayList<Integer>> adj, int u, int v)
 	{
-		List<ArrayList<Integer>> g = 
-		new ArrayList<ArrayList<Integer>>();
-		
-		for(int i=0; i<n; i++)
-			g.add(new ArrayList<Integer>());
-		
-		for(int i=0; i<n; i++)
-		{
-		    for(int u : graph.get(i))
-				g.get(u).add(i);
-		}
-		
-		return g;
-	}
-	
-	// O(V+E)
-	static void dfs2(int u, List<ArrayList<Integer>> graph, boolean visited[])
-	{
-		if(!visited[u])
-			visited[u] = true;
-		
-		for(int v : graph.get(u))
-		{
-			if(!visited[v])
-				dfs2(v, graph, visited);
-		}
+		adj.get(u).add(v);
 	}
 	
 	public static void main(String [] args)
 	{
-		Scanner sc =  new Scanner(in);
-		int n = sc.nextInt();
-		int e = sc.nextInt();
-		
-        List<ArrayList<Integer>> graph =  
-		new ArrayList<ArrayList<Integer>>();
+		int n = 6;		
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
 		
 		for(int i=0; i<n; i++)
-			graph.add(new ArrayList<Integer>());
+			adj.add(new ArrayList<>());
+						
+        addEdge(adj, 0, 1);			
+        addEdge(adj, 1, 2);			
+        addEdge(adj, 2, 0);			
+        addEdge(adj, 2, 3);			
+        addEdge(adj, 3, 4);			
+        addEdge(adj, 4, 5);			
+        addEdge(adj, 5, 3);			
 		
-        while(e-->0)
-		{
-			int u = sc.nextInt();
-			int v = sc.nextInt();
-			graph.get(u).add(v);
-		}			
-		
-		out.println(scc(graph, n));
+		out.println(kosaraju(n, adj));
 	}
 }

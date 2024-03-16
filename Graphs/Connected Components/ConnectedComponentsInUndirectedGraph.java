@@ -16,7 +16,7 @@ public class ConnectedComponentsInUndirectedGraph
    {
 	   adj = new LinkedList[n];
 	   for(int i=0; i<n; i++)
-		   adj[i] = new LinkedList<Integer>();
+		   adj[i] = new LinkedList<>();
    }
 	
 	@Override

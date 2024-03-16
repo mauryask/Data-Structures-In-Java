@@ -1,112 +1,90 @@
-// Detecting Cycle in an undirected graph using 
-// DisjointSet Datastructure (Union Find Algorithm)
-
-// =======>>> Algorithm : 
 /*
-@ Traverse for each Edge
-@ if a source vertex and destination vertex
-@ belong to same set then there is a cycle
-@ The time complexity : O(log n) > worst case
-@ Here "n" is the nuber of the elements im a given set
+* T(n) : O(E * LogV)
+* S(n ): O(V)
 */
 
 import java.util.*;
+import static java.lang.System.*;
 
-class Graph 
+public class DetectCycleUsingDisjointSet
 {
-   int v_num, e_num;
-   
-   class Edge 
-   {
-	   int src;
-	   int dest;
-   }
-   
-   Edge edge[];
-
-   Graph(int v_num, int e_num)
-   {
-	 this.v_num = v_num;
-	 this.e_num = e_num;
-	
-     edge = new Edge[e_num];
-	 
-     for(int i=0; i<e_num; i++)
-		 edge[i] = new Edge();
-   }
-   
- 
-   int find(int parent_set[], int item) //O(log n) (worst case)
-   {
-	  int root = item;
-		if(parent_set[root] == root)
-			return root;
-		//path compression
-		//it gives amortize constant time complexity
-		while(parent_set[root] != root)
-			root = parent_set[root];
-		parent_set[item] = root;		
-		return parent_set[item];
-   }
-
-   void union(int parent_set[],int rank[], int set_1, int set_2)
-   {	   
-	   if(rank[set_2] < rank[set_1])
-		   parent_set[set_2] = set_1;
-	   else if(rank[set_2] > rank[set_1])
-		   parent_set[set_1] = set_2;
- 	   else
-	   {
-		   parent_set[set_2] = set_1;
-		   rank[set_1] += 1;
-	   }		   
-   }
-   
-   boolean isCycle(Graph g)
-   {
-	   int parent_set[] = new int[v_num];
-	   int rank[] = new int[v_num];
-	   
-	     for(int i=0; i<v_num; i++) 
-			 parent_set[i] = i;
-
-		for(int i=0; i<e_num; i++) 
+    static class Edge 
+    {
+	   	int src;
+		int dest;
+		
+		Edge(int src, int dest)
 		{
-			int x = find(parent_set,g.edge[i].src); 
-			int y = find(parent_set, g.edge[i].dest); 
-			if(x == y)
+			this.src = src;
+			this.dest = dest;
+		}
+    }
+   
+   static int find(int size[], int key) //O(log n) (worst case)
+   {	   
+		if(size[key] < 0)
+			return key;
+		
+		int temp = key;
+		
+		while(size[temp] >= 0)
+		{
+			temp = size[temp];
+		}
+		
+		//Path compression (collapsing find)		
+		size[key] = temp; //Updating parents
+		
+		return temp;
+   }
+
+   static void union(int size[], int xSet, int ySet)
+   {	         
+		if(Math.abs(size[ySet]) > Math.abs(size[xSet]))
+		{
+			size[ySet] += size[xSet];	
+			size[xSet] = ySet;
+		}
+		else
+		{			
+			size[xSet] += size[ySet];
+			size[ySet] = xSet;
+		}	
+   }
+   
+   static boolean isCycle(List<Edge> edge)
+   {
+	    int n =  7;
+	    int size[] = new int[n];			   
+	    Arrays.fill(size, -1);
+         
+		for(Edge e : edge) 
+		{
+			int xSet  = find(size, e.src); 
+			int ySet  = find(size, e.dest); 
+			
+			if(xSet == ySet)
 				return true;
-			union(parent_set,rank,x,y); 
+			
+			union(size, xSet, ySet); 
 		}
 		
 		return false;
    }
-}
+   
+   	public static void main(String [] args)
+	{		
+	    List<Edge> edge = new ArrayList<>();
+		
+        edge.add(new Edge(0, 1));			
+        edge.add(new Edge(1, 2));			
+        edge.add(new Edge(0, 3));			
+        edge.add(new Edge(2, 6));			
+        edge.add(new Edge(2, 4));			
+        //edge.add(new Edge(2, 3));			
+        edge.add(new Edge(5, 4));				
 	
-public class DetectCycleUsingDisjointSet
-{
-	public static void main(String [] args)
-	{
-		Graph g = new Graph(6, 6);
-		g.edge[0].src = 0;
-		g.edge[0].dest= 1;
-		
-		g.edge[1].src = 1;
-		g.edge[1].dest= 2;
-		
-		g.edge[2].src = 0;
-		g.edge[2].dest= 3;
-		
-		g.edge[3].src = 2;
-		g.edge[3].dest= 3;
-		
-		g.edge[4].src = 2;
-		g.edge[4].dest= 4;
-		
-		g.edge[5].src = 5;
-		g.edge[5].dest= 4;
-	
-		System.out.println(g.isCycle(g));
+		out.println(isCycle(edge));
 	}
 }
 
