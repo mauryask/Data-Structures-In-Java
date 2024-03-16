@@ -1,12 +1,8 @@
 /*
-* Union by size using path compression
-* Here along with the size one more array
-* parent is used to store the parent of each element
-* ******
-* Time complexity of find operation becomes even 
-* less than (log n) , but the time complexity increases
-* by O(n), since auxillary space
-* is used as the parent array
+* T(n) : O(m * logn)
+* Here logn is for single find operation
+* for m find operations : m * logn
+* S(n) : O(n)
 **/
 
 import static java.lang.System.*;
