@@ -50,18 +50,18 @@ public class Queue
 			out.println("Overflow!");
 			return;
 		}
-		else if(rear ==-1 && front== -1)
+		
+		if(rear ==-1 && front== -1)
 		{
-			rear = 0;
-			front= 0;
+			rear++;
+			front++;
 		}
-		else
+		else 
 			rear++;
 		
 		out.print("Enter element: ");
 		int x = new Scanner(System.in).nextInt();
-		queue[rear] = x;
-				
+		queue[rear] = x;			
 	}
 	
 	static void display()

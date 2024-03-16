@@ -13,6 +13,7 @@ class Graph
 {
 	int v_num;
 	List<Integer> G[];
+	
 	Graph(int v_num)
 	{
 		this.v_num = v_num;
@@ -54,6 +55,7 @@ class Graph
 	{
 		Stack<Integer> stack = new Stack<>();
 		boolean visited[] = new boolean[v_num];
+		
 		for(int i=0; i<v_num; i++)
 		{
 		   if(!visited[i]) 

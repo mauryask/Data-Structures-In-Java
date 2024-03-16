@@ -50,9 +50,7 @@ public class KosaRajusAlgorithm
         for(int i=0; i<V; i++)
         {
             for(int u : adj.get(i))
-            {
                 revAdj.get(u).add(i);
-            }
         }
         
         return revAdj;

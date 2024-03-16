@@ -30,32 +30,32 @@ public class KruskalsAlgorithm
 		}
 	}    
 	
-	static void makeSet(int parent[], int n)
+	static int find(int key, int size[])
 	{
-		for(int i=0; i<n; i++)
-			parent[i] = i;
-	}
-	
-	static int find(int ele, int parent[])
-	{
-		int temp = ele;
-		while(parent[temp] != temp)
-			temp = parent[temp];
-		parent[ele] = temp;
+		if(size[key] < 0)
+			return key;
+		
+		int temp = key;
+				
+		while(size[temp] >= 0)
+			temp = size[temp];
+		
+		size[key] = temp;
+		
 		return temp;
 	}
 		
-	static void union(int xSet, int ySet,
-	int parent[], int rank[])
+	static void union(int xSet, int ySet, int size[])
 	{
-		if(rank[xSet] > rank[ySet])
-			parent[ySet] = xSet;
-		else if(rank[ySet] > rank[xSet])
-			parent[xSet] = ySet;
+		if(Math.abs(size[ySet]) > Math.abs(size[xSet]))
+		{
+			size[ySet] += size[xSet];
+			size[xSet] = ySet;			
+		}
 		else
 		{
-			rank[xSet] += 1;
-			parent[ySet] = xSet;
+			size[xSet] += size[ySet];
+			size[ySet] = xSet;
 		}
 	}
 	
@@ -64,30 +64,28 @@ public class KruskalsAlgorithm
 	   /*
 	   * Sorting edges according to the weights
 	   */
-		Arrays.sort(edge, (e1, e2)->
-		{return e1.w - e2.w;});
+		Arrays.sort(edge, (e1, e2)->e1.w - e2.w);
 		
 	   /* 
 	   * Implementing union by rank
 	   * to remove edges causing the cycle
 	   * Since MST can't have a cycle 
 	   */
-		int parent[] = new int[n];
-		int rank[] = new int[n];
-		
-		makeSet(parent, n);
+		int size[] = new int[n];
+		//Make set	
+		Arrays.fill(size, -1);
 		
 		int j = 0;
 		
 		for(Edge e : edge)
 		{
-			int xSet = find(e.u, parent);
-			int ySet = find(e.v, parent);
+			int xSet = find(e.u, size);
+			int ySet = find(e.v, size);
 			
 			if(xSet != ySet)
 			{
 				result[j++] = e;
-				union(xSet, ySet, parent, rank);
+				union(xSet, ySet, size);
 			}
 		}
 		
