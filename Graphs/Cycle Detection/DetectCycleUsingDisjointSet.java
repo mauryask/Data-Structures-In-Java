@@ -15,6 +15,7 @@ import java.util.*;
 class Graph 
 {
    int v_num, e_num;
+   
    class Edge 
    {
 	   int src;
@@ -65,6 +66,7 @@ class Graph
    {
 	   int parent_set[] = new int[v_num];
 	   int rank[] = new int[v_num];
+	   
 	     for(int i=0; i<v_num; i++) 
 			 parent_set[i] = i;
 

@@ -13,42 +13,32 @@ import static java.lang.System.*;
 
 public class UnionBySizeWithPathCompression 
 {
-	static void makeSet(int size[], int parent[], int n)
-	{
-		/*
-		* Initialize the size of each set to 1
-		* and parent with the element itself
-		**** here in parent the set elements are reprsented by indices
-		** and the set names are reprsented by elements at particular index
-		*/
-			
+	static void makeSet(int size[], int n)
+	{			
 		for(int i=0; i<n; i++)
-		{
-           parent[i] = i;
-		   size[i] = 1;
-		}
+           size[i] = -1;
 	}
 	
-	/*
-	* Time complexity: less than O(log n)
-	*/
-	static int find(int x, int parent[])
-	{
-		int temp = x;
-		while(parent[temp] != temp)
-			temp = parent[temp];
-		/*
-		* Path Compression
-		*/
-		parent[x] = temp;
+	static int find(int key, int size[])
+	{		
+		if(size[key] < 0)
+			return key;
+		
+		int temp = key;
+		
+		while(size[temp] > 0)
+			temp = size[temp];
+		
+		//Path compression (collapsing find)		
+		size[key] = temp; //Updating parents
 		
 		return temp;
 	}
 	
-	static void union(int x, int y, int size[], int parent[])
+	static void union(int x, int y, int size[])
 	{
-		int xSet = find(x, parent);
-		int ySet = find(y, parent);
+		int xSet = find(x, size);
+		int ySet = find(y, size);
 		
 		/*
 		* Check if both elemnets belog to the same set
@@ -56,15 +46,15 @@ public class UnionBySizeWithPathCompression
 		if(xSet == ySet)
 			return;
 
-		if(size[ySet] > size[xSet])
+		if(Math.abs(size[ySet]) > Math.abs(size[xSet]))
 		{
-			parent[xSet] = ySet;
-			size[ySet] += size[xSet];
+			size[ySet] += size[xSet];	
+			size[xSet] = ySet;
 		}
 		else 
-		{
-			parent[ySet] = xSet;
-			size[xSet] += size[ySet];
+		{			
+			size[xSet] += size[ySet];		
+			size[ySet] = xSet;
 		}		
 	}
 	
@@ -72,27 +62,17 @@ public class UnionBySizeWithPathCompression
 	{
 		 int n = 7;
 		 int size[] = new int[n];
-		 int parent[] = new int[n];
-		 makeSet(size, parent, n);
+		 makeSet(size, n);
 		 
-		 union(0,1,size, parent);
-		 union(2,3,size, parent);
-		 union(5,6,size, parent);
-		 union(0,5,size, parent);
-		 union(6,2,size, parent);
-		 union(3,4,size, parent);
-		 union(4,3,size, parent);
-		 
-		 for(int i=0; i<n; i++)
-		 {
-			 out.print(parent[i]+" ");
-		 }
-		 
-		 out.println();
+		 union(0,1,size);
+		 union(2,3,size);
+		 union(5,6,size);
+		 union(0,5,size);
+		 union(6,2,size);
+		 union(3,4,size);
+		 union(4,3,size);
 		 
 		 for(int i=0; i<n; i++)
-		 {
-			out.print(size[i]+" "); 
-		 }
+			 out.println(i+" : "+size[i]);
 	}
 }
