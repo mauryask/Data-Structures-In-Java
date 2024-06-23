@@ -1,8 +1,6 @@
 /*
-* T(n) : O(m * logn)
-* Here logn is for single find operation
-* for m find operations : m * logn
-* S(n) : O(n)
+* T(n) : O(E * log V)
+* S(n) : O(V)
 **/
 import static java.lang.System.*;
 import java.util.*;
@@ -27,28 +25,26 @@ public class UnionBySizeWithPathCompression
 
     static void union(int x, int y, int[] parent)
     {
-        int parentX = find(x, parent);
-        int parentY = find(y, parent);
-
-        out.println(parentX+", "+parentY);
-
-        if(parentX == parentY)
+        int setX = find(x, parent);
+        int setY = find(y, parent);
+		
+        if(setX == setY)
         {
            out.println("Edge causing cycle: ( "+x+", "+y+")");
         }else
         {
-            int rankX = Math.abs(parent[parentX]);
-            int rankY = Math.abs(parent[parentY]);
+            int rankX = Math.abs(parent[setX]);
+            int rankY = Math.abs(parent[setY]);
 
             if(rankY > rankX)
             {
-                parent[parentX] = parentY;
-                parent[parentY] -= rankX;
+                parent[setX] = setY;
+                parent[setY] -= rankX;
             }
             else
             {
-                parent[parentY] = parentX;
-                parent[parentX] -= rankY;
+                parent[setY] = setX;
+                parent[setX] -= rankY;
             }
         }
     }
