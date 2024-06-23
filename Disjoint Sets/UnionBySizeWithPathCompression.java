@@ -4,71 +4,63 @@
 * for m find operations : m * logn
 * S(n) : O(n)
 **/
-
 import static java.lang.System.*;
+import java.util.*;
 
 public class UnionBySizeWithPathCompression 
 {
-	static void makeSet(int size[], int n)
-	{			
-		for(int i=0; i<n; i++)
-           size[i] = -1;
-	}
-	
-	static int find(int key, int size[])
-	{		
-		if(size[key] < 0)
-			return key;
-		
-		int temp = key;
-		
-		while(size[temp] > 0)
-			temp = size[temp];
-		
-		//Path compression (collapsing find)		
-		size[key] = temp; //Updating parents
-		
-		return temp;
-	}
-	
-	static void union(int x, int y, int size[])
-	{
-		int xSet = find(x, size);
-		int ySet = find(y, size);
-		
-		/*
-		* Check if both elemnets belog to the same set
-		*/
-		if(xSet == ySet)
-			return;
+    static int find(int key, int[] parent)
+    {
+        if(parent[key] < 0)
+          return key;
+         
+        int temp  = key;
 
-		if(Math.abs(size[ySet]) > Math.abs(size[xSet]))
-		{
-			size[ySet] += size[xSet];	
-			size[xSet] = ySet;
-		}
-		else 
-		{			
-			size[xSet] += size[ySet];		
-			size[ySet] = xSet;
-		}		
-	}
-	
-	public static void main(String [] args)
+        //Check if parent[temp] is not negative
+        while(parent[temp] >= 0)
+           temp = parent[temp];
+
+        parent[key] = temp;
+
+        return temp;      
+    }
+
+    static void union(int x, int y, int[] parent)
+    {
+        int parentX = find(x, parent);
+        int parentY = find(y, parent);
+
+        out.println(parentX+", "+parentY);
+
+        if(parentX == parentY)
+        {
+           out.println("Edge causing cycle: ( "+x+", "+y+")");
+        }else
+        {
+            int rankX = Math.abs(parent[parentX]);
+            int rankY = Math.abs(parent[parentY]);
+
+            if(rankY > rankX)
+            {
+                parent[parentX] = parentY;
+                parent[parentY] -= rankX;
+            }
+            else
+            {
+                parent[parentY] = parentX;
+                parent[parentX] -= rankY;
+            }
+        }
+    }
+  
+    public static void main(String[] args)
 	{
-		 int n = 7;
-		 int size[] = new int[n];
-		 makeSet(size, n);
-		 
-		 union(0,1,size);
-		 union(2,3,size);
-		 union(5,6,size);
-		 union(0,5,size);
-		 union(6,2,size);
-		 union(3,4,size);
-		 union(4,3,size);
-		 
-		 for(int i=0; i<n; i++)
-			 out.println(i+" : "+size[i]);
-	}
+        int n = 4;
+        int[] parent = new int[n];
+        Arrays.fill(parent, -1);
+	    int edges[][] = {{0,1}, {1,2},{2, 3}, {3, 0}};    
+		
+		for(int[] edge : edges)
+          union(edge[0], edge[1], parent); 
+    }
 }
