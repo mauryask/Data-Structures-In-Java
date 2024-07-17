@@ -15,44 +15,21 @@ public class KahnsAlgorithm
    {
 	   adj = new LinkedList[n];
 	   for(int i=0; i<n; i++)
-		   adj[i] = new LinkedList<Integer>();
+		   adj[i] = new LinkedList<>();
    }
 	
-	@Override
-	public String toString()
-	{
-		String result = "";
-		for(int i=0; i<adj.length; i++)
-			result += i + " => " + adj[i] + "\n";
-		return result;
-	}
 	
-	void addEdge(int u, int v)
+	void addEdge(int u, int v, int[] indegree)
 	{
 		adj[u].add(v);
+		//Update indgree of the vertex
+		indegree[v]++;
 	}
-	
-	/**
-	* This method is going to compute the
-	* indegree of each vertex 
-	* T(n) = O(V+E)
-	*/
-	
-    void computeIndegree(int indegree[], int n)
-	{
-		 for(int i=0; i<n; i++)
-		 {
-     		 for(int v : adj[i])
-			 {
-				indegree[v]++;
-			 }
-		 }
-	}
-	
 	
 	void topoLogicalOrdering(int indegree[], int n)
 	{
-		List<Integer> q = new LinkedList<>();
+		//Thxis q is going to hold vertices with indgree 0
+		Queue<Integer> q = new LinkedList<>();
 		
 		/*
 		* add all the vertices in the Queue
@@ -75,12 +52,13 @@ public class KahnsAlgorithm
 		// T(n) = O(V+E)
 		/*
 		* If graph is a DAG then each and every vertex will 
-		* come in the queue once hence the count will be 
+		* be processed once hence the count will be 
 		* equal to 'n' 
 		*/
+		
 		while(!q.isEmpty())
 		{
-			int u = q.remove(0);
+			int u = q.poll();
 			out.print(u+" ");
 			
 			for(int v : adj[u])
@@ -110,21 +88,18 @@ public class KahnsAlgorithm
 		// number of vertices
 		int n = 7; 
 		KahnsAlgorithm g = new KahnsAlgorithm(n);
+		int indegree[] = new int[n];
+		g.addEdge(0,1, indegree);
+		g.addEdge(0,3, indegree);
+		g.addEdge(1,2, indegree);
+		g.addEdge(3,5, indegree);
+		g.addEdge(4,5, indegree);
+		g.addEdge(2,5, indegree);
+		g.addEdge(4,6, indegree);
+		g.addEdge(4,2, indegree);
+		//The edge causing cycle
+		//g.addEdge(2,0, indegree);
 		
-		g.addEdge(0,1);
-		g.addEdge(0,3);
-		g.addEdge(1,2);
-		g.addEdge(3,5);
-		g.addEdge(4,5);
-		g.addEdge(2,5);
-		g.addEdge(4,6);
-		//g.addEdge(4,2);
-		
-		out.println(g);
-		
-	    int indegree[] = new int[n];
-		// compute indegree
-		g.computeIndegree(indegree, n);
 		// print topological ordering
         g.topoLogicalOrdering(indegree,n);	
 	}
