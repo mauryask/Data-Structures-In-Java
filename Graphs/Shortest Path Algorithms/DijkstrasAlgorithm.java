@@ -38,6 +38,7 @@ public class DijkstrasAlgorithm
 	{
 		int vertex;
 		int dist;
+
 		Util(int vertex, int dist)
 		{
 			this.vertex = vertex;
@@ -46,33 +47,39 @@ public class DijkstrasAlgorithm
 		
 		@Override
 		public int compareTo(Util o)
-		
-		return this.dist - o.dist;
+		{
+			return this.dist - o.dist;
+		}
 	}
 	
-	List<Edge> adj[];
+	int n;
+	List<Edge> graph[];
 	
 	public DijkstrasAlgorithm(int n)
 	{
-		adj = new LinkedList[n];
+		this.n = n;
+		graph = new LinkedList[n];
 		for(int i=0; i<n; i++)
-			adj[i] = new LinkedList<Edge>();
+			graph[i] = new LinkedList<Edge>();
 	}
 	
 	@Override
 	public String toString()
 	{
-		String result = "";
+		StringBuilder result = new StringBuilder();
 		
-		for(int i=0; i< adj.length; i++)
-			result += i+" => "+adj[i]+"\n";
-		return result;
+		for(int i=0; i< n; i++)
+			result.append(i)
+			.append(" => ")
+			.append(graph[i])
+			.append("\n");
+		return result.toString();
 	}
 	
 	void addEdge(int u, int v, int w)
 	{
-		adj[u].add(new Edge(v, w));
-		adj[v].add(new Edge(u, w));
+		graph[u].add(new Edge(v, w));
+		graph[v].add(new Edge(u, w));
 	}
 	
 	void dijkstra(int src,int n)
@@ -89,13 +96,19 @@ public class DijkstrasAlgorithm
 		
 		while(!q.isEmpty())
 		{			
-			int u = q.remove().vertex;
-			
-			for(Edge e : adj[u])
+			Util util = q.poll();
+			int u = util.vertex;
+			int uDist = util.dist;
+            
+			// This condition prevents unnecessary processing of already processed node
+			if(visited[u])
+			  continue;
+
+			for(Edge e : graph[u])
 			{
-				if(!visited[e.v] && distance[u] + e.w < distance[e.v])
+				if(!visited[e.v] && uDist + e.w < distance[e.v])
 				{
-					distance[e.v] = distance[u] + e.w;
+					distance[e.v] = uDist + e.w;
 					q.add(new Util(e.v, distance[e.v]));
 				}
 			}
