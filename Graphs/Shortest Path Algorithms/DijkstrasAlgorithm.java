@@ -2,7 +2,7 @@
 * Single Source Shortest Path Algorithm
 * Time complexity: 
 * O(E+V^2) : for linear search
-* O(V + E*logV): for min heap -> see notes to check how it is so.
+* O(V + E) x logV: for min heap -> see notes to check how it is so.
 * Space complexity: O(V)
 * This algo works for both directed and
 * undirected graph as well

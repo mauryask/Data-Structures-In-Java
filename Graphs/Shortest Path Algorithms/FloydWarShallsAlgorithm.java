@@ -7,11 +7,13 @@
 ** Note:- Here we have taken directed graph
 ** but t works for both directed as well as 
 ** undirected graphs
+** Note: Floyd Warshall's Algorithm does not work for graphs with -ve edge weight cycle
 */
 
 class AllPairShortestPath
 {
 	static final int inf = Integer.MAX_VALUE;
+	
 	void floydWarshall(int G[][], int v_num)
 	{		
 			for(int k=0; k<v_num; k++)
@@ -20,15 +22,6 @@ class AllPairShortestPath
 				{
 					for(int j=0; j<v_num; j++)
 					{
-						//Here G[i][j] always be 0
-						//If i or j is k, that row and column will remain unchanged
-						if(i==j || i==k || j==k) continue;
-						
-						// the purpose to use G[i][k] != inf 
-						// is to prevent overflow
-						// because when you will add something to infinite
-						// it is going to be out of range of "int"
-						
 						if(G[i][k] != inf && G[k][j] != inf)
 							G[i][j] = Math.min(G[i][j], G[i][k] 
 						+ G[k][j]);
