@@ -2,71 +2,57 @@ import static java.lang.System.out;
 import java.util.Arrays;
 
 public class Test {
-
-    class Edge {
-        int u;
-        int v;
-        int w;
-
-        Edge(int u, int v, int w) {
-            this.u = u;
-            this.v = v;
-            this.w = w;
-        }
+    static void makeSet(int[] rank) {
+        Arrays.fill(rank, -1);
     }
 
-    int vNum;
-    int eNum;
-    Edge[] edges;
+    static int find(int x, int[] rank) {
+        int temp = x;
 
-    Test(int vNum, int eNum) {
-        this.vNum = vNum;
-        this.eNum = eNum;
-        edges = new Edge[eNum];
-    }
-
-    void addEdge(int u, int v, int w, int index)
-    {
-        edges[index] = new Edge(u, v, w);
-    }
-
-    boolean relaxEdge(int[] dist)
-    {
-        boolean isRelaxed  = false;
-
-        for(int i=0; i<eNum; i++)
-        {
-            int u = edges[i].u;
-            int v = edges[i].v;
-            int w = edges[i].w;
-
-            if(dist[u] != Integer.MAX_VALUE && dist[u] + w < dist[v])
-            {
-                dist[v] = dist[u] + w;
-                isRelaxed = true;
-            }
+        while (rank[temp] >= 0) {
+            temp = rank[temp];
         }
 
-        return isRelaxed;
+        // Path compresion (Collapsing find)
+        rank[x] = temp;
+
+        return temp;
     }
 
-    void bellmanFord(int src)
-    {
-        int[] dist = new int[vNum];
-        Arrays.fill(dist, Integer.MAX_VALUE);
-        dist[src] = 0;
+    // Union by rank
+    static void union(int x, int y, int[] rank) {
+        int xSet = find(x, rank);
+        int ySet = find(y, rank);
 
-        for(int i=1; i<=vNum-1; i++)
-        {
-           relaxEdge(dist);
+        if (xSet == ySet)
+            return;
+
+        int xRank = Math.abs(rank[xSet]);
+        int yRank = Math.abs(rank[ySet]);
+
+        if (xRank > yRank) {
+            rank[xSet] = -1 * (xRank + yRank);
+            rank[ySet] = xSet;
+        } else {
+            rank[ySet] = -1 * (xRank + yRank);
+            rank[xSet] = ySet;
         }
-
-        if(relaxEdge(dist))
-           out.println("Negative edge weight cycle present!!");   
     }
 
     public static void main(String[] args) {
-       int x = (int)1e8;
-       out.println(x);
+        int n = 7;
+        int[] rank = new int[n];
+        makeSet(rank);
+
+        union(0, 1, rank);
+        union(2, 3, rank);
+        union(5, 6, rank);
+        union(0, 5, rank);
+        union(6, 2, rank);
+        union(3, 4, rank);
+        union(4, 3, rank);
+
+        for (int i = 0; i < n; i++)
+            out.println(i + " => " + rank[i]);
     }
 }
