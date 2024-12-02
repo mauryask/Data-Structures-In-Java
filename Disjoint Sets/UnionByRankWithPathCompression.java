@@ -1,5 +1,6 @@
 /*
-* T(n) : O(E * log V)
+* T(n) : 𝑂(𝐸𝛼(𝑉)) 
+** The time compelxity will be almost linear
 * S(n) : O(V)
 ** Union by rank (size) with path compression (collapsing find)
 **/
@@ -8,7 +9,7 @@ import static java.lang.System.*;
 import java.util.*;
 
 public class UnionByRankWithPathCompression {
-    //This is the true path compression
+    // This is the true path compression
     static int find(int key, int[] rank) {
         if (rank[key] < 0) {
             return key;
