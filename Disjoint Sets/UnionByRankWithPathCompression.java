@@ -13,6 +13,7 @@ public class UnionByRankWithPathCompression {
     static int find(int key, int[] rank) {
         if (rank[key] < 0) {
             return key;
+            
         } else {
             rank[key] = find(rank[key], rank);
             return rank[key];

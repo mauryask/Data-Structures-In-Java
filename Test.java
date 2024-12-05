@@ -7,16 +7,12 @@ public class Test {
     }
 
     static int find(int x, int[] rank) {
-        int temp = x;
-
-        while (rank[temp] >= 0) {
-            temp = rank[temp];
+        if (rank[x] < 0) {
+            return x;
+        } else {
+            rank[x] = find(rank[x], rank);
+            return rank[x];
         }
-
-        // Path compresion (Collapsing find)
-        rank[x] = temp;
-
-        return temp;
     }
 
     // Union by rank
@@ -30,12 +26,12 @@ public class Test {
         int xRank = Math.abs(rank[xSet]);
         int yRank = Math.abs(rank[ySet]);
 
-        if (xRank > yRank) {
-            rank[xSet] = -1 * (xRank + yRank);
-            rank[ySet] = xSet;
-        } else {
-            rank[ySet] = -1 * (xRank + yRank);
+        if (yRank > xRank) {
+            rank[ySet] -= xRank;
             rank[xSet] = ySet;
+        } else {
+            rank[xSet] -= yRank;
+            rank[ySet] = xSet;
         }
     }
 

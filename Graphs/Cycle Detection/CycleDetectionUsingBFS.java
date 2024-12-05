@@ -1,7 +1,6 @@
 // Here worst case time complexity : O(V+E)
-
-import java.util.*;
 import static java.lang.System.*;
+import java.util.*;
 
 class Graph 
 {
@@ -13,7 +12,7 @@ class Graph
 		this.v_num = v_num;
 		G = new LinkedList[v_num];
 		for(int i=0; i<v_num; i++)
-			G[i] = new LinkedList<Integer>();
+			G[i] = new LinkedList<>();
 	}
 	
 	@Override
