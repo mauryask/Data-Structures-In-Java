@@ -57,7 +57,7 @@ class Graph
 	}
 }
 	
-public class CycleDetectionUsingDFS
+public class CycleDtectionUsingDFS
 {
 	public static void main(String [] args)
 	{
