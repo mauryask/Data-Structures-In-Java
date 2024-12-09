@@ -1,3 +1,6 @@
+/*
+* Note: Cycle can be dtected using BFS(Kahns algorithm: if count is not equal to n then cycle)
+**/
 import java.util.*;
 
 public class CycleDetectionDirectedGraph {
