@@ -1,75 +1,87 @@
-/*
-* Cycle Detection in a Directed graph Using colors
-*  0 > white (vertex is not yet discovered)
-* -1 > gray (vertext is discovered)
-*  1 > black (vertex is visited)
-* Time complexity : O(V+E)
-*/
-
 import java.util.*;
-class Graph 
-{
-	int v;
-	List<Integer> G[];
-	Graph(int v)
-	{
-		this.v = v;
-		G = new LinkedList[v];
-		for(int i=0; i<v; i++)
-			G[i] = new LinkedList<Integer>();
-	}
-	
-	void addEdge(int u, int v)
-	{
-		G[u].add(v);
-	}
-	
-	boolean isCycleUtil(int u, boolean visited[])
-	{
-		visited[u] = true;
-		
-		for(int v : G[u])
-		{
-			// if we discover a node and any
-			// of its neighbor is alrady visited
-			// then there is a cycle			
-			
-			if(visited[v])
+
+public class CycleDetectionDirectedGraph {
+	// Method:1 with extra space as pathVisited
+	private static boolean isCycle(int node, List<Integer>[] adj, boolean[] visited, boolean[] pathVisited) {
+		visited[node] = true;
+		pathVisited[node] = true;
+
+		for (int v : adj[node]) {
+			// If node not visited
+			if (!visited[v]) {
+				if (isCycle(v, adj, visited, pathVisited)) {
+					return true;
+				}
+			} else if (pathVisited[v]) { // If node visited and on the same path
 				return true;
-			
-			isCycleUtil(v);					
+			}
 		}
-		
-		visited[u] = false;
-		
-        return false;		
-	}
-	
-	boolean isCycle()
-	{
-		boolean visited[] =  new boolean[v];
-			
-		for(int i=0; i<v ; i++)
-		{
-			isCycleUtil(i, visited);
-		}
-		
+
+		pathVisited[node] = false;
 		return false;
 	}
-}
 
-public class CycleDetectionDirectedGraph 
-{
-	public static void main(String [] args)
-	{
-	   Graph  g = new  Graph(6);
-		g.addEdge(0,1);
-		g.addEdge(1,2);
-		g.addEdge(2,3);
-		g.addEdge(1,3);
-		g.addEdge(2,4);
-		g.addEdge(5,4);
-		
-      System.out.println(g.isCycle());		
+	// Method:2 optimized space
+	// Here 2 means path visited, 1 mens visited node, 0 unvisited node
+	private static boolean isCycleOptimizedSpace(int node, List<Integer>[] adj, int[] visited) {
+		visited[node] = 2; //Mark path visited (On the same path)
+
+		for (int v : adj[node]) {
+			//If node not visited at all
+			if (visited[v] == 0) {
+				if (isCycleOptimizedSpace(v, adj, visited))
+					return true;
+			} else if (visited[v] == 2) { //If node visited and on the smae path
+				return true;
+			}
+		}
+
+		visited[node] = 1;// Remove as path visited while backtracking
+		return false;
+	}
+
+	private static List<Integer>[] createGraph(int n, List<List<Integer>> edges) {
+		List<Integer>[] adj = new ArrayList[n];
+
+		for (int i = 0; i < n; i++) {
+			adj[i] = new ArrayList<>();
+		}
+
+		for (int i = 0; i < edges.size(); i++) {
+			adj[edges.get(i).get(0)].add(edges.get(i).get(1));
+		}
+
+		return adj;
+	}
+
+	public static void main(String[] args) {
+		int n = 10;
+		boolean[] visited = new boolean[n];
+		boolean[] pathVisited = new boolean[n];
+
+		List<List<Integer>> edges = Arrays.asList(Arrays.asList(0, 1),
+				Arrays.asList(1, 2),
+				Arrays.asList(2, 3),
+				Arrays.asList(3, 4),
+				Arrays.asList(4, 5),
+				Arrays.asList(2, 6),
+				Arrays.asList(6, 4),
+				Arrays.asList(7, 1),
+				Arrays.asList(7, 8),
+				Arrays.asList(8, 9),
+				Arrays.asList(9, 7));
+
+		List<Integer>[] adj = createGraph(n, edges);
+
+		int intVisited[] = new int[n];
+
+		for (int i = 0; i < n; i++) {
+			// if (!visited[i]) {
+			// System.out.println(i + " => " + isCycle(i, adj, visited, pathVisited));
+			// }
+
+			if (intVisited[i] == 0)
+				System.out.println(i + " => " + isCycleOptimizedSpace(i, adj, intVisited));
+		}
 	}
 }
