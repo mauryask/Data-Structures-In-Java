@@ -2,53 +2,48 @@ import static java.lang.System.out;
 import java.util.Arrays;
 
 public class Test {
-    static void makeSet(int[] rank) {
-        Arrays.fill(rank, -1);
+    // Initialize the disjoint set
+    static void makeSet(int[] parent) {
+        Arrays.fill(parent, -1);
     }
 
-    static int find(int x, int[] rank) {
-        if (rank[x] < 0) {
+    // Find the representative (root) of the set containing x with path compression
+    static int find(int x, int[] parent) {
+        if (parent[x] < 0) {
             return x;
         } else {
-            rank[x] = find(rank[x], rank);
-            return rank[x];
+            parent[x] = find(parent[x], parent);
+            return parent[x];
         }
     }
 
     // Union by rank
-    static void union(int x, int y, int[] rank) {
-        int xSet = find(x, rank);
-        int ySet = find(y, rank);
+    static void union(int x, int y, int[] parent) {
+        int rootX = find(x, parent);
+        int rootY = find(y, parent);
 
-        if (xSet == ySet)
+        if (rootX == rootY)
             return;
 
-        int xRank = Math.abs(rank[xSet]);
-        int yRank = Math.abs(rank[ySet]);
-
-        if (yRank > xRank) {
-            rank[ySet] -= xRank;
-            rank[xSet] = ySet;
+        // Union by rank
+        if (parent[rootX] < parent[rootY]) {
+            parent[rootX] += parent[rootY];
+            parent[rootY] = rootX;
         } else {
-            rank[xSet] -= yRank;
-            rank[ySet] = xSet;
+            parent[rootY] += parent[rootX];
+            parent[rootX] = rootY;
         }
     }
 
     public static void main(String[] args) {
-        int n = 7;
-        int[] rank = new int[n];
-        makeSet(rank);
+        int[] parent = new int[10];
+        makeSet(parent);
 
-        union(0, 1, rank);
-        union(2, 3, rank);
-        union(5, 6, rank);
-        union(0, 5, rank);
-        union(6, 2, rank);
-        union(3, 4, rank);
-        union(4, 3, rank);
+        union(1, 2, parent);
+        union(3, 4, parent);
+        union(2, 4, parent);
 
-        for (int i = 0; i < n; i++)
-            out.println(i + " => " + rank[i]);
+        out.println("Parent of 1: " + find(1, parent));
+        out.println("Parent of 3: " + find(3, parent));
     }
 }
