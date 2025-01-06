@@ -7,7 +7,8 @@
 ** Note:- Here we have taken directed graph
 ** but t works for both directed as well as 
 ** undirected graphs
-** Note: Floyd Warshall's Algorithm does not work for graphs with -ve edge weight cycle
+** Note: Floyd Warshall's Algorithm works for graphs with -ve edge weights as well 
+** (But there should not be any -ve cycle : same as Bellman Ford Algorithm)
 */
 
 class AllPairShortestPath {
