@@ -1,95 +1,74 @@
 /**
-Time complexity   : O(n)
-Spasce complexity : O(n) 
-Next sibling of each node should point to the 
-next node in the horizontal
+T(n) : O(n)
+S(n) : O(n) (In case of iterative solution) and O(1) (In case of recursive solution) 
 */
-
-import static java.lang.System.*;
 import java.util.*;
 
 class Node 
 {
 	int data;
-	Node left, right, nextSibling;
+	Node left;
+	Node right;
+	Node next;
+
 	Node(int data)
 	{
 		this.data = data;
-		left = right = nextSibling = null;
 	}
 }
 
 public class fillNextSibling
 {
+  //Note: The iterative solution is more generic and works for all types of binary trees
+    static  Node connectNdoes(Node root) {
+        if(root == null)
+           return root;
 
-   static void fillNextSibling(Node root)
-   {
-	   LinkedList<Node> q = new LinkedList<>();
-	   
-	   q.add(root);
-	   q.add(null);
-	   
-	   while(!q.isEmpty())
-	   {
-		   root = q.removeFirst();
-		   
-		   if(root == null)
-		   {
-			   if(!q.isEmpty())
-				   q.add(null);
-			   continue;
-		   }
-		   
-		   if(root.left != null)
-			   q.add(root.left);
-		   
-		   if(root.right != null)
-			   q.add(root.right);
-		   
-		   root.nextSibling = q.getFirst();
-	   }
-   }
+        Node rootNode = root;
+        
+        Queue<Node> q = new ArrayDeque<>();
+        q.add(root);        
 
+        while(!q.isEmpty()){
+            int count = q.size();
+            Node prev = null;
 
-   static void levelOrder(Node root)
-   {
-	   Queue<Node> q = new ArrayDeque<>();
-	   q.add(root);
-	   while(!q.isEmpty())
-	   {
-		   root = q.remove();
-		   out.println(root.nextSibling != null ?
-		   root.data+" => "+root.nextSibling.data:
-		   root.data+" => "+root.nextSibling);
-		   
-		   if(root.left != null)
-			   q.add(root.left);
-		   
-		   if(root.right != null)
-			   q.add(root.right);
-	   }
-   }
+            while(count-->0){
+                root = q.poll();
 
-   // Time complexity  : O(n)
-   // Space complexity : O(n)
+                if(root.left != null)
+                  q.add(root.left);
 
-	static void fillNextSiblingRecursive(Node root)
-	{
-		if(root == null)
-		 return;
+                if(root.right != null)
+                q.add(root.right);
 
-		if(root.left != null)
-			root.left.nextSibling = root.right;
-			
-		if(root.right != null)
-		{
-			if(root.nextSibling != null)
-				root.right.nextSibling = root.nextSibling.left;
-		}
-			
-		fillNextSiblingRecursive(root.left);
-		fillNextSiblingRecursive(root.right);
-	}
+                if(prev != null)
+                  prev.next = root;
+                
+                prev = root;
+            }
+        }
+
+        return rootNode;
+
+      //Comment the above code and uncomment the below code for recursive solution
+      
+       /* if(root != null) recursiveSolution(root);
+          return root;*/
+    }
+
+  //Note: The recursive solution is more specific and works only for perfect binary trees
+    static void recursiveSolution(Node root){
+        // If it is leaf node : do not make a function call
+        if(root.left != null){
+            root.left.next = root.right;
+            if(root.next != null)
+               root.right.next = root.next.left;   
+
+            recursiveSolution(root.left);   
+            recursiveSolution(root.right);
+        }
+    }
 	
 	public static void main(String [] args)
 	{
@@ -123,8 +102,7 @@ public class fillNextSibling
 		  r6.right = r13;
 		  r7.left = r14;
 		  r7.right = r15;*/
-		  
-		  fillNextSiblingRecursive(root);
-		  levelOrder(root);
+
+		  connectNdoes(root);
 	}
 }
