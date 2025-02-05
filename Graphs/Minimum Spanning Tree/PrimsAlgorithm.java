@@ -1,131 +1,65 @@
-// The time complexity of this Algorithm is : O(V^2)
-// since we or using sequential search technique
-// to find minimum key
-/************************/
-// But time complexity can be reduced to : O(E *s log V)
-// if we use Min Binary Heap
-// This is Greedy Algorithm
-
-// ***************** Note: the source code is 
-// ***************** same as the dijkstra algorithm
+//T(N) : O(|E| * log|V|) => |E| times log|V|
+//S(N) : O(|V|) => All the nodes will be pushed in the queue
 
 import java.util.*;
-class Graph 
-{
-	class Edge
-	{
-		int v;
-		int w;
-		Edge(int v, int w)
-		{
-		  this.v = v;
-		  this.w = w;
-		}
-	}
-	int v_num;
-	List<Edge> G[]; 
-	Graph(int v_num)
-	{
-		this.v_num = v_num;
-		G = new LinkedList[v_num];
-		for(int i=0; i<v_num; i++)
-			G[i] = new LinkedList<Edge>();
-	}
-  
-  void addEdge(int u, int v, int w)
-  {
-	  G[u].add(0, new Edge(v,w));
-	  G[v].add(0, new Edge(u,w));
-  }
-  
-  void PMST(int src)
-  {
-	int parent[] = new int[v_num]; 
-	
-	/*
-	* Each element of the weight array 
-	* contains the smallest edge weight from 
-	* the source vertex **
-	* and indices represent the destination vertex 
-	* both source and destination (u --> v) 
-	* are being stored in parent array
-    ***********
-	* elements reprsent 'u' and indices reprsent 'v' 
-	* in the parent array
-	*/
-	
-	int weight[] = new int[v_num];
-	boolean visited[] = new boolean[v_num];
-	
-	for(int i=0; i < v_num; i++)
-	{
-	  parent[i] = -1;
-      weight[i] = Integer.MAX_VALUE;
-	  visited[i] = false;
-	}
-	
-	weight[src] = 0; // make source vertext weight = 0
-	
-	 for(int i=0; i<v_num; i++)
- 	      primsUtil(parent, weight, visited);
-	   
-	   for(int i=0; i<v_num ; i++)
-	   {                      //parent        //vertex  //weight 
-		   System.out.println(parent[i]+" ==> "+i+" ==>"+weight[i]);
-	   }
-	}	
-	
-	void primsUtil(int parent[], int weight[],boolean visited[])
-	{
-		int u = minKey(weight, visited);
-		
-		for(Edge e : G[u])
-		{
-			int w = e.w;
-			int v = e.v;
-		   if(!visited[v] && weight[v] > w)
-		   {			   
-				weight[v] = w;
-				parent[v] = u;
-		   }
-		}
-		visited[u] = true;
-	}
-	
-	int minKey(int weight[], boolean visited[])
-	{
-		int min = Integer.MAX_VALUE;
-		int min_index = -1;
-		
-		for(int i=0; i<v_num; i++)
-		{
-			if(!visited[i] && weight[i] < min)
-			{
-				min = weight[i];
-				min_index = i;
-			}
-		}
-	
-		return min_index;
-	}
-}
 
-public class PrimsAlgorithm
-{
-	public static void main(String [] args)
-	{
-		Graph g = new Graph(6);
-		g.addEdge(0,1,4);
-		g.addEdge(0,2,5);
-		g.addEdge(0,3,10);
-		g.addEdge(1,2,2);
-		g.addEdge(3,2,7);
-		g.addEdge(1,4,3);
-		g.addEdge(4,2,1);
-		g.addEdge(4,5,11);
-		g.addEdge(3,5,3);
-		g.addEdge(2,5,6);
-		
-	    g.PMST(4);
-	}
+public class PrimsAlgorithm {
+
+    class Edge implements Comparable<Edge> {
+
+        int parent;
+        int node;
+        int weight;
+
+        Edge(int parent, int node, int weight) {
+            this.parent = parent;
+            this.node = node;
+            this.weight = weight;
+        }
+
+        @Override
+        public int compareTo(Edge e) {
+            return this.weight - e.weight;
+        }
+    }
+
+    void primsMST(int src, List<List<int[]>> adj, int n) {
+        boolean[] visited = new boolean[n];
+        //Min heap
+        Queue<Edge> q = new PriorityQueue<>();
+        int edgeWeightSum = 0;
+        //Assign a weight 0 and parent as -1 then put source node in the queue 
+        q.add(new Edge(-1, src, 0));
+
+        while (!q.isEmpty()) { //this will be executed almost |E| times
+            Edge edge = q.poll(); //T(n) : log|V|
+            int node = edge.node;
+
+            //Check if node is already processed 
+            if (visited[node]) {
+                continue;
+            }
+
+            //Check if node is source node : if yes skip this step
+            if (node != src) {
+                int weight = edge.weight;
+                int parent = edge.parent;
+                System.out.println(parent + " => " + node + " : " + weight);
+                edgeWeightSum += weight;
+            }
+
+            for (int[] e : adj.get(node)) {
+                int v = e[0];
+                int w = e[1];
+
+                if (!visited[v]) {
+                    q.add(new Edge(node, v, w));
+                }
+            }
+            //Mark the current node as processed
+            visited[node] = true;
+        }
+
+        System.out.println("Edge weight edgeWeightSum of MST: " + edgeWeightSum);
+    }
 }

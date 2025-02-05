@@ -36,20 +36,20 @@ public class BridgeInTheGraph {
     static int timeDisc = 1;
 
     void findBridges(int u, boolean[] visited,
-            int[] tDisc, int[] tMin, int parent) {
+            int[] tDisc, int[] low, int parent) {
         visited[u] = true;
-        tDisc[u] =  tMin[u] = timeDisc++;
+        tDisc[u] =  low[u] = timeDisc++;
 
         for (int v : graph[u]) {
             if (!visited[v]) {
-                findBridges(v, visited, tDisc, tMin, u);
-                tMin[u] = Math.min(tMin[u], tDisc[v]);
+                findBridges(v, visited, tDisc, low, u);
+                low[u] = Math.min(low[u], low[v]);
 				//If discovery time of u is less than min discovery time of v, then it is a bridge
-                if (tDisc[u] < tMin[v]) {
+                if (tDisc[u] < low[v]) {
                     out.println(u + " " + v);
                 }
             } else if (v != parent) {
-                tMin[u] = Math.min(tMin[u], tDisc[v]);
+                low[u] = Math.min(low[u], low[v]);
             }
         }
     }
@@ -65,8 +65,8 @@ public class BridgeInTheGraph {
         }
 
         int[] tDisc = new int[n]; //Discovery time
-        int[] tMin = new int[n]; //Min discovery time
+        int[] low = new int[n]; //Min discovery time
         boolean[] visited = new boolean[n];
-        obj.findBridges(0, visited, tDisc, tMin, -1);
+        obj.findBridges(0, visited, tDisc, low, -1);
     }
 }
