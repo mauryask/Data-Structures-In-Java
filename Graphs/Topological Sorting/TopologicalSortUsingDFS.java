@@ -7,6 +7,7 @@ import java.util.*;
 class Graph {
 	int v_num;
 	List<Integer> adj[];
+	static int index = 0;
 
 	Graph(int v_num) {
 		this.v_num = v_num;
@@ -27,12 +28,12 @@ class Graph {
 		adj[u].add(0, v);
 	}
 
-	boolean topologicalSortUtil(int node, int visited[], Stack<Integer> stack) {
+	boolean topologicalSortUtil(int node, int visited[], int[] topologicalOrdering) {
 		visited[node] = 2;
 
 		for (int v : adj[node]) {
 			if (visited[v] == 0) {
-				if (topologicalSortUtil(v, visited, stack)) {
+				if (topologicalSortUtil(v, visited, topologicalOrdering)) {
 					return true;
 				}
 			} else if (visited[v] == 2) {
@@ -40,18 +41,21 @@ class Graph {
 			}
 		}
 
-		stack.push(node);
+        //Instead of array a Staack could have been used
+		topologicalOrdering[index--] = node;
 		visited[node] = 1;
 		return false;
 	}
 
 	void topologicalSort() {
 		Stack<Integer> stack = new Stack<>();
+		int[] topologicalOrdering = new int[v_num];
 		int visited[] = new int[v_num];
+		index = v_num - 1; //Fill topological from end while back tracking
 
 		for (int i = 0; i < v_num; i++) {
 			if (visited[i] == 0) {
-				if (topologicalSortUtil(i, visited, stack)) {
+				if (topologicalSortUtil(i, visited, topologicalOrdering)) {
 					System.out.println("The graph is not DAG");
 					return;
 				}
