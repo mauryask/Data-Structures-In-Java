@@ -5,44 +5,44 @@
 * (but you can modify it to work with -ve numbers)
 * it is not good technique if k(max) >> n
 * k should be of about O(n)
+
+** The below code handles both +ve and -ve elements
 */
 public class CountingSort 
 {
-	static int findMax(int input[], int n)
-	{
-		int max = input[0];
-		for(int i=1; i<n; i++)
-		{
-		   if(max < input[i])
-			   max = input[i];
-		}
-		return max;
-	}
+	static int[] countingSort(int[] A, int n){
+		int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
 		
-	static void fillCount(int input[], int count[], int n)
-	{
-		for(int i=0; i<n; i++)
-		  count[input[i]]++;
-	  
-	  //updating count array
-	  for(int i=1; i<count.length; i++)
-		  count[i] += count[i-1];
-	}
-	
-	static void countingSort(int input[], int count[], int n)
-	{
-		int output[] = new int[n];
-		//We go from right to left to maintrain the statbility of the count sort
-		//that is the elemnts should come in the same order that they appeared in original array
-		for(int i = n-1; i>=0; i--)
-		{
-			int index =  --count[input[i]];
-			output[index] = input[i];
+		// Get the mion and max values
+		for(int x : A){
+			min = Math.min(min, x);
+			max = Math.max(max, x);
+		}
+      
+	        // When you ddd min value in max value + 1 it gives the size of counting array
+		// For example max is 10 and min -10 we will get range = 21 (it will haveindices from 0 to 20)
+                int range = max - min + 1; 
+		
+		int[] count = new int[range];
+				
+		// Fill the count array with frequncyy of the elements
+		for(int x : A){
+		   count[x - min]++; 	
 		}
 		
-		//copy the output array into input array
-		for(int i=0; i<n; i++)
-			input[i] = output[i];
+		// Update count array
+		for(int i=1; i<range; i++){
+			count[i] += count[i-1];
+		}
+		
+		int[] sortedArray = new int[n];
+		
+		for(int i=n-1; i>=0; i--){
+			int index = --count[A[i] - min];
+			sortedArray[index] = A[i];
+		}
+		
+		return sortedArray;
 	}
 	
 	public static void main(String [] args)
@@ -50,13 +50,9 @@ public class CountingSort
 		//int input[] = {2,1,1,0,2,5,4,0,2,8,7,7,9,2,0,1,9};
 		int input[] = {5,4,7,8,9,3,5,5,7,8,9,6,3,4};
 		int n = input.length;
-	    int max = findMax(input, n); //O(n)
+	        input = countingSort(A, n);
 		
-		//initialize count with zero initially
-		int count [] = new int[max+1];
-		fillCount(input, count, n); //O(n+k) where  k = max
-		countingSort(input,count, n);  // O(n)
-		for(int i : input)
-			System.out.print(i+" ");
+		for(int x : input)
+			System.out.print(x+" ");
 	}
 }
