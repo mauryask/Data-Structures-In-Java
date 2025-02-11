@@ -22,7 +22,7 @@ public class FindKMostFrequentlyOcuuringElements
 			return map.get(a) - map.get(b);
 		});
 		
-		for(Integer key : map.keySet())
+		for(int key : map.keySet())
 		{
 			q.add(key);
 			
