@@ -2,8 +2,8 @@
 //S(n) : O(1)
 // This is useful in case when array is unbounded (tends to infinite)
 
-import java.util.Arrays;
 import static java.lang.System.*;
+import java.util.Arrays;
 
 public class ExponentialSearch 
 {
@@ -24,7 +24,7 @@ public class ExponentialSearch
 		}
 		
 		//O(log i)
-	    return Arrays.binarySearch(A,i/2,Math.min(i,A.length-1),item);
+	    return Arrays.binarySearch(A,i/2,Math.min(i, A.length),item);
 	}
 		
 	public static void main(String [] args)
