@@ -12,7 +12,7 @@ public class HeapSort
 	
 	static void maxHeapify(int A[], int i, int heapSize)
 	{
-		int largest = i;
+		int largest = i; 
 		int l = 2 * i + 1;
 		int r = 2 * i + 2;
 		
@@ -28,8 +28,7 @@ public class HeapSort
 			A[i]  = A[largest];
 			A[largest] = temp;	
 			maxHeapify(A,largest,heapSize);
-		}
-		
+		}		
 	}
 	
 	static void heapSort(int A[])
@@ -49,17 +48,13 @@ public class HeapSort
 		   maxHeapify(A,0,i); //i is reduced heapSize here (we need to leave this element (at index i) since it is at right place now)
 	   }
 	}
-	
-	 static void printHeap(int A[]) //this will print the sorted heap
-	 {
-		 for(int i=0; i<A.length; i++)
-			 System.out.print(A[i]+" ");
-	 }
-	
+		
 	public static void main(String [] args)
 	{
 		int A[] = {10,12,7,5,89,41,20,36};
 		heapSort(A);
-		printHeap(A);
+
+		for(int x : A)
+		  System.out.println(x+" ");
 	}
 }

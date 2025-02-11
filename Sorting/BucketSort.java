@@ -11,30 +11,27 @@
 * Time Complexity : O(n+k) : k -> time to sort all the elements in the bucket
 */
 
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Collections;
+import java.util.*;
 
 public class BucketSort
 {
-	static void sort(float arr[], int n)
+	static void bucketSort(float A[], int n)
 	{
-		List<Float> bucket[]= new LinkedList[n];
+		List<Float> bucket[]= new ArrayList[n];
 		
 		for(int i=0; i<n ; i++)
-			bucket[i] = new LinkedList<Float>();
+			bucket[i] = new ArrayList<>();
 		
 		for(int i=0; i<n ; i++) //O(n)
 		{
-			int index = (int) arr[i] * n;
+			int index = (int) A[i] * n;
 			// for integer values to sort use folowing hash function
 			// int index = arr[i] * n/max_value;
-			// but one important point: the number of buckets will be (n+1)
-			
-			bucket[index].add(arr[i]);
+			// but one important point: the number of buckets will be (n+1)			
+			bucket[index].add(A[i]);
 		}
 		
-		//sort each bucket
+		//Sort each bucket (Generally insertion sort applied here)
 		for(int i=0; i<n ; i++) 
 		{
 			Collections.sort(bucket[i]);
@@ -47,18 +44,17 @@ public class BucketSort
 		 for(int i=0; i<n; i++)
 		 {
 			 for(int j = 0; j<bucket[i].size(); j++)
-				 arr[index++] = bucket[i].get(j);
+				 A[index++] = bucket[i].get(j);
 		 }		
 	}
 	
 	public static void main(String [] args)
 	{
-		float arr[] = {(float)0.35,(float)0.45, 
-		(float)0.84, (float)0.65,(float)0.78,(float)0.98,(float)0.53};
+		float A[] = {0.35f, 0.45f, 0.84f, 0.65f, 0.78f, 0.98f, 0.53f};		
 		
-		sort(arr, arr.length);
+		bucketSort(A, A.length);
 		
-		for(float x : arr)
+		for(float x : A)
 			System.out.print(x+" ");		
 	}
 }
