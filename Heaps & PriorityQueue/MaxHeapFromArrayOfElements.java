@@ -6,7 +6,7 @@ public class MaxHeapFromArrayOfElements {
     // with the number of the elements in 
     // the heap 
 
-    static int heapSize = 8;
+    static int heapSize;
 
     // O(logn)
     static void maxHeapify(int[] A, int i) {
@@ -38,8 +38,10 @@ public class MaxHeapFromArrayOfElements {
     }
 
     // O(n)
-    // since it is done only once
+    // Since it is done only once
     static void buildHeap(int A[]) {
+		// Start heapifying from non-leaf nodes only
+		// As the leaf nodes have only one element
         for (int i = heapSize / 2 - 1; i >= 0; i--) {
             maxHeapify(A, i);
         }
@@ -87,6 +89,7 @@ static void insertKey(int[] A, int key, int n) {
     public static void main(String[] args) {
         int A[] = {10, 12, 45, 78, 96, 41, 20, 14};
         int n = A.length; // heap size
+		heapSize = n; // Numer of elements currently in the heap
         buildHeap(A);
         printHeap(A);
         out.println(deleteMax(A));
