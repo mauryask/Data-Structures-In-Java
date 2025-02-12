@@ -24,8 +24,9 @@ public class ConnectingRopesToMinimizeTheCost
 	   {
 		   int l1 = q.remove();
            int l2 = q.remove();
-		   minCost += l1+l2; 	
-		   q.add(l1+l2);		   
+		   int newLength = l1 + l2;
+		   minCost += newLength; 	
+		   q.add(newLength);		   
 	   }
 
        return minCost;	   
