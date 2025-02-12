@@ -1,4 +1,5 @@
-//linkedlist representaion of the queue
+import static java.lang.System.*;
+
 class Node 
 {
 	int value;
@@ -12,68 +13,36 @@ class Node
 
 public class LinkedQueue
 {
-	static Node front;
-	static Node rear;
-	
-	static Node createNode(int value)
-	{
-		Node newNode = new Node(value);
-		return newNode;
-	}
-	
+	static Node front = null;
+	static Node rear = null;
+		
 	static void enqueue(int value)
 	{
-		Node temp = createNode(value);
-		if(front==null && rear==null)
-		{
-			front = temp;
-			rear = temp;
+		Node temp = new Node(value);
+
+		if(front == null){
+			front = temp;			
+		}else{
+			rear.next = temp;		
 		}
-		else
-		{
-			rear.next = temp;
-			rear = temp;
-		}
+
+		rear = temp;
 	}
-	
-	
-	static void dequeue()
-	{
-		int value=0;
-		if(front==null)
-		{
-			System.out.println("Underflow!");
-			return;
-		}
-		else 
-		{
-		  value = front.value;
-		  if(front == rear)
-		  {
-			 front = rear = null; 
-		  }
-		  else
-		  {
-		   front = front.next;
-		  }
-		}
 		
-		System.out.println("The element "+value+" is removed!");
-	}
-	
-	static void display()
+	static int deque()
 	{
+		if(front == null){
+			out.println("Underflow!!");
+			return -1; 
+		}
+
+		int key = front.value;
+
 		Node temp = front;
-		if(front==null)
-		{
-			System.out.println("Underflow!");
-			System.exit(1);
-		}
-		while(temp!=null)
-		{
-			System.out.print(temp.value+"  ");
-			temp = temp.next;
-		}
+		front = front.next;
+		temp.next = null;
+
+		return key;
 	}
 	
 	public static void main(String [] args)
@@ -82,14 +51,12 @@ public class LinkedQueue
 		enqueue(20);
 		enqueue(30);
 		enqueue(40);
-		display();
-		System.out.println();
-		dequeue();
-		dequeue();
-		dequeue();
-		dequeue();
-		dequeue();
-		display();
-		
+		out.println(deque());	
+		out.println(deque());	
+		out.println(deque());	
+		out.println(deque());	
+		out.println(deque());	
+		enqueue(56);
+		out.println(deque());
 	}
 }
