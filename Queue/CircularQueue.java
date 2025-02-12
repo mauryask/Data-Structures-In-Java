@@ -1,92 +1,59 @@
-//array implementation of the circular queue
 
-public class CircularQueue
-{
-	static int rear = -1;
-	static int front = -1;
-	static int max  = 3;
-	static int queue[] = new int[max];
-	
-	static void enQueue()
-	{
-		if((rear+1)%max == front)
-		{
-			System.out.println("Overflow!");
-			System.exit(1);
-		}
-		else 
-		{
-			if(rear==-1 && front==-1)
-			{
-				rear = front  = 0;
-			}
-			else if(rear == max-1 && front!=0)
-			{
-				rear = 0;
-			}
-			else
-				rear = (rear+1)%max;
-			
-			System.out.print("Enter the element: ");
-			int x = new java.util.Scanner(System.in).nextInt();
-			queue[rear] = x;
-		}
-	}
-	
-	
-	static void deQueue()
-	{
-		int value;
-		if(front==-1)
-		{
-			System.out.println("Underflow!");
-			System.exit(1);
-		}
-		else
-		{
-			value = queue[front];
-			if(front==rear) //when theer is only one element
-				front=rear=-1;
-			else if(front == max-1)
-			{
-				front = 0;
-			}
-			else
-				front++;
-			
-			System.out.println("The element: "+value+" is removed!");
-		}
-	}
-	
-	static void display()
-	{
-		if(front==-1)
-		{
-			System.out.println("Underflow!");
-			System.exit(1);
-		}
-		else
-		{
-		for(int i=front; i<=rear; i++)
-		{
-			System.out.print(queue[i]+"  ");
-		}
-	}
-	}
-	
-	public static void main(String [] args)
-	{
-	 enQueue();
-	 enQueue();
-	 enQueue();
-	 enQueue();
-	 
-	 display();
-     System.out.println("\nDeque and display!");
-	 deQueue();
-	 deQueue();
-	 display();
-	 
-	}
-	
+import static java.lang.System.*;
+
+public class CircularQueue {
+
+    static int rear = -1;
+    static int front = -1;
+
+    static void enque(int[] A, int n, int key) {
+        rear = (rear + 1) % n;
+
+        if (front == -1) {
+            front++;
+        } else if (rear == front) {
+            out.println("Overflow");
+            return;
+        }
+
+        A[rear] = key;
+    }
+
+    static int deque(int[] A, int n) {
+        if (front == -1) {
+            out.println("Underflow!!");
+            return -1;
+        }
+
+        int key = A[front];
+
+        if (front == rear) {
+            front = rear = -1;
+        } else {
+            front = (front + 1) % n;
+        }
+
+        return key;
+    }
+
+    public static void main(String[] args) {
+        int[] A = new int[4];
+        int n = A.length;
+        enque(A, n, 12);
+        enque(A, n, 34);
+        enque(A, n, 7);
+        enque(A, n, 32);
+        // enque(A, n, 9); => Overflow
+        // out.println(front + ", " + rear);
+		out.println(deque(A, n));
+		out.println(deque(A, n));
+		// out.println(deque(A, n));
+		// out.println(deque(A, n));
+		// out.println(deque(A, n)); => Underflow
+		out.println(front + ", " + rear);
+		enque(A, n, 32);
+		enque(A, n, 45);
+		enque(A, n, 90);
+		out.println(front + ", " + rear);
+    }
 }
