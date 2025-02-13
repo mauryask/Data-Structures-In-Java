@@ -4,58 +4,54 @@ import static java.lang.System.*;
 public class CircularQueue {
 
     static int rear = -1;
-    static int front = -1;
+    static int front = 0;
+    static int max = 4;
+    static int size = 0;
 
-    static void enque(int[] A, int n, int key) {
-        rear = (rear + 1) % n;
+    static boolean isFull() {
+        return max == size;
+    }
 
-        if (front == -1) {
-            front++;
-        } else if (rear == front) {
-            out.println("Overflow");
+    static boolean isEmpty() {
+        return size == 0;
+    }
+
+    static void enque(int[] A, int key) {
+        if (isFull()) {
+            out.println("Overflow!!");
             return;
         }
 
+        rear = (rear +1 ) % max;
         A[rear] = key;
+        size++;
     }
 
-    static int deque(int[] A, int n) {
-        if (front == -1) {
+    static int deque(int[] A) {
+        if (isEmpty()) {
             out.println("Underflow!!");
             return -1;
         }
 
         int key = A[front];
-
-        if (front == rear) {
-            front = rear = -1;
-        } else {
-            front = (front + 1) % n;
-        }
-
+        front = (front + 1) % max;
+        size--;
         return key;
     }
 
     public static void main(String[] args) {
-        int[] A = new int[4];
-        int n = A.length;
-        enque(A, n, 12);
-        enque(A, n, 34);
-        enque(A, n, 7);
-        enque(A, n, 32);
-        // enque(A, n, 9); => Overflow
-        out.println(front + ", " + rear);
-		out.println(deque(A, n));
-		out.println(deque(A, n));
-		out.println(deque(A, n));
-		// // out.println(deque(A, n));
-		// // out.println(deque(A, n)); => Underflow
-		out.println(front + ", " + rear);
-		enque(A, n, 32);
-		enque(A, n, 45);
-		enque(A, n, 90);		
-		out.println(front + ", " + rear);
-		out.println(deque(A, n));
-		out.println(front + ", " + rear);
+        int[] A = new int[max];
+        enque(A, 12);
+        enque(A, 21);
+        enque(A, 33);
+        enque(A, 89);
+        // enque(A, 89);
+        out.println(deque(A));
+        out.println(deque(A));
+        out.println(deque(A));
+        enque(A, 15);
+        enque(A, 56);
+        enque(A, 7);
+        // enque(A, 2);        
     }
 }
