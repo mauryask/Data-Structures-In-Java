@@ -44,16 +44,18 @@ public class CircularQueue {
         enque(A, n, 7);
         enque(A, n, 32);
         // enque(A, n, 9); => Overflow
-        // out.println(front + ", " + rear);
+        out.println(front + ", " + rear);
 		out.println(deque(A, n));
 		out.println(deque(A, n));
-		// out.println(deque(A, n));
-		// out.println(deque(A, n));
-		// out.println(deque(A, n)); => Underflow
+		out.println(deque(A, n));
+		// // out.println(deque(A, n));
+		// // out.println(deque(A, n)); => Underflow
 		out.println(front + ", " + rear);
 		enque(A, n, 32);
 		enque(A, n, 45);
-		enque(A, n, 90);
+		enque(A, n, 90);		
+		out.println(front + ", " + rear);
+		out.println(deque(A, n));
 		out.println(front + ", " + rear);
     }
 }
