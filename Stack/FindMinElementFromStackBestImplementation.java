@@ -108,31 +108,48 @@ public class FindMinElementFromStackBestImplementation
 	{
 		int A[] = {3, 2, 6, 1, 1, 8, 5, 5, 5, 5};
 		int n = A.length;
+
+        push(A[0]);
+
+		out.println("Min: "+getMin());
+
+	    for(int i=1; i<=6; i++)
+		   push(A[i]);
+
+		out.println("Min: "+getMin());
+
+		int count = 1;
+
+		while(count++ < 6){
+			out.println(pop());
+		}   
+
+		out.println("Min: "+getMin());
+
+		// for(int x : A)
+		// 	push(x);
 		
-		for(int x : A)
-			push(x);
-		
-		out.println(pop()+" : "+getMin());
-		out.println("==========");
-		out.println(pop()+" : "+getMin());
-		out.println("==========");
-		out.println(pop()+" : "+getMin());
-		out.println("==========");
-		out.println(pop()+" : "+getMin());
-		out.println("==========");
-		out.println(pop()+" : "+getMin());
-		out.println("==========");	
-		out.println(pop()+" : "+getMin());
-		out.println("==========");	
-		out.println(pop()+" : "+getMin());
-		out.println("==========");	
-		out.println(pop()+" : "+getMin());
-		out.println("==========");	
-		out.println(pop()+" : "+getMin());
-		out.println("==========");	
-		out.println(pop()+" : "+getMin());
-		out.println("==========");	
-		out.println(pop()+" : "+getMin());
-		out.println("==========");			
+		// out.println(pop()+" : "+getMin());
+		// out.println("==========");
+		// out.println(pop()+" : "+getMin());
+		// out.println("==========");
+		// out.println(pop()+" : "+getMin());
+		// out.println("==========");
+		// out.println(pop()+" : "+getMin());
+		// out.println("==========");
+		// out.println(pop()+" : "+getMin());
+		// out.println("==========");	
+		// out.println(pop()+" : "+getMin());
+		// out.println("==========");	
+		// out.println(pop()+" : "+getMin());
+		// out.println("==========");	
+		// out.println(pop()+" : "+getMin());
+		// out.println("==========");	
+		// out.println(pop()+" : "+getMin());
+		// out.println("==========");	
+		// out.println(pop()+" : "+getMin());
+		// out.println("==========");	
+		// out.println(pop()+" : "+getMin());
+		// out.println("==========");			
 	}
 }
