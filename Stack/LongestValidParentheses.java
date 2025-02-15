@@ -1,122 +1,136 @@
+/*
+* T(n) : O(n)
+* S(n) : O(n)
+* Dynamic programming
+ */
 import static java.lang.System.*;
 import java.util.*;
 
-public class LongestValidParentheses 
-{
-	/*
-	** Method-1
-	* T(n) : O(n)
-	* S(n) : O(n)
-	*/
-	
-	/* 
-	* In this approach the peek reprsents the 
-	* boundary from which the valid parentheses starts
-	* Our initial asumption was that -1 is index after which the valid 
-    * parentheses starts 	
-	*/
-	
-	static int validParen(String str, int n)
-	{
-		Stack<Integer> stack = new Stack<>();
-		stack.push(-1);
-		int max = 0;
-		
-		for(int i=0; i<n; i++)
-		{
-			char ch = str.charAt(i);
-			
-			if(ch == '(')
-				stack.push(i);
-			else
-			{
-				stack.pop();
-				if(stack.isEmpty())
-					stack.push(i);
-				else // we are pretty sure
-                     //	that we have valid parenteses
-					 //	of some length
-				{
-					int len = i - stack.peek();
-					max = Math.max(max, len);
-				}
-			}
-		}
-		
-		return  max;
-	}
-	
-	/*
-	** Method-2
-	* T(n) : O(n) 
-	* S(n) : O(1)
-	*******
-	* Anlogy : lets take : "()()" this string 
-	* here we can see in order to be valida parentheses
-	* number of opening brfaces should be same as 
-	* number of closing brackets 
-	*  from left to right and from right to left as well
-	* the same analogy used here to solve this problem
-	*/	
-	
-	static int validParen2(String str, int n)
-	{
-		int close = 0;
-		int open = 0;
-		int max = 0;
-		
-		// tarverse the string left to right
-		for(int i=0; i<n; i++)
-		{
-		    char ch  = str.charAt(i);
-		    
-			if(ch == '(')
-				open++;
-			else if(ch == ')')
-				close++;
-			
-			if(close == open)
-			{
-				int len = close + open;
-				max = Math.max(len, max);
-			}
-			// if at any point close > open 
-			// we are pretty sure that at this point 
-			// we encountered an invalid length of braces
-			else if(close > open)
-				close = open = 0;
-		}
-		
-		// traverse the string right to left
-		close  = open = 0;		
-		
-		for(int i=n-1; i>=0; i--)
-		{
-		    char ch  = str.charAt(i);
-		    
-			if(ch == '(')
-				open++;
-			else if(ch == ')')
-				close++;
-			
-			if(close == open)
-			{
-				int len = close + open;
-				max = Math.max(len, max);
-			}
-			else if(open > close)
-				close = open = 0;
-		}
-		
-		return max;
-	}
-	
-	//"())" left to right len = 1, right to left len = 0
-	//")()" rigth to left len = 1, left to right len = 0
-  	public static void main(String [] args)
-	{
-		String str  = ")()())";
-		int n = str.length();		
-		out.println(validParen2(str, n));
-	}
+public class LongestValidParentheses {
+    //O(n) and O(1) solution
+
+    /*
+	* Here the reason to traverse fro left to right and then from right to left is 
+	* Conside this case (() : Here left will never be equal to right
+	* Even if the a valid parenthese of length 2 is already there 
+	* Hence to get the correct answer we have to traverse from right to left as well
+     */
+    static int longestValidParentheses(String s) {
+        int lLeft = 0;
+        int lRight = 0;
+        int rLeft = 0;
+        int rRight = 0;
+        int l2rMax = 0;
+        int r2lMax = 0;
+        int n = s.length();
+
+        for (int i = 0; i < n; i++) {
+            //Left to right
+            if (s.charAt(i) == '(') {
+                lLeft++; 
+            }else {
+                lRight++;
+            }
+
+            if (lLeft == lRight) {
+                l2rMax = Math.max(l2rMax, lLeft * 2);
+            } else if (lRight > lLeft) {
+                lLeft = lRight = 0;
+            }
+
+            //Right to left 
+            if (s.charAt(n - i - 1) == ')') {
+                rRight++; 
+            }else {
+                rLeft++;
+            }
+
+            if (rLeft == rRight) {
+                r2lMax = Math.max(r2lMax, rRight * 2);
+            } else if (rLeft > rRight) {
+                rLeft = rRight = 0;
+            }
+        }
+
+        return Math.max(l2rMax, r2lMax);
+    }
+
+    // O(n) and O(n) approach (Using stacks)
+
+    /*
+   * Concept  here is the valid pair of braces always going to present between two invalid parentheses
+   * like this ( ( ) ( ) (  
+   * A valid length of 4 is present between braces at index 0 and 5
+  **/
+    static int longestValidParentheses2(String s) {
+        if (s == null || s.isEmpty()) {
+            return 0;
+        }
+
+        int max = 0;
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            if (!stack.isEmpty() && s.charAt(i) == ')' && s.charAt(stack.peek()) == '(') {
+                stack.pop(); 
+            }else // Push the invalid braces into the stack (not neccessarily opne braces)
+            {
+                stack.push(i);
+            }
+        }
+
+        int index = -1;
+
+        for (int x : stack) {
+            max = Math.max(max, x - index - 1);
+            index = x;
+        }
+        //Below is neccesary to handle this case: (()
+        return Math.max(max, s.length() - index - 1);
+    }
+
+    static int getLength(String str) {
+        int n = str.length();
+
+        if (n <= 1) {
+            return 0;
+        }
+
+        /*
+		* Here dp[i+1] represents length valid parentheses till dp[i]
+		* j is the position of the open bracket (if any) correspoinding to i 
+         */
+        int dp[] = new int[n + 1];
+        dp[0] = dp[1] = 0;
+
+        int max = 0;
+
+        for (int i = 1; i < n; i++) {
+            char ch = str.charAt(i);
+
+            if (ch == '(') {
+                dp[i + 1] = 0; 
+            }else {
+                int j = i - dp[i] - 1;
+                if (j < 0) {
+                    dp[i + 1] = 0;
+                    continue;
+                }
+
+                ch = str.charAt(j);
+
+                if (ch == '(') {
+                    dp[i + 1] = dp[i] + dp[j] + 2;
+                    max = Math.max(max, dp[i + 1]);
+                }
+            }
+        }
+
+        return max;
+    }
+
+    public static void main(String[] args) {
+        String str = "()()))()()()()()";
+        out.println(getLength(str));
+    }
 }
