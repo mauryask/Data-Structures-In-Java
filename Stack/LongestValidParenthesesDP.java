@@ -4,6 +4,7 @@
 * Dynamic programming
 */
 import static java.lang.System.*;
+import java.util.*;
 
 public class LongestValidParenthesesDP
 {
@@ -52,6 +53,29 @@ public class LongestValidParenthesesDP
         }
 
         return Math.max(l2rMax, r2lMax);
+    }
+
+	// O(n) and O(n) approach (Using stacks)
+
+	static  int longestValidParentheses2(String s) {
+       int max = 0;
+       Stack<Integer> stack = new Stack<>();
+
+       for(int i=0; i<s.length(); i++){         
+         if(!stack.isEmpty() && s.charAt(i) == ')' && s.charAt(stack.peek()) == '(')
+            stack.pop();   
+         else 
+            stack.push(i);
+       }   
+
+       int index = -1;
+
+       for(int x : stack){
+          max = Math.max(max, x - index - 1);
+          index = x;
+       }
+       //Below is neccesary to handle this case: (()
+       return Math.max(max, s.length()-index-1);
     }
 	
 	static int getLength(String str)
