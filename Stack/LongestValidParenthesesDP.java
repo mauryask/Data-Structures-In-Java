@@ -57,6 +57,11 @@ public class LongestValidParenthesesDP
 
 	// O(n) and O(n) approach (Using stacks)
 
+  /*
+   * Concept  here is the valid pair of braces always going to present between two invalid parentheses
+   * like this ( ( ) ( ) (  
+   * A valid length of 4 is present between braces at index 0 and 5
+  **/
 	static  int longestValidParentheses2(String s) {
        int max = 0;
        Stack<Integer> stack = new Stack<>();
@@ -64,7 +69,7 @@ public class LongestValidParenthesesDP
        for(int i=0; i<s.length(); i++){         
          if(!stack.isEmpty() && s.charAt(i) == ')' && s.charAt(stack.peek()) == '(')
             stack.pop();   
-         else 
+         else // Push the invalid braces into the stack (not neccessarily opne braces)
             stack.push(i);
        }   
 
