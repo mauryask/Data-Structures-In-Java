@@ -5,21 +5,21 @@
 
 import static java.lang.System.*;
 
-class TrieNode {
+class Node {
     // word-end = 1, indicates the end of a word
 
     int we = 0;
-    TrieNode chArr[] = new TrieNode[26];
+    Node chArr[] = new Node[26];
 }
 
 public class TrieImplementation {
 
     // T(n) : O(word-length)
-    static void insertWord(TrieNode root, String word) {
+    static void insertWord(Node root, String word) {
         for (int i = 0; i < word.length(); i++) {
             char ch = word.charAt(i);
             if (root.chArr[ch - 'a'] == null) {
-                TrieNode temp = new TrieNode();
+                Node temp = new Node();
                 root.chArr[ch - 'a'] = temp;
                 root = temp;
             } else {
@@ -31,7 +31,7 @@ public class TrieImplementation {
     }
 
     // T(n) : O(word-length)
-    static boolean searchWord(TrieNode root, String word) {
+    static boolean searchWord(Node root, String word) {
         for (int i = 0; i < word.length(); i++) {
             char ch = word.charAt(i);
 
@@ -46,7 +46,7 @@ public class TrieImplementation {
     }
 
     // T(n) : O(word-length)
-    static void deleteWord(TrieNode root, String word) {
+    static void deleteWord(Node root, String word) {
         for (int i = 0; i < word.length(); i++) {
             char ch = word.charAt(i);
 
@@ -68,7 +68,7 @@ public class TrieImplementation {
     }
 
     //T(n) : O(n) : Here n is total number of characters across all the words
-    static void printAllTheWords(TrieNode root, String result) {
+    static void printAllTheWords(Node root, String result) {
         if (root == null) {
             return;
         }
@@ -85,7 +85,7 @@ public class TrieImplementation {
     }
 
     public static void main(String[] args) {
-        TrieNode root = new TrieNode();
+        Node root = new Node();
 
         insertWord(root, "abc");
         insertWord(root, "abd");

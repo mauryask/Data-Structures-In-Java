@@ -11,7 +11,7 @@ class TrieNode
 public class CountNumberOfStringsWithGivenPrefix
 {	
    // T(n) : O(word-length)
-	static void  insertWord(TrieNode root, String word)
+	static void  insertWord(Node root, String word)
 	{
 		char [] arrChar = word.toCharArray();
 		
@@ -19,7 +19,7 @@ public class CountNumberOfStringsWithGivenPrefix
 		{			
 			if(root.chArr[ch-'a'] == null)
 			{
-				TrieNode temp = new TrieNode();
+				Node temp = new Node();
 				root.chArr[ch-'a'] = temp;
 				root = temp; 
 			}
@@ -31,7 +31,7 @@ public class CountNumberOfStringsWithGivenPrefix
 	}	
 	
 	// T(n) : O(prefix-length)
-	static int countString(TrieNode root, String prefix)
+	static int countString(Node root, String prefix)
 	{
 		char arrChar[] = prefix.toCharArray();
         
@@ -48,7 +48,7 @@ public class CountNumberOfStringsWithGivenPrefix
 		
 	public static void main(String [] args)
 	{
-		TrieNode root = new TrieNode();
+		Node root = new Node();
 		
 		insertWord(root, "abc");
 		insertWord(root, "bca");
