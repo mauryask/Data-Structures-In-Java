@@ -1,5 +1,4 @@
 //https://www.youtube.com/watch?v=5P-RlguTk4Q
-package com.pnstech;
 
 public class CheckIfAnArrayIsSoretd {
 
@@ -44,5 +43,4 @@ public class CheckIfAnArrayIsSoretd {
 		
 		return recursiveIsSorted(a, n-1);
 	}
-
 }
