@@ -22,8 +22,8 @@ class Node
 
 public class AddOneToALinkedList
 {
-	// this is the value to be added
-	static int adder = 1;
+	// Intial value to be added
+	static int carry = 1;
 	
 	static void addOne(Node head)
 	{
@@ -34,10 +34,9 @@ public class AddOneToALinkedList
 		
 		addOne(nextHead);
 		
-		int sum = head.data + adder;
-		
+		int sum = head.data + carry;		
 		head.data = sum % 10;
-		adder = sum / 10;
+		carry = sum / 10;
 	}
 	
 	
@@ -74,7 +73,7 @@ public class AddOneToALinkedList
 		// at the end check if the 
 		// the adder is one (the carry from 
 		// first element)
-		if(adder == 1)
+		if(carry > 0)
 		{
 			Node temp  = new Node(1);
 			temp.next = head;
