@@ -5,7 +5,6 @@
 * Space complexity: O(1)
 */
 import static java.lang.System.*;
-import java.util.*;
 
 class Node 
 {

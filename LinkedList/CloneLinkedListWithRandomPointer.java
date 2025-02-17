@@ -1,69 +1,72 @@
-/* https://leetcode.com/problems/copy-list-with-random-pointer/
-// Definition for a Node.
-class Node {
-    int val;
-    Node next;
-    Node random;
 
-    public Node(int val) {
-        this.val = val;
-        this.next = null;
-        this.random = null;
-    }
-}
-T(n) : O(n)
-S(n) : O(1)
-*/
+import java.util.*;
 
-//Best way without using the Map
+/* https://leetcode.com/problems/copy-list-with-random-pointer/*/
+public class CloneLinkedListWithRandomPointer {
 
-class Solution 
-{
-    public Node copyRandomList(Node head) {
-        if(head == null)
-            return null;
-        
-       Node temp = head; 
-       
-       while(temp != null)
-       {
-           System.out.print(temp.val+" ");
-           temp = temp.next;
-       }
-        
-        temp = head;
-        
-      while(temp != null)
-       {
-           Node node =  new Node(temp.val);
-           Node x = temp.next;
-           temp.next = node;
-           node.next = x;
-           temp = x;
-       }
-        
-        
-        
-       temp = head;
-       head = temp.next;
-        
-       while(temp != null)
-       {
-           Node node = temp.next;
-           node.random = temp.random;
-           temp.next = null;
-           temp.random = null;
-           temp = node.next;
+    class Node {
 
-           node.next = temp == null ? null : temp.next;
-       }
-       System.out.println();
-        while(head != null)
-        {
-            System.out.print("("+head.val+", "+head.random.val+")");
-            head = head.next;
+        int val;
+        Node random, next;
+
+        Node(int val) {
+            this.val = val;
         }
-        
-       return head;
+    }
+
+    // O(n) space approah
+    Node copyLinkedList(Node head) {
+        Map<Node, Node> map = new HashMap<>();
+
+        Node curr = head;
+        // Create a new node for each node
+        while (curr != null) {
+            map.put(curr, new Node(curr.val));
+            curr = curr.next;
+        }
+        // Link next and random pointers 
+        curr = head;
+        while (curr != null) {
+            map.get(curr).next = map.get(curr.next);
+            map.get(curr).random = map.get(curr.random);
+        }
+
+        return map.get(head);
+    }
+
+    // O(1) space approach 
+    Node copyLinkedList2(Node head) {
+        Node curr = head;
+        // Insert a deep copy of every node between two nodes
+        while (curr != null) {
+            Node copy = new Node(curr.val);
+            copy.next = curr.next;
+            curr.next = copy;
+            curr = copy.next;
+        }
+
+        // Link random pointers
+        curr = head;
+
+        while (curr != null) {
+            if (curr.random != null) {
+                curr.next.random = curr.random.next;
+            }
+            curr = curr.next.next;
+        }
+
+        curr = head;
+
+        Node dummyHead = new Node(0);
+        Node copyCurr = dummyHead;
+
+        while (curr != null) {
+            copyCurr.next = curr.next;
+            copyCurr = copyCurr.next;
+            curr.next = curr.next.next;
+            curr = curr.next;
+        }
+
+        return dummyHead.next;
     }
 }
