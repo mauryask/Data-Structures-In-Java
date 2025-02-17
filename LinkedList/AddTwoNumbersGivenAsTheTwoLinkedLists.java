@@ -1,107 +1,77 @@
+
 /**
-Time complexity: O(n)
-Space complexity : O(1) 
-*/
+ * Time complexity: O(n)
+ * Space complexity : O(n)
+ */
 
-import static java.lang.System.*;
-import java.util.*;
+class Node {
+    int val;
+    Node next;
 
-class Node
-{
-	int data;
-	Node next;
-	
-	Node(int data)
-	{
-	   this.data = data;   
-	   next =  null;
-	}
+    Node(int val) {
+        this.val = val;
+    }
 }
 
-public class AddTwoNumbersGivenAsTheTwoLinkedLists
-{
-	 static Node tail = null;
-	 
-	 static Node insertNode(Node head,int data)
-	 {
-		 Node temp = new Node(data);
-		 Node ptr = null;
-		 
-		if(head == null)
+public class AddTwoNumbersGivenAsTheTwoLinkedLists {
+
+    static Node sum(Node head1, Node head2) {
+        int carry = 0;
+        Node head = null, tail = null;
+
+        while (head1 != null || head2 != null) 
 		{
-			head = temp;
-			tail = head;
-			return head;
-		}
-		
-        tail.next = temp;
-        tail = temp;
-		
-		return tail;
-	 }
-	 
-	 
-	 static void displayList(Node head)
-	 {
-		 Node ptr = head;
-		
-		 while(ptr != null)
-		 {
-			 out.print(ptr.data+" ");
-			 ptr = ptr.next;
-		 }
-		 
-		 out.println();
-	 }	
-				
-	 static void addList(Node l1, Node l2)
-	 {
-		 if(l1==null)
-            displayList(l2);
-        if(l2==null)
-            displayList(l1);
-                
-        int carry  = 0;
-        Node head = l1;
-        Node ptr = null;
-		
-        while(l1 != null && l2!= null)
-        {   
-            int sum = l1.data + l2.data + carry;
+            int val1 = head1 == null ? 0 : head1.val;
+            int val2 = head2 == null ? 0 : head2.val;
+
+            int sum = val1 + val2 + carry;
+            Node temp = new Node(sum % 10);
             carry = sum / 10;
-            int temp = sum % 10;
-            l1.data = temp;
-        
-            if(l1.next == null && l2.next != null)
-              l1.next = new Node(0);
-            else if(l1.next != null && l2.next == null)
-              l2.next = new Node(0);
-            
-			ptr = l1;            
-            
-			l1 = l1.next;
-            l2 = l2.next;
-         }
-        
-        if(carry != 0)
-           ptr.next = new Node(carry);
-        
-        displayList(head); 
-	 }	 
-   		
-					
-	public static void main(String [] args) 
-	{
-		Node head1 =  null;
-		head1 = insertNode(head1, 2);
-		insertNode(head1, 3);
-		insertNode(head1, 5);
-		
-		Node head2 =  null;
-		head2 = insertNode(head2, 9);
-		insertNode(head2, 7);
-		insertNode(head2, 8);
-       
-        addList(head1, head2);
-	}
+
+            if (head == null) {
+                head = temp;
+                tail = temp;
+            } else {
+                tail.next = temp;
+				tail = temp;
+            }
+
+            if (head1 != null) {
+                head1 = head1.next;
+            }
+            if (head2 != null) {
+                head2 = head2.next;
+            }
+        }
+
+        if (carry > 0) {
+            tail.next = new Node(carry);
+        }
+
+        return head;
+    }
+
+    static void displayList(Node head) {
+        while (head != null) {
+            System.out.print(head.val + " ");
+            head = head.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        Node head1 = new Node(1);
+        Node node1 = new Node(3);
+        Node node2 = new Node(5);
+        head1.next = node1;
+        node1.next = node2;
+
+        Node head2 = new Node(9);
+        Node node3 = new Node(7);
+        Node node4 = new Node(8);
+        head2.next = node3;
+        node3.next = node4;
+
+        Node head = sum(head1, head2);
+		displayList(head);
+    }
 }
