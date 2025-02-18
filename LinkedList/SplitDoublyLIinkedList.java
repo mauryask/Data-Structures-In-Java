@@ -118,7 +118,7 @@ public class SplitDoublyLIinkedList
 		Node end = insertNode(78, head); 
         
 		end.next = head;
-		
+		 
 		displayList(head);
 		System.out.println();
 		splitList(head);

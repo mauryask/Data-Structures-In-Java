@@ -1,9 +1,13 @@
 /**
 Time complexity : O(n)
 Space complexity: O(1)
+** Floyds Tortoise algo
+** Why this works:
+** The first pointer moving 𝑛 steps ahead creates a gap of 𝑛 between the two pointers.
+** When first reaches the end, the second pointer will be at the desired
+𝑛th node from the end.
 */
 
-import java.util.*;
 import static java.lang.System.*;
 
 class Node 
