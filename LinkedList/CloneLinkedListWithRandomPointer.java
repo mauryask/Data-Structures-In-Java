@@ -3,9 +3,7 @@ import java.util.*;
 
 /* https://leetcode.com/problems/copy-list-with-random-pointer/*/
 public class CloneLinkedListWithRandomPointer {
-
     class Node {
-
         int val;
         Node random, next;
 
@@ -35,38 +33,43 @@ public class CloneLinkedListWithRandomPointer {
     }
 
     // O(1) space approach 
-    Node copyLinkedList2(Node head) {
+ public Node copyRandomList(Node head) {
+        if(head == null) return null;
+
         Node curr = head;
-        // Insert a deep copy of every node between two nodes
-        while (curr != null) {
+
+        while(curr != null){
             Node copy = new Node(curr.val);
             copy.next = curr.next;
             curr.next = copy;
-            curr = copy.next;
+            curr = copy.next;            
         }
 
-        // Link random pointers
         curr = head;
 
-        while (curr != null) {
-            if (curr.random != null) {
+        while(curr != null){
+            if(curr.random != null){
                 curr.next.random = curr.random.next;
             }
             curr = curr.next.next;
         }
 
         curr = head;
+        Node newHead = null, tail = null;
 
-        Node dummyHead = new Node(0);
-        Node copyCurr = dummyHead;
+        while(curr != null){
+          if(newHead == null){
+             newHead = curr.next;
+             tail = newHead;
+          }else{
+            tail.next = curr.next;
+            tail = curr.next;
+          }
 
-        while (curr != null) {
-            copyCurr.next = curr.next;
-            copyCurr = copyCurr.next;
-            curr.next = curr.next.next;
-            curr = curr.next;
+          curr.next = tail.next;
+          curr = curr.next;
         }
 
-        return dummyHead.next;
+        return newHead;
     }
 }
