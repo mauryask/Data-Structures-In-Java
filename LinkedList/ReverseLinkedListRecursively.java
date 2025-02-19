@@ -1,3 +1,5 @@
+
+
 /**
 Time complexity: O(n)
 Space complexity: O(n) -> as recursion stack
@@ -45,18 +47,13 @@ class ReverseLinkedListRecursively
 	
 	static Node recursiveReverse(Node head)
 	{
-		if(head == null)
-			return null;
-		else if(head.next == null)
-			return head;
-		else
-		{
-			Node nextNode = head.next;
-			head.next = null;
-			Node rest = recursiveReverse(nextNode);
-			nextNode.next = head;
-			return rest;
-		}
+		if(head == null || head.next == null) 
+		  return head;
+
+		Node newHead = recursiveReverse(head.next);
+		head.next.next = head;
+		head.next = null;
+		return newHead;  
 	}
 	
 	public static void main(String [] args)
