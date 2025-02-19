@@ -1,4 +1,6 @@
 
+import static java.lang.System.*;
+
 class Node {
 
     int data;
@@ -50,21 +52,10 @@ public class SubstractTwoLinkedLists {
             return null;
         }
 
-        Node nextNode1 = null;
-        Node nextNode2 = null;
+        Node prev = substract(head1.next, head2.next);
 
-        if (head1 != null) {
-            nextNode1 = head1.next;
-        }
-
-        if (head2 != null) {
-            nextNode2 = head2.next;
-        }
-
-        Node prev = substract(nextNode1, nextNode2);
-
-        int val1 = (head1 == null ? 0 : head1.data) - borrow;
-        int val2 = head2 == null ? 0 : head2.data;
+        int val1 = head1.data - borrow;
+        int val2 = head2.data;
 
         Node head = new Node(0);
 
@@ -77,7 +68,6 @@ public class SubstractTwoLinkedLists {
         }
 
         head.next = prev;
-
         return head;
     }
 
@@ -128,5 +118,41 @@ public class SubstractTwoLinkedLists {
         }
 
         return head;
+    }
+
+    static void printList(Node head) {
+        while (head != null) {
+            out.print(head.data + " ");
+            head = head.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        Node head1 = new Node(1);
+        Node node1 = new Node(0);
+        Node node2 = new Node(0);
+        Node node3 = new Node(4);
+        Node node4 = new Node(0);
+        Node node5 = new Node(0);
+
+        head1.next = node1;
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        node4.next = node5;
+
+        Node head2 = new Node(6);
+        Node node6 = new Node(5);
+        Node node7 = new Node(3);
+        Node node8 = new Node(3);
+        Node node9 = new Node(5);
+
+        head2.next = node6;
+        node6.next = node7;
+        node7.next = node8;
+        node8.next = node9;
+
+        Node head = subLinkedList(head1, head2);
+        printList(head);
     }
 }
