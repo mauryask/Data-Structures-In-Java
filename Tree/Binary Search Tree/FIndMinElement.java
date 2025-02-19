@@ -4,7 +4,6 @@ Space complexity : O(1)
 */
 
 import static java.lang.System.*;
-import java.util.*;
 
 class Node
 {
@@ -64,7 +63,7 @@ public class FIndMinElement
 	static int findMinElement(Node root)
 	{
 		if(root == null)
-			return null;
+			return -1;
 		
 		while(root.left != null)
 			root = root.left;

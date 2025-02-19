@@ -4,7 +4,6 @@ Space complexity : O(n)
 */
 
 import static java.lang.System.*;
-import java.util.*;
 
 class Node
 {
@@ -69,25 +68,36 @@ public class BinaryTreeToDLLRecursive
 		}
 	}
 		
-	static void bstToDLL(Node root, List list)
-	{
-		if(root == null)
-			return;	
-			
-		bstToDLL(root.left,list);
-		
-		if(list.listHead == null)
-		  list.listHead = root;
-		
-		if(list.prev!= null)
-		{
-			list.prev.right = root;
-			root.left = list.prev;
-		}
-		
-		list.prev = root;
-		bstToDLL(root.right,list);
-	}
+    static Node prev = null;
+    // Head of the DLL (to be returned)
+    static Node head = null;
+
+    // Function to convert Binary Tree to DLL
+    static Node convertToDLL(Node root) {
+        if (root == null) return null;
+
+        // Recursively convert the left subtree
+        convertToDLL(root.left);
+
+        // Process the current node
+        if (prev == null) {
+            // This is the first node (leftmost node in in-order traversal)
+            head = root;
+        } else {
+            // Adjust pointers to form the DLL
+            prev.right = root;
+            root.left = prev;
+        }
+
+        // Update the previous node to the current node
+        prev = root;
+
+        // Recursively convert the right subtree
+        convertToDLL(root.right);
+
+        return head;
+    }
+
 	
 	static void printList(Node head)
 	{
@@ -117,7 +127,7 @@ public class BinaryTreeToDLLRecursive
 		List list = new List();
 		inorder(root);
 		out.println();
-		bstToDLL(root,list);
+		convertToDLL(root);
 		printList(list.listHead);
 	}
 }
