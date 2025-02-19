@@ -153,6 +153,8 @@ public class SubstractTwoLinkedLists {
         node8.next = node9;
 
         Node head = subLinkedList(head1, head2);
+        // Note: here after substraction the result might have leading 0s 
+        // Clarify if it is needed to be removed
         printList(head);
     }
 }

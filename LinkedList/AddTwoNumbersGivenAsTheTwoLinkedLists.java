@@ -3,8 +3,8 @@
  * Time complexity: O(n)
  * Space complexity : O(n)
  */
-
 class Node {
+
     int val;
     Node next;
 
@@ -19,8 +19,7 @@ public class AddTwoNumbersGivenAsTheTwoLinkedLists {
         int carry = 0;
         Node head = null, tail = null;
 
-        while (head1 != null || head2 != null) 
-		{
+        while (head1 != null || head2 != null) {
             int val1 = head1 == null ? 0 : head1.val;
             int val2 = head2 == null ? 0 : head2.val;
 
@@ -30,15 +29,16 @@ public class AddTwoNumbersGivenAsTheTwoLinkedLists {
 
             if (head == null) {
                 head = temp;
-                tail = temp;
             } else {
                 tail.next = temp;
-				tail = temp;
             }
+
+            tail = temp;
 
             if (head1 != null) {
                 head1 = head1.next;
             }
+
             if (head2 != null) {
                 head2 = head2.next;
             }
@@ -57,7 +57,6 @@ public class AddTwoNumbersGivenAsTheTwoLinkedLists {
             head = head.next;
         }
     }
-
     public static void main(String[] args) {
         Node head1 = new Node(1);
         Node node1 = new Node(3);
@@ -72,6 +71,6 @@ public class AddTwoNumbersGivenAsTheTwoLinkedLists {
         node3.next = node4;
 
         Node head = sum(head1, head2);
-		displayList(head);
+        displayList(head);
     }
 }
