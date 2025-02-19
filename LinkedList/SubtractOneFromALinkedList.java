@@ -36,12 +36,11 @@ public class SubtractOneFromALinkedList {
     //     if (head.data < data) {
     //         head.data = (10 + head.data) - data;
     //         borrow = 1;
+    //         data = 0;
     //     } else {
     //         head.data -= data;
     //         borrow = 0;
     //     }
-
-    //     data = 0;
     // }
 
     
