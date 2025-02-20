@@ -4,7 +4,6 @@ Space complexity : O(n) : as recursion stack
 */
 
 import static java.lang.System.*;
-import java.util.*;
 
 class Node
 {
@@ -32,19 +31,19 @@ public class ValidateBSTRecursive
 		}
 	}
 
-	static boolean isBST(Node root)
+	static boolean isBST(Node root, int min, int max)
 	{
 		if(root == null)
 			return true;
 	
-		if(root.left != null && root.left.data > root.data)
-            return false;
-		
-		if(root.right != null && root.right.data < root.data)
-			return false;
-		
+		if(root.data <= min  || root.data >= max) 
+			return false;		
 		// if both sub tress are BST
-		return isBST(root.left) && isBST(root.right);
+		// The recursion follows BST property: everthing in the left subtree shouild be less than and root value and everything in the 
+		// right subtree should be greater than the root value
+		// for a root in the left substree everything should be less than root: hence update max to root value
+		// for a root in the right subtree everthing should be greater than the root: hence update min to root value
+		return isBST(root.left, min, root.data) && isBST(root.right, root.data, max);
 	}
 	
 	public static void main(String [] args)
