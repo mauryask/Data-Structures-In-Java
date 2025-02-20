@@ -70,6 +70,6 @@ public class ValidateBSTRecursive
 		
 		inorder(root);
 		out.println();
-		out.println(isBST(root));
+		out.println(isBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
 	}
 }
