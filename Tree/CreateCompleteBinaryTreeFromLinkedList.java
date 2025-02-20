@@ -1,4 +1,6 @@
+
 import java.util.*;
+// https://www.geeksforgeeks.org/given-linked-list-representation-of-complete-tree-convert-it-to-linked-representation/
 
 class TreeNode {
 
@@ -14,13 +16,28 @@ class Node {
 
     int data;
     Node next;
+
     Node(int data) {
         this.data = data;
     }
 }
 
 public class CreateCompleteBinaryTreeFromLinkedList {
+    //Recursive less space efficient approach
+    TreeNode createTree(int index, int n, Map<Integer, Integer> map) {
+        if (index >= n) {
+            return null;
+        }
 
+        TreeNode root = new TreeNode(map.get(index));
+
+        root.left = createTree(2 * index + 1, n, map);
+        root.right = createTree(2 * index + 2, n, map);
+
+        return root;
+    }
+
+    //Level order traversal more space efficient approach
     public TreeNode linkedListToBinaryTree(Node head) {
         if (head == null) {
             return null;
