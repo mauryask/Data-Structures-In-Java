@@ -1,53 +1,34 @@
+
 import static java.lang.System.*;
 import java.util.*;
 
-public class ArrayImplementationOfBinaryTree
-{
-	static void setRoot(int A[],int key)
-	{
-		// check if root is not yet set
-		if(A[0] == -1)
-		    A[0] = key;
-		else
-			System.out.println("root is already present..");
-	}
-	
-	static void setLeftChild(int A[], int rootIndex , int key)
-	{
-		int leftIndex = 2 * rootIndex + 1;
-		if(A[leftIndex] == -1)
-			A[leftIndex] = key;
-		else
-			System.out.println("already have a left child..");
-	}
-	
-	static void setRightChild(int A[], int rootIndex, int key)
-	{
-		int rightIndex =  2 * rootIndex + 2;
-		if(A[rightIndex] == -1)
-			A[rightIndex] = key;
-		else
-			System.out.println("already have a right child..");
-	}
-	
-	static void printTree(int A[])
-	{
-		for(int i=0; i< A.length; i++)
-		{
-			System.out.print(A[i]+" ");
-		}
-	}
-	
-	public static void main(String [] args)
-	{
-		int A[] = new int[10];
-		Arrays.fill(A, -1);
-		setRoot(A, 10);
-		setLeftChild(A,0,78);
-		setRightChild(A,0,15);
-		setLeftChild(A,2,20);
-		setRightChild(A,2,35);
-		
-		printTree(A);
-	}
+class Node {
+
+    int data;
+    Node left, right;
+
+    Node(int data) {
+        this.data = data;
+    }
+}
+
+public class ArrayImplementationOfBinaryTree {
+    //Recursive version of creating A BST 
+    static Node createBST(int[] A, int index, int n) {
+        if (index >= n) {
+            return null;
+        }
+
+        Node root = new Node(A[index]);
+
+        root.left = createBST(A, 2 * index + 1, n);
+        root.right = createBST(A, 2 * index + 2, n);
+
+        return root;
+    }
+
+    public static void main(String[] args) {
+        int[] A = {10, 12, 45, 78, 96, 52, 10};
+        Node root = createBST(A, 0, A.length);
+    }
 }
