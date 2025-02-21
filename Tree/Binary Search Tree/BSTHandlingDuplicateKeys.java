@@ -22,7 +22,7 @@ public class BSTHandlingDuplicateKeys {
 		return new_node;
 	}
 	
-	
+	//Resuse it to create BST
 	static Node insert(Node root, int value)
 	{
 		if(root == null)
