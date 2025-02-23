@@ -19,7 +19,7 @@ class Node
 	}
 }
 
-public class CountLeafNodeInBinaryTree
+public class CountLeafNode
 {
 	static void levelOrder(Node root)
 	{
@@ -38,6 +38,7 @@ public class CountLeafNodeInBinaryTree
 		out.println();
 	}
 	
+	//Iterative
 	static int countLeafNode(Node root)
 	{
         int count = 0;	
@@ -59,6 +60,17 @@ public class CountLeafNodeInBinaryTree
 		return count;
 	}
 		
+	//Recursive	
+    static int count(Node root){
+		if(root == null) return 0;
+
+		if(root.left == null && root.right == null){
+			return 1;
+		}
+
+		return count(root.left) + count(root.right);
+	}
+
 	  public static void main(String [] args)
 		{
 		
@@ -77,6 +89,6 @@ public class CountLeafNodeInBinaryTree
 		  r3.left = r6;
 		  r3.right = r7;
           levelOrder(root);
-		  out.println(countLeafNode(root));
+		  out.println(count(root));
 		}
 }
