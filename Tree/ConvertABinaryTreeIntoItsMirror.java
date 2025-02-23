@@ -2,59 +2,45 @@
 Time complexity  : O(n)
 Space complexity : O(n)
 */
-import static java.lang.System.*;
+
 import java.util.*;
+
 class Node 
 {
 	int data;
 	Node left, right;
+
 	Node(int data)
 	{
 		this.data = data;
-		left = null;
-		right = null;
 	}
 }
 
 public class ConvertABinaryTreeIntoItsMirror
-{
-    static void levelOrder(Node root)
-	{
-		if(root == null)
-			return;
-		Queue<Node> q = new ArrayDeque<>();
-		q.add(root);
-		
-		while(!q.isEmpty())
-		{
-			root = q.remove();
-			out.print(root.data+" ");
-			
-			if(root.left != null)
-				q.add(root.left);
-			if(root.right != null)
-				q.add(root.right);
-		}
-		out.println();
-	}
-	
-	static void getMirror(Node root)
-	{
-	    Queue<Node> q = new ArrayDeque<>();
-		q.add(root);
-		while(!q.isEmpty())
-		{
-			root = q.poll();
-			Node temp = root.left;
-			root.left = root.right;
-			root.right = temp;
-			
-			if(root.left !=null)
-				q.add(root.left);
-			if(root.right != null)
-				q.add(root.right);
-		}
-	}
+{	
+    static Node invertTree(Node root) {
+        if(root == null) return null;
+        
+        Queue<Node> q = new ArrayDeque<>();
+        q.add(root);
+
+        while(!q.isEmpty()){
+            Node node = q.poll();
+            Node temp = node.right;
+            node.right = node.left;
+            node.left = temp;
+
+            if(node.left != null){
+                q.add(node.left);
+            }
+
+            if(node.right != null){
+                q.add(node.right);
+            }
+        }
+
+        return root;
+    }
 	
 	public static void main(String [] args)
 	{
@@ -70,9 +56,8 @@ public class ConvertABinaryTreeIntoItsMirror
 		  r2.left = r4;
 		  r2.right = r5;
 		  r4.left = r6;
-		  levelOrder(root);
-		  getMirror(root);
-		  levelOrder(root);
+          
+		  invertTree(root);
 	}
 }
 
