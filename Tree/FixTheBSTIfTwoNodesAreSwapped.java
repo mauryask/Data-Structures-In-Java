@@ -60,7 +60,7 @@ class Solution {
         second.data = temp;
     }
 
-    void correctBST(Node root) {
+    void recoverBST(Node root) {
         prev = mid = last = first = null;
         solve(root);
         //The case when nodes are not adjacent to each other

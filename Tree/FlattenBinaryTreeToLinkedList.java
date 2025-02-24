@@ -23,28 +23,18 @@ class Node
 
 public class FlattenBinaryTreeToLinkedList
 {
-	static void flattenBinaryTree(Node root)
-	{
-	  if(root == null || (root.left == null && root.right == null))
-        return;
-      	
-	   if(root.left != null)
-	   {
-		   flattenBinaryTree(root.left);
-		   
-		   Node tempNode = root.right;
-		   root.right = root.left;
-		   root.left = null;
-		   Node curr = root.right;
-		   
-		   while(curr.right != null)
-			   curr = curr.right;
-		   
-		   curr.right = tempNode;
-	   }
+    static Node prev = null;
 
-        flattenBinaryTree(root.right);	   
-	}
+    static void flattenBinaryTree(Node root){
+        if(root == null) return;
+
+        flattenBinaryTree(root.right);
+        flattenBinaryTree(root.left);
+        
+        root.right = prev;
+        root.left = null;
+        prev = root;
+    }
 	
 	static void printLinkedList(Node root)
 	{

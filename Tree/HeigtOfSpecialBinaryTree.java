@@ -23,24 +23,16 @@ public class HeigtOfSpecialBinaryTree
 	* T(n) : O(n)
 	* S(n) : O(n)	
 	*/
-	static boolean isLeafNode(Node node)
-	{
-		return node.left != null && node.left.right == node 
-		&& node.right != null && node.right.left == node;
-	}
-	
-	static int findHeight(Node root)
-	{
-		if(root == null)
-			return 0;
-		if(isLeafNode(root))
-			return 1;
-		
-		int left = findHeight(root.left);
-		int right = findHeight(root.right);
-		
-		return Math.max(left, right) + 1;
-	}
+    static int findHeight(Node root) {
+       if(root == null) return 0;
+       
+       if(root.right != null && root.right.left == root) return 0;
+       
+       int lh = findHeight(root.left);
+       int rh = findHeight(root.right);
+       
+       return Math.max(lh, rh) + 1;
+    }
 	
 	public static void main(String args[])
 	{
