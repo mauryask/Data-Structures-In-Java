@@ -33,6 +33,7 @@ class Solution {
 //Approach - 02 : O(n) time complexity
     Node prev = null, first = null, mid = null, last = null;
 
+    // Inorder traversal
     void solve(Node root) {
         if (root == null) {
             return;
@@ -62,9 +63,10 @@ class Solution {
     void correctBST(Node root) {
         prev = mid = last = first = null;
         solve(root);
+        //The case when nodes are not adjacent to each other
         if (first != null && last != null) {
             swap(first, last);
-        } else {
+        } else { //The case when both nodes are adjacent to each other in inorder traversal
             swap(first, mid);
         }
     }
