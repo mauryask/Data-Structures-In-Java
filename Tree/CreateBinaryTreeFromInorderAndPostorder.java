@@ -23,12 +23,12 @@ class CreateBinaryTreeFromInorderAndPostorder
         int index = 0;
     }
 
-    TreeNode getRoot(int[] po, Map<Integer, Integer> map, Test test, int start, int end)
+    Node getRoot(int[] po, Map<Integer, Integer> map, Test test, int start, int end)
     {
            if(start > end)
              return null;
            
-           TreeNode root = new TreeNode(po[test.index--]);
+           Node root = new Node(po[test.index--]);
 
            if(start == end)
              return root;
@@ -41,7 +41,7 @@ class CreateBinaryTreeFromInorderAndPostorder
            return root;    
     }
 
-    public TreeNode buildTree(int[] inorder, int[] postorder) 
+    public Node buildTree(int[] inorder, int[] postorder) 
     {
         Map<Integer, Integer> map = new HashMap<>();
         Test test = new Test();

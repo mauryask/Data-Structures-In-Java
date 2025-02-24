@@ -2,12 +2,13 @@
 import java.util.*;
 // https://www.geeksforgeeks.org/given-linked-list-representation-of-complete-tree-convert-it-to-linked-representation/
 
-class TreeNode {
+class Node {
 
     int data;
-    TreeNode left, right;
+    Node left;
+    Node right;
 
-    TreeNode(int data) {
+    Node(int data) {
         this.data = data;
     }
 }
@@ -24,12 +25,12 @@ class Node {
 
 public class CreateCompleteBinaryTreeFromLinkedList {
     //Recursive less space efficient approach
-    TreeNode createTree(int index, int n, Map<Integer, Integer> map) {
+    Node createTree(int index, int n, Map<Integer, Integer> map) {
         if (index >= n) {
             return null;
         }
 
-        TreeNode root = new TreeNode(map.get(index));
+        Node root = new Node(map.get(index));
 
         root.left = createTree(2 * index + 1, n, map);
         root.right = createTree(2 * index + 2, n, map);
@@ -38,27 +39,27 @@ public class CreateCompleteBinaryTreeFromLinkedList {
     }
 
     //Level order traversal more space efficient approach
-    public TreeNode linkedListToBinaryTree(Node head) {
+    public Node linkedListToBinaryTree(Node head) {
         if (head == null) {
             return null;
         }
 
-        Queue<TreeNode> q = new ArrayDeque();
-        TreeNode root = new TreeNode(head.data);
+        Queue<Node> q = new ArrayDeque();
+        Node root = new Node(head.data);
         q.add(root);
         head = head.next;
 
         while (!q.isEmpty() && head != null) {
-            TreeNode temp = q.poll();
+            Node temp = q.poll();
 
             if (head != null) {
-                temp.left = new TreeNode(head.data);
+                temp.left = new Node(head.data);
                 q.add(temp.left);
                 head = head.next;
             }
 
             if (head != null) {
-                temp.right = new TreeNode(head.data);
+                temp.right = new Node(head.data);
                 q.add(temp.right);
                 head = head.next;
             }
