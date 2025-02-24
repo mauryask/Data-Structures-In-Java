@@ -1,57 +1,71 @@
 /*
 * T(n) : O(n)
 * S(n) : O(n)
-*/
+ */
 class Solution {
-        void inorder(TreeNode root, List<Integer> list)    
-    {
-        if(root == null)
+// Approach: 1 => Through sorting: O(|N| * log|N|)
+/*
+    void recordInorder(Node root, List<Integer> list){
+        if(root == null) return;
+        recordInorder(root.left, list);
+        list.add(root.data);
+        recordInorder(root.right, list);
+    }
+    
+    static int index = 0;
+    
+    void repopulateBST(Node root, List<Integer> list){
+        if(root == null) return;
+        repopulateBST(root.left, list);
+        root.data = list.get(index++);
+        repopulateBST(root.right, list);
+    }
+    
+    void correctBST(Node root) {
+        List<Integer> list =  new ArrayList<>();
+        recordInorder(root, list);
+        Collections.sort(list);
+        index = 0;
+        repopulateBST(root, list);
+    }
+**/
+
+//Approach - 02 : O(n) time complexity
+    Node prev = null, first = null, mid = null, last = null;
+
+    void solve(Node root) {
+        if (root == null) {
             return;
-        inorder(root.left, list);
-        list.add(root.val);
-        inorder(root.right, list);
-    }
-    
-    void fixOrder(List<Integer> list)
-    {
-        int index1 = -1;
-        int index2 = -1;
-        int n = list.size();         
-
-        for(int i=0; i<n; i++)
-        {
-            if((i==0 && i+1<n && list.get(i) > list.get(i+1)) 
-				|| (i==n-1 && i-1 >=0 && list.get(i) < list.get(i-1)) 
-			    || (i-1 >=0 && i+1 < n && !(list.get(i) > list.get(i-1) && list.get(i) < list.get(i+1))))
-            {
-                if(index1 == -1)
-                     index1 = i;
-                 else 
-                     index2 = i;    
-            } 
         }
- 
-            int temp = list.get(index1);
-            list.set(index1, list.get(index2));
-            list.set(index2, temp);
+
+        solve(root.left);
+
+        if (prev != null && prev.data > root.data) {
+            if (first == null) {
+                first = prev;
+                mid = root;
+            } else {
+                last = root;
+            }
+        }
+
+        prev = root;
+        solve(root.right);
     }
 
-    int index = 0;
-    
-    void fixTree(TreeNode root, List<Integer> list)
-    {
-        if(root == null)
-          return;
-
-        fixTree(root.left, list);
-        root.val = list.get(index++);
-        fixTree(root.right, list);  
+    void swap(Node first, Node second) {
+        int temp = first.data;
+        first.data = second.data;
+        second.data = temp;
     }
 
-    public void recoverTree(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        inorder(root, list);
-        fixOrder(list);
-        fixTree(root, list);
+    void correctBST(Node root) {
+        prev = mid = last = first = null;
+        solve(root);
+        if (first != null && last != null) {
+            swap(first, last);
+        } else {
+            swap(first, mid);
+        }
     }
 }
