@@ -90,7 +90,6 @@ public class MinSwapsToConvertTreeIntoBST
 		  Node r6 = new Node(10);
 		  Node r7 = new Node(11);
 		
-
 		  root.left = r2;
 		  root.right = r3;
 		  r2.left = r4;
