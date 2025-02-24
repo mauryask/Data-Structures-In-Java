@@ -16,28 +16,17 @@ class Node
 
 public class IsGivenTreeIsSumTree
 {
-    static boolean isSumTree = true;
-	
-	static int sumTree(Node root)
-	{
-		if(root == null)
-			return 0;
-		
-		if(!isSumTree)
-			return 0;
-		
-		if(root.left == null && root.right == null)
-			return root.data;
-		
-		int lSum = sumTree(root.left);
-		int rSum = sumTree(root.right);
-		
-		if(lSum + rSum != root.data)
-			isSumTree = false;
-		
-		return root.data + lSum + rSum;
-	}
-		
+    static int isSumTree(Node root){
+       if(root == null) return 0;
+       if(root.left == null && root.right == null) return root.data;
+       int ls = isSumTree(root.left);
+       if(ls == -1) return -1;
+       int rs = isSumTree(root.right);
+       if(rs == -1) return -1; 
+       int sum = ls + rs;
+       if(sum != root.data) return -1;
+       return root.data + ls + rs;
+    }
 	public static void main(String[] args)
 	{
 		  Node root = new Node(3);
@@ -63,10 +52,7 @@ public class IsGivenTreeIsSumTree
 		  r7.left = r9;
 		  r9.left = r11;
 		  
-		  /*sumTree(root);
-		  out.println(isSumTree);*/
-		  
-		  bruteForce(root);
-		  out.println(isSumTree);
+		 int sum = isSumTree(root);
+		 out.println(sum == -1 ? "Not a sum tree" : "Sum tree");
 	}
 }
