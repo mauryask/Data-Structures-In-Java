@@ -1,8 +1,8 @@
 
 /**
- * Time complexity  : O(n)
+ * Time complexity  : O(n*n)
  * Space complexity : O(n)
- ** Here are printing root to leaf
+ ** Printing all the paths with sum k (could be between any nodes)
  ** paths
  */
 import static java.lang.System.*;
@@ -43,7 +43,8 @@ public class PrintAllKSumPaths {
 
         for (int i = list.size() - 1; i >= 0; i--) {
             sum += list.get(i);
-            if (sum == k) {
+            if (sum == k) { 
+				//Do not break here could be negative nodes furthe that adding up might give a sum k
                 count++;
                 printPath(i, list);
             }
