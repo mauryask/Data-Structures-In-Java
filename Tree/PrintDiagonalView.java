@@ -52,7 +52,7 @@ public class PrintDiagonalView
 			 
 			 for(Map.Entry<Integer, List<Integer>> m : map.entrySet())
 			 {
-				 out.println(m.getValue());
+				 out.println(m.getKey()+" : "+m.getValue());
 			 }
     }
 		
@@ -62,11 +62,12 @@ public class PrintDiagonalView
 		  Node root = new Node(1);
 		  Node r2 = new Node(2);
 		  Node r3 = new Node(3);
-		  Node r4 = new Node(4);
-		  Node r5 = new Node(5);
-		  Node r6 = new Node(6);
-		  Node r7 = new Node(7);
-		  Node r8 = new Node(8);
+		  Node r4 = new Node(6);
+		  Node r5 = new Node(9);
+		  Node r6 = new Node(5);
+		  Node r7 = new Node(4);
+		  Node r8 = new Node(0);
+		  Node r9 = new Node(8);
 		  
 		  root.left = r2;
 		  root.right = r3;
@@ -74,7 +75,8 @@ public class PrintDiagonalView
 		  r2.right = r5;
 		  r3.left = r6;
 		  r3.right = r7;
-		  r7.right = r8;
+		  r5.left = r8;
+		  r8.right = r9;
           
 		  topView(root);
 		}
