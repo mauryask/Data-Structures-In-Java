@@ -1,6 +1,4 @@
 //finding the sum of all nodes of the n-ary tree
-package com.pnstech;
-
 class Node{
 	
 	int value;

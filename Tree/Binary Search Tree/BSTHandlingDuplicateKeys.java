@@ -1,4 +1,3 @@
-package com.pnstech;
 
 public class BSTHandlingDuplicateKeys {
 	static class Node
