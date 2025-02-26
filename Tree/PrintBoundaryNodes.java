@@ -70,7 +70,7 @@ public class PrintBoundaryNodes {
             return list;
         }
         
-		//This is very important condition over here
+		//This is very important condition over here (When root it self is leaf node)
         if (!isLeaf(root)) {
             list.add(root.data);
         }
