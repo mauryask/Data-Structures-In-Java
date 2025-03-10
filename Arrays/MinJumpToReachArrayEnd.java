@@ -14,7 +14,7 @@ public class MinJumpToReachArrayEnd
 {
    
   // Bruteforce Solution
-  // T(n): O(n*n)
+  // T(n): O(2^n)
   // S(n) : O(1)
   // consider all the position where we can reach from 
   // the current position
