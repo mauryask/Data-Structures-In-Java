@@ -61,6 +61,7 @@ public class LongestValidParentheses {
    * Concept  here is the valid pair of braces always going to present between two invalid parentheses
    * like this ( ( ) ( ) (  
    * A valid length of 4 is present between braces at index 0 and 5
+   * // BasiclalY here we are finding the length of valid pairs between invalid pair of braces
   **/
     static int longestValidParentheses2(String s) {
         if (s == null || s.isEmpty()) {

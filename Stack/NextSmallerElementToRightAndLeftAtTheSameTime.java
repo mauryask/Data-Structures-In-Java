@@ -4,7 +4,7 @@ import java.util.*;
 
 public class NextSmallerElementToRightAndLeftAtTheSameTime {
 
-    /*
+/*
 * Why is it working: Because the stack going to keep all the elements increasing order 
 * So whenever an element encountered which is greater or equal to this element 
 * for the element at the top of stack the current element will be next smaller element  
