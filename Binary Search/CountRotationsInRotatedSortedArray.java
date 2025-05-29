@@ -1,25 +1,51 @@
 /*
 * Time complexity  : O(log n)
 * Space complexity : O(1)
+* Note: Here array has distinct elements
  */
 import static java.lang.System.*;
 
 public class CountRotationsInRotatedSortedArray {
-
+    
+	static int bestSoution(int[] A){
+		int n = A.length;
+		
+		if(n == 1)
+			return 0;
+		
+		int left = 0;
+		int right = n-1;
+		
+		if(A[left] < A[right])
+			return 0;
+		
+		while(left < right){
+			int mid = left + (right - left) / 2;
+			// In this case the min element will be at the right of the mid
+			if(A[mid] > A[right])
+				left = mid + 1;
+			else //If A[mid] <= A[right] : As we are intrested in smallest element: Will wilol consider mid  position as well not skip it like mid - 1
+				right = mid;
+		}
+		
+		return left;
+	}
+	
+	//Good but not the best solution
     static int getRotationCount(int A[]) {
         int n = A.length;
-        int start = 0;
-        int end = n - 1;
+        int left = 0;
+        int right = n - 1;
 
         // If the array is not rotated 
         // This handles the case when there is only one element e.g. {12}
-        if (A[start] <= A[end]) {
+        if (A[left] <= A[right]) {
             return 0;
         }
 
-        while (start <= end) {
+        while (left <= right) {
 
-            int mid = start + (end - start) / 2;
+            int mid = left + (right - left) / 2;
 
             // check if (mid+1) is min element
             if (mid < n - 1 && A[mid + 1] < A[mid]) {
@@ -40,21 +66,22 @@ public class CountRotationsInRotatedSortedArray {
 			* since the min element 
 			* might be present there
              */
-            if (A[mid] >= A[start]) {
-                start = mid + 1;
+            if (A[mid] > A[left]) {
+                left = mid + 1;
             }/*
 			* If right subarray is already sorted
 			* take left subarray
 			* since the min element 
-			* might be present there
-             */ else if (A[mid] < A[end]) {
-                end = mid - 1;
+			* might be present there*/
+            else{
+                right = mid - 1;
             }
         }
 
         return 0;
     }
 
+    //O(n)
     static int bruteForce(int A[]) {
         int n = A.length;
         if (n == 0 || n == 1) {
@@ -74,8 +101,10 @@ public class CountRotationsInRotatedSortedArray {
     }
 
     public static void main(String[] args) {
-        int A[] = {-2, -1, -5, -4, -3};//{20,22,24,26,28,30,32,34,36,10,12,14,16,18};    
-        out.println(getRotationCount(A));
+        int A[] = {-2, -1, -5, -4, -3};
+		// {20,22,24,26,28,30,32,34,36,10,12,14,16,18};    
+        // out.println(getRotationCount(A));
+        out.println(bestSoution(A));
         // out.println(bruteForce(A));
     }
 }

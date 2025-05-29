@@ -52,6 +52,8 @@ public class LongestValidParentheses {
             }
         }
 
+        out.println(l2rMax+", "+r2lMax);
+
         return Math.max(l2rMax, r2lMax);
     }
 
@@ -131,7 +133,7 @@ public class LongestValidParentheses {
     }
 
     public static void main(String[] args) {
-        String str = "()()))()()()()()";
-        out.println(getLength(str));
+        String str = ")()())";//"()()))()()()()()";
+        out.println(longestValidParentheses(str));
     }
 }
