@@ -3,6 +3,7 @@
 import static java.lang.System.*;
 
 public class FindMinInRotatedSortedArrayWithDuplicateElements{
+	
 	static int findMin(int[] A) {
         int left = 0;
         int right = A.length - 1;

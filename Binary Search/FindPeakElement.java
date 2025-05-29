@@ -1,12 +1,40 @@
 /*
 * Time complexity  : O(log n)
 * Space compelxity : O(1)
+* Leetcode 162: check the constraits
  */
 
 import static java.lang.System.*;
 
 public class FindPeakElement {
-
+	/*
+	The array’s structure (distinct adjacent elements and -∞ boundaries) guarantees at least one peak, and binary search can efficiently find one by following the “slope” of the array.
+	*/
+	static int bestSolutionnn(int[] A){
+		int n = A.length;
+		
+		if(n == 0)
+		  return -1;	  
+	    if(n == 1)
+		  return A[0];
+	     
+		int start = 0;
+		int end = n-1;
+		
+		while(start < end){
+			int mid = start + (end - start)/2;
+			
+			if(A[mid] > A[mid+1])
+				end = mid;
+			else //A[mid] <= A[right]
+				start = mid + 1;
+		}
+		
+		return A[start];
+	}
+	
+	
+    //Good solution but not the best as so many useless comparisons
     static int getPeakElement(int A[]) {
         int n = A.length;
 
