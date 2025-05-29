@@ -5,7 +5,7 @@
  */
 import static java.lang.System.*;
 
-public class CountRotationsInRotatedSortedArray {
+public class CountRotationsInRotatedSortedArrayWithDistinctElements {
     
 	static int bestSoution(int[] A){
 		int n = A.length;
@@ -24,7 +24,11 @@ public class CountRotationsInRotatedSortedArray {
 			// In this case the min element will be at the right of the mid
 			if(A[mid] > A[right])
 				left = mid + 1;
-			else //If A[mid] <= A[right] : As we are intrested in smallest element: Will wilol consider mid  position as well not skip it like mid - 1
+/*
+Why Not right = mid - 1?
+When nums[mid] <= nums[right], it indicates that the right half of the array (from mid to right) is sorted in ascending order. This means the minimum element cannot be in the range (mid, right] (i.e., after mid up to right), because all elements in that range are greater than or equal to nums[mid]. However, nums[mid] itself could be the minimum, so we must include the mid index in the next iteration of the search. Setting right = mid - 1 would exclude nums[mid], which could lead to missing the minimum element.
+*/
+			else //A[mid] <= A[rigth]
 				right = mid;
 		}
 		
