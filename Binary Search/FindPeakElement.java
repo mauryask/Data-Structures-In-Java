@@ -79,7 +79,7 @@ public class FindPeakElement {
     }
 
     public static void main(String[] args) {
-        int A[] = {1, 2};//{1,2,4,5,7,8,3};//{8, 10, 20, 80, 100, 200, 400, 500, 3, 2, 1};
+        int A[] = {70,50,40,30,20,100,1,2,3,4};//{1, 2};//{1,2,4,5,7,8,3};//{8, 10, 20, 80, 100, 200, 400, 500, 3, 2, 1};
         out.println(getPeakElement(A));
     }
 }
