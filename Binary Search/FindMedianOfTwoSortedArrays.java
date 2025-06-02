@@ -1,10 +1,11 @@
-// T(n) : O(log(min(m, n)))
+// T(n) : O(log(min(m, n))), T(n) = O(log n) : in case of arrays of same length
 // S(n) : O(1)
+
 import static java.lang.System.*;
 import java.util.*;
 
 public class FindMedianOfTwoSortedArrays{
-	
+	//Best approach
 	static int findMedian(int[] A, int[] B){
 		int m = A.length;
 		int n = B.length;
@@ -40,11 +41,65 @@ public class FindMedianOfTwoSortedArrays{
 		return -1;
 	}
 	
+	//T(n) : O(m+n)
+	//S(n) : O(1)
+	static int findMedianApproach1(int[] A, int[ ] B){
+		int m = A.length;
+		int n = B.length;		
+		boolean isEven = (m+n)%2==0;
+		int m1 = -1;
+		int m2 = -1;
+		int i=0, j=0;
+		
+        //this handles both odd and even length cases		
+		for(int count=1; count<=(m+n+1)/2; count++){
+		   m2 = m1;
+           
+           if(i != m && j != n)
+			   m1 = A[i] > B[j] ? B[j++] : A[i++];
+           else if(i < m)
+               m1  = A[i++];
+		   else 
+               m1 = B[j++];			   
+		}
+		
+		if(isEven) return (m1+m2) / 2;
+		
+		return m1;
+	}
+	
+	// T(n) : O((m+n)log(m+n))
+	// S(n) : O(m+n)
+	static int findMedianApproach2(int[] A, int[] B){
+		int m = A.length;
+		int n = B.length;
+		int k = m+n;
+		int[] C = new int[k];
+		int index = 0;
+		
+		for(int i=0; i<m; i++)
+			C[index++] = A[i];
+		
+		for(int j=0; j<n; j++)
+			C[index++] = B[j];
+		
+		Arrays.sort(C);
+		
+		boolean isEven = k%2==0;
+		//for even: (n/2) + (n/2)+1 / 2 > for n sorted elements
+		//for odd: (n+1)/2
+		if(isEven)
+			return (C[k/2-1] + C[k/2])/2;
+		else
+			return C[(k-1)/2];
+	}
+	
     public static void main(String[] args) {
 	   int[] A = {-5, 3, 6, 12, 15};
 	   int[] B = {-12, -10, -6, -3, 4, 10};
 	   //Since we will be applying the binary search on array with smaller length (hence pass like below findMedian(smaller_array, larger_array))
-	   int median = B.length < A.length ? findMedian(B, A) : findMedian(A, B);
+	   // int median = B.length < A.length ? findMedian(B, A) : findMedian(A, B);
+	   int median = findMedianApproach1(A, B);
 	   out.println(median);
     }
 }
