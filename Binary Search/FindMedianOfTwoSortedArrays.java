@@ -9,8 +9,11 @@ public class FindMedianOfTwoSortedArrays{
 	static int findMedian(int[] A, int[] B){
 		int m = A.length;
 		int n = B.length;
+		
+		if(m > n) return findMedianApproach1(B, A);
+		
 		int left = 0;
-		int right = n;
+		int right = m;
 		
 		while(left <= right){
 			int mid1 = left+(right-left)/2;
@@ -98,7 +101,7 @@ public class FindMedianOfTwoSortedArrays{
 	   int[] A = {-5, 3, 6, 12, 15};
 	   int[] B = {-12, -10, -6, -3, 4, 10};
 	   //Since we will be applying the binary search on array with smaller length (hence pass like below findMedian(smaller_array, larger_array))
-	   // int median = B.length < A.length ? findMedian(B, A) : findMedian(A, B);
+	   // int median = findMedian(A, B);
 	   int median = findMedianApproach1(A, B);
 	   out.println(median);
     }
