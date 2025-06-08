@@ -1,3 +1,5 @@
+//T(n) : O(log x * log n)
+//S(n) : O(1)
 import static java.lang.System.*;
 import java.util.*;
 
@@ -62,7 +64,7 @@ public class NthRootOfANumber{
 			
 			if(power == x)
 				return mid;
-			else if(power > x)
+			else if(power > x || power < 0) // Here power < 0 indicates overflow (not neccerary but handle if asked)
 				end = mid - 1;
 			else 
 				start = mid + 1;
