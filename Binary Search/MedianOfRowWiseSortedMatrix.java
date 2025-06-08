@@ -4,10 +4,10 @@
 import static java.lang.System.*;
 import java.util.*;
 
-public class MedianOfRwoWiseSortedMatrix {
+public class MedianOfRowWiseSortedMatrix {
     //Finding upperbound of the given taregt: start will give how many elemnts are >= of the given target value
     //T(n) : O(log n)
-    int getCountUtil(int[] mat, int target){
+    static int getCountUtil(int[] mat, int target){
         int start = 0;
         int end = mat.length-1;
         
@@ -25,7 +25,7 @@ public class MedianOfRwoWiseSortedMatrix {
     }
     
     //T(n) : O(m * log n)
-     int getCount(int[][] mat, int target){
+     static int getCount(int[][] mat, int target){
         int count = 0;
         //Applying binary search on each row        
         for(int i=0; i<mat.length; i++){
@@ -35,7 +35,7 @@ public class MedianOfRwoWiseSortedMatrix {
         return count;
     }
     
-    int bestApproach(int mat[][]) {
+    static int bestApproach(int mat[][]) {
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
         int m = mat.length; //Rows
@@ -105,10 +105,10 @@ public class MedianOfRwoWiseSortedMatrix {
 	}
 	
     public static void main(String[] args) {
-	   int[][] A = {{9}};
-	   // {{1, 3, 5, 8},
-				  // {2, 6, 9, 10},
-				  // {3, 6, 9, 11}};
-	   out.println("\n"+findMedian(A));
+	   int[][] A =// {{9}};
+	    {{1, 3, 5},
+		{2, 6, 9},
+		{3, 6, 9}};
+	   out.println("\n"+bestApproach(A));
     }
 }
