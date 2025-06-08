@@ -1,14 +1,73 @@
+// T(n) : O(n * log(m) * log(maxVal - minVal))
+// S(n) : O(1)
+// Note: Here maxVal - minVal  => Total number of elements in the range (search space)
 import static java.lang.System.*;
 import java.util.*;
 
 public class MedianOfRwoWiseSortedMatrix {
-	static int bestApproach(int[][] A){
-		int m = A.length;
-		int n = A[0].length;
-		//Handle base case
-		if(m*n == 1) return A[0][0];
-		
-	}
+    //Finding upperbound of the given taregt: start will give how many elemnts are >= of the given target value
+    //T(n) : O(log n)
+    int getCountUtil(int[] mat, int target){
+        int start = 0;
+        int end = mat.length-1;
+        
+        while(start <= end){
+            int mid = start + (end - start) / 2;
+            
+            if(mat[mid] <= target){
+                start = mid + 1;
+            }else{
+                end = mid - 1;
+            }
+        }
+        
+        return start;
+    }
+    
+    //T(n) : O(m * log n)
+     int getCount(int[][] mat, int target){
+        int count = 0;
+        //Applying binary search on each row        
+        for(int i=0; i<mat.length; i++){
+            count += getCountUtil(mat[i], target);
+        }
+        
+        return count;
+    }
+    
+    int bestApproach(int mat[][]) {
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        int m = mat.length; //Rows
+        int n = mat[0].length; //Columns
+
+        //Finding min and max values from first and last columns respectively        
+        //T(n) : O(m)
+        for(int i=0; i<m; i++){
+            min = Math.min(mat[i][0], min);
+            max = Math.max(mat[i][n-1], max);
+        }
+        
+        int start = min;
+        int end = max;
+        
+        //reqCount-th: This will be the piossible median
+        int reqCount = (m*n)/2;
+        
+        while(start <= end){
+            int mid = start + (end - start) / 2;
+            //Finding how many elements less than or equal to mid in the matrix
+            int count = getCount(mat, mid); 
+            //We need count just greater than the reqCount
+            if(count <= reqCount){
+                start = mid + 1;
+            }else{
+                end = mid - 1;
+            }
+        }
+        
+        return start;
+    }
 	
 	//Approach-01: Brute force approach O(mn * log (m*n)) & O(m*n)
 	
