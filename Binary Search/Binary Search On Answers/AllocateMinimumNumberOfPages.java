@@ -1,4 +1,4 @@
-//T(n) : O((m-n+1) log(m)): m => sum, n => max pages in a book
+//T(n) : O(N * log(m-n)): N, =. Array size, m => sum, n => max pages in a book
 import static java.lang.System.*;
 
 public class AllocateMinimumNumberOfPages{
