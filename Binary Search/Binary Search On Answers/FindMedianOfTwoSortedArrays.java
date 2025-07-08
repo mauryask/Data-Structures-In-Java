@@ -10,7 +10,7 @@ public class FindMedianOfTwoSortedArrays{
 		int m = A.length;
 		int n = B.length;
 		
-		if(m > n) return findMedianApproach1(B, A);
+		if(m > n) return findMedian(B, A);
 		
 		int left = 0;
 		int right = m;
